@@ -123,8 +123,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <version>1.5.7.RELEASE</version>
-            <optional>true</optional>
         </dependency>
         <!-- redis客户端:Jedis -->
         <dependency>
@@ -238,13 +236,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-
-                    <fork>true</fork>
-
-                    <addResources>true</addResources>
-
-                </configuration>
             </plugin>
         </plugins>
 
