@@ -3,20 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="css/iconfont.css">
-	<link rel="stylesheet" href="css/global.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/swiper.min.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<script src="js/jquery.1.12.4.min.js" charset="UTF-8"></script>
-	<script src="js/bootstrap.min.js" charset="UTF-8"></script>
-	<script src="js/swiper.min.js" charset="UTF-8"></script>
-	<script src="js/global.js" charset="UTF-8"></script>
-	<script src="js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
+	<link rel="stylesheet" href="/css/iconfont.css">
+	<link rel="stylesheet" href="/css/global.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/css/swiper.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" href="/css/checkout.css">
+	<link rel="stylesheet" href="/css/modal.css">
 	<title>U袋网</title>
 </head>
-<body>
+<body id="bodys">
 	<!-- 顶部tab -->
 	<div class="tab-header">
 		<div class="inner">
@@ -38,137 +35,88 @@
 	<div class="bgf5 clearfix">
 		<div class="top-user">
 			<div class="inner">
-				<a class="logo" href="index.html"><img src="images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+				<a class="logo" href="index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 				<div class="title">购物车</div>
 			</div>
 		</div>
 	</div>
-	<div class="content clearfix bgf5">
+	<div class="content clearfix bgf5" id="showshopping">
 		<section class="user-center inner clearfix">
 			<div class="user-content__box clearfix bgf">
 				<div class="title">购物车</div>
 				<form action="udai_shopcart_pay.html" class="shopcart-form__box">
 					<table class="table table-bordered">
 						<thead>
-							<tr>
-								<th width="150">
-									<label class="checked-label"><input type="checkbox" class="check-all"><i></i> 全选</label>
-								</th>
-								<th width="300">商品信息</th>
-								<th width="150">单价</th>
-								<th width="200">数量</th>
-								<th width="200">现价</th>
-								<th width="80">操作</th>
-							</tr>
+						<tr>
+							<th width="150">
+
+							</th>
+							<th width="300">商品信息</th>
+							<th width="150">单价</th>
+							<th width="200">数量</th>
+							<th width="200">现价</th>
+							<th width="80">操作</th>
+						</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th scope="row">
-									<label class="checked-label"><input type="checkbox"><i></i>
-										<div class="img"><img src="images/temp/M-003.jpg" alt="" class="cover"></div>
-									</label>
-								</th>
-								<td>
-									<div class="name ep3">锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款</div>
-									<div class="type c9">颜色分类：深棕色  尺码：均码</div>
-								</td>
-								<td>¥20.0</td>
-								<td>
-									<div class="cart-num__box">
-										<input type="button" class="sub" value="-">
-										<input type="text" class="val" value="1" maxlength="2">
-										<input type="button" class="add" value="+">
-									</div>
-								</td>
-								<td>¥20.0</td>
-								<td><a href="">删除</a></td>
-							</tr>
-							<tr>
-								<th scope="row">
-									<label class="checked-label"><input type="checkbox"><i></i>
-										<div class="img"><img src="images/temp/S-005.jpg" alt="" class="cover"></div>
-									</label>
-								</th>
-								<td>
-									<div class="name ep3">霜天月明 原创传统日常汉服男绣花交领衣裳cp春装单品</div>
-									<div class="type c9">颜色分类：深棕色  尺码：均码</div>
-								</td>
-								<td>¥20.0</td>
-								<td>
-									<div class="cart-num__box">
-										<input type="button" class="sub" value="-">
-										<input type="text" class="val" value="1" maxlength="2">
-										<input type="button" class="add" value="+">
-									</div>
-								</td>
-								<td>¥20.0</td>
-								<td><a href="">删除</a></td>
-							</tr>
-							<tr>
-								<th scope="row">
-									<label class="checked-label"><input type="checkbox"><i></i>
-										<div class="img"><img src="images/temp/M-007.jpg" alt="" class="cover"></div>
-									</label>
-								</th>
-								<td>
-									<div class="name ep3">陇上乐 原创传统日常汉服男绣花单大氅大袖衫cp情侣春秋</div>
-									<div class="type c9">颜色分类：深棕色  尺码：均码</div>
-								</td>
-								<td>¥20.0</td>
-								<td>
-									<div class="cart-num__box">
-										<input type="button" class="sub" value="-">
-										<input type="text" class="val" value="1" maxlength="2">
-										<input type="button" class="add" value="+">
-									</div>
-								</td>
-								<td>¥20.0</td>
-								<td><a href="">删除</a></td>
-							</tr>
+						<tr v-for="item in productList">
+
+							<th scope="row cart-tab-1"  >
+								<div class="cart-item-check">
+									<a href="javascript:void 0" class="item-check-btn" v-bind:class="{'check':item.checked}" @click="selectedProduct(item)">
+										<svg class="icon icon-ok"><use xlink:href="#icon-ok"></use></svg>
+									</a>
+								</div>
+								<div class="img"><img  v-bind:src="item.productImage" alt="" class="cover"></div>
+								</label>
+							</th>
+							<td>
+								<div class="name ep3">{{item.productName}}</div>
+								<div class="type c9" >颜色分类：<span v-for="part in item.parts" v-text="part.partsName"></span>
+									尺码：<span v-for="part in item.parts" v-text="part.partsType" ></span></div>
+							</td>
+							<td>{{item.productPrice | formatMoney}}</td>
+							<td>
+								<div class="cart-num__box">
+									<!--<input type="button" class="sub" value="-" @click="changeMoney(item,-1)">-->
+									<a href="javascript:void 0" class="sub"  @click="changeMoney(item,-1)" >-</a>
+
+									<input type="text" class="val" value="1" v-model="item.productQuentity">
+									<a href="javascript:void 0" class="sub" @click="changeMoney(item,1)" >+</a>
+								</div>
+							</td>
+							<td>{{item.productPrice*item.productQuentity  |  money('元')}}</td>
+							<td><a href="javascript:void 0" @click="delConfrim(item)">删除</a></td>
+						</tr>
+
 						</tbody>
 					</table>
 					<div class="user-form-group tags-box shopcart-submit pull-right">
 						<button type="submit" class="btn">提交订单</button>
 					</div>
 					<div class="checkbox shopcart-total">
-						<label><input type="checkbox" class="check-all"><i></i> 全选</label>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">删除</a>
+						<!-- 全选-->
+						<div class="item-all-check">
+							<a href="javascript:void 0" v-bind:class="{'check':checkAllFlag}" @click="checkAll(true)">
+                    <span class="item-check-btn" v-bind:class="{'check':checkAllFlag}" @click="checkAll(true)">
+                      <svg class="icon icon-ok"><use xlink:href="#icon-ok"></use></svg>
+                    </span>
+								<span>全选</span>
+							</a>
+						</div>
+						<!--取消全选-->
+						<div class="item-all-del">
+							<a href="javascript:void 0" class="item-del-btn" @click="checkAll(false)">
+								<span style="margin-left: 20px">取消全选</span>
+							</a>
+						</div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void 0">删除</a>
 						<div class="pull-right">
-							已选商品 <span>2</span> 件
+							已选商品 <span>{{totalMum}}</span> 件
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合计（不含运费）
-							<b class="cr">¥<span class="fz24">40.00</span></b>
+							<b class="cr"><span class="fz24">{{totalMoney |money("元")}}</span></b>
 						</div>
 					</div>
-					<script>
-						$(document).ready(function(){
-							var $item_checkboxs = $('.shopcart-form__box tbody input[type="checkbox"]'),
-								$check_all = $('.check-all');
-							// 全选
-							$check_all.on('change', function() {
-								$check_all.prop('checked', $(this).prop('checked'));
-								$item_checkboxs.prop('checked', $(this).prop('checked'));
-							});
-							// 点击选择
-							$item_checkboxs.on('change', function() {
-								var flag = true;
-								$item_checkboxs.each(function() {
-									if (!$(this).prop('checked')) { flag = false }
-								});
-								$check_all.prop('checked', flag);
-							});
-							// 个数限制输入数字
-							$('input.val').onlyReg({reg: /[^0-9.]/g});
-							// 加减个数
-							$('.cart-num__box').on('click', '.sub,.add', function() {
-								var value = parseInt($(this).siblings('.val').val());
-								if ($(this).hasClass('add')) {
-									$(this).siblings('.val').val(Math.min((value += 1),99));
-								} else {
-									$(this).siblings('.val').val(Math.max((value -= 1),1));
-								}
-							});
-						});
-					</script>
 				</form>
 			</div>
 		</section>
@@ -211,25 +159,25 @@
 				<div class="r-tip__box"><span class="r-tip-text">返回顶部</span></div>
 			</li>
 		</ul>
-		<script>
-			$(document).ready(function(){ $('.to-top').toTop({position:false}) });
-		</script>
+		<!--<script>
+            $(document).ready(function(){ $('.to-top').toTop({position:false}) });
+        </script>-->
 	</div>
 	<!-- 底部信息 -->
 	<div class="footer">
 		<div class="footer-tags">
 			<div class="tags-box inner">
 				<div class="tag-div">
-					<img src="images/icons/footer_1.gif" alt="厂家直供">
+					<img src="/images/icons/footer_1.gif" alt="厂家直供">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_2.gif" alt="一件代发">
+					<img src="/images/icons/footer_2.gif" alt="一件代发">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_3.gif" alt="美工活动支持">
+					<img src="/images/icons/footer_3.gif" alt="美工活动支持">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_4.gif" alt="信誉认证">
+					<img src="/images/icons/footer_4.gif" alt="信誉认证">
 				</div>
 			</div>
 		</div>
@@ -270,5 +218,11 @@
 			</p>
 		</div>
 	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+	<script src="/js/lib/vue-resource.js"></script>
+
+	<script src="/js/udai_shopcart.js"></script>
 </body>
 </html>
