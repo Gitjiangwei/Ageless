@@ -19,5 +19,12 @@
 	);
 
 </insert>
+	<select id="selshopAll" resultType="ShoppingCart" parameterType="ShoppingCart">
+          SELECT `user`.id,shoppingcart.id,product.id,sku.SKUId, productName,price,SKUcon, orderamount
+            FROM shoppingcart
+            INNER JOIN  product ON shoppingcart.productId=product.productId
+            INNER JOIN sku ON shoppingcart.productId=sku.productId
+            INNER JOIN `user` ON shoppingcart.userId=userid
+     </select>
 
 </mapper>

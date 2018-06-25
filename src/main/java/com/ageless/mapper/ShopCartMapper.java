@@ -1,6 +1,9 @@
 package com.ageless.mapper;
 
 import com.ageless.pojo.ShopCart;
+import com.ageless.pojo.ShoppingCart;
+
+import java.util.List;
 
 public interface ShopCartMapper {
 
@@ -11,4 +14,19 @@ public interface ShopCartMapper {
      */
     int addShoppingCart(ShopCart shoppingCart);
 
+    /**
+     * 购物车查询
+     * @param id
+     * @return
+     */
+
+    public List<ShoppingCart> selshopAll(Integer id );
+
+    /**
+     *删除购物车商品
+     * @param id
+     * @return
+     */
+
+     public int delshop(Integer id );
 }
