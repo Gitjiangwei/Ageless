@@ -45,21 +45,9 @@ public class AreaController {
 		return "login";
 	}
 
-	@GetMapping("/test")
-	@ResponseBody
-	public String test(){
-		createException();
-		return "正常";
-	}
 
-	@GetMapping("/error.html")
-	public String tests(){
 
-		return "error/error";
-	}
-	private  void createException(){
-		int i=5/0;
-	}
+
 
 
 
