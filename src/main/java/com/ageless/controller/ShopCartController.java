@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ShopCartController {
-    @GetMapping("/udai_shopcart")
+    @GetMapping("/")
     public String udai() {
-        return "udai_shopcart";
+        return "item_show";
     }
 }
