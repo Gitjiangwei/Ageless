@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.ageless.mapper.ShopCartMapper">
+
+<insert id="addShoppingCart" parameterType="ShopCart">
+    INSERT INTO ageless.shoppingcart
+	(
+	userId,
+	productId,
+	orderamount
+	)
+	VALUES
+	(
+	#{userId},
+	#{productId},
+	#{orderamount}
+	);
+
+</insert>
+	<select id="selshopAll" resultType="ShoppingCart" parameterType="ShoppingCart">
+          SELECT `user`.id,shoppingcart.id,product.id,sku.SKUId, productName,price,SKUcon, orderamount
+            FROM shoppingcart
+            INNER JOIN  product ON shoppingcart.productId=product.productId
+            INNER JOIN sku ON shoppingcart.productId=sku.productId
+            INNER JOIN `user` ON shoppingcart.userId=userid
+     </select>
+
+</mapper>
