@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.ProductMapper">
+<select id="selectall" parameterType="int" resultMap="select">
+    select productName,price,descript,kucun,product.id,optionName,skuoption.productId,skuoption.id,skuproperty.propertyName,skuproperty.categoryId
+    from product,skuoption,skuproperty
+    where product.id=skuoption.productId
+    and skuoption.id=skuproperty.categoryId
+    and product.id=#{id}
+
+</select>
+    <resultMap id="select" type="com.ageless.pojo.Product" autoMapping="true">
+        <id property="id" column="id"></id>
+        <result property="productId" column="productId"></result>
+        <result property="productName" column="productName"></result>
+        <result property="descript" column="descript"></result>
+        <result property="maidian" column="maidian"></result>
+        <result property="update" column="update"></result>
+        <result property="downdate" column="downdate"></result>
+        <result property="status" column="status"></result>
+        <result property=" price" column=" price"></result>
+        <result property=" kucun" column=" kucun"></result>
+        <result property="xiaoliang" column="xiaoliang"></result>
+        <result property="comment" column="comment"></result>
+        <result property="sendScore" column="sendScore"></result>
+        <result property="category01" column="category01"></result>
+        <result property="category02" column="category02"></result>
+        <result property="category03" column="category03"></result>
+        <result property="sortId" column="sortId"></result>
+        <result property="sortConId" column="sortConId"></result>
+<association property="skuOption" javaType="com.ageless.pojo.SkuOption">
+    <id property="id" column="id"></id>
+    <result property="optionName" column="optionName"></result>
+    <result property="productId" column="productId"></result>
+
+</association>
+        <association property="skuProperty" javaType="com.ageless.pojo.SkuProperty">
+            <id property="id" column="id"></id>
+            <result property="propertyName" column="propertyName"></result>
+            <result property="categoryId" column="categoryId"></result>
+        </association>
+
+    </resultMap>
+    <select id="selectPoroductById" parameterType="Integer" resultMap="select">
+        SELECT 	id,
+            productId,
+            productName,
+            descript,
+            maidian,
+            price,
+            product.update,
+            downdate,
+            product.status,
+            kucun,
+            xiaoliang,
+            priority,
+            specialId,
+            product.comment,
+            sendScore,
+            category01,
+            category02,
+            category03,
+            sortId,
+            sortconId
+            FROM
+            ageless.product
+            WHERE
+            id = #{id}
+    </select>
+
+    <select id="selectAllSkuById" parameterType="Integer" resultType="com.ageless.pojo.Sku">
+        SELECT 	SKUId,
+            productId,
+            SKUcon,
+            kucun,
+            price
+            FROM
+            ageless.sku
+    </select>
+    
+    <select id="selectAllSkuoptionById" parameterType="Integer" resultType="com.ageless.pojo.SkuOption">
+        SELECT 	id, 
+            optionName, 
+            productId
+             
+            FROM 
+            ageless.skuoption
+            where
+            productId = #{id}
+    </select>
+    
+    <select id="selectAllSkupropertyByIds" resultType="com.ageless.pojo.SkuProperty" >
+        SELECT 	id,
+            propertyName,
+            categoryId
+            FROM
+            ageless.skuproperty
+            where categoryId in
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+    </select>
+
+    <select id="selectSkuByCon" parameterType="String" resultType="com.ageless.pojo.Sku">
+        SELECT 	SKUId,
+            productId,
+            SKUcon,
+            kucun,
+            price
+            FROM
+            ageless.sku
+            WHERE
+            SKUcon = #{skuCon}
+    </select>
+</mapper>
