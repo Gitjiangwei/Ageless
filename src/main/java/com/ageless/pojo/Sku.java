@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Sku {
-    private Integer id;
+    private Integer SKUId;
     private Integer productId;
     private String skuCon;
     private Integer kucun;
