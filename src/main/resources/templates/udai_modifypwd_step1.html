@@ -92,6 +92,7 @@
 					<div class="step-flow-box">
 						<div class="step-flow__bd">
 							<div class="step-flow__li step-flow__li_done">
+
 							  <div class="step-flow__state"><i class="iconfont icon-ok"></i></div>
 							  <p class="step-flow__title-top">输入旧密码</p>
 							</div>
@@ -111,24 +112,45 @@
 							</div>
 						</div>
 					</div>
-					<form action="udai_modifypwd_step2.html" class="user-setting__form" role="form">
+					<form  class="user-setting__form" role="form" method="post">
 						<div class="form-group">
-							<input class="form-control" name="phone" required="" maxlength="11" autocomplete="off" type="password">
+							<input class="form-control" name="opwd" id="opwd" required="" maxlength="18" autocomplete="off" type="password">
 							<span class="tip-text">请输入原密码</span>
 							<span class="see-pwd pwd-toggle" title="显示密码"><i class="glyphicon glyphicon-eye-open"></i></span>
 							<span class="error_tip"></span>
 						</div>
+
 						<div class="user-form-group tags-box">
-							<button type="submit" class="btn ">提交</button>
+							<button type="button" class="btn ">提交</button>
 						</div>
 						<script src="js/login.js"></script>
 						<script>
 							$(document).ready(function(){
-								$('.form-control').on('blur focus',function() {
+								$('.form-controlform-control').on('blur focus',function() {
 									$(this).addClass('focus');
 									$('.error_tip').empty();
 									if ($(this).val() == ''){$(this).removeClass('focus')}
 								});
+
+								$(".btn").click(function () {
+									var opwd=$("#opwd").val();
+									var url="/udai_modifypwd_step1_opwd?opwd="+opwd+"";
+                                    $.ajax({
+                                        url:url,
+                                        type:"post",
+                                        dataType:"json",
+                                        success:function(result){
+											if(result.mes=="no"){
+												alert("密码输入有误，请重新输入。")
+												$("#opwd").val("");
+											}else if(result.mes=="yes"){
+											    location.href="/udai_modifypwd_step2.html";
+											}
+                                        },error:function () {
+                                            alert("链接服务器失败！");
+                                        }
+                                    })
+								})
 							});
 						</script>
 					</form>
@@ -234,4 +256,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

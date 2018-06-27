@@ -6,11 +6,13 @@ new Vue({
         productList:[],
         checkAllFlag: false,
         delFlag: false,
+        delId:0,
+        delRessult:0,
     },
     filters:{
-        formatMoney: function (value) {
+      /*  formatMoney: function (value) {
             return "￥" + value.toFixed(2)//前端不建议数据格式转换，会丢失精度
-        }
+        }*/
     },
     mounted:function () {
         this.$nextTick(function () {
@@ -21,21 +23,22 @@ new Vue({
     methods:{
         cartView:function () {
             var _this=this;
-            this.$http.get("/data/cart.json",{"id":123}).then(function (res) {
-               // alert(res.data.result.productList.length);
-                 _this.productList=res.data.result.productList;
-                 _this.totalMoney=res.data.result.totalMoney;
+
+            this.$http.get("/shop/selshopAll").then(function (json) {
+                  alert(json);
+                 _this.productList=json.data;
+
             });
         },
         changeMoney:function (product,way) {
             //alert(product.productQuentity);
             if (way>0){
-                product.productQuentity++;
+                product.orderamount++;
             }else{
-                product.productQuentity--;
-                if(product.productQuentity<1){
+                product.orderamount--;
+                if(product.orderamount<1){
                     alert("亲，不能再减啦！");
-                    product.productQuentity=1;
+                    product.orderamount=1;
                 }
             }
             this.calcTotalPrice();
@@ -71,8 +74,8 @@ new Vue({
             this.totalMum=0;
             this.productList.forEach(function (item, index) {
                 if (item.checked) {
-                    _this.totalMoney += item.productPrice * item.productQuentity;
-                    _this.totalMum+=item.productQuentity;
+                    _this.totalMoney += item.price * item.orderamount;
+                    _this.totalMum+=item.orderamount;
                 }
             });
 
@@ -80,13 +83,25 @@ new Vue({
         delConfrim: function (item) {
             this.delFlag = true;
             this.product = item;
+            this.delId=item.id;
+
         },
         delProduct: function () {
-            var index = this.productList.indexOf(this.curProduct);
-            this.productList.splice(index, 1);
-            /*从当前下标开始删除，删除一个*/
+            var _this=this;
+            this.$http.get("/shop/delShop",{"id":_this.delId}).then(function (data) {
+             _this.delRessult=data.data;
+            if(_this.delRessult>0){
+                 alert("删除成功！");
+                 this.cartView();
+            }else{
+                alert("删除失败！");
+            }
+            },function () {
+                alert("删除失败1！");
+            });
+
             this.delFlag = false;
-            //实际中应该使用this.$http.post()传值id去调用控制器的接口并返回结果
+
         },
 
 
@@ -96,6 +111,9 @@ new Vue({
 Vue.filter("money", function (value, type) {
     return "￥" + value.toFixed(2) + type;
 })
+
+
+
 
 
 
