@@ -19,12 +19,19 @@
 	);
 
 </insert>
+	<!--购物车查询语句-->
 	<select id="selshopAll" resultType="ShoppingCart" parameterType="ShoppingCart">
-          SELECT `user`.id,shoppingcart.id,product.id,sku.SKUId, productName,price,SKUcon, orderamount
-            FROM shoppingcart
-            INNER JOIN  product ON shoppingcart.productId=product.productId
-            INNER JOIN sku ON shoppingcart.productId=sku.productId
-            INNER JOIN `user` ON shoppingcart.userId=userid
+        SELECT 	shoppingcart.id, userId, shoppingcart.productId, orderamount ,sku.SKUId,price,productName FROM ageless.shoppingcart
+        INNER JOIN sku ON shoppingcart.productId=sku.productId
+        INNER JOIN  product ON shoppingcart.productId=product.productId
+            <!--<if test="userId!=null and userId!=0">
+                and userId=#{userId}
+            </if>
+            <if test="SKUId!=null and SKUId!=0">
+                and SKUId=#{SKUId}
+            </if>-->
      </select>
-
+     <delete id="delshop" parameterType="ShoppingCart" >
+            DELETE FROM shoppingcart WHERE id = #{id}
+	 </delete>
 </mapper>

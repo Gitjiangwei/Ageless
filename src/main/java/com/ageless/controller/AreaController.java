@@ -42,7 +42,7 @@ public class AreaController {
 
 	@GetMapping("/ss.html")
 	public String index() {
-		return "login";
+		return "item_show";
 	}
 
 

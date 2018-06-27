@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -31,15 +32,18 @@ public class ShopCartController {
 
     //购物车查询
     @GetMapping("/selshopAll")
+    @ResponseBody
     public Object  selShopsAll(Integer uid){
-        List<ShoppingCart>  shoppingAll =shopCartService.selshopAll(uid);
-        Object json=JSON.toJSON(shoppingAll);
+        List<ShoppingCart>  productList =shopCartService.selshopAll(uid);
+        Object json=JSON.toJSON(productList);
         return json;
     }
+
     //删除购物车商品
-    public Object  delShops(Integer uid){
-        int delShopping=shopCartService.delshop(uid);
-        Object json=JSON.toJSON(delShopping);
-        return json;
+    @GetMapping("/delShop")
+    @ResponseBody
+    public Object  delShops(Integer id){
+       int delShopping=shopCartService.delshop(id);
+        return JSON.toJSONString(delShopping);
     }
 }
