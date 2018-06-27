@@ -111,23 +111,23 @@
 							</div>
 						</div>
 					</div>
-					<form action="udai_modifypay_step3.html" class="user-setting__form" role="form">
+					<form  class="user-setting__form" role="form">
 						<div class="form-group">
-							<input class="form-control" name="phone" required="" maxlength="11" autocomplete="off" type="password">
+							<input class="form-control" name="npay1" id="npay1" required="" maxlength="6" autocomplete="off" type="password">
 							<span class="tip-text">新的密码</span>
 							<span class="see-pwd pwd-toggle" title="显示密码"><i class="glyphicon glyphicon-eye-open"></i></span>
 							<span class="error_tip"></span>
 						</div>
 						<div class="form-group">
 						<div class="form-group">
-							<input class="form-control" name="phone" required="" maxlength="11" autocomplete="off" type="password">
+							<input class="form-control" name="npay2"  id="npay2" required="" maxlength="6" autocomplete="off" type="password">
 							<span class="tip-text">再次确认新的密码</span>
 							<span class="see-pwd pwd-toggle" title="显示密码"><i class="glyphicon glyphicon-eye-open"></i></span>
 							<span class="error_tip"></span>
 						</div>
 						</div>
 						<div class="user-form-group tags-box">
-							<button type="submit" class="btn ">提交</button>
+							<button type="button" class="btn ">提交</button>
 						</div>
 						<script src="js/login.js"></script>
 						<script>
@@ -136,6 +136,40 @@
 									$(this).addClass('focus')
 									if ($(this).val() == ''){$(this).removeClass('focus')}
 								});
+
+
+                                $(".btn").click(function () {
+                                    var npay1=$("#npay1").val();
+                                    var npay2=$("#npay2").val();
+                                    var pwd = /^\d{6}$/;
+                                    if(!pwd.test(npay1)){
+                                        alert("支付密码格式不正确，请输入6位数字！")
+                                        $("#npay1").val("");
+                                        $("#npay2").val("");
+										return;
+									}
+                                    if (npay1==npay2 && npay1!=""){
+                                        var url="/udai_modifypay_step2_opay?npay="+npay2+"";
+                                        $.ajax({
+                                            url:url,
+                                            type:"post",
+                                            dataType:"json",
+                                            success:function(result){
+                                                if(result.mes=="no"){
+                                                    alert("修改失败")
+                                                }else if(result.mes=="yes"){
+                                                    location.href="/udai_modifypay_step3.html";
+                                                }
+                                            },error:function () {
+                                                alert("链接服务器失败！");
+                                            }
+                                        })
+                                    } else{
+                                        alert("两次密码不匹配，请重新输入！")
+                                        $("#npay1").val("");
+                                        $("#npay2").val("");
+                                    }
+                                })
 							});
 						</script>
 					</form>
