@@ -1,0 +1,42 @@
+
+<div class="sort-total pull-right shang">共${shuliang}个商品</div>
+<div class="item-list__area clearfix">
+    <#list selectProduct as p>
+    <div class="item-card">
+        <a href="item_show.html" class="photo">
+            <img src="images/temp/${p.productPic}" alt="${p.productName}" class="cover">
+            <div class="name">${p.productName}</div>${p.id}
+        </a>
+        <div class="middle">
+            <div class="price">
+                <small>￥</small>
+                ${p.price}
+            </div>
+            <div class="sale"><a href="">加入购物车</a></div>
+        </div>
+        <div class="buttom">
+            <div>销量 <b>${p.xiaoliang}</b></div>
+            <div>评论 <b>${p.comment}</b></div>
+        </div>
+    </div>
+</#list>
+
+</div>
+<!-- 分页 -->
+<div class="page text-right clearfix">
+    <#if (pageIndex-1>0) >
+    <a href="javascript:" class="disabled" onclick="show(${pageIndex-1})">上一页</a>
+</#if>
+
+<#if (pageIndex < pageCount) >
+<a href="javascript:" class="disabled" onclick="show(${pageIndex+1})">下一页</a>
+</#if>
+
+<a class="disabled">${pageIndex}/${pageCount}页</a>
+<form action="" class="page-order">
+    到第
+    <input type="text" name="page">
+    页
+    <input class="sub" type="submit" value="确定">
+</form>
+</div>
