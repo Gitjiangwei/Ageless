@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/commodity")
 public class ProductController {
 
     @Resource
@@ -47,10 +48,10 @@ public class ProductController {
         Integer emm = 0;
         for (SkuOption skuopt:options) {
             skucon.append(skuopt.getId() + ":" + thefirst.get(emm) + ",");
-            emm ++;
+           emm ++;
         }
         Sku sku = service.selectSkuByCon(skucon.toString());
-        System.out.println("------id:" + sku.getSKUId() + "------name:" + sku.getSkuCon() + "------price:" +
+       System.out.println("------id:" + sku.getSKUId() + "------name:" + sku.getSkuCon() + "------price:" +
                 sku.getPrice() + "-------kucun:" + sku.getKucun());
         model.addAttribute("options",options);
         model.addAttribute("properties",properties);
