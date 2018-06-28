@@ -25,25 +25,39 @@ public class ProductController {
     @Resource
     private ProductService service;
 
-    @RequestMapping(value="cha",method = RequestMethod.GET)
-    public String ll(Model model,@RequestParam(value = "id",defaultValue = "2")Integer id){
+    @RequestMapping("/shopshow")
+    public String shopshow(Model model,@RequestParam(value = "id",defaultValue = "2")Integer id){
         Product product = service.selectPoroductById(id);
         List<Sku> skus = service.selectAllSkuById(id);
-        String skucon = skus.get(0).getSkuCon();
-        Integer len = skucon.length() / 4;
         List<String> skuPropertyIds = new ArrayList<>();
-        for (int i = 0 ; i < len ; i++){
-            skuPropertyIds.add(skucon.substring(4*i,(4*i)+1));
-        }
         List<String> skuOptionIds = new ArrayList<>();
-        for (int i = 0 ; i < skus.size() ; i++){
-            for (int j = 0 ; j < len ; j++){
-                String a = skus.get(i).getSkuCon().substring((4*j)+2,(4*j)+3);
-                if (!skuOptionIds.contains(a)){
-                    skuOptionIds.add(a);
+        for (int k = 0;k < skus.size();k++){
+            String string = skus.get(k).getSkuCon();
+            String substring = string.substring(0, string.length()-1);//截取最后一个
+            System.out.println(substring);
+            String[] split = substring.split(",");//以逗号分割
+            Integer len = split.length;
+            for (String string2 : split) {
+                int q = 0;
+                for(int i=0;i<string2.length();i++) {
+                    if(string2.indexOf(":", i)!=-1){
+                        q++;
+                    }
+                }
+                String skucon1 = string2.substring(q,string2.length());
+                String skucon2 = string2.substring(0,q-1);
+
+                if (!skuOptionIds.contains(skucon1)){
+                    skuOptionIds.add(skucon1);
+                }
+                if (!skuPropertyIds.contains(skucon2)){
+                    skuPropertyIds.add(skucon2);
                 }
             }
         }
+        System.out.println("---");
+        System.out.println(skuPropertyIds);
+        System.out.println(skuOptionIds);
         List<SkuProperty> properties = service.selectAllSkupropertyByIds(skuPropertyIds);
         List<SkuOption> options = service.selectAllSkuoptionById(skuOptionIds);
         List<Integer> thefirst = new ArrayList();
@@ -55,18 +69,12 @@ public class ProductController {
                 }
             }
         }
-        StringBuffer skucon2 = new StringBuffer();
-        Integer emm = 0;
-        for (SkuProperty skupro:properties) {
-            skucon2.append(skupro.getId() + ":" + thefirst.get(emm) + ",");
-            emm ++;
-        }
-        Sku sku = service.selectSkuByCon(skucon2.toString());
-        model.addAttribute("options",options);
-        model.addAttribute("properties",properties);
+        System.out.println(options.toString());
+        System.out.println("-=-=-=-=-=--==--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println(thefirst.size());
+        model.addAttribute("productId",id);
+        model.addAttribute("firsts",thefirst);
         model.addAttribute("product",product);
-        model.addAttribute("thefirst",thefirst);
-        model.addAttribute("sku",sku);
         return "item_show";
     }
 
@@ -74,21 +82,35 @@ public class ProductController {
     public ModelAndView productRight(ModelAndView modelAndView, HttpServletRequest request, @RequestParam("id")Integer id){
         Product product = service.selectPoroductById(id);
         List<Sku> skus = service.selectAllSkuById(id);
-        String skucon = skus.get(0).getSkuCon();
-        Integer len = skucon.length() / 4;
         List<String> skuPropertyIds = new ArrayList<>();
-        for (int i = 0 ; i < len ; i++){
-            skuPropertyIds.add(skucon.substring(4*i,(4*i)+1));
-        }
         List<String> skuOptionIds = new ArrayList<>();
-        for (int i = 0 ; i < skus.size() ; i++){
-            for (int j = 0 ; j < len ; j++){
-                String a = skus.get(i).getSkuCon().substring((4*j)+2,(4*j)+3);
-                if (!skuOptionIds.contains(a)){
-                    skuOptionIds.add(a);
+        for (int k = 0;k < skus.size();k++){
+            String string = skus.get(k).getSkuCon();
+            String substring = string.substring(0, string.length()-1);//截取最后一个
+            System.out.println(substring);
+            String[] split = substring.split(",");//以逗号分割
+            Integer len = split.length;
+            for (String string2 : split) {
+                int q = 0;
+                for(int i=0;i<string2.length();i++) {
+                    if(string2.indexOf(":", i)!=-1){
+                        q++;
+                    }
+                }
+                String skucon1 = string2.substring(q,string2.length());
+                String skucon2 = string2.substring(0,q-1);
+
+                if (!skuOptionIds.contains(skucon1)){
+                    skuOptionIds.add(skucon1);
+                }
+                if (!skuPropertyIds.contains(skucon2)){
+                    skuPropertyIds.add(skucon2);
                 }
             }
         }
+        System.out.println("---");
+        System.out.println(skuPropertyIds);
+        System.out.println(skuOptionIds);
         List<SkuProperty> properties = service.selectAllSkupropertyByIds(skuPropertyIds);
         List<SkuOption> options = service.selectAllSkuoptionById(skuOptionIds);
         List<Integer> thefirst = new ArrayList();
@@ -98,6 +120,7 @@ public class ProductController {
         }
         StringBuffer skucon2 = new StringBuffer();
         Integer emm = 0;
+        System.out.println(thefirst.size());
         for (SkuProperty skupro:properties) {
             System.out.println("------skuproId:"+skupro.getId() + "-------------thefirst"+thefirst.get(emm)+"-----------------------------");
             skucon2.append(skupro.getId() + ":" + thefirst.get(emm) + ",");
@@ -112,4 +135,5 @@ public class ProductController {
         modelAndView.setViewName("item_right");
         return modelAndView;
     }
+
 }

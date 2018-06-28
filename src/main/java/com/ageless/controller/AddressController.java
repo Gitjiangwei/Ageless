@@ -32,6 +32,7 @@ public class AddressController {
     private String showAddress(Long id,HttpSession session){
         User u= (User) session.getAttribute("user");
         Long userId=u.getId();//用户Id
+        /*Long userId= Long.valueOf(1);//用户Id*/
         List<Address> userList=addressService.getListAddress(userId);
         return JSON.toJSONString(userList);
     }
@@ -65,6 +66,7 @@ public class AddressController {
     private Object integerAddress(Address address,HttpSession session){
         User u= (User) session.getAttribute("user");
         Long userId=u.getId();//用户Id
+        /*Long userId= Long.valueOf(1);//用户Id*/
         address.setNameId(userId);
         Integer i=addressService.insertAddress(address);
         Object obj="";
