@@ -215,6 +215,14 @@
                 </div>
 			</div>
 			<script>
+                $(function () {
+                    var result;
+                    var url=window.location.search; //获取url中"?"符后的字串
+                    if(url.indexOf("?")!=-1){
+                        result = url.substr(url.indexOf("=")+1);
+                    }
+                    $("#login_phone").val(result);
+                });
 				$(document).ready(function() {
 					// 判断直接进入哪个页面 例如 login.php?p=register
 					switch($.getUrlParam('p')) {
@@ -383,7 +391,7 @@
                                 dataType:"json",
                                 success:function(data){
                                     if(data.back=='对的'){
-                                        error.html(msgtemp('<strong>注册成功</strong>','alert-warning'));
+                                        location.href="login.html?values="+phoneNo;
                                     }else if(data.back=='超时'){
                                         error.html(msgtemp('<strong>验证码过期</strong>请重新获取验证码','alert-warning'));
                                     }else if(data.back=='重复'){

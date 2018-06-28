@@ -35,6 +35,13 @@ public interface AddressMapper {
      * @param address
      * @return
      */
-    Integer updateAddress(Address address,Long id);
+    Integer updateAddress(Address address);
+
+    /**
+     * 根据id显示地址
+     * @param id
+     * @return
+     */
+    Address selectAddress(Long id);
 
 }
