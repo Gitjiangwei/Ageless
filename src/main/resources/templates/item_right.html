@@ -29,50 +29,20 @@
     </ul>
     <div class="item-key">
         <div class="item-sku">
-            <#list options as opt>
+            <#list properties as pro>
             <dl class="item-prop clearfix">
-                <dt class="item-metatit">${opt.optionName}：</dt>
-                <dd><ul data-property="${opt.optionName}" class="clearfix">
-                    <#list properties as pro>
-                    <#if (opt.id==pro.categoryId)>
-                    <li onclick="sku(this)"><a <#list thefirst as fir><#if (pro.id==fir)>class="on" </#if></#list> href="javascript:;" role="button" data-value="${pro.propertyName}" name="${pro.id}" aria-disabled="true">
-                    <span>${pro.propertyName}</span>
+                <dt class="item-metatit">${pro.propertyName}：</dt>
+                <dd><ul data-property="${pro.propertyName}" class="clearfix">
+                    <#list options as opt>
+                    <#if (opt.productId==pro.id)>
+                    <li onclick="sku(this)"><a <#list thefirst as fir><#if (opt.id==fir)>class="on" </#if></#list> role="button" data-value="${opt.optionName}" name="${opt.id}" aria-disabled="true">
+                    <span>${opt.optionName}</span>
                     </a></li>
                 </#if>
             </#list>
-            <!--<li><a class="on" href="javascript:;" role="button" data-value="白色" aria-disabled="true">
-                <span>白色</span>
-            </a></li>
-            <li><a href="javascript:;" role="button" data-value="黑色" aria-disabled="true">
-                <span>黑色</span>
-            </a></li>
-            <li><a href="javascript:;" role="button" data-value="粉红色" aria-disabled="true">
-                <span>粉红色</span>
-            </a></li>
-            <li><a href="javascript:;" role="button" data-value="黄色" aria-disabled="true">
-                <span>黄色</span>
-            </a></li>-->
             </ul></dd>
             </dl>
         </#list>
-
-        <!--<dl class="item-prop clearfix">
-            <dt class="item-metatit">尺码：</dt>
-            <dd><ul data-property="尺码" class="clearfix">
-                <li><a href="javascript:;" role="button" data-value="S" aria-disabled="true">
-                    <span>S</span>
-                </a></li>
-                <li><a href="javascript:;" role="button" data-value="M" aria-disabled="true">
-                    <span>M</span>
-                </a></li>
-                <li><a href="javascript:;" role="button" data-value="L" aria-disabled="true">
-                    <span>L</span>
-                </a></li>
-                <li><a href="javascript:;" role="button" data-value="XL" aria-disabled="true">
-                    <span>XL</span>
-                </a></li>
-            </ul></dd>
-        </dl>-->
     </div>
     <div class="item-amount clearfix bgf5">
         <div class="item-metatit">数量：</div>
