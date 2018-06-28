@@ -5,6 +5,13 @@ import com.ageless.service.UserService;
 import com.ageless.util.GetSMS;
 import com.ageless.util.MD5;
 import com.ageless.util.RandUtil;
+import com.alipay.api.internal.util.StringUtils;
+import com.qq.connect.QQConnectException;
+import com.qq.connect.api.OpenID;
+import com.qq.connect.api.qzone.UserInfo;
+import com.qq.connect.javabeans.AccessToken;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
+import com.qq.connect.oauth.Oauth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +20,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.ParseException;
@@ -397,5 +406,78 @@ public class UserController {
             object="{\"back\":\"成功\"}";
         }
         return object;
+    }
+    /**
+     * 生成QQ授权
+     *
+     * @param request
+     * @return
+     * @throws QQConnectException
+     */
+    @GetMapping("/authorizeUrl.html")
+    public String authorizeUrl(HttpServletRequest request) {
+        String authorizeUrl = null;
+        try {
+            authorizeUrl = new Oauth().getAuthorizeURL(request);
+        } catch (QQConnectException e) {
+            e.printStackTrace();
+        }
+        return "redirect:" + authorizeUrl;
+    }
+
+    @RequestMapping("/qqRedirect")
+    public String qqRedirect(HttpServletRequest request, HttpServletResponse response) {
+        String userOpenId=null;
+        User userLoginOpenid=null;
+
+        try {
+            //第一步获取授权码
+            AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
+            //第二部获取accesstoken
+            String accesstoken=accessTokenObj.getAccessToken();
+
+            String accessToken = null;
+            String openID = null;
+            Long tokenExpireIn = 0L;
+
+            if(StringUtils.isEmpty(accesstoken)){
+                logger.info("==========================未获取到用户 accessToken=========================");
+            }else {
+                //获取accessToken信息
+                accessToken = accessTokenObj.getAccessToken();
+                tokenExpireIn = accessTokenObj.getExpireIn();
+
+                // 利用获取到的accessToken 去获取当前用的openid
+                OpenID openIDObj =  new OpenID(accessToken);
+                openID = openIDObj.getUserOpenID();
+
+                //利用 accessToken 和 openID 获取用户信息
+                UserInfo userInfo = new UserInfo(accessToken, openID);
+                UserInfoBean userInfoBean = userInfo.getUserInfo();
+
+                //第三方登录成功
+                if(userInfoBean.getRet()==0){
+                    userLoginOpenid = userService.userLoginOpenId(accessToken);
+                    if(userLoginOpenid==null){
+                        userLoginOpenid =new User();
+                        userLoginOpenid.setMembership(userInfoBean.getNickname());
+                        userLoginOpenid.setLoginpwd(userInfoBean.getGender());
+                        userLoginOpenid.setDongjie(0L);
+                        userLoginOpenid.setIntegral("0");
+                        userLoginOpenid.setState(0L);
+                        userLoginOpenid.setOpenId(accessToken);
+                        userService.addQqUser(userLoginOpenid);
+                    }
+                    request.getSession().setAttribute("QQuser",userLoginOpenid);
+                    request.getSession().setMaxInactiveInterval(tokenExpireIn.intValue());
+                }else {
+                    logger.info("未能正确获取到信息，原因是：" + userInfoBean.getMsg());
+                }
+            }
+
+        } catch (QQConnectException e) {
+            e.printStackTrace();
+        }
+        return "redirect:../../web/index";
     }
 }
