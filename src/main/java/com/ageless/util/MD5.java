@@ -20,8 +20,7 @@ public class MD5 {
             return "";  
         }  
         char[] charArray = inStr.toCharArray();  
-        byte[] byteArray = new byte[charArray.length];  
-  
+        byte[] byteArray = new byte[charArray.length];
         for (int i = 0; i < charArray.length; i++)  
             byteArray[i] = (byte) charArray[i];  
         byte[] md5Bytes = md5.digest(byteArray);  
@@ -38,8 +37,7 @@ public class MD5 {
     /**
      * 加密解密算法 执行一次加密，两次解密
      */
-    public static String convertMD5(String inStr){  
-  
+    public static String convertMD5(String inStr){
         char[] a = inStr.toCharArray();  
         for (int i = 0; i < a.length; i++){  
             a[i] = (char) (a[i] ^ 't');  

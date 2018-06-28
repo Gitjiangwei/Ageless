@@ -1,4 +1,4 @@
-$(function(){
+$(function(){	
 	var addressLeng = $(".ui-switchable-panel").length;
 	
 	var ds_prov = document.getElementById('ds_prov');
@@ -249,36 +249,6 @@ $(function(){
 		//		隐藏地址选项区
 		$(".ds_area").removeClass("text-wrap-hover");
 	}
-
-	$.ajax({
-		type:'post',
-		url:'/showAdd',
-		dataType:'json',
-		success:function (data) {
-			var content="";
-			$.each(data,function (i,e) {
-				content+="<div class=\"addr-item\">\n" +
-                    "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
-                    "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
-                    "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
-                    "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
-                    "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
-                    "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
-                    "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
-                    "\t\t\t\t\t\t</div>\n" +
-                    "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
-                    "\t\t\t\t\t\t\t<div v-if="+ e.state  +">\n" +
-                    "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default\">设为默认</a>\n" +
-                    "\t\t\t\t\t\t\t</div>\n" +
-                    "\t\t\t\t\t\t\t<div v-if="+ e.state +">\n" +
-                    "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default active\">默认地址</a>\n" +
-                    "\t\t\t\t\t\t\t</div>\n" +
-                    "\t\t\t\t\t\t</div>\n" +
-                    "\t\t\t\t\t</div>";
-            })
-			$(".addr-list").html(content);
-        }
-	})
-
+	
 })
 

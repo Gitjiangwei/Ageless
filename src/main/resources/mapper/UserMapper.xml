@@ -53,4 +53,24 @@
         </trim>
         where id=#{id}
     </update>
+
+    <select id="selectId" resultType="java.lang.Integer">
+        SELECT id FROM USER ORDER BY id DESC LIMIT 0,1
+    </select>
+    <select id="selectCount" parameterType="com.ageless.pojo.User" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM ageless.user where 1=1
+        <if test="phone!=null and phone!=''">
+            and phone=#{phone}
+        </if>
+        <if test="mailbox!=null and mailbox!=''">
+            and mailbox=#{mailbox}
+        </if>
+
+    </select>
+    <insert id="inserInfo" parameterType="com.ageless.pojo.User">
+        INSERT INTO ageless.user (membership,phone,loginpwd,regtime)VALUES(#{membership},#{phone},#{loginpwd},#{regtime});
+    </insert>
+    <insert id="inserInfo1" parameterType="com.ageless.pojo.User">
+        INSERT INTO ageless.user (membership,mailbox,loginpwd,regtime)VALUES(#{membership},#{mailbox},#{loginpwd},#{regtime});
+    </insert>
 </mapper>

@@ -10,6 +10,8 @@ public class Product {
     private String productId;
     private String productName;
     private String descript;
+    private String maidian;
+    private Double price;
     private Date update;
     private Date downdate;
     private Integer status;
@@ -24,6 +26,7 @@ public class Product {
     private String sortConId;
 
 
+    private ProductPic productPic;
     private SkuOption skuOption;
     private SkuProperty skuProperty;
 

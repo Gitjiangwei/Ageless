@@ -48,12 +48,14 @@ function msgtemp(msg,className) {
 				//邮箱验证
 				var mailbox =/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
 
-				if(!reg.test(num) && !mailbox.test(num)) {
-					$(this)[0].focus();
-					return 3;
-				} else {
-					return 0;
-				}
+                if(!reg.test(num) && !mailbox.test(num)) {
+                    $(this)[0].focus();
+                    return 3;
+                } else if(reg.test(num)){
+                    return 0;
+                }else if(mailbox.test(num)){
+                    return 4;
+                }
 			}
 		},
 		/*
@@ -99,7 +101,20 @@ function msgtemp(msg,className) {
                 return 2;
             }
         },
-	});
+        /**
+         * 短信验证码是否为空
+         * @returns {number}
+         */
+        validatemess: function (){
+            var num = $(this).val();
+            if (num.length == 0) {
+                $(this)[0].focus();
+                return 1
+            }else{
+                return 2
+            }
+        },
+    });
 })(jQuery);
 
 

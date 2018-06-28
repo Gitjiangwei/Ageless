@@ -31,12 +31,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Integer updateAddress(Address address) {
-        return addressMapper.updateAddress(address);
-    }
-
-    @Override
-    public Address selectAddress(Long id) {
-        return addressMapper.selectAddress(id);
+    public Integer updateAddress(Address address,Long id) {
+        return addressMapper.updateAddress(address,id);
     }
 }

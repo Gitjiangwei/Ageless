@@ -16,7 +16,6 @@
 	<script src="/js/swiper.min.js" charset="UTF-8"></script>
 	<script src="/js/global.js" charset="UTF-8"></script>
 	<script src="/js/udai_address.js" charset="UTF-8"></script>
-	<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
 	<!-- <script src="js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script> -->
 	<title>U袋网</title>
 </head>
@@ -94,12 +93,12 @@
 		<div class="pull-right">
 			<div class="user-content__box clearfix bgf">
 				<div class="title">账户信息-收货地址</div>
-				<form action="#" class="user-addr__form form-horizontal" role="form">
+				<form action="" class="user-addr__form form-horizontal" role="form">
 					<p class="fz18 cr">新增收货地址<span class="c6" style="margin-left: 20px">必填项</span></p>
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">收货人姓名：</label>
 						<div class="col-sm-6">
-							<input class="form-control" id="name"  name="consignee" placeholder="请输入姓名" type="text">
+							<input class="form-control" id="name" placeholder="请输入姓名" type="text">
 						</div>
 					</div>
 					<div class="form-group">
@@ -114,13 +113,13 @@
 									<span id="aa" >请选择地区</span><i style="margin-top: 4px"></i>
 								</div>
 
-								<div class="ui-arear-content-wrap" name="province">
+								<div class="ui-arear-content-wrap">
 									<!--tab页签-->
 									<div class="ui-area-tab">
-										<a class="ui-switchable-item ui-area-current" href="javascript:;"><em id="province" name="province">请选择</em><i></i></a>
-										<a class="ui-switchable-item" href="javascript:;"><em id="city" name="city">请选择</em><i></i></a>
-										<a class="ui-switchable-item" href="javascript:;"><em id="area" name="area">请选择</em><i></i></a>
-										<a class="ui-switchable-item" href="javascript:;"><em id="street" name="street">请选择</em><i></i></a>
+										<a class="ui-switchable-item ui-area-current" href="javascript:;"><em>请选择</em><i></i></a>
+										<a class="ui-switchable-item" href="javascript:;"><em>请选择</em><i></i></a>
+										<a class="ui-switchable-item" href="javascript:;"><em>请选择</em><i></i></a>
+										<a class="ui-switchable-item" href="javascript:;"><em>请选择</em><i></i></a>
 									</div>
 									<div class="ui-area-content">
 										<!--省-->
@@ -153,7 +152,7 @@
                                 <select name="area"></select>
                                 <select name="town"></select>
                             </div>-->
-							<input style="margin-top: 20px" class="form-control" id="details" name="details" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码等信息" maxlength="30" type="text">
+							<input style="margin-top: 20px" class="form-control" id="details" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码等信息" maxlength="30" type="text">
 						</div>
 					</div>
 					<!-- <div class="form-group">
@@ -165,102 +164,25 @@
 					<div class="form-group">
 						<label for="mobile" class="col-sm-2 control-label">手机号码：</label>
 						<div class="col-sm-6">
-							<input class="form-control" id="mobile" name="tel" placeholder="请输入手机号码" type="text">
+							<input class="form-control" id="mobile" placeholder="请输入手机号码" type="text">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
 							<div class="checkbox">
-								<label><input type="checkbox" name="state"><i></i> 设为默认收货地址</label>
+								<label><input type="checkbox"><i></i> 设为默认收货地址</label>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
-							<input type="button" class="but" value="保存"></input>
+							<button type="submit" class="but">保存</button>
 						</div>
 					</div>
 					<script src="js/jquery.citys.js"></script>
 					<script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 					<script>
-                        $(".but").click(function () {
-                            var province=$("#province").text();
-                            var city=$("#city").text();
-                            var area=$("#area").text();
-                            var street=$("#street").text();
-
-                            if($("#name").val()==""){
-                                alert("请输入姓名");
-                                return;
-							}
-                            if(province=="请选择"){
-                                alert("请选择省");
-                                return;
-                            }
-                            if(city=="请选择"){
-                                alert("请选择市");
-                                return;
-                            }
-                            if(area=="请选择"){
-                                alert("请选择区");
-                                return;
-                            }
-                            if(street=="请选择"){
-                                alert("请选择街道");
-                                return;
-                            }
-                            if($("#details").val()==""){
-                                alert("请输入详细地址");
-                                return;
-                            }
-                            if($("#mobile").val()==""){
-                                alert("请输入电话号码");
-                                return;
-                            }
-
-                            var a=$("input[type='checkbox']").is(':checked');
-                            var state="";
-                            if(a==false){
-                                state=0;
-                            }else if(a==true){
-                                state=1;
-                            }
-                            $.ajax({
-                                type:'post',
-                                url:'/insertAdd',
-                                data:$("form").serialize()+"&province="+province+"&city="+city+"&area="+area+"&street="+street+"&state="+state,
-								 dataType:'json',
-                                success:function (data) {
-                                    if (data.add=="OK"){
-                                        alert("添加成功");
-                                        window.location.href="/udai_address.html";
-                                    } else if(data.add=="NO"){
-                                        alert("添加失败");
-                                    }
-                                }
-                            })
-						});
-						//删除地址
-                        function cct(id) {
-                            var flag = confirm("是否删除？");
-                            if(flag){
-                                $.ajax({
-                                    type:'post',
-                                    url:'/delAdd',
-                                    data:'id='+id,
-                                    dataType:'json',
-                                    success:function (data) {
-                                        if (data.del=="OK"){
-                                            alert("删除成功");
-                                            window.location.href="/udai_address.html";
-                                        } else if(data.del=="NO"){
-                                            alert("删除失败");
-                                        }
-                                    }
-                                })
-                            }
-                        }
                         $(document).ready(function(){
                             // 添加街道/乡镇
                             function townFormat(info){
@@ -318,27 +240,24 @@
 					<div class="tdf1"></div>
 				</div>
 				<div class="addr-list">
-
-					<!--<div class="addr-item">
+					<div class="addr-item">
 						<div class="tdf1">喵喵喵</div>
 						<div class="tdf2 tdt-a_l">福建省 福州市 晋安区</div>
 						<div class="tdf3 tdt-a_l">浦下村74号</div>
-						&lt;!&ndash; <div class="tdf1">350111</div> &ndash;&gt;
+						<!-- <div class="tdf1">350111</div> -->
 						<div class="tdf1">153****7649</div>
 						<div class="tdf1 order">
 							<a href="udai_address_edit.html">修改</a><a href="">删除</a>
 						</div>
 						<div class="tdf1">
-
 							<a href="" class="default active">默认地址</a>
 						</div>
 					</div>
-
 					<div class="addr-item">
 						<div class="tdf1">喵污喵⑤</div>
 						<div class="tdf2 tdt-a_l">福建省 福州市 仓山区 建新镇</div>
 						<div class="tdf3 tdt-a_l">建新中心小学</div>
-						&lt;!&ndash; <div class="tdf1">350104</div> &ndash;&gt;
+						<!-- <div class="tdf1">350104</div> -->
 						<div class="tdf1">153****7649</div>
 						<div class="tdf1 order">
 							<a href="udai_address_edit.html">修改</a><a href="">删除</a>
@@ -351,7 +270,7 @@
 						<div class="tdf1">taroxd</div>
 						<div class="tdf2 tdt-a_l">福建省 福州市 鼓楼区 鼓东街道</div>
 						<div class="tdf3 tdt-a_l">世界金龙大厦20层B北 福州腾讯企点运营中心</div>
-						&lt;!&ndash; <div class="tdf1">350104</div> &ndash;&gt;
+						<!-- <div class="tdf1">350104</div> -->
 						<div class="tdf1">153****7649</div>
 						<div class="tdf1 order">
 							<a href="udai_address_edit.html">修改</a><a href="">删除</a>
@@ -364,7 +283,7 @@
 						<div class="tdf1">VIPArcher</div>
 						<div class="tdf2 tdt-a_l">福建省 福州市 仓山区 建新镇</div>
 						<div class="tdf3 tdt-a_l">详细地址</div>
-						&lt;!&ndash; <div class="tdf1">350104</div> &ndash;&gt;
+						<!-- <div class="tdf1">350104</div> -->
 						<div class="tdf1">153****7649</div>
 						<div class="tdf1 order">
 							<a href="udai_address_edit.html">修改</a><a href="">删除</a>
@@ -372,7 +291,7 @@
 						<div class="tdf1">
 							<a href="" class="default">设为默认</a>
 						</div>
-					</div>-->
+					</div>
 				</div>
 			</div>
 		</div>
