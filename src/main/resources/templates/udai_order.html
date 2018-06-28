@@ -126,7 +126,7 @@
 											<td>{{item.price*item.orderNumber  |  money('元')}}<br><span class="fz12 c6 text-nowrap">(含运费: ¥0.00)</span></td>
 											<td class="state">
 												<a class="but c6">等待付款</a>
-												<a href="udai_order_detail.html" class="but c9">订单详情</a>
+												<a v-bind:href="('./udai_order_detail.html?id='+(item.id))" class="but c9">订单详情</a>
 											</td>
 											<td class="order">
 												<div class="del"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>

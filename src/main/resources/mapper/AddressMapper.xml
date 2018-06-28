@@ -65,4 +65,10 @@
         </trim>
         where id=#{id}
     </update>
+    <select id="selectAddress" resultType="Address" parameterType="java.lang.Long">
+        SELECT  `id`,`nameId`,`consignee`,`tel`,`province`,
+        `city`,`area`,`street`,`details`,`state`,`zipcode`
+        FROM `address`
+        WHERE id=#{id}
+    </select>
 </mapper>
