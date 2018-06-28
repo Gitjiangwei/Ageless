@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.UserMapper">
+
+    <select id="loginUser" resultType="User">
+        SELECT  `id`,`membership`,`name`,`phone`,
+        `sex`,`birthday`,`loginpwd`,`dongjie`,`regtime`,`truename`,
+        `integral`,`state`,`paymentpwd`,`mailbox`
+        FROM `user`
+        WHERE loginpwd = #{loginpwd}
+        <if test="phone != null and phone != ''">
+            AND phone = #{phone}
+        </if>
+        <if test="membership != null and membership != ''">
+            AND membership = #{membership}
+        </if>
+        <if test="mailbox != null and mailbox != ''">
+            AND mailbox = #{mailbox}
+        </if>
+    </select>
+
+    <update id="updateUser">
+        UPDATE  `user`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="membership!=null and membership!=''">
+                membership=#{membership},
+            </if>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="sex!=null and sex!=''">
+                sex=#{sex},
+            </if>
+            <if test="birthday!=null and birthday!=''">
+                birthday=#{birthday},
+            </if>
+            <if test="loginpwd!=null and loginpwd!=''">
+                loginpwd=#{loginpwd},
+            </if>
+            <if test="truename!=null and truename!=''">
+                truename=#{truename},
+            </if>
+            <if test="paymentpwd!=null and paymentpwd!=''">
+                paymentpwd=#{paymentpwd},
+            </if>
+            <if test="mailbox!=null and mailbox!=''">
+                mailbox=#{mailbox},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

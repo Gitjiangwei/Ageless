@@ -111,23 +111,23 @@
 							</div>
 						</div>
 					</div>
-					<form action="udai_modifypwd_step3.html" class="user-setting__form" role="form">
+					<form  class="user-setting__form" role="form">
 						<div class="form-group">
-							<input class="form-control" name="phone" required="" maxlength="11" autocomplete="off" type="password">
+							<input class="form-control" name="npwd1" id="npwd1" required="" maxlength="18" autocomplete="off" type="password">
 							<span class="tip-text">新的密码</span>
 							<span class="see-pwd pwd-toggle" title="显示密码"><i class="glyphicon glyphicon-eye-open"></i></span>
 							<span class="error_tip"></span>
 						</div>
 						<div class="form-group">
 						<div class="form-group">
-							<input class="form-control" name="phone" required="" maxlength="11" autocomplete="off" type="password">
+							<input class="form-control" name="npwd2" id="npwd2" required="" maxlength="18" autocomplete="off" type="password">
 							<span class="tip-text">再次确认新的密码</span>
 							<span class="see-pwd pwd-toggle" title="显示密码"><i class="glyphicon glyphicon-eye-open"></i></span>
 							<span class="error_tip"></span>
 						</div>
 						</div>
 						<div class="user-form-group tags-box">
-							<button type="submit" class="btn ">提交</button>
+							<button type="button" class="btn ">提交</button>
 						</div>
 						<script src="js/login.js"></script>
 						<script>
@@ -136,6 +136,31 @@
 									$(this).addClass('focus')
 									if ($(this).val() == ''){$(this).removeClass('focus')}
 								});
+								$(".btn").click(function () {
+                                    var npwd1=$("#npwd1").val();
+                                    var npwd2=$("#npwd2").val();
+                                    if (npwd1==npwd2 && npwd1!=""){
+                                        var url="/udai_modifypwd_step2_npwd?npwd="+npwd2+"";
+                                        $.ajax({
+                                            url:url,
+                                            type:"post",
+                                            dataType:"json",
+                                            success:function(result){
+                                                if(result.mes=="no"){
+                                                    alert("修改失败")
+                                                }else if(result.mes=="yes"){
+                                                    location.href="/udai_modifypwd_step3.html";
+                                                }
+                                            },error:function () {
+                                                alert("链接服务器失败！");
+                                            }
+                                        })
+                                    } else{
+                                        alert("两次密码不匹配，请重新输入！")
+                                        $("#npwd1").val("");
+                                        $("#npwd2").val("");
+                                    }
+                                })
 							});
 						</script>
 					</form>
@@ -143,6 +168,7 @@
 			</div>
 		</section>
 	</div>
+
 	<!-- 右侧菜单 -->
 	<div class="right-nav">
 		<ul class="r-with-gotop">
