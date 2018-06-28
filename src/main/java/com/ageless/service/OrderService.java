@@ -10,5 +10,5 @@ public interface OrderService {
      * 显示所有订单
      * @return
      */
-    public List<Order> all();
+    public List<Order> all(String status);
 }
