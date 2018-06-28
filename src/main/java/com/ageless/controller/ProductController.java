@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/commodity")
 public class ProductController {
 
     @Resource
@@ -29,7 +29,6 @@ public class ProductController {
     public String ll(Model model,@RequestParam(value = "id",defaultValue = "2")Integer id){
         Product product = service.selectPoroductById(id);
         List<Sku> skus = service.selectAllSkuById(id);
-        System.out.println("------------------------------------------------------------------");
         String skucon = skus.get(0).getSkuCon();
         Integer len = skucon.length() / 4;
         List<String> skuPropertyIds = new ArrayList<>();
@@ -47,10 +46,6 @@ public class ProductController {
         }
         List<SkuProperty> properties = service.selectAllSkupropertyByIds(skuPropertyIds);
         List<SkuOption> options = service.selectAllSkuoptionById(skuOptionIds);
-        System.out.println(properties.toString());
-        System.out.println(options.toString());
-        System.out.println("-----------------------------skuPropertyIds:"+skuPropertyIds+"-------------------------------------");
-        System.out.println("-----------------------------skuOptionIds:"+skuOptionIds+"-------------------------------------");
         List<Integer> thefirst = new ArrayList();
         for (SkuProperty pro:properties) {
             for (SkuOption opt2:options) {
@@ -62,18 +57,11 @@ public class ProductController {
         }
         StringBuffer skucon2 = new StringBuffer();
         Integer emm = 0;
-        System.out.println("++++++++++++++++++++++"+thefirst.toString()+"++++++++++++++++++++++++");
         for (SkuProperty skupro:properties) {
-            System.out.println("------skuproId:"+skupro.getId() + "-------------thefirst"+thefirst.get(emm)+"-----------------------------");
             skucon2.append(skupro.getId() + ":" + thefirst.get(emm) + ",");
             emm ++;
         }
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println(skucon2.toString());
-        System.out.println("================================================================");
         Sku sku = service.selectSkuByCon(skucon2.toString());
-        System.out.println("------id:" + sku.getSKUId() + "------name:" + sku.getSkuCon() + "------price:" +
-                sku.getPrice() + "-------kucun:" + sku.getKucun());
         model.addAttribute("options",options);
         model.addAttribute("properties",properties);
         model.addAttribute("product",product);
@@ -86,7 +74,6 @@ public class ProductController {
     public ModelAndView productRight(ModelAndView modelAndView, HttpServletRequest request, @RequestParam("id")Integer id){
         Product product = service.selectPoroductById(id);
         List<Sku> skus = service.selectAllSkuById(id);
-        System.out.println("------------------------------------------------------------------");
         String skucon = skus.get(0).getSkuCon();
         Integer len = skucon.length() / 4;
         List<String> skuPropertyIds = new ArrayList<>();
@@ -104,9 +91,6 @@ public class ProductController {
         }
         List<SkuProperty> properties = service.selectAllSkupropertyByIds(skuPropertyIds);
         List<SkuOption> options = service.selectAllSkuoptionById(skuOptionIds);
-        System.out.println(properties.toString());
-        System.out.println(options.toString());
-        System.out.println("-----------------------------skuPropertyIds:"+skuPropertyIds+"-------------------------------------");
         List<Integer> thefirst = new ArrayList();
         String[] thenext = request.getParameterValues("ary[]");
         for (int i = 0;i < thenext.length;i++){
@@ -114,19 +98,12 @@ public class ProductController {
         }
         StringBuffer skucon2 = new StringBuffer();
         Integer emm = 0;
-        System.out.println("++++++++++++++++++++++"+properties.size()+"++++++++++++++++++++++++");
         for (SkuProperty skupro:properties) {
             System.out.println("------skuproId:"+skupro.getId() + "-------------thefirst"+thefirst.get(emm)+"-----------------------------");
             skucon2.append(skupro.getId() + ":" + thefirst.get(emm) + ",");
             emm ++;
         }
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println(skucon2.toString());
-        System.out.println("================================================================");
         Sku sku = service.selectSkuByCon(skucon2.toString());
-        System.out.println("------id:" + sku.getSKUId() + "------name:" + sku.getSkuCon() + "------price:" +
-                sku.getPrice() + "-------kucun:" + sku.getKucun());
-
         modelAndView.addObject("options",options);
         modelAndView.addObject("properties",properties);
         modelAndView.addObject("product",product);
