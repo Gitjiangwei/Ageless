@@ -3,6 +3,7 @@ package com.ageless.mapper;
 
 
 import com.ageless.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
 
@@ -48,4 +49,18 @@ public interface UserMapper {
      * @return
      */
     public int inserInfo1(User user);
+
+    /**
+     * 数据查找OpenId是否与QQ关联
+     * @param openId
+     * @return
+     */
+    User userLoginOpenId(@Param("openId") String openId);
+
+    /**
+     * 添加QQ用户
+     * @param user
+     * @return
+     */
+    int addQqUser(User user);
 }

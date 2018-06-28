@@ -73,4 +73,30 @@
     <insert id="inserInfo1" parameterType="com.ageless.pojo.User">
         INSERT INTO ageless.user (membership,mailbox,loginpwd,regtime)VALUES(#{membership},#{mailbox},#{loginpwd},#{regtime});
     </insert>
+    <select id="userLoginOpenId" resultType="com.ageless.pojo.User">
+        SELECT NAME,phone,sex,birthday FROM USER WHERE openId=#{openId}
+    </select>
+    <insert id="addQqUser" parameterType="com.ageless.pojo.User">
+
+    INSERT INTO ageless.user
+    (
+    membership,
+    loginpwd,
+    dongjie,
+    regtime,
+    integral,
+    state,
+    openId
+    )
+    VALUES
+    (
+    #{membership},
+    #{loginpwd},
+    #{dongjie},
+    NOW(),
+    #{integral},
+    #{state},
+    #{openId},
+    );
+    </insert>
 </mapper>
