@@ -17,8 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 姚毅
+ */
 @Controller
-//@RequestMapping(value = "/sort")
+@RequestMapping(value = "/sort")
 public class SortController {
 
     Logger logger = LoggerFactory.getLogger(AreaController.class);
@@ -39,10 +42,10 @@ public class SortController {
         request.setAttribute("selectsanji", selectsanji);
 
 
-
         List<Product> selectProduct = sortService.selectProduct(list,tiaojian,pageIndex);
         PageInfo<Product> info = new PageInfo<Product>(selectProduct);
-        request.setAttribute("shuliang", selectProduct.size());//共多少个商品
+        request.setAttribute("shuliang", info.getTotal());//共多少个商品
+
         request.setAttribute("pageIndex", pageIndex);
         request.setAttribute("pageCount", info.getPages());
         request.setAttribute("selectProduct", selectProduct);
@@ -64,10 +67,9 @@ public class SortController {
         for (int i =0;i<lists.length;i++){
             list.add(Integer.parseInt(lists[i]));
         }
-        System.out.println(tiaojian+"---------------------------------------------------------------");
         List<Product> selectProduct = sortService.selectProduct(list, tiaojian,pageIndex);
         PageInfo<Product> info = new PageInfo<Product>(selectProduct);
-        request.setAttribute("shuliang", selectProduct.size());//共多少个商品
+        request.setAttribute("shuliang", info.getTotal());//共多少个商品
         request.setAttribute("pageIndex", pageIndex);
         request.setAttribute("pageCount", info.getPages());
         request.setAttribute("selectProduct", selectProduct);
@@ -76,14 +78,5 @@ public class SortController {
         return mv;
     }
 
- /*   public HttpServletRequest httpServletRequest(HttpServletRequest request,List<Integer> list,String tiaojian,Integer pageIndex){
-        List<Product> selectProduct = sortService.selectProduct(list, tiaojian,pageIndex);
-        PageInfo<Product> info = new PageInfo<Product>(selectProduct);
-        request.setAttribute("shuliang", selectProduct.size());//共多少个商品
-        request.setAttribute("pageIndex", pageIndex);
-        request.setAttribute("pageCount", info.getPages());
-        request.setAttribute("selectProduct", selectProduct);
-        return request;
-    }*/
 
 }

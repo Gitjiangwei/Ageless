@@ -3,20 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="css/iconfont.css">
-	<link rel="stylesheet" href="css/global.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/swiper.min.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<script src="js/jquery.1.12.4.min.js" charset="UTF-8"></script>
-	<script src="js/bootstrap.min.js" charset="UTF-8"></script>
-	<script src="js/swiper.min.js" charset="UTF-8"></script>
-	<script src="js/global.js" charset="UTF-8"></script>
-	<script src="js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
+	<link rel="stylesheet" href="/css/iconfont.css">
+	<link rel="stylesheet" href="/css/global.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/css/swiper.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
+	<script src="/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
+	<script src="/js/bootstrap.min.js" charset="UTF-8"></script>
+	<script src="/js/swiper.min.js" charset="UTF-8"></script>
+	<script src="/js/global.js" charset="UTF-8"></script>
+	<script src="/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
 
 
-    <script src="js/sortcon.js" charset="UTF-8"></script>
+    <script src="/js/sortcon.js" charset="UTF-8"></script>
+
 	<title>U袋网</title>
 </head>
 <body>
@@ -40,7 +41,7 @@
 	<!-- 搜索栏 -->
 	<div class="top-search">
 		<div class="inner">
-			<a class="logo" href="index.html"><img src="images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+			<a class="logo" href="index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 			<div class="search-box">
 				<form class="input-group">
 					<input placeholder="Ta们都在搜U袋网" type="text">
@@ -91,92 +92,77 @@
 				<li>商品筛选</li>
 			</ol>
 			<div class="filter-box">
-				<div class="all-filter">
-					<div class="filter-value">
-						<div class="filter-title">选择商品分类 <i class="iconfont icon-down"></i></div>
-						<!-- 全部大分类 -->
-						<!--<ul class="catelist-card">-->
-							<!--<a href=""><li class="active">全部分类</li></a>-->
-							<!--<a href=""><li>女装</li></a>-->
-							<!--<a href=""><li>男装</li></a>-->
-							<!--<a href=""><li>包包</li></a>-->
-							<!--<a href=""><li>童装</li></a>-->
-							<!--<a href=""><li>鞋靴</li></a>-->
-						<!--</ul>-->
-						<a class="reset pull-right" href="/qwwe">重置</a>
-					</div>
-				</div>
+
                 <#list selectsanji as s>
-                <div class="filter-prop-item">
-					<span class="filter-prop-title" >
-                        ${s.name}:
-                    </span>
-                    <ul class="clearfix clear" id="siji${s_index}" >
-						<li class="active ac" onclick="chuan(this)" name="0"><!--<a href="javascript:">-->全部<!--</a>--></li>
-                        <#list s.sortcons as ss>
-                        <li class="ac" onclick="chuan(this)" name="${ss.sortconid}"><!--<a href="javascript:">-->${ss.sortconname}<!--${ss.sortconid}--><!--</a>--></li>
-                        </#list>
-                    </ul>
-                </div>
+                    <div class="filter-prop-item">
+				    	<span class="filter-prop-title" >${s.name}:</span>
+                        <ul class="clearfix clear" id="siji${s_index}" >
+						    <li class="active ac" onclick="chuan(this)" name="0"><!--<a href="javascript:">-->全部<!--</a>--></li>
+                            <#list s.sortcons as ss>
+                            <li class="ac" onclick="chuan(this)" name="${ss.sortconid}"><!--<a href="javascript:">-->${ss.sortconname}<!--${ss.sortconid}--><!--</a>--></li>
+                            </#list>
+                        </ul>
+                    </div>
                 </#list>
-
-
 			</div>
-			<div class="sort-box bgf5">
-				<div class="sort-text">排序：</div>
-				<a href="javascript:" name="xiaoliang" onclick="paixu(name)"><div class="sort-text">销量 <!--<i class="iconfont icon-sortDown" ></i>--></div></a>
-				<a href="javascript:" name="comment" onclick="paixu(name)"><div class="sort-text">评价 <!--<i class="iconfont icon-sortUp"></i>--></div></a>
-				<a href="javascript:" name="price" onclick="paixu(name)"><div class="sort-text">价格 <!--<i class="iconfont icon-sortDown"></i>--></div></a>
+	        <div class="sort-box bgf5">
 
+				<div class="sort-text">排序：</div>
+				<a href="javascript:" name="xiaoliang" onclick="paixu(this)"><div class="sort-text">销量 <!--<i class="iconfont icon-sortDown" ></i>--></div></a>
+				<a href="javascript:" name="comment" onclick="paixu(this)"><div class="sort-text">评价 <!--<i class="iconfont icon-sortUp"></i>--></div></a>
+				<a href="javascript:" name="price" onclick="paixu(this)"><div class="sort-text">价格 <!--<i class="iconfont icon-sortDown"></i>--></div></a>
 
 			</div>
 		</section>
 		<section class="item-show__div clearfix">
 			<div class="pull-left xuan">
-				<div class="sort-total pull-right shang">共${shuliang}个商品</div>
+				<div style="height: 20px;">
+					<div class="sort-total pull-right">共${shuliang}个商品</div>
+				</div>
+
 				<div class="item-list__area clearfix">
 
 					<#list selectProduct as p>
 					<div class="item-card">
 						<a href="item_show.html" class="photo">
-							<img src="images/temp/${p.productPic}" alt="${p.productName}" class="cover">
-							<div class="name">${p.productName}</div>${p.id}
+							<img src="${p.productPic.picPath}" alt="${p.productName}" class="cover">
+							<div class="name">${p.productName}</div>
 						</a>
 						<div class="middle">
 							<div class="price">
 								<small>￥</small>
 								${p.price}
 							</div>
-							<div class="sale"><a href="">加入购物车</a></div>
+							<div class="sale"><a href="">加入购物车----${p.id}</a></div>
 						</div>
 						<div class="buttom">
 							<div>销量 <b>${p.xiaoliang}</b></div>
 							<div>评论 <b>${p.comment}</b></div>
 						</div>
 					</div>
-				</#list>
+				    </#list>
 
-			</div>
-			<!-- 分页 -->
-			<div class="page text-right clearfix">
-				<#if (pageIndex-1>0) >
-				<a href="javascript:" class="disabled" onclick="show(${pageIndex-1})">上一页</a>
-			</#if>
+			    </div>
+			    <!-- 分页 -->
+                <div class="page text-right clearfix">
+				    <a href="javascript:"<#if (pageIndex-1<= 0) > class="disabled"</#if> <#if (pageIndex-1> 0) > onclick="show(${pageIndex-1})"</#if> >上一页</a>
 
-			<#if (pageIndex < pageCount) >
-			<a href="javascript:" class="disabled" onclick="show(${pageIndex+1})">下一页</a>
-		</#if>
+                    <#list 1..pageCount as i>
+			            <a href="javascript:" onclick="show(${i})">${i}</a>
+		            </#list>
 
-	<a class="disabled">${pageIndex}/${pageCount}页</a>
-	<form action="" class="page-order">
-		到第
-		<input type="text" name="page">
-		页
-		<input class="sub" type="submit" value="确定">
-	</form>
-	</div>
+	                <a href="javascript:" <#if (pageIndex >= pageCount) > class="disabled"</#if><#if (pageIndex < pageCount) > onclick="show(${pageIndex+1})"</#if> >下一页</a>
 
-			</div>
+                    <a class="disabled">${pageIndex}/${pageCount}页</a>
+	                <span  class="page-order">
+		                到第
+		                <input type="text" name="page" id="ye" pattern="^[0-9]*$"/>
+		                页
+                        <input class="sub"  value="确定" onclick="show1(${pageCount})"/>
+	                </span>
+	            </div>
+
+            </div>
 
 			<div class="pull-right">
 
@@ -185,16 +171,16 @@
 						<span class="c6">爆款推荐</span>
 					</div>
 					<div class="picked-box">
-						<a href="" class="picked-item"><img src="images/temp/S-001.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-001.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
 					</div>
 				</div>
 			</div>
@@ -247,16 +233,16 @@
 		<div class="footer-tags">
 			<div class="tags-box inner">
 				<div class="tag-div">
-					<img src="images/icons/footer_1.gif" alt="厂家直供">
+					<img src="/images/icons/footer_1.gif" alt="厂家直供">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_2.gif" alt="一件代发">
+					<img src="/images/icons/footer_2.gif" alt="一件代发">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_3.gif" alt="美工活动支持">
+					<img src="/images/icons/footer_3.gif" alt="美工活动支持">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_4.gif" alt="信誉认证">
+					<img src="/images/icons/footer_4.gif" alt="信誉认证">
 				</div>
 			</div>
 		</div>
