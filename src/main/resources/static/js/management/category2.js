@@ -1,9 +1,9 @@
 $(function(){
 
 	$.ajax({
-		type:"GET",
-		url:"/CateOne/Oneadd",
-		data:{},
+		type:"POST",
+		url:"/CateOne/getcategory1list",
+		data:{name:null},
 		dataType:"json",
 		success:function(data){
 			var oneCategory;
@@ -40,11 +40,8 @@ function loadAjax(){
 
 
 $('#sousuo').click(function () {
-    alert("bbbbb");
     var id=$("#yifen").val();
-    alert(id);
     var categoryName=$("#souText").val();
-    alert(categoryName);
     $.ajax({
         type:"GET",
         url:"/CateTwo/Twolist",
