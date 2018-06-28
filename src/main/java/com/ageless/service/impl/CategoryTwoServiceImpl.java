@@ -15,18 +15,32 @@ public class CategoryTwoServiceImpl implements CategoryTwoService{
     private CategoryTwoMapper categoryTwoMapper;
 
     @Override
-    public List<CategoryTwo> Twolist(int id) {
-        List<CategoryTwo> TT=categoryTwoMapper.Twolist( id );
+    public List<CategoryTwo> Twolist(Integer id,String categoryName) {
+        List<CategoryTwo> TT=categoryTwoMapper.Twolist( id ,categoryName);
         return TT;
     }
-
     @Override
-    public int insertTwo(CategoryTwo two) {
-        return categoryTwoMapper.insertTwo( two );
+    public List<CategoryTwo> Twolist2() {
+        List<CategoryTwo> TT=categoryTwoMapper.Twolist2();
+        return TT;
+    }
+    @Override
+    public int insertTwo(List<String> two,Integer id) {
+        return categoryTwoMapper.insertTwo( two,id );
     }
 
     @Override
     public int updateTwo(CategoryTwo two) {
         return categoryTwoMapper.updateTwo( two );
+    }
+
+    @Override
+    public int shanchu(Integer id) {
+        return categoryTwoMapper.shanchu( id );
+    }
+
+    @Override
+    public int shanchu1(Integer id) {
+         return categoryTwoMapper.shanchu1( id );
     }
 }
