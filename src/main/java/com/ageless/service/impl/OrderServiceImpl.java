@@ -12,8 +12,8 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     private OrderMapper orderMapper;
     @Override
-    public List<Order> all(String status) {
-        return orderMapper.all(status);
+    public List<Order> all(String status,Integer id) {
+        return orderMapper.all(status, id);
     }
 
 }
