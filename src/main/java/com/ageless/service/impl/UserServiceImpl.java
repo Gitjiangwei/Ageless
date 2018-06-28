@@ -54,4 +54,15 @@ public class UserServiceImpl implements UserService {
         return userMapper.inserInfo1(user);
     }
 
+
+    @Override
+    public User userLoginOpenId(String openId) {
+        return userMapper.userLoginOpenId(openId);
+    }
+
+    @Override
+    public int addQqUser(User user) {
+        return userMapper.addQqUser(user);
+    }
+
 }
