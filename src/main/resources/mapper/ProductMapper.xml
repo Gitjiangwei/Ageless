@@ -68,7 +68,7 @@
     </select>
 
     <select id="selectAllSkuById" parameterType="Integer" resultType="com.ageless.pojo.Sku">
-        SELECT 	SKUId,
+        SELECT SKUId,
             productId,
             SKUcon,
             kucun,
@@ -77,15 +77,17 @@
             ageless.sku
     </select>
     
-    <select id="selectAllSkuoptionById" parameterType="Integer" resultType="com.ageless.pojo.SkuOption">
+    <select id="selectAllSkuoptionById" resultType="com.ageless.pojo.SkuOption">
         SELECT 	id, 
             optionName, 
             productId
              
             FROM 
             ageless.skuoption
-            where
-            productId = #{id}
+            where id in
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+                #{item}
+            </foreach>
     </select>
     
     <select id="selectAllSkupropertyByIds" resultType="com.ageless.pojo.SkuProperty" >
@@ -94,7 +96,7 @@
             categoryId
             FROM
             ageless.skuproperty
-            where categoryId in
+            where id in
             <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
                 #{item}
             </foreach>
