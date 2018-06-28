@@ -22,5 +22,30 @@ public interface UserMapper {
      */
    Integer updateUser(Map<String,Object> map);
 
+    /**
+     * 查询最大id
+     * @return
+     */
+    public int selectId();
 
+    /**
+     * 查询用户条数用于判断用户是否重复注册
+     * @param user
+     * @return
+     */
+    public int selectCount(User user);
+
+    /**
+     * 根据手机号注册信息
+     * @param user
+     * @return
+     */
+    public int inserInfo(User user);
+
+    /**
+     * 根据邮箱注册信息
+     * @param user
+     * @return
+     */
+    public int inserInfo1(User user);
 }
