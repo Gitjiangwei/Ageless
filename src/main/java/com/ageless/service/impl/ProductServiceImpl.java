@@ -25,8 +25,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<SkuOption> selectAllSkuoptionById(Integer id) {
-        return mapper.selectAllSkuoptionById(id);
+    public List<SkuOption> selectAllSkuoptionById(List<String> list) {
+        return mapper.selectAllSkuoptionById(list);
     }
 
     @Override

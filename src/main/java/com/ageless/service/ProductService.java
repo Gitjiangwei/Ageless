@@ -12,7 +12,7 @@ public interface ProductService {
 
     Sku selectSkuByCon(String skuCon);
 
-    List<SkuOption> selectAllSkuoptionById(Integer id);
+    List<SkuOption> selectAllSkuoptionById(List<String> list);
 
     List<SkuProperty> selectAllSkupropertyByIds(List<String> list);
 

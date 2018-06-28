@@ -12,7 +12,7 @@ public interface ProductMapper {
 
      Sku selectSkuByCon(@Param("skuCon") String skuCon);
 
-     List<SkuOption> selectAllSkuoptionById(@Param("id") Integer id);
+     List<SkuOption> selectAllSkuoptionById(List<String> list);
 
      List<SkuProperty> selectAllSkupropertyByIds(List<String> list);
 

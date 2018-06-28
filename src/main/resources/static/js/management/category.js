@@ -57,7 +57,9 @@ $(function(){
 						+'">'+item.categoryName+'</li>';
 				});
 				$(".categoryOne").html(oneCategory);
-		});	
+		});
+
+
 	}
 
 	function getCategoryListTwo(id){
