@@ -11,7 +11,7 @@ public class Order {
     private Date createDate;
     private Integer atch;
     private Integer userId;
-    private Integer order_number;
+    private Integer orderNumber;
     private Integer OrderStatus;
     private Double order_price;
     private Integer productid;
