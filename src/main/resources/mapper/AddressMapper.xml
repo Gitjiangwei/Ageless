@@ -59,6 +59,7 @@
             <if test="details!=null and details!=''">
                 details=#{details},
             </if>
+                state=#{state},
             <if test="zipcode!=null and zipcode!=''">
                 zipcode=#{zipcode},
             </if>
