@@ -7,9 +7,9 @@ import java.util.List;
 
 /**
  * ����
- * 
+ *
  * @author JW
- * 
+ *
  */
 @Data
 public class Shop {
