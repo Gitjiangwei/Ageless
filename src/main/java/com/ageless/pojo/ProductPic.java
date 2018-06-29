@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ProductPic {
-    private Integer id;
+    private Integer tuid;
     private String picPath;
     private Integer productId;
 }
