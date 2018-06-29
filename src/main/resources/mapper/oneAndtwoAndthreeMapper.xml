@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.oneAndtwoAndthreeMapper">
+    <select id="lists" resultMap="caidan">
+        SELECT categoryone.id,categoryone.categoryName,categorytwo.id as tid,categorytwo.categoryName as  tname,
+        categorytwo.parentId,categorythree.id as thid,categorythree.categoryName as thname,categorythree.parentId
+        FROM categoryone
+        INNER JOIN categorytwo ON categorytwo.parentId=categoryone.id
+        INNER JOIN categorythree ON categorythree.parentId=categorytwo.id
+    </select>
+    <resultMap id="caidan" type="oneAndtwoAndthree">
+        <id property="id" column="id"></id>
+        <result property="categoryName" column="categoryName"></result>
+        <collection property="categoryTwo" ofType="twoAndthree">
+            <id property="id" column="tid"></id>
+            <result property="categoryName" column="tname"></result>
+            <result property="parentId" column="parentId"></result>
+            <collection property="categoryThree" ofType="CategoryThree">
+                <id property="id" column="thid"></id>
+                <result property="categoryName" column="thname"></result>
+                <result property="parentId" column="parentId"></result>
+            </collection>
+        </collection>
+    </resultMap>
+</mapper>

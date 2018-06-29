@@ -8,6 +8,8 @@ new Vue({
         delFlag: false,
         delId:0,
         delRessult:0,
+        picPathList:"",
+        picList:new Array(),
     },
     filters:{
       /*  formatMoney: function (value) {
@@ -23,12 +25,17 @@ new Vue({
     methods:{
         cartView:function () {
             var _this=this;
-
             this.$http.get("/shop/selshopAll").then(function (json) {
-                  alert(json);
-                 _this.productList=json.data;
+                alert(json.data.length);
+                _this.productList=json.data;
+                 for (var i =0;i<json.data.length;i++){
+                     _this.picPathList=json.data[i].picPath;
+                    /* alert(json.data[i].picPath);*/
+                 }
+
 
             });
+
         },
         changeMoney:function (product,way) {
             //alert(product.productQuentity);
@@ -48,8 +55,12 @@ new Vue({
             if (typeof item.checked == "undefined") {
                 //Vue.set(item,"checked",true);//全局注册
                 this.$set(item, "checked", true);//局部注册
+
             } else {
                 item.checked = !item.checked;
+                if(item.checked==false){
+                    this.checkAllFlag==false;
+                }
             }
             this.calcTotalPrice();
 
@@ -103,6 +114,29 @@ new Vue({
             this.delFlag = false;
 
         },
+        tijiao:function () {
+
+            var _this=this;
+
+             _this.picList=new Array();
+
+             _this.productList.forEach(function (item) {
+                  if(item.checked){
+
+                      _this.picList.push(item);
+                  }
+            })
+
+           /* _this.$http.post("/shop/daizhissss")*/
+
+            /*location.href="/shop/daizhi?zi="+_this.picList;*/
+            /*picList*/
+
+
+
+
+        }
+
 
 
 }
@@ -111,36 +145,6 @@ new Vue({
 Vue.filter("money", function (value, type) {
     return "￥" + value.toFixed(2) + type;
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

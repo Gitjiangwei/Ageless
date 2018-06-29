@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.ProductAndPicMapper">
+<select id="list" resultMap="productandpic">
+      SELECT 	product.id,
+	product.productId,
+	productName,
+	descript,
+	maidian,
+	product.update,
+	downdate,
+	product.status,
+	price,
+	kucun,
+	xiaoliang,
+	product.comment,
+	sendScore,
+	category01,
+	category02,
+	category03,
+	sortId,
+	sortconId,
+	 productpic.tuid AS pid,
+	 productpic.picPath
+	FROM
+	ageless.product
+	INNER JOIN productpic ON  product.id=productpic.productId
+    ORDER BY xiaoliang DESC
+</select>
+
+
+    <select id="Newlist" resultMap="productandpic">
+      SELECT 	product.id,
+	product.productId,
+	productName,
+	descript,
+	maidian,
+	product.update,
+	downdate,
+	product.status,
+	price,
+	kucun,
+	xiaoliang,
+	product.comment,
+	sendScore,
+	category01,
+	category02,
+	category03,
+	sortId,
+	sortconId,
+	 productpic.tuid as pid,
+	 productpic.picPath
+	FROM
+	ageless.product
+	INNER JOIN productpic ON  product.id=productpic.productId
+    ORDER BY product.update DESC
+</select>
+
+	<select id="listbyxiaoliang" resultMap="productandpic" parameterType="String">
+
+		SELECT product.id,
+		product.productId,
+		productName,
+		descript,
+		maidian,
+		product.update,
+		downdate,
+		product.status,
+		price,
+		kucun,
+		xiaoliang,
+		product.comment,
+		sendScore,
+		category01,
+		category02,
+		category03,
+		sortId,
+		sortconId,
+		productpic.tuid as pid,
+		productpic.picPath,
+		productpic.productId
+		FROM
+		ageless.product
+		INNER JOIN productpic ON  product.id=productpic.productId
+
+
+		<if test="products!=null and products!=''">
+			ORDER BY ${products} DESC
+		</if>
+
+	</select>
+
+	<resultMap id="productandpic" type="ProductAndPic">
+		<id property="id" column="id"></id>
+		<result property="price" column="price"></result>
+		<result property="productName" column="productName"></result>
+		<result property="xiaoliang" column="xiaoliang"></result>
+		<result property="comment" column="comment"></result>
+
+
+		<association property="productPic" javaType="ProductPic">
+			<id property="tuid" column="pid"></id>
+			<result property="picPath" column="picPath"></result>
+			<result property="productId" column="productId"></result>
+		</association>
+	</resultMap>
+
+</mapper>
