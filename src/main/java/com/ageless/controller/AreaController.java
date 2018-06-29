@@ -28,7 +28,7 @@ public class AreaController {
 	@GetMapping("/hello")
 	@ResponseBody
 	public Object listArea() {
-	   List<Area> areaList= areaService.seleAll();
+		List<Area> areaList= areaService.seleAll();
 		Object obj= JSON.toJSON(areaList);
 		return obj;
 	}

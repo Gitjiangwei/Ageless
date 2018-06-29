@@ -34,5 +34,35 @@ public class UserServiceImpl implements UserService {
     public Integer updateUser(Map<String, Object> map) {
         return userMapper.updateUser(map);
     }
+    @Override
+    public int selectId() {
+        return userMapper.selectId();
+    }
+
+    @Override
+    public int selectCount(User user) {
+        return userMapper.selectCount(user);
+    }
+
+    @Override
+    public int inserInfo(User user) {
+        return userMapper.inserInfo(user);
+    }
+
+    @Override
+    public int inserInfo1(User user) {
+        return userMapper.inserInfo1(user);
+    }
+
+
+    @Override
+    public User userLoginOpenId(String openId) {
+        return userMapper.userLoginOpenId(openId);
+    }
+
+    @Override
+    public int addQqUser(User user) {
+        return userMapper.addQqUser(user);
+    }
 
 }

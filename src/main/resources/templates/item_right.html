@@ -9,7 +9,7 @@
     <div class="item-price bgf5">
         <div class="price-box clearfix">
             <div class="price-panel pull-left">
-                售价：<span class="price">￥${sku.price} <s class="fz16 c9">￥${product.price}</s></span>
+                售价：<span class="price" id="skuId" name="${sku.SKUId}">￥${sku.price} <s class="fz16 c9">￥${product.price}</s></span>
             </div>
         </div>
     </div>
@@ -29,56 +29,32 @@
     </ul>
     <div class="item-key">
         <div class="item-sku">
-            <#list options as opt>
-            <dl class="item-prop clearfix">
-                <dt class="item-metatit">${opt.optionName}：</dt>
-                <dd><ul data-property="${opt.optionName}" class="clearfix">
-                    <#list properties as pro>
-                    <#if (opt.id==pro.categoryId)>
-                    <li onclick="sku(this)"><a <#list thefirst as fir><#if (pro.id==fir)>class="on" </#if></#list> href="javascript:;" role="button" data-value="${pro.propertyName}" name="${pro.id}" aria-disabled="true">
-                    <span>${pro.propertyName}</span>
-                    </a></li>
-                </#if>
+            <#if properties?? && (properties?size > 0) >
+            <#list properties as pro>
+                <dl class="item-prop clearfix">
+                    <dt class="item-metatit">${pro.propertyName}：</dt>
+                    <dd><ul data-property="${pro.propertyName}" class="clearfix">
+                        <#if options?? && (options?size > 0) >
+                            <#list options as opt>
+                            <#if (opt.productId==pro.id)>
+                            <li onclick="sku(this)">
+                                <a <#list thefirst as fir><#if (opt.id==fir)>class="on" </#if></#list> role="button" data-value="${opt.optionName}" name="${opt.id}" aria-disabled="true">
+                                    <span>${opt.optionName}</span>
+                                </a>
+                            </li>
+                            </#if>
+                            </#list>
+                        </#if>
+                    </ul></dd>
+                </dl>
             </#list>
-            <!--<li><a class="on" href="javascript:;" role="button" data-value="白色" aria-disabled="true">
-                <span>白色</span>
-            </a></li>
-            <li><a href="javascript:;" role="button" data-value="黑色" aria-disabled="true">
-                <span>黑色</span>
-            </a></li>
-            <li><a href="javascript:;" role="button" data-value="粉红色" aria-disabled="true">
-                <span>粉红色</span>
-            </a></li>
-            <li><a href="javascript:;" role="button" data-value="黄色" aria-disabled="true">
-                <span>黄色</span>
-            </a></li>-->
-            </ul></dd>
-            </dl>
-        </#list>
-
-        <!--<dl class="item-prop clearfix">
-            <dt class="item-metatit">尺码：</dt>
-            <dd><ul data-property="尺码" class="clearfix">
-                <li><a href="javascript:;" role="button" data-value="S" aria-disabled="true">
-                    <span>S</span>
-                </a></li>
-                <li><a href="javascript:;" role="button" data-value="M" aria-disabled="true">
-                    <span>M</span>
-                </a></li>
-                <li><a href="javascript:;" role="button" data-value="L" aria-disabled="true">
-                    <span>L</span>
-                </a></li>
-                <li><a href="javascript:;" role="button" data-value="XL" aria-disabled="true">
-                    <span>XL</span>
-                </a></li>
-            </ul></dd>
-        </dl>-->
+            </#if>
     </div>
     <div class="item-amount clearfix bgf5">
         <div class="item-metatit">数量：</div>
         <div class="amount-box">
             <div class="amount-widget">
-                <input class="amount-input" value="1" maxlength="8" title="请输入购买量" type="text">
+                <input class="amount-input" id="shuliang" value="1" maxlength="8" title="请输入购买量" type="text">
                 <div class="amount-btn">
                     <a class="amount-but add"></a>
                     <a class="amount-but sub"></a>
@@ -117,8 +93,8 @@
         </div>
     </div>
     <div class="item-action clearfix bgf5">
-        <a href="javascript:;" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
-        <a href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket">
+        <a onclick="add()" href="javascript:;" rel="nofollow" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息。" role="button" class="item-action__buy">立即购买</a>
+        <a onclick="add()" href="javascript:;" rel="nofollow" data-addfastbuy="true" role="button" class="item-action__basket">
             <i class="iconfont icon-shopcart"></i> 加入购物车
         </a>
     </div>

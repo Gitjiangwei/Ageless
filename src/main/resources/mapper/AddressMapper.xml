@@ -59,10 +59,17 @@
             <if test="details!=null and details!=''">
                 details=#{details},
             </if>
+                state=#{state},
             <if test="zipcode!=null and zipcode!=''">
                 zipcode=#{zipcode},
             </if>
         </trim>
         where id=#{id}
     </update>
+    <select id="selectAddress" resultType="Address" parameterType="java.lang.Long">
+        SELECT  `id`,`nameId`,`consignee`,`tel`,`province`,
+        `city`,`area`,`street`,`details`,`state`,`zipcode`
+        FROM `address`
+        WHERE id=#{id}
+    </select>
 </mapper>

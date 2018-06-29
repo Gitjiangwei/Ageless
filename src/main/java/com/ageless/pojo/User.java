@@ -28,5 +28,7 @@ public class User {
     private Long state;//会员名状态
     private String paymentpwd;//支付密码
     private String mailbox;//邮箱注册
+    private String openId;//第三方登陆接口令牌
+    private String haoqi;//豪气值
 
 }
