@@ -72,4 +72,10 @@
         FROM `address`
         WHERE id=#{id}
     </select>
+    <update id="updatenameId">
+        UPDATE `ageless`.`address` SET  `state` = 0 WHERE `nameId` = #{nameId}
+    </update>
+    <update id="updateId">
+        UPDATE `ageless`.`address` SET  `state` = 1 WHERE `id` = #{id}
+    </update>
 </mapper>

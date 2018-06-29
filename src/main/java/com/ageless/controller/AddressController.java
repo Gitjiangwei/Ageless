@@ -68,6 +68,10 @@ public class AddressController {
         Long userId=u.getId();//用户Id
         /*Long userId= Long.valueOf(1);//用户Id*/
         address.setNameId(userId);
+        System.out.println(address.toString());
+        if(address.getState()==1){
+            addressService.updatenameId(address.getNameId());
+        }
         Integer i=addressService.insertAddress(address);
         Object obj="";
         if(i>0){
@@ -105,6 +109,27 @@ public class AddressController {
             obj= "{\"upd\":\"OK\"}";
         }else{
             obj= "{\"upd\":\"NO\"}";
+        }
+        return obj;
+    }
+
+    /**
+     * 修改收货地址
+     * @param address
+     * @param session
+     * @return
+     */
+    @PostMapping(value = "/updateState")
+    @ResponseBody
+    private Object updateState(Address address,HttpSession session){
+        System.out.println(address);
+        Integer a=addressService.updatenameId(address.getNameId());
+        Integer b=addressService.updateId(address.getId());
+        Object obj="";
+        if(a>0 && b>0){
+            obj= "{\"sta\":\"OK\"}";
+        }else{
+            obj= "{\"sta\":\"NO\"}";
         }
         return obj;
     }

@@ -268,7 +268,7 @@ $(function(){
                     "\t\t\t\t\t\t</div>\n" +
                     "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
                     "\t\t\t\t\t\t\t<div v-if="+ e.state  +"===0>\n" +
-                    "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default\">设为默认</a>\n" +
+                    "\t\t\t\t\t\t\t\t<a onclick='sta("+e.id+','+e.nameId+")' class=\"default\">设为默认</a>\n" +
                     "\t\t\t\t\t\t\t</div>\n" +
                     "\t\t\t\t\t\t\t<div v-else>\n" +
                     "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default active\">默认地址</a>\n" +
