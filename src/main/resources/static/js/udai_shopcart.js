@@ -23,7 +23,6 @@ new Vue({
     methods:{
         cartView:function () {
             var _this=this;
-
             this.$http.get("/shop/selshopAll").then(function (json) {
                   alert(json);
                  _this.productList=json.data;
