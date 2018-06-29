@@ -30,7 +30,7 @@ public class SortServiceImpl implements SortService {
 
     @Override
     public List<Product> selectProduct(List<Integer> list, String tiaojian,Integer pageIndex) {
-        PageHelper.startPage(pageIndex,20);
+        PageHelper.startPage(pageIndex,4);
         return sortMapper.selectProduct(list,tiaojian);
     }
 }

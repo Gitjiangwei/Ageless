@@ -63,6 +63,7 @@ public class SortController {
 
         List<Integer> list =new ArrayList<Integer>();
 
+
         String[] lists = request.getParameterValues("list[]");
         for (int i =0;i<lists.length;i++){
             list.add(Integer.parseInt(lists[i]));

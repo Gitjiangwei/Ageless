@@ -55,6 +55,7 @@ function shuzu() {
 function show(pageindex) {
 
     var tiaojian = $(".qu").attr("name");
+    alert(tiaojian);
     var ary = shuzu();
     $.ajax({
         type: 'post',
