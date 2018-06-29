@@ -207,12 +207,10 @@
                                 return;
                             }
                             if(area=="请选择"){
-                                alert("请选择区");
-                                return;
+                                area="";
                             }
                             if(street=="请选择"){
-                                alert("请选择街道");
-                                return;
+                                street="";
                             }
                             if($("#details").val()==""){
                                 alert("请输入详细地址");
@@ -246,6 +244,26 @@
                                 }
                             })
                         });
+                        //删除地址
+                        function cct(id) {
+                            var flag = confirm("是否删除？");
+                            if(flag){
+                                $.ajax({
+                                    type:'post',
+                                    url:'/delAdd',
+                                    data:'id='+id,
+                                    dataType:'json',
+                                    success:function (data) {
+                                        if (data.del=="OK"){
+                                            alert("删除成功");
+                                            window.location.href="/udai_address.html";
+                                        } else if(data.del=="NO"){
+                                            alert("删除失败");
+                                        }
+                                    }
+                                })
+                            }
+                        }
                         $(document).ready(function(){
                             // 添加街道/乡镇
                             function townFormat(info){
