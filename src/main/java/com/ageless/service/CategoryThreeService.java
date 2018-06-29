@@ -11,14 +11,14 @@ public interface CategoryThreeService {
      * @param id
      * @return
      */
-    List<CategoryThree> listThree(int id);
+    List<CategoryThree> listThree(Integer id,String name);
 
     /**
      * 添加三级选项
-     * @param three
+     * @param threes
      * @return
      */
-    int insertThree(CategoryThree three);
+    int insertThree(List<String> threes,int id);
 
     /**
      * 修改三级选项
@@ -26,4 +26,11 @@ public interface CategoryThreeService {
      * @return
      */
     int updateThree(CategoryThree three);
+
+    /**
+     * 删除三级选项
+     * @param id
+     * @return
+     */
+    int deleteThree(int id);
 }
