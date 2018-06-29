@@ -172,7 +172,7 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
 							<div class="checkbox">
-								<label><input type="checkbox" name="state"><i></i> 设为默认收货地址</label>
+								<label><input type="checkbox"><i></i> 设为默认收货地址</label>
 							</div>
 						</div>
 					</div>
@@ -203,12 +203,10 @@
                                 return;
                             }
                             if(area=="请选择"){
-                                alert("请选择区");
-                                return;
+                                area="";
                             }
                             if(street=="请选择"){
-                                alert("请选择街道");
-                                return;
+                                street="";
                             }
                             if($("#details").val()==""){
                                 alert("请输入详细地址");

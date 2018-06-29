@@ -267,10 +267,10 @@ $(function(){
                     "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
                     "\t\t\t\t\t\t</div>\n" +
                     "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
-                    "\t\t\t\t\t\t\t<div v-if="+ e.state  +">\n" +
+                    "\t\t\t\t\t\t\t<div v-if="+ e.state  +"===0>\n" +
                     "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default\">设为默认</a>\n" +
                     "\t\t\t\t\t\t\t</div>\n" +
-                    "\t\t\t\t\t\t\t<div v-if="+ e.state +">\n" +
+                    "\t\t\t\t\t\t\t<div v-else>\n" +
                     "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default active\">默认地址</a>\n" +
                     "\t\t\t\t\t\t\t</div>\n" +
                     "\t\t\t\t\t\t</div>\n" +
