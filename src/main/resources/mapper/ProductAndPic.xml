@@ -3,23 +3,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.ProductAndPicMapper">
 <select id="list" resultMap="productandpic">
-     SELECT 	product.id,
+      SELECT 	product.id,
+	product.productId,
 	productName,
 	descript,
-	price,
+	maidian,
 	product.update,
 	downdate,
-	STATUS,
+	product.status,
+	price,
 	kucun,
 	xiaoliang,
-	priority,
-	specialId,
-	COMMENT,
+	product.comment,
 	sendScore,
 	category01,
 	category02,
 	category03,
-	 productpic.id as pid,
+	sortId,
+	sortconId,
+	 productpic.tuid AS pid,
 	 productpic.picPath
 	FROM
 	ageless.product
@@ -30,22 +32,24 @@
 
     <select id="Newlist" resultMap="productandpic">
       SELECT 	product.id,
+	product.productId,
 	productName,
 	descript,
-	price,
+	maidian,
 	product.update,
 	downdate,
-	STATUS,
+	product.status,
+	price,
 	kucun,
 	xiaoliang,
-	priority,
-	specialId,
-	COMMENT,
+	product.comment,
 	sendScore,
 	category01,
 	category02,
 	category03,
-	 productpic.id as pid,
+	sortId,
+	sortconId,
+	 productpic.tuid as pid,
 	 productpic.picPath
 	FROM
 	ageless.product
@@ -55,23 +59,25 @@
 
 	<select id="listbyxiaoliang" resultMap="productandpic" parameterType="String">
 
-		SELECT 	product.id,
+		SELECT product.id,
+		product.productId,
 		productName,
 		descript,
-		price,
+		maidian,
 		product.update,
 		downdate,
-		STATUS,
+		product.status,
+		price,
 		kucun,
 		xiaoliang,
-		priority,
-		specialId,
-		COMMENT,
+		product.comment,
 		sendScore,
 		category01,
 		category02,
 		category03,
-		productpic.id as pid,
+		sortId,
+		sortconId,
+		productpic.tuid as pid,
 		productpic.picPath,
 		productpic.productId
 		FROM
@@ -94,7 +100,7 @@
 
 
 		<association property="productPic" javaType="ProductPic">
-			<id property="id" column="pid"></id>
+			<id property="tuid" column="pid"></id>
 			<result property="picPath" column="picPath"></result>
 			<result property="productId" column="productId"></result>
 		</association>

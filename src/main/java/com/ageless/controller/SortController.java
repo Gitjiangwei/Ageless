@@ -34,7 +34,7 @@ public class SortController {
     @ResponseBody
     public ModelAndView index(Integer categorythreeId, @RequestParam(defaultValue = "1") Integer pageIndex,/*@RequestParam(defaultValue = "price")*/String tiaojian,HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        List<Sort> selectsanji = sortService.selectsanji(2);
+        List<Sort> selectsanji = sortService.selectsanji(categorythreeId);
         List<Integer> list =new ArrayList<Integer>();
         list.add(0);
         list.add(0);
@@ -57,7 +57,7 @@ public class SortController {
     @ResponseBody
     public ModelAndView er(Integer categorythreeId, @RequestParam(defaultValue = "1") Integer pageIndex,/*@RequestParam(defaultValue = "price")*/String tiaojian,HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        List<Sort> selectsanji = sortService.selectsanji(2);
+        List<Sort> selectsanji = sortService.selectsanji(categorythreeId);
 
         request.setAttribute("selectsanji", selectsanji);
 
