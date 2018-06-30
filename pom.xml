@@ -26,6 +26,8 @@
 
 
     <dependencies>
+
+
         <!-- 对web开发的支持，包括tomcat,spring-webmvc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -41,6 +43,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!--分页插件  -->
         <!--分页插件  -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
