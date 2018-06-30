@@ -113,4 +113,15 @@
             WHERE
             SKUcon = #{skuCon}
     </select>
+
+    <select id="selectAllPicById" parameterType="Integer" resultType="com.ageless.pojo.ProductPic">
+        SELECT 	tuid,
+            picPath,
+            productId
+
+            FROM
+            ageless.productpic
+            where
+            productId = #{id}
+    </select>
 </mapper>

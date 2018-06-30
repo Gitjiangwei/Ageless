@@ -1,14 +1,13 @@
 package com.ageless.service;
 
-import com.ageless.pojo.Product;
-import com.ageless.pojo.Sku;
-import com.ageless.pojo.SkuOption;
-import com.ageless.pojo.SkuProperty;
+import com.ageless.pojo.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface ProductService {
+
+    List<ProductPic> selectAllPicById(Integer id);
 
     Sku selectSkuByCon(String skuCon);
 
