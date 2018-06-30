@@ -26,6 +26,7 @@ public class ProductController {
     public String shopshow(Model model,@RequestParam(value = "id",defaultValue = "2")Integer id){
         List<ProductPic> pics = service.selectAllPicById(id);
         ProductPic firtsPic = pics.get(0);
+        List<Property> propertys = service.selectPropertyAllById(id);
         Product product = service.selectPoroductById(id);
         List<Sku> skus = service.selectAllSkuById(id);
         List<String> skuPropertyIds = new ArrayList<>();
@@ -66,6 +67,7 @@ public class ProductController {
             }
         }
         model.addAttribute("productId",id);
+        model.addAttribute("propertys",propertys);
         model.addAttribute("firsts",thefirst);
         model.addAttribute("product",product);
         model.addAttribute("firtsPic",firtsPic);

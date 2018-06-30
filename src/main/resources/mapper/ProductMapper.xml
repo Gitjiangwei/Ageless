@@ -124,4 +124,16 @@
             where
             productId = #{id}
     </select>
+    
+    <select id="selectPropertyAllById" parameterType="Integer" resultType="com.ageless.pojo.Property">
+        SELECT 	id,
+            productId,
+            title,
+            content
+
+            FROM
+            ageless.property
+            where
+            productId = #{id}
+    </select>
 </mapper>

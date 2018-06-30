@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProductMapper {
 
+     List<Property> selectPropertyAllById(@Param("id") Integer id);
+
      List<ProductPic> selectAllPicById(@Param("id") Integer id);
 
      Sku selectSkuByCon(@Param("skuCon") String skuCon);
