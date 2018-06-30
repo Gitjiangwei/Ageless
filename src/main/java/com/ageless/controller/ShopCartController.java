@@ -3,7 +3,6 @@ package com.ageless.controller;
 import com.ageless.pojo.SkuOption;
 import com.ageless.pojo.SkuProperty;
 import com.ageless.service.ProductService;
-import com.ageless.pojo.Area;
 import com.ageless.pojo.ShoppingCart;
 import com.ageless.service.ShopCartService;
 import com.alibaba.fastjson.JSON;
