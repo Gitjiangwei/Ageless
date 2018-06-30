@@ -100,7 +100,7 @@
 						<div class="col-sm-6">
 							<input type="hidden" id="id" name="id" value="${address.id}">
 							<input type="hidden" id="nameId" name="nameId" value="${address.nameId}">
-							<input class="form-control" id="name" name="consignee" value="${address.consignee}" placeholder="请输入姓名" type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')">
+							<input class="form-control" id="name" name="consignee" value="${address.consignee}" placeholder="请输入姓名" maxlength="10" type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')">
 						</div>
 					</div>
 					<div class="form-group">
