@@ -19,7 +19,7 @@ public class OneAndtwoAndthreeController {
     @Autowired
     private ProductAndPicService productService;
 
-    @RequestMapping("/list.html")
+    @RequestMapping("/")
     public String lists(Model model){
         List<oneAndtwoAndthree> list=oneAndtwoAndthreeService.lists();
         model.addAttribute("list1",list);
