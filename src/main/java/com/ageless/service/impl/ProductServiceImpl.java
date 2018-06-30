@@ -2,10 +2,7 @@ package com.ageless.service.impl;
 
 
 import com.ageless.mapper.ProductMapper;
-import com.ageless.pojo.Product;
-import com.ageless.pojo.Sku;
-import com.ageless.pojo.SkuOption;
-import com.ageless.pojo.SkuProperty;
+import com.ageless.pojo.*;
 import com.ageless.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +15,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Resource
     private ProductMapper mapper;
+
+    @Override
+    public List<ProductPic> selectAllPicById(Integer id) {
+        return mapper.selectAllPicById(id);
+    }
 
     @Override
     public Sku selectSkuByCon(String skuCon) {

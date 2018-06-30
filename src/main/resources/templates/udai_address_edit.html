@@ -98,7 +98,8 @@
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">收货人姓名：</label>
 						<div class="col-sm-6">
-							<input type="hidden" name="id" value="${address.id}">
+							<input type="hidden" id="id" name="id" value="${address.id}">
+							<input type="hidden" id="nameId" name="nameId" value="${address.nameId}">
 							<input class="form-control" id="name" name="consignee" value="${address.consignee}" placeholder="请输入姓名" type="text">
 						</div>
 					</div>
@@ -189,11 +190,14 @@
 					<script src="js/jquery.citys.js"></script>
 					<script>
                         $(".but").click(function () {
+                            var id=$("#id").val();
+                            var nameId=$("#nameId").val();
                             var province=$("#province").text();
                             var city=$("#city").text();
                             var area=$("#area").text();
                             var street=$("#street").text();
 
+                            alert(id+nameId);
                             if($("#name").val()==""){
                                 alert("请输入姓名");
                                 return;
@@ -228,7 +232,6 @@
                             }else if(b==true){
                                 state=1;
                             }
-                            alert($("form").serialize());
                             $.ajax({
                                 type:'post',
                                 url:'/updateAdd',
@@ -237,6 +240,10 @@
                                 success:function (data) {
                                     if (data.upd=="OK"){
                                         alert("修改成功");
+                                        if(state == 1){
+                                            sta(id,nameId);
+                                            return;
+                                        }
                                         window.location.href="/udai_address.html";
                                     } else if(data.upd=="NO"){
                                         alert("修改失败");
@@ -244,6 +251,23 @@
                                 }
                             })
                         });
+                        //状态
+                        function sta(id,nameId) {
+                            $.ajax({
+                                type:'post',
+                                url:'/updateState',
+                                data:'id='+id+"&nameId="+nameId,
+                                dataType:'json',
+                                success:function (data) {
+                                    if (data.sta=="OK"){
+                                        alert("设置默认地址成功");
+                                        window.location.href="/udai_address.html";
+                                    } else if(data.sta=="NO"){
+                                        alert("设置默认地址失败");
+                                    }
+                                }
+                            })
+                        }
                         //删除地址
                         function cct(id) {
                             var flag = confirm("是否删除？");

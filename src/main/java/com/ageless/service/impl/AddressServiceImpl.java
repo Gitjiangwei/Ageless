@@ -39,4 +39,14 @@ public class AddressServiceImpl implements AddressService {
     public Address selectAddress(Long id) {
         return addressMapper.selectAddress(id);
     }
+
+    @Override
+    public Integer updatenameId(Long nameId) {
+        return addressMapper.updatenameId(nameId);
+    }
+
+    @Override
+    public Integer updateId(Long id) {
+        return addressMapper.updateId(id);
+    }
 }

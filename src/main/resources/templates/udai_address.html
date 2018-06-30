@@ -99,6 +99,7 @@
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">收货人姓名：</label>
 						<div class="col-sm-6">
+
 							<input class="form-control" id="name"  name="consignee" placeholder="请输入姓名" type="text">
 						</div>
 					</div>
@@ -239,6 +240,23 @@
                                 }
                             })
                         });
+                        //状态
+                        function sta(id,nameId) {
+                            $.ajax({
+                                type:'post',
+                                url:'/updateState',
+                                data:'id='+id+"&nameId="+nameId,
+                                dataType:'json',
+                                success:function (data) {
+                                    if (data.sta=="OK"){
+                                        alert("设置默认地址成功");
+                                        window.location.href="/udai_address.html";
+                                    } else if(data.sta=="NO"){
+                                        alert("设置默认地址失败");
+                                    }
+                                }
+                            })
+                        }
                         //删除地址
                         function cct(id) {
                             var flag = confirm("是否删除？");
