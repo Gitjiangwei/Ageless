@@ -60,14 +60,13 @@
 						</thead>
 						<tbody>
 						<tr v-for="item in productList">
-
 							<th scope="row cart-tab-1"  >
 								<div class="cart-item-check">
 									<a href="javascript:void 0" class="item-check-btn" v-bind:class="{'check':item.checked}" @click="selectedProduct(item)">
 										<svg class="icon icon-ok"><use xlink:href="#icon-ok"></use></svg>
 									</a>
 								</div>
-								<div class="img"><img  v-bind:src="item.productImage" alt="" class="cover"></div>
+								<div  class="img"><!--<img src="/images/temp/item.picPath" alt="" class="cover">--><img :src="'/images/temp/'+item.picPath">{{item.picPath}}</div><!-- v-bind:src="item.productImage"-->
 								</label>
 							</th>
 							<td>
@@ -75,25 +74,27 @@
 								<div class="type c9" >颜色分类：<span v-for="part in item.parts" v-text="part.partsName"></span>
 									尺码：<span v-for="part in item.parts" v-text="part.partsType" ></span></div>
 							</td>
-							<td>{{item.productPrice | formatMoney}}</td>
+							<td>{{item.price  |  money('元')}}</td>
 							<td>
 								<div class="cart-num__box quantity">
 									<!--<input type="button" class="sub" value="-" @click="changeMoney(item,-1)">-->
 									<a href="javascript:void 0" class="sub"  @click="changeMoney(item,-1)" >-</a>
 
 								<!--	<input type="text" class="val" value="1" readonly v-model="item.productQuentity">-->
-									<input type="text" value="1" disabled v-model="item.productQuentity">
+									<input type="text" value="1" disabled v-model="item.orderamount">
 									<a href="javascript:void 0" class="sub" @click="changeMoney(item,1)" >+</a>
 								</div>
 							</td>
-							<td>{{item.productPrice*item.productQuentity  |  money('元')}}</td>
+							<td>{{item.price*item.orderamount  |  money('元')}}</td>
 							<td><a href="javascript:void 0" @click="delConfrim(item)">删除</a></td>
+
+
 						</tr>
 
 						</tbody>
 					</table>
 					<div class="user-form-group tags-box shopcart-submit pull-right">
-						<button type="submit" class="btn">提交订单</button>
+						<button type="button" class="btn" @click="tijiao()">提交订单</button>
 					</div>
 					<div class="checkbox shopcart-total">
 						<!-- 全选-->
@@ -115,7 +116,7 @@
 						<div class="pull-right">
 							已选商品 <span>{{totalMum}}</span> 件
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合计（不含运费）
-							<b class="cr"><span class="fz24">{{totalMoney |money("元")}}</span></b>
+							<b class="cr"><span class="fz24">{{totalMoney  |  money('元')}}</span></b>
 						</div>
 					</div>
 				</form>
@@ -130,7 +131,7 @@
 					<button class="md-close" @click="delFlag=false">关闭</button>
 				</div>
 				<div class="md-content">
-					<div class="confirm-tips">1
+					<div class="confirm-tips">
 						<p id="cusLanInfo">你确认删除此订单信息吗?</p>
 					</div>
 					<div class="btn-wrap col-2">

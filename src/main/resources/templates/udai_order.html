@@ -3,17 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="css/iconfont.css">
-	<link rel="stylesheet" href="css/global.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/swiper.min.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<script src="js/jquery.1.12.4.min.js" charset="UTF-8"></script>
-	<script src="js/bootstrap.min.js" charset="UTF-8"></script>
-	<script src="js/swiper.min.js" charset="UTF-8"></script>
-	<script src="js/global.js" charset="UTF-8"></script>
-	<script src="js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
+	<link rel="stylesheet" href="/css/iconfont.css">
+	<link rel="stylesheet" href="/css/global.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/css/swiper.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
 	<title>U袋网</title>
 </head>
 <body>
@@ -86,7 +81,7 @@
 					<a href="temp_article/udai_article12.html"><dd>隐私说明</dd></a>
 				</dl>
 			</div>
-			<div class="pull-right">
+			<div class="pull-right" id="pull-right">
 				<div class="user-content__box clearfix bgf">
 					<div class="title">订单中心-我的订单</div>
 					<div class="order-list__box bgf">
@@ -110,35 +105,37 @@
 											<th width="120">交易状态</th>
 											<th width="120">交易操作</th>
 										</tr>
-										<tr class="order-item">
+										
+										<tr class="order-item"  v-for="item in orderList">
 											<td>
 												<label>
 													<a href="udai_order_detail.html" class="num">
-														2017-03-30 订单号: 2669901385864042
+														{{item.createDate}} 订单号:{{item.number}}
 													</a>
 													<div class="card">
 														<div class="img"><img src="images/temp/item-img_1.jpg" alt="" class="cover"></div>
-														<div class="name ep2">纯色圆领短袖T恤活动衫弹力柔软纯色圆领短袖T恤</div>
-														<div class="format">颜色分类：深棕色  尺码：均码</div>
+														<div class="name ep2">{{item.descript}}</div>
+														<div class="format">颜色分类：<span v-for="part in item.parts" v-text="part.partsName"></span>
+															尺码：<span v-for="part in item.parts" v-text="part.partsType" ></span></div>
 														<div class="favour">使用优惠券：优惠¥2.00</div>
 													</div>
 												</label>
 											</td>
-											<td>￥100</td>
-											<td>1</td>
-											<td>￥1000<br><span class="fz12 c6 text-nowrap">(含运费: ¥0.00)</span></td>
+											<td>{{item.price  |  money('元')}}</td>
+											<td>{{item.orderNumber}}</td>
+											<td>{{item.price*item.orderNumber  |  money('元')}}<br><span class="fz12 c6 text-nowrap">(含运费: ¥0.00)</span></td>
 											<td class="state">
 												<a class="but c6">等待付款</a>
-												<a href="udai_order_detail.html" class="but c9">订单详情</a>
+												<a v-bind:href="('./udai_order_detail.html?id='+(item.id))" class="but c9">订单详情</a>
 											</td>
 											<td class="order">
 												<div class="del"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>
 												<a href="udai_shopcart_pay.html" class="but but-primary">立即付款</a>
-												<!-- <a href="" class="but but-link">评价</a> -->
+												 <a href="" class="but but-link">评价</a> 
 												<a href="" class="but c3">取消订单</a>
 											</td>
 										</tr>
-										<tr class="order-item">
+										<!--<tr class="order-item">
 											<td>
 												<label>
 													<a href="udai_order_detail.html" class="num">
@@ -163,7 +160,7 @@
 											<td class="order">
 												<div class="del"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>
 												<a href="udai_order_receipted.html" class="but but-primary">确认收货</a>
-												<!-- <a href="" class="but but-link">评价</a> -->
+												&lt;!&ndash; <a href="" class="but but-link">评价</a> &ndash;&gt;
 												<a href="udai_apply_return.html" class="but c3">退款/退货</a>
 											</td>
 										</tr>
@@ -250,7 +247,7 @@
 												<a href="" class="but but-link">评价</a>
 												<a href="" class="but c3">取消订单</a>
 											</td>
-										</tr>
+										</tr>-->
 									</table>
 									<div class="page text-right clearfix" style="margin-top: 40px">
 										<a class="disabled">上一页</a>
@@ -285,7 +282,7 @@
 											<th width="120">交易状态</th>
 											<th width="120">交易操作</th>
 										</tr>
-										<tr class="order-item">
+										<!--<tr class="order-item">
 											<td>
 												<label>
 													<a href="udai_order_detail.html" class="num">
@@ -365,7 +362,7 @@
 												<a href="udai_order_receipted.html" class="but but-primary">确认收货</a>
 												<a href="udai_apply_return.html" class="but c3">退款/退货</a>
 											</td>
-										</tr>
+										</tr>-->
 									</table>
 									<div class="page text-right clearfix" style="margin-top: 40px">
 										<a class="disabled">上一页</a>
@@ -594,5 +591,10 @@
 			</p>
 		</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+	<script src="/js/lib/vue-resource.js"></script>
+
+	<script src="/js/udai_order.js"></script>
 </body>
 </html>

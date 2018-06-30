@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.CategoryThreeMapper">
+    <select id="listThree" resultType="CategoryThree">
+        select id,categoryName,parentId from categorythree
+        <where>
+            <if test="id!=null and id!=''">
+                and parentId=#{id}
+            </if>
+            <if test="name!=null and name!=''">
+                and categoryName like CONCAT("%",#{name},"%")
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertThree" parameterType="java.util.List">
+
+        insert into categorythree(categoryName,parentId)   value
+        <foreach collection="list" item="cate" separator=",">
+            (#{cate},#{id})
+        </foreach>
+
+    </insert>
+    <update id="updateThree" parameterType="CategoryThree">
+        update categorythree set categoryName=#{categoryName},parentId=#{parentId} where id=#{id}
+    </update>
+    <delete id="deleteThree" parameterType="int">
+        delete from categorythree where id =#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.CategoryTwoMapper">
+    <select id="Twolist" resultType="CategoryTwo">
+        select id,categoryName,parentId from categorytwo
+         <where>
+             <if test="id!=''and id!=null">
+               and  parentId=#{id}
+             </if>
+             <if test="categoryName!=''and categoryName!=null">
+               and  categoryName like CONCAT ('%',#{categoryName},'%')
+             </if>
+
+         </where>
+
+    </select>
+    <select id="Twolist2" resultType="CategoryTwo">
+        select id,categoryName,parentId from categorytwo
+    </select>
+    <insert id="insertTwo">
+        insert into categorytwo(categoryName,parentId) values
+        <foreach collection="list" item="cate" separator=",">
+            (#{cate},#{id})
+        </foreach>
+    </insert>
+    <update id="updateTwo" parameterType="CategoryTwo">
+        update categorytwo
+        <set>
+         categoryName=#{categoryName},
+            <if test="parentId!=0">
+                parentId =#{parentId}
+            </if>
+        </set>  where id=#{id}
+    </update>
+    <delete id="shanchu" parameterType="int">
+        delete from categorytwo where id=#{id}
+    </delete>
+    <delete id="shanchu1" parameterType="int">
+         delete from categorythree where parentId = #{id}
+    </delete>
+</mapper>

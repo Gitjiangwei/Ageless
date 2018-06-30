@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.ageless.mapper.ShopCartMapper">
+
+<insert id="addShoppingCart" parameterType="ShopCart">
+    INSERT INTO ageless.shoppingcart
+	(
+	userId,
+	productId,
+	orderamount
+	)
+	VALUES
+	(
+	#{userId},
+	#{productId},
+	#{orderamount}
+	);
+
+</insert>
+
+	<!--购物车查询语句-->
+	<select id="selshopAll" resultType="ShoppingCart" >
+
+		SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
+
+		,productpic.picPath,product.productName FROM shoppingcart
+
+		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
+
+		LEFT  JOIN productpic ON shoppingcart.productId=productpic.id
+
+		LEFT  JOIN product ON shoppingcart.productId=product.productId  GROUP BY shoppingcart.id
+
+		ORDER BY shoppingcart.id DESC
+
+		/*	SELECT shoppingcart.id'主键id',shoppingcart.userId'用户id',shoppingcart.productId'商品id',shoppingcart.orderamount'商品数量',sku.price'商品价格'
+
+		,productpic.picPath'商品图片',product.productName'商品名称' FROM shoppingcart
+
+		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
+
+		LEFT  JOIN productpic ON shoppingcart.productId=productpic.id
+
+		LEFT  JOIN product ON shoppingcart.productId=product.productId  GROUP BY shoppingcart.id
+
+		 SELECT 	shoppingcart.id, userId, shoppingcart.productId, orderamount ,sku.SKUId,price,productName FROM ageless.shoppingcart
+        INNER JOIN sku ON shoppingcart.productId=sku.productId
+        INNER JOIN  product ON shoppingcart.productId=product.productId*/
+            <!--<if test="userId!=null and userId!=0">
+                and userId=#{userId}
+            </if>
+            <if test="SKUId!=null and SKUId!=0">
+                and SKUId=#{SKUId}
+            </if>-->
+     </select>
+     <delete id="delshop" parameterType="ShoppingCart" >
+            DELETE FROM shoppingcart WHERE id = #{id}
+	 </delete>
+</mapper>
