@@ -8,9 +8,10 @@
         `city`,`area`,`street`,`details`,`state`,`zipcode`
         FROM `address`
         WHERE nameId=#{nameId}
+        ORDER BY state desc
     </select>
 
-    <insert id="insertAddress">
+    <insert id="insertAddress" parameterType="com.ageless.pojo.Address">
          INSERT INTO address
         (
            nameId,consignee,tel,province,city,area,street,details,state,zipcode
@@ -30,12 +31,12 @@
         );
     </insert>
 
-    <delete id="deleteAddress">
+    <delete id="deleteAddress" parameterType="java.lang.Long">
         DELETE FROM `address`
         WHERE id=#{id}
     </delete>
 
-    <update id="updateAddress">
+    <update id="updateAddress" parameterType="com.ageless.pojo.Address">
         UPDATE  `address`
         <trim prefix="set" suffixOverrides=",">
             <if test="consignee!=null and consignee!=''">
@@ -72,10 +73,10 @@
         FROM `address`
         WHERE id=#{id}
     </select>
-    <update id="updatenameId">
+    <update id="updatenameId" parameterType="java.lang.Long">
         UPDATE `ageless`.`address` SET  `state` = 0 WHERE `nameId` = #{nameId}
     </update>
-    <update id="updateId">
+    <update id="updateId" parameterType="java.lang.Long">
         UPDATE `ageless`.`address` SET  `state` = 1 WHERE `id` = #{id}
     </update>
 </mapper>

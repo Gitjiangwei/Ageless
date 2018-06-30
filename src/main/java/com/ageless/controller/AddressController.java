@@ -102,7 +102,6 @@ public class AddressController {
     @PostMapping(value = "/updateAdd")
     @ResponseBody
     private Object updateAddress(Address address,HttpSession session){
-        System.out.println(address);
         Integer i=addressService.updateAddress(address);
         Object obj="";
         if(i>0){
@@ -114,7 +113,7 @@ public class AddressController {
     }
 
     /**
-     * 修改收货地址
+     * 修改收货地址状态
      * @param address
      * @param session
      * @return
