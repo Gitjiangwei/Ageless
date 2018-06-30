@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.ProductAndPicMapper">
 <select id="list" resultMap="productandpic">
-      SELECT 	product.id,
+      SELECT   product.id  ,
 	product.productId,
 	productName,
 	descript,
@@ -21,17 +21,18 @@
 	category03,
 	sortId,
 	sortconId,
-	 productpic.tuid AS pid,
+	 productpic.tuid AS tid,
 	 productpic.picPath
 	FROM
 	ageless.product
 	INNER JOIN productpic ON  product.id=productpic.productId
+	GROUP BY product.id
     ORDER BY xiaoliang DESC
 </select>
 
 
     <select id="Newlist" resultMap="productandpic">
-      SELECT 	product.id,
+      SELECT   	product.id  ,
 	product.productId,
 	productName,
 	descript,
@@ -49,17 +50,18 @@
 	category03,
 	sortId,
 	sortconId,
-	 productpic.tuid as pid,
+	 productpic.tuid as tid,
 	 productpic.picPath
 	FROM
 	ageless.product
 	INNER JOIN productpic ON  product.id=productpic.productId
+	GROUP BY product.id
     ORDER BY product.update DESC
 </select>
 
-	<select id="listbyxiaoliang" resultMap="productandpic" parameterType="String">
+	<select id="listbyxiaoliang" resultMap="productandpic" >
 
-		SELECT product.id,
+		SELECT   product.id ,
 		product.productId,
 		productName,
 		descript,
@@ -77,19 +79,48 @@
 		category03,
 		sortId,
 		sortconId,
-		productpic.tuid as pid,
+		productpic.tuid as tid,
 		productpic.picPath,
-		productpic.productId
+		productpic.productId as proid
 		FROM
 		ageless.product
 		INNER JOIN productpic ON  product.id=productpic.productId
 
-
+		GROUP BY product.id
 		<if test="products!=null and products!=''">
 			ORDER BY ${products} DESC
 		</if>
 
 	</select>
+
+	<select id="listbyupdate" resultMap="productandpic" >
+		SELECT   product.id ,
+		product.productId,
+		productName,
+		descript,
+		maidian,
+		product.update,
+		downdate,
+		product.status,
+		price,
+		kucun,
+		xiaoliang,
+		product.comment,
+		sendScore,
+		category01,
+		category02,
+		category03,
+		sortId,
+		sortconId,
+		productpic.tuid AS tid,
+		productpic.picPath,
+		productpic.productId AS proid
+		FROM
+		ageless.product
+		INNER JOIN productpic ON  product.id=productpic.productId
+		ORDER BY product.update DESC,xiaoliang DESC
+	</select>
+
 
 	<resultMap id="productandpic" type="ProductAndPic">
 		<id property="id" column="id"></id>
@@ -98,12 +129,11 @@
 		<result property="xiaoliang" column="xiaoliang"></result>
 		<result property="comment" column="comment"></result>
 
-
-		<association property="productPic" javaType="ProductPic">
-			<id property="tuid" column="pid"></id>
+		<collection property="productPic" ofType="ProductPic">
+			<id property="tuid" column="tid"></id>
 			<result property="picPath" column="picPath"></result>
-			<result property="productId" column="productId"></result>
-		</association>
+			<result property="productId" column="proid"></result>
+		</collection>
 	</resultMap>
 
 </mapper>
