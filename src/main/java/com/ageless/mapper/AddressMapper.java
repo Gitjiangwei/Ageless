@@ -53,7 +53,7 @@ public interface AddressMapper {
     Integer updatenameId(Long nameId);
 
     /**
-     * 根据id修改状态为1
+     * 根据id修改地址状态为1
      * @param id
      * @return
      */
