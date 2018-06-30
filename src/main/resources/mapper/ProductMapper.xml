@@ -75,6 +75,8 @@
             price
             FROM
             ageless.sku
+            where
+            productId = #{id}
     </select>
     
     <select id="selectAllSkuoptionById" resultType="com.ageless.pojo.SkuOption">
