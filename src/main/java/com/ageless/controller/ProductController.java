@@ -22,7 +22,7 @@ public class ProductController {
     @Resource
     private ProductService service;
 
-    @RequestMapping("/shopshow")
+    @RequestMapping("/shopshow.html")
     public String shopshow(Model model,@RequestParam(value = "id",defaultValue = "2")Integer id){
         List<ProductPic> pics = service.selectAllPicById(id);
         ProductPic firtsPic = pics.get(0);
@@ -128,5 +128,6 @@ public class ProductController {
         modelAndView.setViewName("item_right");
         return modelAndView;
     }
+
 
 }

@@ -11,6 +11,7 @@ public class ShoppingCart {
     private int orderamount;   //订购数量
     private Sku  sku;           //商品sku表
     private Product product;    //商品表
+    private int skuid;   //
     private String productName;
     private int price;
 

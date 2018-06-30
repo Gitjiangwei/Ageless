@@ -1,0 +1,24 @@
+
+    <div class="msg-list" id="linfo">
+
+        <#list list1 as probyxiao>
+        <a class="ep active woqu" href="javascript:;" vid="${probyxiao.id}">【${probyxiao.typeName}】${probyxiao.title} </a>
+    </#list>
+    </div>
+
+    <div class="page text-right clearfix" >
+    <#if (pageindex>1) >
+        <a class="disabled" onclick="index(${pageindex-1})">上一页</a>
+    </#if>
+    <#list 1..countpage as i>
+    <a class="select" onclick="index(${i})">${i}</a>
+    </#list>
+
+    <#if (pageindex<countpage)>
+    <a onclick="index(${pageindex+1})">下一页</a>
+    </#if>
+    </div>
+
+
+
+

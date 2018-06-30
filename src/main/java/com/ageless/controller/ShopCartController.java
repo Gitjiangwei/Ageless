@@ -1,16 +1,15 @@
 package com.ageless.controller;
 
-
-import com.ageless.pojo.Area;
+/*
+import com.ageless.pojo.Area;*/
 import com.ageless.pojo.ShoppingCart;
 import com.ageless.service.ShopCartService;
 import com.alibaba.fastjson.JSON;
+import lombok.Builder;
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -29,9 +28,18 @@ public class ShopCartController {
         return "item_show";
     }
 
-    @GetMapping("/udai_shopcart.html")
-    public String udaishop() {
-        return "udai_shopcart";
+    @PostMapping("/udai_shopcart.html")
+    @ResponseBody
+    public Integer udaishop(@RequestParam("skuId") Integer skuId,@RequestParam("id") Integer id) {
+
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUserId(1);
+        shoppingCart.setProductId(id);
+        shoppingCart.setOrderamount(1);
+        shoppingCart.setSkuid(skuId);
+        Integer index = shopCartService.addShoppingCart(shoppingCart);
+
+        return index;
     }
 
     @RequestMapping("/udai_shopcart_pay")
@@ -41,6 +49,7 @@ public class ShopCartController {
     }
 
 
+/*
     //购物车查询
     @GetMapping("/selshopAll")
     @ResponseBody
@@ -50,6 +59,7 @@ public class ShopCartController {
         Object json = JSON.toJSON(productList);
         return json;
     }
+*/
 
 
     //带值进来的方法
