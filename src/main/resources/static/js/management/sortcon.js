@@ -95,12 +95,16 @@ function result(bz, choose) {
                     window.location.href="/sort/sortcon";
                 }
 
+            },
+            error:function (data) {
+                showWebAlert("服务器异常！");
             }
         });
     }
 
 }
 
+/*
 $("#tijiao").click(
     function () {
 
@@ -108,18 +112,57 @@ $("#tijiao").click(
     var sort =new Array();
         sx.map(function (index,item) {
             tempObj = $(item).val();
-            alert(index);
+
             sort.push(tempObj);
 
         }
 
         );
-        alert(sort);
+
       var con=$(".ss");
       var sortcon=new Array();
        con.map(function (index,item) {
              sortObj=$(item).val();
              sortcon.push(sortObj);
        });
-       alert(sortcon);
-});
+alert(sortcon);
+
+
+});*/
+
+
+$.fn.serializeJson = function () {
+    var serializeObj = {};
+    $(this.serializeArray()).each(function () {
+        if(serializeObj[this.name]){
+            if(!serializeObj[this.name].push){
+                serializeObj[this.name]=[serializeObj[this.name]];
+
+            }
+            serializeObj[this.name].push(this.value||'');
+        }else{
+            serializeObj[this.name]=this.value||'';
+        }
+
+    });
+
+    alert(JSON.stringify(serializeObj));
+    return serializeObj;
+};
+$('#tijiao').click(function () {
+var j=[];
+
+    var z=$(".form").serializeJson();
+
+   alert(JSON.stringify(z));
+    $ .ajax({
+        type: "POST",
+        url: "/sort/add",
+        data: JSON.stringify(z),
+        contentType:"application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+              alert(data);
+        }
+    });
+} )
