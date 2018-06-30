@@ -1,18 +1,22 @@
 package com.ageless.controller;
 
-
-import com.ageless.pojo.Area;
-import com.ageless.pojo.ShoppingCart;
 import com.ageless.pojo.SkuOption;
 import com.ageless.pojo.SkuProperty;
 import com.ageless.service.ProductService;
+import com.ageless.pojo.Area;
+import com.ageless.pojo.ShoppingCart;
 import com.ageless.service.ShopCartService;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import lombok.Builder;
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,12 +37,19 @@ public class ShopCartController {
         return "item_show";
     }
 
-    @GetMapping("/udai_shopcart.html")
-    public String udaishop() {
-        return "udai_shopcart";
+    @PostMapping("/udai_shopcart.html")
+    @ResponseBody
+    public Integer udaishop(@RequestParam("skuId") Integer skuId,@RequestParam("id") Integer id) {
+
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUserId(1);
+        shoppingCart.setProductId(id);
+        shoppingCart.setOrderamount(1);
+        shoppingCart.setSkuid(skuId);
+        Integer index = shopCartService.addShoppingCart(shoppingCart);
+
+        return index;
     }
-
-
 
     @RequestMapping("/udai_shopcart_pay")
     public String udaishoppay(ModelAndView modelAndView, @RequestParam int totalMoney, @RequestParam String checkeItem[]) {
@@ -76,13 +87,10 @@ public class ShopCartController {
     @ResponseBody
     public Object  selShopsAll(){
         List<ShoppingCart>  productList =shopCartService.selshopAll();
-
         System.out.println(productList.size());
         Object json = JSON.toJSON(productList);
         return json;
     }
-
-
 
 
     //带值进来的方法
@@ -110,61 +118,4 @@ public class ShopCartController {
        int delShopping=shopCartService.delshop(id);
         return JSON.toJSONString(delShopping);
     }
-
-    public String skuString(String skuCon){
-        StringBuffer sku = new StringBuffer();
-        String substring = skuCon.substring(0, skuCon.length()-1);//截取最后一个
-        System.out.println(substring);
-        String[] split = substring.split(",");//以逗号分割
-        Integer len = split.length;
-        List<String> skuPropertyIds = new ArrayList<>();
-        List<String> skuOptionIds = new ArrayList<>();
-        for (String string2 : split) {
-            int q = 0;
-            for(int i=0;i<string2.length();i++) {
-                if(string2.indexOf(":", i)!=-1){
-                    q++;
-                }
-            }
-            String skucon1 = string2.substring(q,string2.length());
-            String skucon2 = string2.substring(0,q-1);
-
-            if (!skuOptionIds.contains(skucon1)){
-                skuOptionIds.add(skucon1);
-            }
-            if (!skuPropertyIds.contains(skucon2)){
-                skuPropertyIds.add(skucon2);
-            }
-        }
-        //service是：
-        //  @Resource
-        //  private ProductService service;
-        List<SkuProperty> properties = productService.selectAllSkupropertyByIds(skuPropertyIds);
-        List<SkuOption> options = productService.selectAllSkuoptionById(skuOptionIds);
-        for (String string2 : split) {
-            int q = 0;
-            for(int j=0;j<string2.length();j++) {
-                if(string2.indexOf(":", j)!=-1){
-                    q++;
-                }
-            }
-            String skucon1 = string2.substring(q,string2.length());
-            String skucon2 = string2.substring(0,q-1);
-            for (SkuProperty property:properties) {
-                if (Integer.parseInt(skucon2) == property.getId()){
-                    sku.append(property.getPropertyName()+":");
-                }
-            }
-            for (SkuOption option:options) {
-                if (Integer.parseInt(skucon1) == option.getId()){
-                    sku.append(option.getOptionName()+",");
-                }
-            }
-        }
-        String skus = sku.toString().substring(0, sku.length()-1);//截取最后一个
-        return skus;
-    }
-
-
-
 }

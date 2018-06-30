@@ -11,14 +11,14 @@ public interface CategoryThreeMapper {
      * @param id
      * @return
      */
-    List<CategoryThree> listThree(@Param("id") int id);
+    List<CategoryThree> listThree(@Param("id") Integer id,@Param( "name" )String name);
 
     /**
      * 添加三级选项
-     * @param three
+     * @param threes
      * @return
      */
-    int insertThree(CategoryThree three);
+    int insertThree(@Param( "list" ) List<String> threes,@Param( "id" )int id);
 
     /**
      * 修改三级选项
@@ -26,4 +26,11 @@ public interface CategoryThreeMapper {
      * @return
      */
     int updateThree(CategoryThree three);
+
+    /**
+     * 删除三级选项
+     * @param id
+     * @return
+     */
+    int deleteThree(@Param( "id" )int id);
 }

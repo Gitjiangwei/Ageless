@@ -26,6 +26,8 @@
 
 
     <dependencies>
+
+
         <!-- 对web开发的支持，包括tomcat,spring-webmvc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,10 +44,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <!--分页插件  -->
+        <!--分页插件  -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-            <version>3.4.2</version>
+            <version>5.1.4</version>
         </dependency>
         <!-- 配置freemarker 模板 -->
         <dependency>
@@ -245,6 +248,4 @@
         </plugins>
 
     </build>
-
-
 </project>

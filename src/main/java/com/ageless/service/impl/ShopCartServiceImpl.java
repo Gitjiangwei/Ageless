@@ -14,7 +14,7 @@ public class ShopCartServiceImpl implements ShopCartService {
     @Autowired
     private ShopCartMapper shoppingCartMapper;
     @Override
-    public int addShoppingCart(ShopCart shoppingCart) {
+    public int addShoppingCart(ShoppingCart shoppingCart) {
 
         return shoppingCartMapper.addShoppingCart(shoppingCart);
     }

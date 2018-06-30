@@ -18,6 +18,7 @@ public class ShoppingCart {
     private Integer price; //商品的价格
     private String productName; //商品的名称
 
+    private int skuid;   //
 
 
 }

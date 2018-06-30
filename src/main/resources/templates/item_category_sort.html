@@ -1,0 +1,41 @@
+<div style="height: 20px;">
+    <div class="sort-total pull-right">共${shuliang}个商品</div>
+</div>
+<div class="item-list__area clearfix">
+    <#list selectProduct as p>
+    <div class="item-card">
+        <a href="/commodity/shopshow.html?id=${p.id}" class="photo">
+            <img src="${p.productPic.picPath}" alt="${p.productName}" class="cover">
+            <div class="name">${p.productName}</div>
+        </a>
+        <div class="middle">
+            <div class="price">
+                <small>￥</small>
+                ${p.price}
+            </div>
+            <div class="sale"><a href="">加入购物车----${p.id}</a></div>
+        </div>
+        <div class="buttom">
+            <div>销量 <b>${p.xiaoliang}</b></div>
+            <div>评论 <b>${p.comment}</b></div>
+        </div>
+    </div>
+    </#list>
+
+</div>
+<!-- 分页 -->
+<div class="page text-right clearfix">
+
+        <a href="javascript:"<#if (pageIndex-1<= 0) > class="disabled"</#if> <#if (pageIndex-1> 0) > onclick="show(${pageIndex-1})"</#if> >上一页</a>
+        <#list 1..pageCount as i>
+            <a href="javascript:" onclick="show(${i})">${i}</a>
+        </#list>
+        <a href="javascript:" <#if (pageIndex >= pageCount) > class="disabled"</#if><#if (pageIndex < pageCount)> onclick="show(${pageIndex+1})"</#if> >下一页</a>
+        <a class="disabled">${pageIndex}/${pageCount}页</a>
+        <span class="page-order">
+		    到第
+		    <input type="text" name="page" id="ye" pattern="^[0-9]*$"/>
+		    页
+		    <input class="sub" value="确定" onclick="show1(${pageCount})"/>
+	    </span>
+</div>

@@ -3,6 +3,7 @@ package com.ageless.pojo;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Product {
@@ -24,7 +25,6 @@ public class Product {
     private String category03;
     private String sortId;
     private String sortConId;
-
 
     private ProductPic productPic;
     private SkuOption skuOption;
