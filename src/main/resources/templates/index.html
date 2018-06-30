@@ -195,77 +195,31 @@
 </nav>
 <!-- 楼层内容 -->
 <div class="content inner" style="margin-bottom: 40px;">
-    <!--	<section class="scroll-floor floor-1 clearfix">
+    	<section class="scroll-floor floor-1 clearfix">
             <div class="pull-left">
                 <div class="floor-title">
                     <i class="iconfont icon-tuijian fz16"></i> 爆款推荐
-                    <a href="" class="more"><i class="iconfont icon-more"></i></a>
+                    <a href="/proxiao.html?product=xiaoliang" class="more"><i class="iconfont icon-more"></i></a>
                 </div>
                 <div class="con-box">
-                    <a class="left-img hot-img" href="">
+                    <a class="left-img hot-img" href="/proxiao.html?product=xiaoliang">
                         <img src="images/floor_1.jpg" alt="" class="cover">
                     </a>
                     <div class="right-box hot-box">
-                        <a href="item_show.html" class="floor-item">
-                            <div class="item-img hot-img">
-                                <img src="images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-                            </div>
-                            <div class="price clearfix">
-                                <span class="pull-left cr fz16">￥18.0</span>
-                                <span class="pull-right c6">进货价</span>
-                            </div>
-                            <div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-                        </a>
-                        <a href="item_show.html" class="floor-item">
-                            <div class="item-img hot-img">
-                                <img src="images/temp/S-002.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-                            </div>
-                            <div class="price clearfix">
-                                <span class="pull-left cr fz16">￥18.0</span>
-                                <span class="pull-right c6">进货价</span>
-                            </div>
-                            <div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-                        </a>
-                        <a href="item_show.html" class="floor-item">
-                            <div class="item-img hot-img">
-                                <img src="images/temp/S-003.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-                            </div>
-                            <div class="price clearfix">
-                                <span class="pull-left cr fz16">￥18.0</span>
-                                <span class="pull-right c6">进货价</span>
-                            </div>
-                            <div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-                        </a>
-                        <a href="/xiang.html" class="floor-item">
-                            <div class="item-img hot-img">
-                                <img src="images/temp/S-004.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-                            </div>
-                            <div class="price clearfix">
-                                <span class="pull-left cr fz16">￥18.0</span>
-                                <span class="pull-right c6">进货价</span>
-                            </div>
-                            <div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-                        </a>
-                        <a href="item_show.html" class="floor-item">
-                            <div class="item-img hot-img">
-                                <img src="images/temp/S-005.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-                            </div>
-                            <div class="price clearfix">
-                                <span class="pull-left cr fz16">￥18.0</span>
-                                <span class="pull-right c6">进货价</span>
-                            </div>
-                            <div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-                        </a>
-                        <a href="item_show.html" class="floor-item">
-                            <div class="item-img hot-img">
-                                <img src="images/temp/S-006.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-                            </div>
-                            <div class="price clearfix">
-                                <span class="pull-left cr fz16">￥18.0</span>
-                                <span class="pull-right c6">进货价</span>
-                            </div>
-                            <div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">纯色圆领短袖T恤活a动衫弹力柔软</div>
-                        </a>
+                        <#list list4 as product>
+                            <#if (product_index<6)>
+                            <a href="/commodity/shopshow.html?id=${product.id}" class="floor-item">
+                                <div class="item-img hot-img">
+                                    <img src="${product.productPic.picPath}" alt="${product.productName}" class="cover">
+                                </div>
+                                <div class="price clearfix">
+                                    <span class="pull-left cr fz16">￥${product.price}</span>
+                                    <span class="pull-right c6">进货价</span>
+                                </div>
+                                <div class="name ep" title="${product.productName}">${product.productName}</div>
+                            </a>
+                            </#if>
+                        </#list>
                     </div>
                 </div>
             </div>
@@ -323,42 +277,8 @@
                     </div>
                 </div>
             </div>
-        </div>-->
-    </section>
-    <section class="scroll-floor floor-1">
-        <div class="floor-title">
-            <i class="iconfont icon-skirt fz16"></i>爆款推荐
-            <div class="case-list fz0 pull-right">
-                <a href="item_category.html">最新女装</a>
-                <a href="item_category.html">时尚女装</a>
-                <a href="item_category.html">最新上装</a>
-                <a href="item_category.html">最新下装</a>
-                <a href="item_category.html">最新裙装</a>
-                <a href="item_category.html">最新内衣</a>
-            </div>
         </div>
-        <div class="con-box">
-            <a class="left-img hot-img " href="/proxiao.html?product=xiaoliang">
-                <img src="images/floor_1.jpg" alt="" class="cover">
-            </a>
-            <div class="right-box">
-                <#list list4 as product>
-                <#if (product_index<8)>
-                <a href="item_show.html" class="floor-item">
-                    <div class="item-img hot-img">
-                        <img src="${product.productPic.picPath}" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
-                    </div>
-                    <div class="price clearfix">
-                        <span class="pull-left cr fz16">￥${product.price}</span>
-                        <span class="pull-right c6">进货价</span>
-                    </div>
-                    <div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">${product.productName}</div>
-                </a>
-                </#if>
-            </#list>
-        </div>
-</div>
-</section>
+   </section>
 <section class="scroll-floor floor-2">
     <div class="floor-title">
         <i class="iconfont icon-skirt fz16"></i>最新推荐
@@ -378,15 +298,15 @@
         <div class="right-box">
             <#list list5 as newlist>
             <#if (newlist_index<8)>
-            <a href="item_show.html" class="floor-item">
+            <a href="/commodity/shopshow.html?id=${newlist.id}" class="floor-item">
                 <div class="item-img hot-img">
-                    <img src="images/temp/S-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+                    <img src="${newlist.productPic.picPath}" alt="${newlist.productName}" class="cover">
                 </div>
                 <div class="price clearfix">
                     <span class="pull-left cr fz16">￥${newlist.price}</span>
                     <span class="pull-right c6">进货价</span>
                 </div>
-                <div class="name ep" title="纯色圆领短袖T恤活a动衫弹力柔软">${newlist.productName}</div>
+                <div class="name ep" title="${newlist.productName}">${newlist.productName}</div>
             </a>
             </#if>
         </#list>

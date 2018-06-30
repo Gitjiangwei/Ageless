@@ -309,10 +309,10 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="detail" aria-labelledby="detail-tab">
                 <div class="item-detail__info clearfix">
-                    <div class="record">商品编号：D-8812</div>
-                    <div class="record">上架时间：2017-06-24</div>
-                    <div class="record">商品毛重：200克</div>
-                    <div class="record">商品库存：1000件</div>
+
+                    <#list propertys as perty>
+                        <div class="record">${perty.title}：${perty.content}</div>
+                    </#list>
                 </div>
                 <div class="rich-text">
                     <p style="text-align: center;">

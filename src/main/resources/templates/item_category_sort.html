@@ -4,7 +4,7 @@
 <div class="item-list__area clearfix">
     <#list selectProduct as p>
     <div class="item-card">
-        <a href="item_show.html" class="photo">
+        <a href="/commodity/shopshow.html?id=${p.id}" class="photo">
             <img src="${p.productPic.picPath}" alt="${p.productName}" class="cover">
             <div class="name">${p.productName}</div>
         </a>

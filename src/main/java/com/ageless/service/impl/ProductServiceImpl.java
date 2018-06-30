@@ -17,6 +17,11 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper mapper;
 
     @Override
+    public List<Property> selectPropertyAllById(Integer id) {
+        return mapper.selectPropertyAllById(id);
+    }
+
+    @Override
     public List<ProductPic> selectAllPicById(Integer id) {
         return mapper.selectAllPicById(id);
     }

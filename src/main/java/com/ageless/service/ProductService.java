@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProductService {
 
+    List<Property> selectPropertyAllById(Integer id);
+
     List<ProductPic> selectAllPicById(Integer id);
 
     Sku selectSkuByCon(String skuCon);
