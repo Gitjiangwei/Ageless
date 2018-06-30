@@ -15,11 +15,11 @@ public interface ShopCartService {
     int addShoppingCart(ShoppingCart shoppingCart);
     /**
      * 购物车查询
-     * @param id
+     * @param
      * @return
      */
 
-    public List<ShoppingCart> selshopAll(Integer id );
+    public List<ShoppingCart> selshopAll();
 
     /**
      *删除购物车商品
@@ -28,4 +28,6 @@ public interface ShopCartService {
      */
 
     public int delshop(Integer id );
+    public ShoppingCart queryShopChecked(Integer productId);
+
 }
