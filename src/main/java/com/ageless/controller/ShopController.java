@@ -2,11 +2,8 @@ package com.ageless.controller;
 
 import java.util.Date;
 
-import com.ageless.pojo.Area;
 
 import com.ageless.pojo.Shop;
-
-import com.ageless.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ShopController {
 
 	@Autowired
-	private ShopService shopService;
+//	private ShopService shopService;
 
 	/**
 	 * 添加
@@ -48,16 +45,16 @@ public class ShopController {
 	 * 
 	 * @return
 	 */
-	@ResponseBody
-	@RequestMapping(value = "/updateshop")
-	public Object updateShop() {
-		Shop shop = new Shop();
-		shop.setShopId(3L);
-		shop.setShopName("奶茶店");
-		shop.setShopDesc("非常好喝！");
-		shop.setLastEditTime(new Date());
-		int result = shopService.updateShop(shop);
-		return result;
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/updateshop")
+//	public Object updateShop() {
+//		Shop shop = new Shop();
+//		shop.setShopId(3L);
+//		shop.setShopName("奶茶店");
+//		shop.setShopDesc("非常好喝！");
+//		shop.setLastEditTime(new Date());
+//		int result = shopService.updateShop(shop);
+//		return result;
+//	}
 
 }

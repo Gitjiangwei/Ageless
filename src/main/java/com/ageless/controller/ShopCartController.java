@@ -35,6 +35,10 @@ public class ShopCartController {
     public String udai() {
         return "item_show";
     }
+    @GetMapping("/shopcart.html")
+    public String shopcart() {
+        return "udai_shopcart";
+    }
 
     @PostMapping("/udai_shopcart.html")
     @ResponseBody

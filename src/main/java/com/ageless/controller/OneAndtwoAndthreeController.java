@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "ageless")
 public class OneAndtwoAndthreeController {
     @Autowired
    private OneAndtwoAndthreeService  oneAndtwoAndthreeService;
@@ -19,7 +20,7 @@ public class OneAndtwoAndthreeController {
     @Autowired
     private ProductAndPicService productService;
 
-    @RequestMapping("/")
+    @RequestMapping("/index.html")
     public String lists(Model model){
         List<oneAndtwoAndthree> list=oneAndtwoAndthreeService.lists();
         model.addAttribute("list1",list);

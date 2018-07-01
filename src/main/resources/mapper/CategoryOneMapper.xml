@@ -16,7 +16,7 @@
             (#{cate})
         </foreach>
     </insert>
-    <update id="updateOne" parameterType="CategoryOne">
+    <update id="updateOne" parameterType="CategoryOne" >
         UPDATE categoryone set categoryName=#{categoryName} where id=#{id}
     </update>
 
