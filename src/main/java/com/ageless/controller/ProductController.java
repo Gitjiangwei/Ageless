@@ -5,8 +5,8 @@ import com.ageless.pojo.*;
 import com.ageless.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -129,5 +129,23 @@ public class ProductController {
         return modelAndView;
     }
 
+    @GetMapping("/goshangjia")
+    public String goshangjia(){
+        return "/management/category";
+    }
 
+    @GetMapping("/goxiajia")
+    public String goxiajia(){
+        return "/management/category";
+    }
+
+    @GetMapping("/goaddproject")
+    public String goshgoaddprojectangjia(@RequestParam("context")String context,@RequestParam("oneId")Integer oneId,
+                                         @RequestParam("twoId")Integer twoId,@RequestParam("threeId")Integer threeId,Model model){
+        model.addAttribute("context",context);
+        model.addAttribute("oneId",oneId);
+        model.addAttribute("twoId",twoId);
+        model.addAttribute("threeId",threeId);
+        return "/management/addProject";
+    }
 }
