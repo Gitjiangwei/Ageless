@@ -1,6 +1,7 @@
 package com.ageless.mapper;
 
 import com.ageless.pojo.Address;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.List;
 import java.util.Map;
@@ -43,5 +44,19 @@ public interface AddressMapper {
      * @return
      */
     Address selectAddress(Long id);
+
+    /**
+     * 根据nameId修改状态为0
+     * @param nameId
+     * @return
+     */
+    Integer updatenameId(Long nameId);
+
+    /**
+     * 根据id修改地址状态为1
+     * @param id
+     * @return
+     */
+    Integer updateId(Long id);
 
 }

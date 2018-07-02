@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.NoticeMapper">
+    <select id="selectAll" resultType="Notice">
+        SELECT id,title,link,announcement_content,announcement_time,typeId,modificationDate FROM notice
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="title!=null and title!=''">
+                and title=#{title}
+            </if>
+            <if test="typeId=='国际'and typeId=='国内'">
+                and typeId=#{typeId}
+            </if>
+        </trim>
+
+    </select>
+    <insert id="add">
+		INSERT INTO
+		notice(title,link,announcement_content,announcement_time,typeId,modificationDate)VALUES(#{title},#{link},#{announcement_content},#{announcement_time},#{typeId},#{modificationDate});
+	</insert>
+    <delete id="delete">
+	DELETE FROM notice WHERE id=#{id}
+	</delete>
+    <update id="xiuGai">
+		UPDATE notice SET announcement_content=#{announcement_content} WHERE id=#{id}
+	</update>
+
+    <select id="qianselect"   resultType="Notice">
+        select ne.typeName,n.id,n.title,n.announcement_content,n.announcement_time,n.typeId from notice n
+        join newstype ne
+        on n.typeId=ne.n_id
+        <trim prefix="WHERE" prefixOverrides="AND">
+
+            <if test="id!=null and id!=''">
+            and id=#{id}
+            </if>
+            <if test="typeName!=null and typeName!=''">
+                and typeName=#{typeName}
+            </if>
+            <if test="typeId!=null and typeId!=''">
+                and typeId=#{typeId}
+            </if>
+        </trim>
+</select>
+
+    <select id="incha"   resultType="Notice">
+        select ne.typeName,n.id,n.title,n.announcement_content,n.announcement_time,n.typeId from notice n
+        join newstype ne
+        on n.typeId=ne.n_id
+        WHERE id=#{id}
+
+    </select>
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.SortMapper">
+    <!-- yy  根据三级列表id查询  查询三级id下面的内容-->
+    <select id="selectsanji" parameterType="Integer" resultMap="sanji">
+        SELECT 	sort.id,
+	    sort.name,
+	    sort.categorythreeId,
+	    sortcon.sortconid,
+	    sortcon.sortconname
+	    FROM
+	    ageless.sort
+	    INNER JOIN sortcon ON sort.id=sortcon.sortId
+	    WHERE  sort.categorythreeId = #{categorythreeId}
+    </select>
+    <resultMap id="sanji" type="com.ageless.pojo.Sort">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="categorythreeId" property="categorythreeId"/>
+
+        <collection property="sortcons"  ofType="com.ageless.pojo.Sortcon">
+            <id column="sortconid" property="sortconid"/>
+            <result column="sortconname" property="sortconname"/>
+            <result column="sortId" property="sortId"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectProduct" resultMap="shangpin" >
+    SELECT 	product.id,
+	productName,
+	price,
+	xiaoliang,
+	product.comment,
+	product.sortconId,
+	productpic.tuid,
+	productpic.picPath
+	FROM
+	ageless.product
+
+	INNER JOIN productpic ON product.id=productpic.productId  /*图片表*/
+
+        <where>
+            <if test="list!=null" >
+                <foreach collection="list" item="item" index="index" separator="AND" >
+                    <if test="item != 0">
+                        product.sortconId LIKE CONCAT('%', #{item},'%')
+                    </if>
+                </foreach>
+            </if>
+        </where>
+	  GROUP BY product.id
+        <if test="tiaojian!=null and tiaojian!=''">
+	      ORDER BY ${tiaojian} DESC
+        </if>
+    </select>
+
+    <resultMap id="shangpin" type="com.ageless.pojo.Product">
+        <id column="id" property="id"/>
+        <result column="productName" property="productName"/>
+        <result column="price" property="price"/>
+        <result column="xiaoliang" property="xiaoliang"/>
+        <result column="comment" property="comment"/>
+
+        <association property="productPic"  javaType="com.ageless.pojo.ProductPic">
+            <id column="tuid" property="tuid"/>
+            <result column="picPath" property="picPath"/>
+        </association>
+
+    </resultMap>
+
+
+
+    <select id="selectmohu" resultMap="shangpin">
+         SELECT product.id,
+            productName,
+            price,
+            xiaoliang,
+            product.comment,
+            product.sortconId,
+            productpic.tuid,
+            productpic.picPath
+            FROM
+            ageless.product
+
+            INNER JOIN productpic ON product.id=productpic.productId  /*图片表*/
+
+                WHERE  product.productName LIKE CONCAT('%', '${mo}','%')
+
+            GROUP BY product.id
+        <if test="tiaojian!=null and tiaojian!=''">
+            ORDER BY ${tiaojian} DESC
+        </if>
+    </select>
+</mapper>

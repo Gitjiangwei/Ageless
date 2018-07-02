@@ -1,10 +1,7 @@
 package com.ageless.controller;
 
 
-import com.ageless.pojo.Product;
-import com.ageless.pojo.Sku;
-import com.ageless.pojo.SkuOption;
-import com.ageless.pojo.SkuProperty;
+import com.ageless.pojo.*;
 import com.ageless.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +22,11 @@ public class ProductController {
     @Resource
     private ProductService service;
 
-    @RequestMapping("/shopshow")
+    @RequestMapping("/shopshow.html")
     public String shopshow(Model model,@RequestParam(value = "id",defaultValue = "2")Integer id){
+        List<ProductPic> pics = service.selectAllPicById(id);
+        ProductPic firtsPic = pics.get(0);
+        List<Property> propertys = service.selectPropertyAllById(id);
         Product product = service.selectPoroductById(id);
         List<Sku> skus = service.selectAllSkuById(id);
         List<String> skuPropertyIds = new ArrayList<>();
@@ -55,9 +55,6 @@ public class ProductController {
                 }
             }
         }
-        System.out.println("---");
-        System.out.println(skuPropertyIds);
-        System.out.println(skuOptionIds);
         List<SkuProperty> properties = service.selectAllSkupropertyByIds(skuPropertyIds);
         List<SkuOption> options = service.selectAllSkuoptionById(skuOptionIds);
         List<Integer> thefirst = new ArrayList();
@@ -69,12 +66,12 @@ public class ProductController {
                 }
             }
         }
-        System.out.println(options.toString());
-        System.out.println("-=-=-=-=-=--==--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-        System.out.println(thefirst.size());
         model.addAttribute("productId",id);
+        model.addAttribute("propertys",propertys);
         model.addAttribute("firsts",thefirst);
         model.addAttribute("product",product);
+        model.addAttribute("firtsPic",firtsPic);
+        model.addAttribute("pics",pics);
         return "item_show";
     }
 
@@ -108,9 +105,6 @@ public class ProductController {
                 }
             }
         }
-        System.out.println("---");
-        System.out.println(skuPropertyIds);
-        System.out.println(skuOptionIds);
         List<SkuProperty> properties = service.selectAllSkupropertyByIds(skuPropertyIds);
         List<SkuOption> options = service.selectAllSkuoptionById(skuOptionIds);
         List<Integer> thefirst = new ArrayList();
@@ -120,7 +114,6 @@ public class ProductController {
         }
         StringBuffer skucon2 = new StringBuffer();
         Integer emm = 0;
-        System.out.println(thefirst.size());
         for (SkuProperty skupro:properties) {
             System.out.println("------skuproId:"+skupro.getId() + "-------------thefirst"+thefirst.get(emm)+"-----------------------------");
             skucon2.append(skupro.getId() + ":" + thefirst.get(emm) + ",");
@@ -135,5 +128,6 @@ public class ProductController {
         modelAndView.setViewName("item_right");
         return modelAndView;
     }
+
 
 }

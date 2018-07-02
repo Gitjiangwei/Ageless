@@ -86,17 +86,17 @@
 		<div class="popup" id="stuInfo">
 			<h1>新增属性<span class="closeX" onclick="closeMask('stuInfo')">X</span></h1>
 			<div class="pInfo">
-				<from action="" method="post">
+				<form action="" method="post" class="form">
 					<br/>
 					<div class="sort">
-						<div class="so">
-					<p>属性名：<input type="text" class="textStyle shuxing" style="width:80px;" />
+
+					<p>属性名：<input type="text" class="textStyle shuxing" style="width:80px;" name="name"/>
 						<input type="button" value="" class="button add addsort"  /></p>
 					
-					<p>属性选项：<span class="sortcon"><input type="text" class="textStyle ss" name="sProblem" style="width:80px;" /></span>
-					<input type="button" value="" class="button add addsortcon"  /></p></div>
+					<p>属性选项：<span class="sortcon"><input type="text" class="textStyle ss"  name="sortconname" style="width:80px;" /></span>
+					<input type="button" value="" class="button add addsortcon"  /></p>
 					</div>
-				</from>
+				</form>
 			</div>
 			<div class="pfooter">
 				<input type="button" id="tijiao" value="保存" class="button save" />
@@ -121,20 +121,20 @@
 				
 			$(function(){
 				$("#dianji").click(function(){
-					mask(560, 340, true, "stuInfo");
+					mask(560, 340, true, "stuInfo",true);
 				});
 				
 				$(".sort").on("click",".addsort",function(){
-					var sortcon = '<div class="so"><p>属性名：<input type="text" class="textStyle shuxing" style="width:80px;"/>'
+					var sortcon = '<p>属性名：<input type="text" class="textStyle shuxing" style="width:80px;" name="name"/>'
 						+'<input type="button" value="" class="button add addsort"  /></p>'
-						+'<p>属性选项：<span class="sortcon"><input type="text" class="textStyle ss" name="sProblem" style="width:80px;" /></span>'
-						+'<input type="button" value="" class="button add addsortcon"  /></p></div>';
+						+'<p>属性选项：<span class="sortcon"><input type="text" class="textStyle ss" name="sortconname" style="width:80px;" /></span>'
+						+'<input type="button" value="" class="button add addsortcon"   /></p>';
 					$(".sort").append(sortcon);
 					$(this).hide();
 				});
 				
 				$(".sort").on("click",".addsortcon",function(){
-					var sortcon = '<input type="text" class="textStyle ss" name="sProblem" style="width:80px;" onchange="addsortcon()">';
+					var sortcon = '<input type="text" class="textStyle ss" name="sortconname" style="width:80px;" >';
 					$(this).prev().append(sortcon);
 				});
 			});

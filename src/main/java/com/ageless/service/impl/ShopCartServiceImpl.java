@@ -14,18 +14,26 @@ public class ShopCartServiceImpl implements ShopCartService {
     @Autowired
     private ShopCartMapper shoppingCartMapper;
     @Override
-    public int addShoppingCart(ShopCart shoppingCart) {
+    public int addShoppingCart(ShoppingCart shoppingCart) {
 
         return shoppingCartMapper.addShoppingCart(shoppingCart);
     }
 
     @Override
-    public List<ShoppingCart> selshopAll(Integer id) {
-        return shoppingCartMapper.selshopAll(id);
+    public List<ShoppingCart> selshopAll() {
+        return shoppingCartMapper.selshopAll();
     }
 
     @Override
     public int delshop(Integer id) {
         return shoppingCartMapper.delshop(id);
     }
+
+    @Override
+    public ShoppingCart queryShopChecked(Integer productId) {
+        return shoppingCartMapper.queryShopChecked(productId);
+    }
+
+
+
 }

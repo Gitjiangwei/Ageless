@@ -1,7 +1,6 @@
 package com.ageless.dto;
 
 import com.ageless.enums.ShopStateEnum;
-import com.ageless.pojo.Shop;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class ShopExecution {
 	// 结果状态
-	private int state;
+	/*private int state;
 
 	// 状态标识
 	private String stateInfo;
@@ -84,6 +83,6 @@ public class ShopExecution {
 
 	public void setShopList(List<Shop> shopList) {
 		this.shopList = shopList;
-	}
+	}*/
 
 }

@@ -4,34 +4,63 @@
 <!-- 设置为IUserDao接口方法提供sql语句配置 -->
 <mapper namespace="com.ageless.mapper.ShopCartMapper">
 
-<insert id="addShoppingCart" parameterType="ShopCart">
+<insert id="addShoppingCart">
     INSERT INTO ageless.shoppingcart
 	(
 	userId,
 	productId,
-	orderamount
+	orderamount,
+	skuid
 	)
 	VALUES
 	(
 	#{userId},
 	#{productId},
-	#{orderamount}
+	#{orderamount},
+	#{skuid}
 	);
 
 </insert>
+
 	<!--购物车查询语句-->
-	<select id="selshopAll" resultType="ShoppingCart" parameterType="ShoppingCart">
-        SELECT 	shoppingcart.id, userId, shoppingcart.productId, orderamount ,sku.SKUId,price,productName FROM ageless.shoppingcart
-        INNER JOIN sku ON shoppingcart.productId=sku.productId
-        INNER JOIN  product ON shoppingcart.productId=product.productId
-            <!--<if test="userId!=null and userId!=0">
-                and userId=#{userId}
-            </if>
-            <if test="SKUId!=null and SKUId!=0">
-                and SKUId=#{SKUId}
-            </if>-->
+	<select id="selshopAll" resultType="ShoppingCart" >
+
+		SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
+
+		,productpic.picPath,product.productName,sku.SKUcon FROM shoppingcart
+
+		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
+
+		LEFT  JOIN productpic ON shoppingcart.productId=productpic.tuid
+
+		LEFT  JOIN product ON shoppingcart.productId=product.productId  GROUP BY shoppingcart.id
+
+		ORDER BY shoppingcart.id DESC
+
+
      </select>
      <delete id="delshop" parameterType="ShoppingCart" >
             DELETE FROM shoppingcart WHERE id = #{id}
 	 </delete>
+
+	<!--查询购物车中要进行结算的商品-->
+	<select id="queryShopChecked" resultType="ShoppingCart" parameterType="int">
+
+	SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
+
+		,productpic.picPath,product.productName,sku.SKUcon  FROM shoppingcart
+
+		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
+
+		LEFT  JOIN productpic ON shoppingcart.productId=productpic.tuid
+
+		LEFT  JOIN product ON shoppingcart.productId=product.productId
+			WHERE shoppingcart.productId in (#{ productId })
+		 GROUP BY shoppingcart.id
+
+		ORDER BY shoppingcart.id DESC
+
+
+     </select>
+
 </mapper>

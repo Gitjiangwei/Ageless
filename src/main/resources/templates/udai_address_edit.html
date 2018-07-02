@@ -42,7 +42,7 @@
 <div class="bgf5 clearfix">
 	<div class="top-user">
 		<div class="inner">
-			<a class="logo" href="index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+			<a class="logo" href="/ageless/index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 			<div class="title">个人中心</div>
 		</div>
 	</div>
@@ -98,8 +98,9 @@
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">收货人姓名：</label>
 						<div class="col-sm-6">
-							<input type="hidden" name="id" value="${address.id}">
-							<input class="form-control" id="name" name="consignee" value="${address.consignee}" placeholder="请输入姓名" type="text">
+							<input type="hidden" id="id" name="id" value="${address.id}">
+							<input type="hidden" id="nameId" name="nameId" value="${address.nameId}">
+							<input class="form-control" id="name" name="consignee" value="${address.consignee}" placeholder="请输入姓名" maxlength="10" type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')">
 						</div>
 					</div>
 					<div class="form-group">
@@ -153,7 +154,7 @@
                                 <select name="area"></select>
                                 <select name="town"></select>
                             </div>-->
-							<input style="margin-top: 20px" class="form-control" id="details" value="${address.details}" name="details" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码等信息" maxlength="30" type="text">
+							<input style="margin-top: 20px" class="form-control" id="details" value="${address.details}" name="details" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码等信息" maxlength="30" type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')">
 						</div>
 					</div>
 					<!-- <div class="form-group">
@@ -163,9 +164,9 @@
                         </div>
                     </div> -->
 					<div class="form-group">
-						<label for="mobile" class="col-sm-2 control-label">手机号码：</label>
+						<label class="col-sm-2 control-label">手机号码：</label>
 						<div class="col-sm-6">
-							<input class="form-control" id="mobile" name="tel" value="${address.tel}" placeholder="请输入手机号码" type="text">
+							<input class="form-control" id="tel" name="tel" value="${address.tel}" placeholder="请输入手机号码" type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')">
 						</div>
 					</div>
 					<!--<div class="form-group">
@@ -177,7 +178,7 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
 							<div class="checkbox">
-								<label><input type="checkbox"><i></i> 设为默认收货地址</label>
+								<label><input type="checkbox" checked><i></i> 设为默认收货地址</label>
 							</div>
 						</div>
 					</div>
@@ -189,11 +190,14 @@
 					<script src="js/jquery.citys.js"></script>
 					<script>
                         $(".but").click(function () {
+                            var id=$("#id").val();
+                            var nameId=$("#nameId").val();
                             var province=$("#province").text();
                             var city=$("#city").text();
                             var area=$("#area").text();
                             var street=$("#street").text();
 
+                            alert(id+nameId);
                             if($("#name").val()==""){
                                 alert("请输入姓名");
                                 return;
@@ -207,19 +211,20 @@
                                 return;
                             }
                             if(area=="请选择"){
-                                alert("请选择区");
-                                return;
+                                area="";
                             }
                             if(street=="请选择"){
-                                alert("请选择街道");
-                                return;
+                                street="";
                             }
                             if($("#details").val()==""){
                                 alert("请输入详细地址");
                                 return;
                             }
-                            if($("#mobile").val()==""){
+                            if($("#tel").val()==""){
                                 alert("请输入电话号码");
+                                return;
+                            }else if(!$("#tel").val().match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/)){
+                                alert("请输入正确的手机格式");
                                 return;
                             }
 
@@ -230,7 +235,6 @@
                             }else if(b==true){
                                 state=1;
                             }
-                            alert($("form").serialize());
                             $.ajax({
                                 type:'post',
                                 url:'/updateAdd',
@@ -239,13 +243,174 @@
                                 success:function (data) {
                                     if (data.upd=="OK"){
                                         alert("修改成功");
-                                        window.location.href="/udai_address.html";
+                                        if(state == 1){
+                                            sta(id,nameId);
+                                            return;
+                                        }
+                                        $.ajax({
+                                            type:'post',
+                                            url:'/showAdd',
+                                            dataType:'json',
+                                            success:function (data) {
+                                                var content="";
+                                                $.each(data,function (i,e) {
+                                                    if(e.state==0){
+                                                        content+="<div class=\"addr-item\">\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                            "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                            "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                            "\t\t\t\t\t\t\t\t<a onclick='sta("+e.id+','+e.nameId+")' class=\"default\">设为默认</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t</div>";
+                                                    }else if(e.state==1){
+                                                        content+="<div class=\"addr-item\">\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                            "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                            "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                            "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default active\">默认地址</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t</div>";
+                                                    }
+
+                                                })
+                                                $(".addr-list").html(content);
+                                            }
+                                        })
                                     } else if(data.upd=="NO"){
                                         alert("修改失败");
                                     }
                                 }
                             })
                         });
+                        //状态
+                        function sta(id,nameId) {
+                            $.ajax({
+                                type:'post',
+                                url:'/updateState',
+                                data:'id='+id+"&nameId="+nameId,
+                                dataType:'json',
+                                success:function (data) {
+                                    if (data.sta=="OK"){
+                                        alert("设置默认地址成功");
+                                        $.ajax({
+                                            type:'post',
+                                            url:'/showAdd',
+                                            dataType:'json',
+                                            success:function (data) {
+                                                var content="";
+                                                $.each(data,function (i,e) {
+                                                    if(e.state==0){
+                                                        content+="<div class=\"addr-item\">\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                            "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                            "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                            "\t\t\t\t\t\t\t\t<a onclick='sta("+e.id+','+e.nameId+")' class=\"default\">设为默认</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t</div>";
+                                                    }else if(e.state==1){
+                                                        content+="<div class=\"addr-item\">\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                            "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                            "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                            "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default active\">默认地址</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t</div>";
+                                                    }
+
+                                                })
+                                                $(".addr-list").html(content);
+                                            }
+                                        })
+                                    } else if(data.sta=="NO"){
+                                        alert("设置默认地址失败");
+                                    }
+                                }
+                            })
+                        }
+                        //删除地址
+                        function cct(id) {
+                            var flag = confirm("是否删除？");
+                            if(flag){
+                                $.ajax({
+                                    type:'post',
+                                    url:'/delAdd',
+                                    data:'id='+id,
+                                    dataType:'json',
+                                    success:function (data) {
+                                        if (data.del=="OK"){
+                                            alert("删除成功");
+                                            $.ajax({
+                                                type:'post',
+                                                url:'/showAdd',
+                                                dataType:'json',
+                                                success:function (data) {
+                                                    var content="";
+                                                    $.each(data,function (i,e) {
+                                                        if(e.state==0){
+                                                            content+="<div class=\"addr-item\">\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                                "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                                "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                                "\t\t\t\t\t\t</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                                "\t\t\t\t\t\t\t\t<a onclick='sta("+e.id+','+e.nameId+")' class=\"default\">设为默认</a>\n" +
+                                                                "\t\t\t\t\t\t</div>\n" +
+                                                                "\t\t\t\t\t</div>";
+                                                        }else if(e.state==1){
+                                                            content+="<div class=\"addr-item\">\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                                "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                                "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                                "\t\t\t\t\t\t</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                                "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default active\">默认地址</a>\n" +
+                                                                "\t\t\t\t\t\t</div>\n" +
+                                                                "\t\t\t\t\t</div>";
+                                                        }
+
+                                                    })
+                                                    $(".addr-list").html(content);
+                                                }
+                                            })
+                                        } else if(data.del=="NO"){
+                                            alert("删除失败");
+                                        }
+                                    }
+                                })
+                            }
+                        }
                         $(document).ready(function(){
                             // 添加街道/乡镇
                             function townFormat(info){
@@ -371,7 +536,7 @@
 			</a>
 		</li>
 		<li class="r-toolbar-item">
-			<a href="udai_shopcart.html" class="r-item-hd">
+			<a href="/shop/shopcart.html" class="r-item-hd">
 				<i class="iconfont icon-cart"></i>
 				<div class="r-tip__box"><span class="r-tip-text">购物车</span></div>
 			</a>

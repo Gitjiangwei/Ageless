@@ -3,17 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="css/iconfont.css">
-	<link rel="stylesheet" href="css/global.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/swiper.min.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<script src="js/jquery.1.12.4.min.js" charset="UTF-8"></script>
-	<script src="js/bootstrap.min.js" charset="UTF-8"></script>
-	<script src="js/swiper.min.js" charset="UTF-8"></script>
-	<script src="js/global.js" charset="UTF-8"></script>
-	<script src="js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
+	<link rel="stylesheet" href="/css/iconfont.css">
+	<link rel="stylesheet" href="/css/global.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/css/swiper.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
+	<script src="/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
+	<script src="/js/bootstrap.min.js" charset="UTF-8"></script>
+	<script src="/js/swiper.min.js" charset="UTF-8"></script>
+	<script src="/js/global.js" charset="UTF-8"></script>
+	<script src="/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
+	<script src="/js/fenye.js"></script>
 	<title>U袋网</title>
 </head>
 <body>
@@ -37,15 +38,15 @@
 	<!-- 搜索栏 -->
 	<div class="top-search">
 		<div class="inner">
-			<a class="logo" href="index.html"><img src="images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+			<a class="logo" href="index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 			<div class="search-box">
-				<form class="input-group">
-					<input placeholder="Ta们都在搜U袋网" type="text">
+				<form class="input-group" action="/sort/selectmohu" method="post">
+					<input placeholder="Ta们都在搜U袋网" type="text" name="mohu">
 					<span class="input-group-btn">
-						<button type="button">
+						<button type="submit">
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						</button>
-					</span>
+                </span>
 				</form>
 				<p class="help-block text-nowrap">
 					<a href="">连衣裙</a>
@@ -90,7 +91,7 @@
 			<div class="filter-box">
 				<div class="all-filter">
 					<div class="filter-value">
-						<a href="" class="sale-title active">满减专区</a>
+						<a href="" class="sale-title active">爆款专区</a>
 						<a href="" class="sale-title">热卖专区</a>
 						<a href="" class="sale-title">折扣专区</a>
 					</div>
@@ -98,316 +99,60 @@
 			</div>
 			<div class="sort-box bgf5">
 				<div class="sort-text">排序：</div>
-				<a href=""><div class="sort-text">销量 <i class="iconfont icon-sortDown"></i></div></a>
-				<a href=""><div class="sort-text">评价 <i class="iconfont icon-sortUp"></i></div></a>
-				<a href=""><div class="sort-text">价格 <i class="iconfont"></i></div></a>
-				<div class="sort-total pull-right">共1688个商品</div>
+				<a   onclick="sun(this)" name="xiaoliang"><div class="sort-text">销量 </div></a>
+				<a onclick="sun(this)" name="comment"><div  class="sort-text">评价</div></a>
+				<a onclick="sun(this)" name="price"><div  class="sort-text">价格 </div></a>
+				<div class="sort-total pull-right">共${shuliang}个商品</div>
 			</div>
 		</section>
 		<section class="item-show__div clearfix">
 			<div class="pull-left">
-				<div class="item-list__area clearfix">
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-001.jpg" alt="锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款" class="cover">
-							<div class="name">锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale no-hide"><a href="">满100减20</a></div>
+				<div class="mv">
+
+					<div class="item-list__area clearfix">
+						<#list list1 as probyxiao>
+
+						<div class="item-card">
+							<a href="/commodity/shopshow.html?id=${probyxiao.id}" class="photo">
+								<img src="${probyxiao.productPic.picPath}" alt="锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款" class="cover">
+								<div class="name">${probyxiao.productName}</div></a>
+							<div class="middle">
+								<div class="price"><small>￥</small>${probyxiao.price}</div>
+								<div class="sale no-hide"><a href="">满100减20</a></div>
+							</div>
+							<div class="buttom">
+								<div>销量 <b>${probyxiao.xiaoliang}</b></div>
+								<div>人气 <b></b></div>
+								<div>评论 <b>${probyxiao.comment}</b></div>
+							</div>
 						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-002.jpg" alt="霜天月明 原创日常汉服男云纹绣花单大氅传统礼服外套" class="cover">
-							<div class="name">霜天月明 原创日常汉服男云纹绣花单大氅传统礼服外套</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<!-- 优惠和满减常态显示不隐藏加上 no-hide 类 -->
-							<!-- <div class="sale"><a href="">加入购物车</a></div>
-							<div class="sale no-hide"><a href="">8折优惠</a></div> -->
-							<div class="sale no-hide"><a href="">8折优惠</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-003.jpg" alt="陇上乐原创传统日常汉服男绣花交领cp情侣非古装春秋" class="cover">
-							<div class="name">陇上乐原创传统日常汉服男绣花交领cp情侣非古装春秋</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-004.jpg" alt="霜天月明 原创传统日常汉服男绣花交领衣裳cp春装单品" class="cover">
-							<div class="name">霜天月明 原创传统日常汉服男绣花交领衣裳cp春装单品</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-005.jpg" alt="琅轩日常汉服男龙纹绣花短褙子气质传统外套春秋非古装" class="cover">
-							<div class="name">琅轩日常汉服男龙纹绣花短褙子气质传统外套春秋非古装</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-006.jpg" alt="峥嵘 原创设计传统日常汉服男绣花唐制圆领袍春秋非古装" class="cover">
-							<div class="name">峥嵘 原创设计传统日常汉服男绣花唐制圆领袍春秋非古装</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-007.jpg" alt="陇上乐原创传统日常汉服男绣花单大氅大袖衫cp情侣春秋" class="cover">
-							<div class="name">陇上乐原创传统日常汉服男绣花单大氅大袖衫cp情侣春秋</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-008.jpg" alt="擎苍原创传统绣花交领衣裳春装单品日常汉服男非 古装" class="cover">
-							<div class="name">擎苍原创传统绣花交领衣裳春装单品日常汉服男非 古装</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-009.jpg" alt="英华原创品牌日常汉服弓道服绣花情侣cp装男款交领衣裳" class="cover">
-							<div class="name">英华原创品牌日常汉服弓道服绣花情侣cp装男款交领衣裳</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-010.jpg" alt="怀楚原创品牌汉服男绣花日常长中长半臂短打裋褐上衣春夏" class="cover">
-							<div class="name">怀楚原创品牌汉服男绣花日常长中长半臂短打裋褐上衣春夏</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-011.jpg" alt="舍竹改良汉服日常汉元素中国民族风男款绣花交领上衣春秋" class="cover">
-							<div class="name">舍竹改良汉服日常汉元素中国民族风男款绣花交领上衣春秋</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-012.jpg" alt="乌鹭原创设计日常汉服情侣cp装男款绣花半臂交领春秋" class="cover">
-							<div class="name">乌鹭原创设计日常汉服情侣cp装男款绣花半臂交领春秋</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-013.jpg" alt="锦瑟 原创日常汉服男装传统cp情侣装绣花对襟半臂夏款" class="cover">
-							<div class="name">锦瑟 原创日常汉服男装传统cp情侣装绣花对襟半臂夏款</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-014.jpg" alt="霜天月明新款传统日常汉服男绣花半臂单上衣cp情侣夏装" class="cover">
-							<div class="name">霜天月明新款传统日常汉服男绣花半臂单上衣cp情侣夏装</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-015.jpg" alt="琅轩 原创品牌日常汉服男棉麻纯色交领上衣春夏装单品" class="cover">
-							<div class="name">琅轩 原创品牌日常汉服男棉麻纯色交领上衣春夏装单品</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-016.jpg" alt="青鸾原创传统日常汉服男装绣花上衣下裳大氅单品非" class="cover">
-							<div class="name">青鸾原创传统日常汉服男装绣花上衣下裳大氅单品非</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-017.jpg" alt="墨染 原创设计改良汉服男竹节棉日常松紧抽绳单裤子百搭" class="cover">
-							<div class="name">墨染 原创设计改良汉服男竹节棉日常松紧抽绳单裤子百搭</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-018.jpg" alt="飞廉原创品牌传统日常绣花汉服情侣cp装男款交领衣裳" class="cover">
-							<div class="name">飞廉原创品牌传统日常绣花汉服情侣cp装男款交领衣裳</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-019.jpg" alt="和如原创设计汉服男女cp情侣装绣花交领襦裙披风大氅" class="cover">
-							<div class="name">和如原创设计汉服男女cp情侣装绣花交领襦裙披风大氅</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
-					<div class="item-card">
-						<a href="item_show.html" class="photo">
-							<img src="images/temp/M-020.jpg" alt="白鹭行原创传统日常汉服男装绣花短褙子百搭外套单品春夏" class="cover">
-							<div class="name">白鹭行原创传统日常汉服男装绣花短褙子百搭外套单品春夏</div></a>
-						<div class="middle">
-							<div class="price"><small>￥</small>18.0</div>
-							<div class="sale"><a href="">加入购物车</a></div>
-						</div>
-						<div class="buttom">
-							<div>销量 <b>666</b></div>
-							<div>人气 <b>888</b></div>
-							<div>评论 <b>1688</b></div>
-						</div>
-					</div>
+					</#list>
 				</div>
 				<!-- 分页 -->
 				<div class="page text-right clearfix">
-					<a class="disabled">上一页</a>
-					<a class="select">1</a>
-					<a href="">2</a>
-					<a href="">3</a>
-					<a href="">4</a>
-					<a href="">5</a>
-					<a class="" href="">下一页</a>
-					<a class="disabled">1/5页</a>
-					<form action="" class="page-order">
-						到第
-						<input type="text" name="page">
-						页
-						<input class="sub" type="submit" value="确定">
-					</form>
+					<#if (pageindex>1)>
+					<a class="disabled" onclick="index(${pageindex-1})">上一页</a>
+				</#if>
+
+				<#list 1..countpage as i>
+				<a  onclick="index(${i})">${i}</a>
+			</#list>
+
+				<#if (pageindex < countpage)>
+				<a onclick="index(${pageindex+1})">下一页</a>
+			</#if>
+			<a class="disabled">${pageindex}/${countpage}页</a>
+			<form action="" class="page-order">
+				到第
+				<input type="text" name="page" id="page">
+				页
+				<input class="sub" type="button" value="确定" onclick="shu()">
+			</form>
+			</div>
+
 				</div>
+
+
 			</div>
 			<div class="pull-right">
 				
@@ -416,16 +161,16 @@
 						<span class="c6">爆款推荐</span>
 					</div>
 					<div class="picked-box">
-						<a href="" class="picked-item"><img src="images/temp/S-001.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
-						<a href="" class="picked-item"><img src="images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-001.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
 					</div>
 				</div>
 			</div>
@@ -478,16 +223,16 @@
 		<div class="footer-tags">
 			<div class="tags-box inner">
 				<div class="tag-div">
-					<img src="images/icons/footer_1.gif" alt="厂家直供">
+					<img src="/images/icons/footer_1.gif" alt="厂家直供">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_2.gif" alt="一件代发">
+					<img src="/images/icons/footer_2.gif" alt="一件代发">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_3.gif" alt="美工活动支持">
+					<img src="/images/icons/footer_3.gif" alt="美工活动支持">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_4.gif" alt="信誉认证">
+					<img src="/images/icons/footer_4.gif" alt="信誉认证">
 				</div>
 			</div>
 		</div>
