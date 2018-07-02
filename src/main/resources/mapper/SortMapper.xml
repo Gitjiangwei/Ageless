@@ -70,4 +70,27 @@
 
     </resultMap>
 
+
+
+    <select id="selectmohu" resultMap="shangpin">
+         SELECT product.id,
+            productName,
+            price,
+            xiaoliang,
+            product.comment,
+            product.sortconId,
+            productpic.tuid,
+            productpic.picPath
+            FROM
+            ageless.product
+
+            INNER JOIN productpic ON product.id=productpic.productId  /*图片表*/
+
+                WHERE  product.productName LIKE CONCAT('%', '${mo}','%')
+
+            GROUP BY product.id
+        <if test="tiaojian!=null and tiaojian!=''">
+            ORDER BY ${tiaojian} DESC
+        </if>
+    </select>
 </mapper>
