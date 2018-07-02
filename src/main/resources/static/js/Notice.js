@@ -11,7 +11,7 @@ function nav(){
              $("#info").html("");
             for (var i=0;i<data.length;i++){
 
-                $("#info").append("<a class='swiper-slide ep' style='height: 24px' href='/er/getTest.html?xid="+data[i].typeId+"&yid="+data[i].id+"'>【"+data[i].typeName+"】"+data[i].title+"</a>");
+                $("#info").append("<a class='swiper-slide ep' style='height: 24px' href='/er/getTest.html?xid="+data[i].typeId+"&yid="+data[i].id+"'>【"+data[i].typeName+"】"+data[i].title+"</a><br>");
 
             }
                 },error:function(){

@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.SortconMapper">
     <select id="selectAll" resultMap="all">
-       select so.id as sid,so.name as sname,sc.id as cid,sc.name as cname,categoryName from sort as so,sortcon as sc,categorythree
+       select so.id as sid,so.name as sname,sc.sortconId as cid,sc.sortconName as cname,categoryName from sort as so,sortcon as sc,categorythree
        where so.id=sc.sortId and so.categorythreeId=categorythree.id
     <if test="name!=''and name!=null">
         and so.name  like CONCAT("%",#{name},"%")
@@ -21,7 +21,7 @@
            <result property="categoryName" column="categoryName"></result>
         </association>
         <collection property="sortcons" ofType="Sortcon">
-            <id property="cid" column="id"></id>
+            <id property="sortconid" column="cid"></id>
             <result property="sortconname" column="cname"></result>
         </collection>
 

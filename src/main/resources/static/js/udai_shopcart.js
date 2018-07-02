@@ -114,29 +114,23 @@ new Vue({
             this.delFlag = false;
 
         },
-        tijiao:function () {
+        enterPay: function () {
+            var _this = this;
+            _this.checkeItem = new Array();
+            // alert("使用之前集合长度："+_this.checkeItem.length);
+            this.productList.forEach(function (item) {
+                if (item.checked) {
+                    _this.checkeItem.push(item.productId);
+                }
+            });
 
-            var _this=this;
-
-             _this.picList=new Array();
-
-             _this.productList.forEach(function (item) {
-                  if(item.checked){
-
-                      _this.picList.push(item);
-                  }
-            })
-
-           /* _this.$http.post("/shop/daizhissss")*/
-
-            /*location.href="/shop/daizhi?zi="+_this.picList;*/
-            /*picList*/
-
-
-
-
+            var totalMoney = _this.totalMoney;
+            var checkeItem = _this.checkeItem;
+            //alert("需要结算的价钱：" +totalMoney+ "======" + "使用后集合长度：" + checkeItem[0]);
+            /* this.$router.push({name:'/shop/udai_shopcart_pay',
+                 params:{totalMoney:_this.totalMoney,checkeItem:checkeItem}});*/
+            window.location.href = '/shop/udai_shopcart_pay?totalMoney='+totalMoney+"&checkeItem="+checkeItem;
         }
-
 
 
 }

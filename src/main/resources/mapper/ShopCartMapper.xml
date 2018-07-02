@@ -27,37 +27,40 @@
 
 		SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
 
-		,productpic.picPath,product.productName FROM shoppingcart
+		,productpic.picPath,product.productName,sku.SKUcon FROM shoppingcart
 
 		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
 
-		LEFT  JOIN productpic ON shoppingcart.productId=productpic.id
+		LEFT  JOIN productpic ON shoppingcart.productId=productpic.tuid
 
 		LEFT  JOIN product ON shoppingcart.productId=product.productId  GROUP BY shoppingcart.id
 
 		ORDER BY shoppingcart.id DESC
 
-		/*	SELECT shoppingcart.id'主键id',shoppingcart.userId'用户id',shoppingcart.productId'商品id',shoppingcart.orderamount'商品数量',sku.price'商品价格'
 
-		,productpic.picPath'商品图片',product.productName'商品名称' FROM shoppingcart
-
-		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
-
-		LEFT  JOIN productpic ON shoppingcart.productId=productpic.id
-
-		LEFT  JOIN product ON shoppingcart.productId=product.productId  GROUP BY shoppingcart.id
-
-		 SELECT 	shoppingcart.id, userId, shoppingcart.productId, orderamount ,sku.SKUId,price,productName FROM ageless.shoppingcart
-        INNER JOIN sku ON shoppingcart.productId=sku.productId
-        INNER JOIN  product ON shoppingcart.productId=product.productId*/
-            <!--<if test="userId!=null and userId!=0">
-                and userId=#{userId}
-            </if>
-            <if test="SKUId!=null and SKUId!=0">
-                and SKUId=#{SKUId}
-            </if>-->
      </select>
      <delete id="delshop" parameterType="ShoppingCart" >
             DELETE FROM shoppingcart WHERE id = #{id}
 	 </delete>
+
+	<!--查询购物车中要进行结算的商品-->
+	<select id="queryShopChecked" resultType="ShoppingCart" parameterType="int">
+
+	SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
+
+		,productpic.picPath,product.productName,sku.SKUcon  FROM shoppingcart
+
+		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
+
+		LEFT  JOIN productpic ON shoppingcart.productId=productpic.tuid
+
+		LEFT  JOIN product ON shoppingcart.productId=product.productId
+			WHERE shoppingcart.productId in (#{ productId })
+		 GROUP BY shoppingcart.id
+
+		ORDER BY shoppingcart.id DESC
+
+
+     </select>
+
 </mapper>
