@@ -11,7 +11,7 @@ public interface ProductService {
 
     List<ProductPic> selectAllPicById(Integer id);
 
-    Sku selectSkuByCon(String skuCon);
+    Sku selectSkuByCon(String skuCon,Integer id);
 
     List<SkuOption> selectAllSkuoptionById(List<String> list);
 

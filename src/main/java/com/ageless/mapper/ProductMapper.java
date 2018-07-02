@@ -11,7 +11,7 @@ public interface ProductMapper {
 
      List<ProductPic> selectAllPicById(@Param("id") Integer id);
 
-     Sku selectSkuByCon(@Param("skuCon") String skuCon);
+     Sku selectSkuByCon(@Param("skuCon") String skuCon,@Param("id") Integer id);
 
      List<SkuOption> selectAllSkuoptionById(List<String> list);
 
