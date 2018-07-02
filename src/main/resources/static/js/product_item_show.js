@@ -41,12 +41,29 @@ function sku(q) {
     ProductShowRight(ary,id);
 }
 
-function add() {
+function add(canshu) {
     var skuId = $("#skuId").attr("name");
-    alert(skuId);
     var id = $("#right").attr("name");
-    alert(id);
     var shuliang = $("#shuliang").val();
-    alert(shuliang);
+    if (canshu == 'ljgm') {
+        window.location.href="/commodity/udai_shopcart_pay?id="+id+",skuid="+skuId+",shuliang=" + shuliang;
+    }else if (canshu == 'gwc') {
+        $.ajax({
+            type: "post",
+            url: "/shop/udai_shopcart.html",
+            data: {skuId:skuId,id:id},
+            /* dataType:"html",*/
+            success: function (data) {
+                if (data == 1){
+                    alert("加入成功！");
+                } else{
+                    alert("加入失败！");
+                }
+            }, error: function (data) {
+                alert("no");
+            }
+        });
+    }
+
 
 }

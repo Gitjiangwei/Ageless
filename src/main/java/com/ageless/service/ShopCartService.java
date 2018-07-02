@@ -1,6 +1,6 @@
 package com.ageless.service;
 
-import com.ageless.pojo.ShopCart;
+
 import com.ageless.pojo.ShoppingCart;
 
 import java.util.List;
@@ -12,14 +12,14 @@ public interface ShopCartService {
      * @param shoppingCart
      * @return
      */
-    int addShoppingCart(ShopCart shoppingCart);
+    int addShoppingCart(ShoppingCart shoppingCart);
     /**
      * 购物车查询
-     * @param id
+     * @param
      * @return
      */
 
-    public List<ShoppingCart> selshopAll(Integer id );
+    public List<ShoppingCart> selshopAll();
 
     /**
      *删除购物车商品
@@ -28,4 +28,6 @@ public interface ShopCartService {
      */
 
     public int delshop(Integer id );
+    public ShoppingCart queryShopChecked(Integer productId);
+
 }

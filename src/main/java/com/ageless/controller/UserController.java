@@ -6,12 +6,12 @@ import com.ageless.util.GetSMS;
 import com.ageless.util.MD5;
 import com.ageless.util.RandUtil;
 import com.alipay.api.internal.util.StringUtils;
-import com.qq.connect.QQConnectException;
+/*import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
 import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
-import com.qq.connect.oauth.Oauth;
+import com.qq.connect.oauth.Oauth;*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -287,11 +288,22 @@ public class UserController {
         User u= (User) session.getAttribute("user");
         Long  id=u.getId();//获取用户ID
         user.setId(id);
+        Date dateDate =user.getBirthday();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(dateDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = dateFormat.parse(dateString);
+            System.out.println(date.toLocaleString().split(" ")[0]);//切割掉不要的时分秒数据
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Map<String,Object> map=new HashMap<>();
         map.put("membership",user.getMembership());
         map.put("name",user.getName());
         map.put("sex",user.getSex());
-        map.put("birthday",user.getBirthday());
+        map.put("birthday",date.toLocaleString().split(" ")[0]);
         map.put("truename",user.getTruename());
         map.put("id",id);
         int x=userService.updateUser(map);
@@ -413,7 +425,7 @@ public class UserController {
      * @param request
      * @return
      * @throws QQConnectException
-     */
+     *//*
     @GetMapping("/authorizeUrl.html")
     public String authorizeUrl(HttpServletRequest request) {
         String authorizeUrl = null;
@@ -479,5 +491,5 @@ public class UserController {
             e.printStackTrace();
         }
         return "redirect:../../web/index";
-    }
+    }*/
 }

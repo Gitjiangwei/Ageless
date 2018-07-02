@@ -42,7 +42,7 @@
 <div class="bgf5 clearfix">
 	<div class="top-user">
 		<div class="inner">
-			<a class="logo" href="index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+			<a class="logo" href="/ageless/index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 			<div class="title">个人中心</div>
 		</div>
 	</div>
@@ -100,7 +100,7 @@
 						<label for="name" class="col-sm-2 control-label">收货人姓名：</label>
 						<div class="col-sm-6">
 
-							<input class="form-control" id="name"  name="consignee" placeholder="请输入姓名" type="text">
+							<input class="form-control" id="name"  name="consignee" placeholder="请输入姓名" maxlength="10" type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')">
 						</div>
 					</div>
 					<div class="form-group">
@@ -154,7 +154,7 @@
                                 <select name="area"></select>
                                 <select name="town"></select>
                             </div>-->
-							<input style="margin-top: 20px" class="form-control" id="details" name="details" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码等信息" maxlength="30" type="text">
+							<input style="margin-top: 20px" class="form-control" id="details" name="details" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码等信息" maxlength="30" type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')">
 						</div>
 					</div>
 					<!-- <div class="form-group">
@@ -164,9 +164,9 @@
                         </div>
                     </div> -->
 					<div class="form-group">
-						<label for="mobile" class="col-sm-2 control-label">手机号码：</label>
+						<label class="col-sm-2 control-label">手机号码：</label>
 						<div class="col-sm-6">
-							<input class="form-control" id="mobile" name="tel" placeholder="请输入手机号码" type="text">
+							<input class="form-control" id="tel" name="tel" placeholder="请输入手机号码" type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')">
 						</div>
 					</div>
 
@@ -213,10 +213,13 @@
                                 alert("请输入详细地址");
                                 return;
                             }
-                            if($("#mobile").val()==""){
-                                alert("请输入电话号码");
+                            if($("#tel").val()==""){
+                                alert("请输入手机号码");
                                 return;
-                            }
+                            }else if(!$("#tel").val().match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/)){
+                                alert("请输入正确的手机格式");
+                                return;
+							}
 
                             var a=$("input[type='checkbox']").is(':checked');
                             var state="";
@@ -233,7 +236,47 @@
                                 success:function (data) {
                                     if (data.add=="OK"){
                                         alert("添加成功");
-                                        window.location.href="/udai_address.html";
+                                        $.ajax({
+                                            type:'post',
+                                            url:'/showAdd',
+                                            dataType:'json',
+                                            success:function (data) {
+                                                var content="";
+                                                $.each(data,function (i,e) {
+                                                    if(e.state==0){
+                                                        content+="<div class=\"addr-item\">\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                            "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                            "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                            "\t\t\t\t\t\t\t\t<a onclick='sta("+e.id+','+e.nameId+")' class=\"default\">设为默认</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t</div>";
+                                                    }else if(e.state==1){
+                                                        content+="<div class=\"addr-item\">\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                            "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                            "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                            "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default active\">默认地址</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t</div>";
+                                                    }
+
+                                                })
+                                                $(".addr-list").html(content);
+                                            }
+                                        })
                                     } else if(data.add=="NO"){
                                         alert("添加失败");
                                     }
@@ -249,8 +292,48 @@
                                 dataType:'json',
                                 success:function (data) {
                                     if (data.sta=="OK"){
-                                        alert("设置默认地址成功");
-                                        window.location.href="/udai_address.html";
+
+                                        $.ajax({
+                                            type:'post',
+                                            url:'/showAdd',
+                                            dataType:'json',
+                                            success:function (data) {
+                                                var content="";
+                                                $.each(data,function (i,e) {
+                                                    if(e.state==0){
+                                                        content+="<div class=\"addr-item\">\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                            "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                            "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                            "\t\t\t\t\t\t\t\t<a onclick='sta("+e.id+','+e.nameId+")' class=\"default\">设为默认</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t</div>";
+                                                    }else if(e.state==1){
+                                                        content+="<div class=\"addr-item\">\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                            "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                            "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                            "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default active\">默认地址</a>\n" +
+                                                            "\t\t\t\t\t\t</div>\n" +
+                                                            "\t\t\t\t\t</div>";
+                                                    }
+
+                                                })
+                                                $(".addr-list").html(content);
+                                            }
+                                        })
                                     } else if(data.sta=="NO"){
                                         alert("设置默认地址失败");
                                     }
@@ -269,7 +352,47 @@
                                     success:function (data) {
                                         if (data.del=="OK"){
                                             alert("删除成功");
-                                            window.location.href="/udai_address.html";
+                                            $.ajax({
+                                                type:'post',
+                                                url:'/showAdd',
+                                                dataType:'json',
+                                                success:function (data) {
+                                                    var content="";
+                                                    $.each(data,function (i,e) {
+                                                        if(e.state==0){
+                                                            content+="<div class=\"addr-item\">\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                                "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                                "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                                "\t\t\t\t\t\t</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                                "\t\t\t\t\t\t\t\t<a onclick='sta("+e.id+','+e.nameId+")' class=\"default\">设为默认</a>\n" +
+                                                                "\t\t\t\t\t\t</div>\n" +
+                                                                "\t\t\t\t\t</div>";
+                                                        }else if(e.state==1){
+                                                            content+="<div class=\"addr-item\">\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">"+e.consignee+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf2 tdt-a_l\">"+e.province+e.city+e.area+e.street+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf3 tdt-a_l\">"+e.details+"</div>\n" +
+                                                                "\t\t\t\t\t\t<!-- <div class=\"tdf1\">350104</div> -->\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">"+e.tel+"</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1 order\">\n" +
+                                                                "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+e.id+"\">修改</a><a onclick=\"cct("+e.id+")\">删除</a>\n" +
+                                                                "\t\t\t\t\t\t</div>\n" +
+                                                                "\t\t\t\t\t\t<div class=\"tdf1\">\n" +
+                                                                "\t\t\t\t\t\t\t\t<a href=\"\" class=\"default active\">默认地址</a>\n" +
+                                                                "\t\t\t\t\t\t</div>\n" +
+                                                                "\t\t\t\t\t</div>";
+                                                        }
+
+                                                    })
+                                                    $(".addr-list").html(content);
+                                                }
+                                            })
                                         } else if(data.del=="NO"){
                                             alert("删除失败");
                                         }
@@ -404,7 +527,7 @@
 			</a>
 		</li>
 		<li class="r-toolbar-item">
-			<a href="udai_shopcart.html" class="r-item-hd">
+			<a href="/shop/shopcart.html" class="r-item-hd">
 				<i class="iconfont icon-cart"></i>
 				<div class="r-tip__box"><span class="r-tip-text">购物车</span></div>
 			</a>
