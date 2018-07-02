@@ -67,16 +67,23 @@
         </trim>
         where id=#{id}
     </update>
+
     <select id="selectAddress" resultType="Address" parameterType="java.lang.Long">
         SELECT  `id`,`nameId`,`consignee`,`tel`,`province`,
         `city`,`area`,`street`,`details`,`state`,`zipcode`
         FROM `address`
         WHERE id=#{id}
     </select>
+
     <update id="updatenameId" parameterType="java.lang.Long">
         UPDATE `ageless`.`address` SET  `state` = 0 WHERE `nameId` = #{nameId}
     </update>
+
     <update id="updateId" parameterType="java.lang.Long">
         UPDATE `ageless`.`address` SET  `state` = 1 WHERE `id` = #{id}
     </update>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM `ageless`.`address` WHERE nameId=#{nameId}
+    </select>
 </mapper>

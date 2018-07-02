@@ -33,4 +33,10 @@ public class SortServiceImpl implements SortService {
         PageHelper.startPage(pageIndex,4);
         return sortMapper.selectProduct(list,tiaojian);
     }
+
+    @Override
+    public List<Product> selectmohu(String mo, String tiaojian,Integer pageIndex) {
+        PageHelper.startPage(pageIndex,4);
+        return sortMapper.selectmohu(mo,tiaojian);
+    }
 }
