@@ -197,7 +197,6 @@
                             var area=$("#area").text();
                             var street=$("#street").text();
 
-                            alert(id+nameId);
                             if($("#name").val()==""){
                                 alert("请输入姓名");
                                 return;
@@ -303,7 +302,7 @@
                                 dataType:'json',
                                 success:function (data) {
                                     if (data.sta=="OK"){
-                                        alert("设置默认地址成功");
+
                                         $.ajax({
                                             type:'post',
                                             url:'/showAdd',
