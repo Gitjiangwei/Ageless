@@ -1,5 +1,6 @@
 package com.ageless.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,7 +14,9 @@ public class Product {
     private String descript;
     private String maidian;
     private Double price;
+    @JSONField(format="yyyy-MM-dd")
     private Date update;
+    @JSONField(format="yyyy-MM-dd")
     private Date downdate;
     private Integer status;
     private Integer kucun;
@@ -29,5 +32,6 @@ public class Product {
     private ProductPic productPic;
     private SkuOption skuOption;
     private SkuProperty skuProperty;
+    private List<ProductPic>  productpic;
 
 }
