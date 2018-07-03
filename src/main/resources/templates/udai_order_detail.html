@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/css/iconfont.css">
 	<link rel="stylesheet" href="/css/global.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/css/boo02tstrap-theme.min.css">
 	<link rel="stylesheet" href="/css/swiper.min.css">
 	<link rel="stylesheet" href="/css/styles.css">
 
@@ -84,20 +84,20 @@
 			</div>
 			<div class="pull-right" id="orders">
 				<div class="user-content__box clearfix bgf">
-					<div class="title">订单中心-订单2669901385864042</div>
+					<div class="title">订单中心-订单${item.number}</div>
 					<div class="order-info__box">
-						<div class="order-addr">收货地址：<span class="c6">喵喵喵，18759808122，福建省福州市五四路世界金龙大厦</span></div>
+						<div class="order-addr">收货地址：<span class="c6">${item.address}</span></div>
 						<div class="order-info">
 							订单信息
 							<table>
-								<tr>
-									<td>订单编号：5656565656565655656</td>
-									<td>支付宝交易号：20175215464616164616</td>
-									<td>创建时间：2017-09-20 08:05:45</td>
+								<tr><#setting date_format="dd-MM-yyyy">
+									<td>订单编号：${item.number}</td>
+									<td>支付宝交易号：<#if item.atch??>${item.atch}</#if></td>
+									<td>创建时间：${item.createDate?datetime}</td>
 								</tr>
 								<tr>
-									<td>付款时间：2017-09-20 08:15:45</td>
-									<td>成交时间：2017-09-20 08:25:45</td>
+									<td>付款时间：<#if item.payment_Time??>${item.payment_Time?datetime}</#if></td>
+									<td>成交时间：<#if item.transaction_Time??>${item.transaction_Time?datetime}</#if></td>
 									<td></td>
 								</tr>
 							</table>
@@ -112,21 +112,21 @@
 							<div class="tdf1">运费</div>
 						</div>
 						<div class="order-item__list">
-							<#list item as items>
+							<#list items as itemss>
 							<div class="item">
 								<div class="tdf3">
-									<a href="item_show.html"><div class="img"><img src="/images/temp/M-003.jpg" alt="" class="cover"></div>
-									<div class="ep2 c6">${items.descript}</div></a>
+									<a href="item_show.html"><div class="img"><img src="${itemss.picPath}" alt="" class="cover"></div>
+									<div class="ep2 c6">${itemss.order3}</div></a>
 									<div class="attr ep">颜色分类：<!--<span v-for="part in item.parts" v-text="part.partsName"></span>-->
 										尺码：<!--<span v-for="part in item.parts" v-text="part.partsType" ></span>--></div>
 								</div>
-								<div class="tdf1"><a href="order_evaluate.html">${items.status}</a><!-- 已确认收货 --></div>
-								<div class="tdf1">${items.orderNumber}</div>
-								<div class="tdf1">${items.price}</div>
+								<div class="tdf1"><a href="order_evaluate.html">${itemss.status}</a><!-- 已确认收货 --></div>
+								<div class="tdf1">${itemss.count}</div>
+								<div class="tdf1">${itemss.price}</div>
 								<div class="tdf2">
 									<div class="ep2">活动8折优惠<br>优惠：¥4.0</div>
 								</div>
-								<div class="tdf1">${items.price}</div>
+								<div class="tdf1">${itemss.price * itemss.count}</div>
 								<div class="tdf1">
 									<div class="ep2">快递<br>¥0.00</div>
 								</div>
@@ -135,8 +135,8 @@
 						</div>
 						<div class="price-total">
 							<div class="fz12 c9">使用优惠券【满￥20.0减￥2.0】优惠￥2.0元<br>快递运费 ￥0.0</div>
-							<div class="fz18 c6">实付款：<b class="cr">¥76.0</b></div>
-							<div class="fz12 c9">（本单可获 <span class="c6">380</span> 积分）</div>
+							<div class="fz18 c6">实付款：<b class="cr">¥${item.orderPrice}</b></div>
+							<div class="fz12 c9">（本单可获 <span class="c6">${item.orderPrice*0.1}</span> 积分）</div>
 						</div>
 					</div>
 				</div>
