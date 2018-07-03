@@ -104,7 +104,7 @@
             </foreach>
     </select>
 
-    <select id="selectSkuByCon" parameterType="String" resultType="com.ageless.pojo.Sku">
+    <select id="selectSkuByCon" resultType="com.ageless.pojo.Sku">
         SELECT 	SKUId,
             productId,
             SKUcon,
@@ -114,6 +114,8 @@
             ageless.sku
             WHERE
             SKUcon = #{skuCon}
+            and
+            productId = #{id}
     </select>
 
     <select id="selectAllPicById" parameterType="Integer" resultType="com.ageless.pojo.ProductPic">

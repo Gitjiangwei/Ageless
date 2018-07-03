@@ -2,6 +2,7 @@ package com.ageless.service;
 
 import com.ageless.pojo.Product;
 import com.ageless.pojo.Sort;
+import com.ageless.pojo.Sortcon;
 
 import java.util.List;
 
@@ -36,4 +37,12 @@ public interface SortService {
      * @return
      */
     List<Product> selectmohu(String mo,String tiaojian,Integer pageIndex);
+
+
+    /**
+     * 添加多条属性选项
+     * @param ls
+     * @return
+     */
+    int addSortcon(List<Sortcon> ls,Integer id);
 }

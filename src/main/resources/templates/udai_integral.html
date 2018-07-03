@@ -14,6 +14,8 @@
 	<script src="js/swiper.min.js" charset="UTF-8"></script>
 	<script src="js/global.js" charset="UTF-8"></script>
 	<script src="js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
+	<script src="js/jifen.js" charset="UTF-8"></script>
+	<script src="js/Integral.js" charset="UTF-8"></script>
 	<title>U袋网</title>
 </head>
 <body>
@@ -96,7 +98,11 @@
 					<div class="integral-box clearfix bgf5">
 						<div class="integral-total">
 							<div class="fz16">可用的积分</div>
-							<b class="num">888</b>
+							<b class="num" id="waka">
+
+							${list.integral}
+
+							</b>
 						</div>
 						<div class="integral-desc">
 							<b class="cr fz16">积分使用规则：</b><br>
@@ -114,7 +120,7 @@
 							<p class="fz18 cr">商品兑换</p>
 							<ul class="nav user-nav__title" role="tablist">
 								<li role="presentation" class="nav-item active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">全部</a></li>
-								<li role="presentation" class="nav-item "><a href="#usable" aria-controls="usable" role="tab" data-toggle="tab">可兑换</a></li>
+
 							</ul>
 							<div class="table-thead">
 								<div class="tdf3">商品信息</div>
@@ -124,113 +130,59 @@
 							</div>
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane fade in active" id="all">
-									<div class="integral-item__list">
+									<div class="integral-item__list" id="xuan" >
+
+
+
+									<#list selectProduct as p>
 										<div class="integral-item">
-											<div class="tdf3">
-												<a class="integral-item__info" href="">
-													<div class="img"><img src="images/temp/M-001.jpg" alt="" class="cover"></div>
-													<div class="name ep2">锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款</div>
-													<div class="type">颜色分类：深棕色 尺码：均码</div>
-												</a>
-											</div>
-											<div class="tdf2"><span class="c9">¥269.90</span></div>
-											<div class="tdf2"><span class="cr">500</span></div>
-											<div class="tdf1">
-												<a class="but" href="#" role="button">兑换</a>
-											</div>
-										</div>
-										<div class="integral-item">
-											<div class="tdf3">
-												<a class="integral-item__info" href="">
-													<div class="img"><img src="images/temp/M-002.jpg" alt="" class="cover"></div>
-													<div class="name ep2">霜天月明 原创日常汉服男云纹绣花单大氅传统礼服外套</div>
-													<div class="type">颜色分类：深棕色 尺码：均码</div>
-												</a>
-											</div>
-											<div class="tdf2"><span class="c9">¥1269.90</span></div>
-											<div class="tdf2"><span class="cr">2000</span></div>
-											<div class="tdf1">
-												<a class="but disabled" href="#" role="button">积分不够</a>
-											</div>
-										</div>
-										<div class="integral-item">
-											<div class="tdf3">
-												<a class="integral-item__info" href="">
-													<div class="img"><img src="images/temp/M-003.jpg" alt="" class="cover"></div>
-													<div class="name ep2">霜天月明 原创日常汉服男云纹绣花单大氅传统礼服外套</div>
-													<div class="type">颜色分类：深棕色 尺码：均码</div>
-												</a>
-											</div>
-											<div class="tdf2"><span class="c9">¥1269.90</span></div>
-											<div class="tdf2"><span class="cr">700</span></div>
-											<div class="tdf1">
-												<a class="but" href="#" role="button">兑换</a>
-											</div>
-										</div>
-										<div class="integral-item">
-											<div class="tdf3">
-												<a class="integral-item__info" href="">
-													<div class="img"><img src="images/temp/M-004.jpg" alt="" class="cover"></div>
-													<div class="name ep2">霜天月明 原创日常汉服男云纹绣花单大氅传统礼服外套</div>
-													<div class="type">颜色分类：深棕色 尺码：均码</div>
-												</a>
-											</div>
-											<div class="tdf2"><span class="c9">¥1269.90</span></div>
-											<div class="tdf2"><span class="cr">700</span></div>
-											<div class="tdf1">
-												<a class="but" href="#" role="button">兑换</a>
-											</div>
-										</div>
-										<div class="integral-item">
-											<div class="tdf3">
-												<a class="integral-item__info" href="">
-													<div class="img"><img src="images/temp/M-005.jpg" alt="" class="cover"></div>
-													<div class="name ep2">霜天月明 原创日常汉服男云纹绣花单大氅传统礼服外套</div>
-													<div class="type">颜色分类：深棕色 尺码：均码</div>
-												</a>
-											</div>
-											<div class="tdf2"><span class="c9">¥1269.90</span></div>
-											<div class="tdf2"><span class="cr">700</span></div>
-											<div class="tdf1">
-												<a class="but" href="#" role="button">兑换</a>
-											</div>
-										</div>
-										<div class="integral-item">
+
 											<div class="tdf3">
 												<a class="integral-item__info" href="">
 													<div class="img"><img src="images/temp/M-006.jpg" alt="" class="cover"></div>
-													<div class="name ep2">霜天月明 原创日常汉服男云纹绣花单大氅传统礼服外套</div>
+													<div class="name ep2">${p.productName}</div>
 													<div class="type">颜色分类：深棕色 尺码：均码</div>
 												</a>
 											</div>
-											<div class="tdf2"><span class="c9">¥1269.90</span></div>
-											<div class="tdf2"><span class="cr">700</span></div>
+											<div class="tdf2"><span class="c9">${p.price}</span></div>
+											<div class="tdf2"><span class="cr" name="">${p.price*0.1}</span></div>
+											<#if 	(list.integral?number >= (p.price * 0.1))  >
 											<div class="tdf1">
-												<a class="but" href="#" role="button">兑换</a>
+												<a class="but" href="#" role="button" onclick="lll( ${p.price*0.1} )">兑换</a>
 											</div>
+										   </#if>
+										<#if 	(list.integral?number < (p.price * 0.1)) >
+										<div class="tdf1">
+											<a class="but disabled" href="#" role="button">积分不够</a>
 										</div>
-										<div class="integral-item">
-											<div class="tdf3">
-												<a class="integral-item__info" href="">
-													<div class="img"><img src="images/temp/M-007.jpg" alt="" class="cover"></div>
-													<div class="name ep2">霜天月明 原创日常汉服男云纹绣花单大氅传统礼服外套</div>
-													<div class="type">颜色分类：深棕色 尺码：均码</div>
-												</a>
-											</div>
-											<div class="tdf2"><span class="c9">¥1269.90</span></div>
-											<div class="tdf2"><span class="cr">700</span></div>
-											<div class="tdf1">
-												<a class="but" href="#" role="button">兑换</a>
-											</div>
+											</#if>
+
 										</div>
-									</div>
-									<div class="page text-right clearfix">
-										<a class="disabled">上一页</a>
-										<a class="select">1</a>
-										<a href="">2</a>
-										<a href="">3</a>
-										<a class="" href="">下一页</a>
-									</div>
+									</#list>
+
+
+
+										<div class="page text-right clearfix">
+
+
+
+											<a href=" javascript:" <#if (pageIndex-1>0)>onclick="ss(${pageIndex-1})"  </#if>  >上一页</a>
+
+											<a href="javascript:"   <#if (pageIndex < pageCount) >onclick="ss(${pageIndex+1})"  </#if>>下一页</a>
+
+
+
+				                   </span>
+			                        </div>
+
+
+
+
+
+</section>
+
+
+	</div>
 								</div>
 								<div role="tabpanel" class="tab-pane fade" id="usable">
 									<div class="integral-item__list">

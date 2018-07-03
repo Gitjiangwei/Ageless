@@ -59,4 +59,11 @@ public interface AddressMapper {
      */
     Integer updateId(Long id);
 
+    /**
+     * 根据nameId查询该用户共有几条数据
+     * @param nameId
+     * @return
+     */
+    Integer count(Long nameId);
+
 }

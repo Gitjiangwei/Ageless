@@ -28,4 +28,11 @@ public interface SortconMapper {
      * @return
      */
     public int delSortcon(@Param("id")Integer id);
+
+    /**
+     *
+     * @param s
+     * @return
+     */
+    public int add(Sort s);
 }

@@ -26,8 +26,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Sku selectSkuByCon(String skuCon) {
-        return mapper.selectSkuByCon(skuCon);
+    public Sku selectSkuByCon(String skuCon,Integer id) {
+        return mapper.selectSkuByCon(skuCon,id);
     }
 
     @Override

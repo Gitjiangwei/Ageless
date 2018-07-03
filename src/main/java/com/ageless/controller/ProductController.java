@@ -129,12 +129,13 @@ public class ProductController {
         }
         StringBuffer skucon2 = new StringBuffer();
         Integer emm = 0;
+        System.out.println(thefirst);
         for (SkuProperty skupro:properties) {
             System.out.println("------skuproId:"+skupro.getId() + "-------------thefirst"+thefirst.get(emm)+"-----------------------------");
             skucon2.append(skupro.getId() + ":" + thefirst.get(emm) + ",");
             emm ++;
         }
-        Sku sku = service.selectSkuByCon(skucon2.toString());
+        Sku sku = service.selectSkuByCon(skucon2.toString(),id);
         modelAndView.addObject("options",options);
         modelAndView.addObject("properties",properties);
         modelAndView.addObject("product",product);

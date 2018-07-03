@@ -35,4 +35,12 @@
     <delete id="delSortcon" parameterType="java.lang.Integer">
         delete from sortcon where id=#{id}
     </delete>
+
+    <insert id="add" >
+        <selectKey  keyProperty="id" resultType="int" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+       insert into sort(name,categorythreeId) VALUES(#{name},#{categorythreeId});
+
+    </insert>
 </mapper>
