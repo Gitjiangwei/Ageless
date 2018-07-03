@@ -1,49 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.OrderMapper">
+    <!--java.lang.String-->
+<select id="all" resultType="Order" >
+    SELECT  DISTINCT order.id,createDate,`number`,productpic.picPath,product.descript,product.price,order.orderNumber,order.order_price,order_status.status
+FROM ageless.order
+INNER JOIN order_status ON ageless.order.OrderStatus=order_status.id
+INNER JOIN product ON ageless.order.productid=product.id
+INNER JOIN productpic ON ageless.order.productid=productpic.productId   WHERE 1=1
 
-        <select id="all" resultType="Order" >
-            SELECT  DISTINCT order.id,createDate,`number`,productpic.picPath,product.descript,sku.price,order.orderNumber,order.order_price,order_status.status
-            FROM ageless.order
-            INNER JOIN order_status ON ageless.order.OrderStatus=order_status.id
-            INNER JOIN product ON ageless.order.productid=product.id
-            INNER JOIN ageless.order_details ON ageless.order_details.oid=order.id
-            INNER JOIN productpic ON ageless.order.productid=productpic.productId
-            INNER JOIN sku ON sku.SKUId=order_details.skuId
-            LEFT JOIN skuoption ON skuoption.productId=order_details.shipid   WHERE 1=1
-            <if test="status!=null and status!=''">
-                and order_status.status=#{status}
-
-            </if>
-            GROUP BY order.id
-        </select>
-
-        <delete id="delOrder" parameterType="Order"  >
-            DELETE FROM ageless.order WHERE id = #{id}
-        </delete>
-         
-    
-    
-        <select id="order_details" resultType="Order">
-            SELECT  order.id,createDate,`number`,atch,CONCAT(consignee,",",tel,",",address.province,address.city,`area`,street,details) AS address,payment_Time,transaction_Time,order_price
-            FROM ageless.order
-            INNER JOIN ageless.address ON ageless.address.id=order.addressid
-            INNER JOIN ageless.order_details ON ageless.order_details.oid=order.id
-            WHERE order.id=#{id} GROUP BY number
-        </select>
-
-       <select id="order_product" resultType="Order">
-            SELECT  order_status.`status`,productName AS order3,picPath,sku.price ,`count`
-            FROM ageless.order
-            INNER JOIN ageless.address ON ageless.address.id=order.addressid
-            INNER JOIN ageless.order_details ON ageless.order_details.oid=order.id
-            INNER JOIN order_status  ON ageless.order.OrderStatus=order_status.id
-            INNER JOIN product ON ageless.product.id=order_details.shipid
-            INNER JOIN productpic ON productpic.productId=product.id
-            INNER JOIN sku ON sku.SKUId=order_details.skuId
-            LEFT JOIN skuoption ON skuoption.productId=order_details.shipid
-            WHERE order.id=#{id}
-            GROUP BY productpic.productId
-
-       </select>
+    <if test="status!=null and status!=''">
+        and order_status.status=#{status}
+    </if>
+    <if test="id!=null and id!=0">
+        and order.id=#{id}
+    </if>
+</select>
 </mapper>

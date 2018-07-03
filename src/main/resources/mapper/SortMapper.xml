@@ -93,4 +93,15 @@
             ORDER BY ${tiaojian} DESC
         </if>
     </select>
+
+    <insert id="addSortcon" >
+
+        insert into sortcon(sortconName,sortId) values
+        <foreach collection="list" separator="," item="item">
+            (#{item.sortconname},#{id})
+
+
+        </foreach>
+
+    </insert>
 </mapper>
