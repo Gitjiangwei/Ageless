@@ -18,26 +18,39 @@ import java.util.List;
 public class OrderController {
     @Resource
     private OrderService orderService;
+
+    //进入商品页面
     @RequestMapping("/show")
     public String show(){
         return "udai_order";
     }
 
+    //查询所有订单
     @RequestMapping("/all")
     @ResponseBody
     public Object all(@RequestParam(required = false) String status,
-                      @RequestParam(required = false)Integer id){
-        List<Order> all = orderService.all(status,id);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+JSON.toJSONString(all));
-        return JSON.toJSONString(all);
+        @RequestParam(required = false)Integer id){
+            List<Order> all = orderService.all(status,id);
+            return JSON.toJSONString(all);
+        }
+        //查看订单详情
+        @GetMapping("/udai_order_detail.html")
+        public String udaishop(Model model, @RequestParam(required = false) String status,
+                @RequestParam(required = false)Integer id) {
+            Order address=orderService.order_details(id);
+            List<Order> allProduct=orderService.order_product(id);
+            model.addAttribute("item",address);
+            model.addAttribute("items",allProduct);
+            return "udai_order_detail";
+        }
+
+        //订单取消（删除）
+        @RequestMapping("/delorder")
+        @ResponseBody
+        public Object  delorder(Integer delid){
+            int delOrd=orderService.delOrder(delid);
+            Object json=JSON.toJSON(delOrd);
+            return json;
     }
 
-    @GetMapping("/udai_order_detail.html")
-    public String udaishop(Model model, @RequestParam(required = false) String status,
-                           @RequestParam(required = false)Integer id) {
-        List<Order> allOrder=orderService.all(null,id);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!"+allOrder);
-        model.addAttribute("item",allOrder);
-        return "udai_order_detail";
-    }
 }

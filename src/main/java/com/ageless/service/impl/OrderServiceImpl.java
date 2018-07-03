@@ -16,4 +16,19 @@ public class OrderServiceImpl implements OrderService{
         return orderMapper.all(status, id);
     }
 
+    @Override
+    public int delOrder(Integer id) {
+        return orderMapper.delOrder(id);
+    }
+
+    @Override
+    public Order order_details(Integer id) {
+        return orderMapper.order_details(id);
+    }
+
+    @Override
+    public List<Order> order_product(Integer id) {
+        return orderMapper.order_product(id);
+    }
+
 }
