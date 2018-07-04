@@ -1,0 +1,133 @@
+package com.ageless.controller;
+
+import com.ageless.pojo.Order;
+import com.ageless.pojo.SkuOption;
+import com.ageless.pojo.SkuProperty;
+import com.ageless.service.OrderService;
+import com.ageless.service.ProductService;
+import com.alibaba.fastjson.JSON;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+@RequestMapping(value="/Order")
+public class OrderController {
+    @Resource
+    private OrderService orderService;
+
+    @Resource
+    private ProductService productService;
+
+    //进入商品页面
+    @RequestMapping("/show")
+    public String show(){
+        return "udai_order";
+    }
+
+    //查询所有订单
+    @RequestMapping("/all")
+    @ResponseBody
+    public Object all(@RequestParam(required = false) String status,
+        @RequestParam(required = false)Integer id){
+            List<Order> all = orderService.all(status,id);
+        for (int i=0;i<all.size();i++){
+            String skuNum= all.get(i).getSkuCon();
+            String s=skuString(skuNum);
+            all.get(i).setSkuCons(s);
+        }
+            return JSON.toJSONString(all);
+        }
+        //查看订单详情
+        @GetMapping("/udai_order_detail.html")
+        public String udaishop(Model model, @RequestParam(required = false) String status,
+                @RequestParam(required = false)Integer id) {
+            Order address=orderService.order_details(id);
+            List<Order> allProduct=orderService.order_product(id);
+            for (int i=0;i<allProduct.size();i++){
+               String skuNum= allProduct.get(i).getSkuCon();
+                System.out.println(skuNum+"-*******************************************");
+               String s=skuString(skuNum);
+               allProduct.get(i).setSkuCons(s);
+            }
+            for (Order v:allProduct
+                 ) {
+                System.out.println(v.getSkuCons()+"-*******************************************");
+            }
+            model.addAttribute("item",address);
+            model.addAttribute("items",allProduct);
+            return "udai_order_detail";
+        }
+
+        //订单取消（删除）
+        @RequestMapping("/delorder")
+        @ResponseBody
+        public Object  delorder(Integer delid){
+            int delOrd=orderService.delOrder(delid);
+            Object json=JSON.toJSON(delOrd);
+            return json;
+    }
+
+    public String skuString(String skuCon){
+        StringBuffer sku = new StringBuffer();
+        String substring = skuCon.substring(0, skuCon.length()-1);//截取最后一个
+        System.out.println(substring);
+        String[] split = substring.split(",");//以逗号分割
+        Integer len = split.length;
+        List<String> skuPropertyIds = new ArrayList<>();
+        List<String> skuOptionIds = new ArrayList<>();
+        for (String string2 : split) {
+            int q = 0;
+            for(int i=0;i<string2.length();i++) {
+                if(string2.indexOf(":", i)!=-1){
+                    q++;
+                }
+            }
+            String skucon1 = string2.substring(q,string2.length());
+            String skucon2 = string2.substring(0,q-1);
+
+            if (!skuOptionIds.contains(skucon1)){
+                skuOptionIds.add(skucon1);
+            }
+            if (!skuPropertyIds.contains(skucon2)){
+                skuPropertyIds.add(skucon2);
+            }
+        }
+        //service是：
+        //  @Resource
+        //  private ProductService service;
+        List<SkuProperty> properties = productService.selectAllSkupropertyByIds(skuPropertyIds);
+        List<SkuOption> options = productService.selectAllSkuoptionById(skuOptionIds);
+        for (String string2 : split) {
+            int q = 0;
+            for(int j=0;j<string2.length();j++) {
+                if(string2.indexOf(":", j)!=-1){
+                    q++;
+                }
+            }
+            String skucon1 = string2.substring(q,string2.length());
+            String skucon2 = string2.substring(0,q-1);
+            for (SkuProperty property:properties) {
+                if (Integer.parseInt(skucon2) == property.getId()){
+                    sku.append(property.getPropertyName()+":");
+                }
+            }
+            for (SkuOption option:options) {
+                if (Integer.parseInt(skucon1) == option.getId()){
+                    sku.append(option.getOptionName()+",");
+                }
+            }
+        }
+        String skus = sku.toString().substring(0, sku.length()-1);//截取最后一个
+        return skus;
+    }
+
+}
