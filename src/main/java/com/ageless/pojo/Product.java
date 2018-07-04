@@ -3,7 +3,6 @@ package com.ageless.pojo;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 public class Product {
@@ -30,4 +29,30 @@ public class Product {
     private SkuOption skuOption;
     private SkuProperty skuProperty;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productId='" + productId + '\'' +
+                ", productName='" + productName + '\'' +
+                ", descript='" + descript + '\'' +
+                ", maidian='" + maidian + '\'' +
+                ", price=" + price +
+                ", update=" + update +
+                ", downdate=" + downdate +
+                ", status=" + status +
+                ", kucun=" + kucun +
+                ", xiaoliang=" + xiaoliang +
+                ", comment=" + comment +
+                ", sendScore=" + sendScore +
+                ", category01=" + category01 +
+                ", category02='" + category02 + '\'' +
+                ", category03='" + category03 + '\'' +
+                ", sortId='" + sortId + '\'' +
+                ", sortConId='" + sortConId + '\'' +
+                ", productPic=" + productPic +
+                ", skuOption=" + skuOption +
+                ", skuProperty=" + skuProperty +
+                '}';
+    }
 }

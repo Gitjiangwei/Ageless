@@ -155,4 +155,11 @@
 		</association>
 	</resultMap>
 
+	<insert id="addPic">
+		INSERT INTO `productpic` (`picPath`, `productId`) VALUES
+		<foreach collection="list" separator="," item="item">
+			(#{item},#{productId})
+		</foreach>
+	</insert>
+
 </mapper>

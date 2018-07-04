@@ -1,22 +1,17 @@
 package com.ageless.controller;
 
-import com.ageless.mapper.CategoryOneMapper;
 import com.ageless.pojo.CategoryOne;
-import com.ageless.pojo.CategoryThree;
 import com.ageless.pojo.Sort;
-import com.ageless.pojo.Sortcon;
+import com.ageless.service.CategoryOneService;
+import com.ageless.service.SortService;
 import com.ageless.service.SortconService;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/sort")
@@ -24,7 +19,9 @@ public class SortconController {
     @Autowired
     private SortconService sortconService;
     @Autowired
-    private CategoryOneMapper categoryOneMapper;
+    private CategoryOneService categoryOneService;
+    @Autowired
+    private SortService sortService;
 
     @RequestMapping(value = "/sortcon")
     public String selectAll(@RequestParam(required = false) String name,@RequestParam(required = false)String categoryName,
@@ -34,14 +31,23 @@ public class SortconController {
             name=null;
         }
 
-        List<CategoryOne> lg=categoryOneMapper.Onelist(categoryName);
+        List<CategoryOne> lg=categoryOneService.Onelist(categoryName);
         List<Sort> ls= sortconService.selectAll(name,categoryThree);
         session.setAttribute("category",lg);
 
 
         session.setAttribute("lis",ls);
-        System.out.print("-----------"+ls);
+        System.out.println("-----------"+ls);
         return "/management/sortcon";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/selects")
+    public Object selects(@RequestParam(required = false)Integer categoryThree){
+        List<Sort> ls= sortconService.selectAll(null,categoryThree);
+        System.out.println(ls.get(0).getSortcons());
+        Object ob = JSONArray.toJSONString(ls);
+        return ob;
     }
 
     @RequestMapping(value = "/sortcon",method = RequestMethod.POST)
@@ -52,13 +58,13 @@ public class SortconController {
             name=null;
         }
 
-        List<CategoryOne> lg=categoryOneMapper.Onelist(categoryName);
+        List<CategoryOne> lg=categoryOneService.Onelist(categoryName);
         List<Sort> ls= sortconService.selectAll(name,categoryThree);
         session.setAttribute("category",lg);
 
 
         session.setAttribute("lis",ls);
-        System.out.print("-----------"+ls);
+        System.out.println("-----------"+ls);
         return "/management/sortcon";
     }
 @RequestMapping(value = "/del")
@@ -78,9 +84,24 @@ public class SortconController {
     }
 @RequestMapping(value = "/add")
 @ResponseBody
-  public Object add(@RequestBody Object obj){
+  public Object add(@RequestBody Sort[] sort){
 
-        return "";
+
+    int result=0;
+     for(int i=0;i<sort.length;i++){
+         Sort sort1=new Sort();
+         sort1.setName(sort[i].getName());
+         sort1.setCategorythreeId(sort[i].getCategorythreeId());
+         int  sortId=sortconService.add(sort1);
+         System.out.println(sort1.getId());
+         result=sortService.addSortcon(sort[i].getSortcons(),sort1.getId());
+     }
+     if(result>0){
+         return "true";
+     }else{
+         return "error";
+     }
+
   }
 }
 

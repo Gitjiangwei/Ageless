@@ -1,6 +1,5 @@
 package com.ageless.mapper;
 
-import com.ageless.pojo.Product;
 import com.ageless.pojo.ProductAndPic;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,4 +30,10 @@ public interface ProductAndPicMapper {
      * 最新商品按条件查询
      */
     public List<ProductAndPic> listbyupdate(@Param("up")String upda);
+    public List<ProductAndPic> listbyupdate(@Param("up")String upda,@Param("xiao") String xiaos);
+
+    /**
+     * 新增商品图片
+     */
+    int addPic(@Param("list") List<String> lp,@Param("productId")Integer productId);
 }

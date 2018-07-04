@@ -1,7 +1,6 @@
 package com.ageless.service.impl;
 
 import com.ageless.mapper.ProductAndPicMapper;
-import com.ageless.pojo.Product;
 import com.ageless.pojo.ProductAndPic;
 import com.ageless.service.ProductAndPicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +33,10 @@ public class ProductAndPicServiceImpl implements ProductAndPicService {
     @Override
     public List<ProductAndPic> listbyupdate(String upda) {
         return productMapper.listbyupdate(upda);
+    }
+
+    @Override
+    public int addPic(List<String> lp, Integer productId) {
+        return productMapper.addPic(lp,productId);
     }
 }

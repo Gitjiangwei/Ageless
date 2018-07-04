@@ -1,5 +1,6 @@
 package com.ageless.service.impl;
 
+import com.ageless.mapper.SortMapper;
 import com.ageless.mapper.SortconMapper;
 import com.ageless.pojo.Sort;
 import com.ageless.service.SortconService;
@@ -39,5 +40,12 @@ public class SortconServiceImpl implements SortconService {
             falg=true;
         }
         return falg;
+    }
+
+    @Override
+    public int add(Sort s) {
+
+
+        return  sortconMapper.add(s);
     }
 }

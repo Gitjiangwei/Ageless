@@ -140,4 +140,28 @@
             where
             productId = #{id}
     </select>
+
+    <insert id="add" parameterType="Product">
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        INSERT INTO `product` (`productId`, `productName`, `descript`,maidian, `update`, `downdate`, `status`, `kucun`, `xiaoliang`, `comment`, `sendScore`, `category01`, `category02`, `category03`, sortId , sortconId)
+        VALUES (#{productId},
+        #{productName},
+        #{descript},
+        #{maidian},
+        #{update},
+        #{downdate},
+        #{status},
+        #{kucun},
+        #{xiaoliang},
+        #{comment},
+        #{sendScore},
+        #{category01},
+        #{category02},
+        #{category03},
+        #{sortId},
+        #{sortConId}
+        )
+    </insert>
 </mapper>

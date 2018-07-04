@@ -27,4 +27,11 @@ public interface SortconService {
      * @return
      */
     public Boolean delSortcon(Integer id);
+
+    /**
+     * 返回添加属性的主键
+     * @param s
+     * @return
+     */
+    public int add(Sort s);
 }
