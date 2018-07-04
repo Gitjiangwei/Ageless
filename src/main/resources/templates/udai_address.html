@@ -191,6 +191,9 @@
                             var area=$("#area").text();
                             var street=$("#street").text();
 
+                            var ds_area = $("#ds_area").text();
+                            var ds_town = $("#ds_town").text();
+
                             if($("#name").val()==""){
                                 alert("请输入姓名");
                                 return;
@@ -202,6 +205,12 @@
                             if(city=="请选择"){
                                 alert("请选择市");
                                 return;
+                            }
+                            if(ds_area==""){
+                                area="";
+                            }
+                            if(ds_town==""){
+                                street="";
                             }
                             if(area=="请选择"){
                                 area="";
@@ -454,7 +463,7 @@
 					<div class="tdf2">所在地</div>
 					<div class="tdf3"><div class="tdt-a_l">详细地址</div></div>
 					<!-- <div class="tdf1">邮编</div> -->
-					<div class="tdf1">电话/手机</div>
+					<div class="tdf1">手机号</div>
 					<div class="tdf1">操作</div>
 					<div class="tdf1"></div>
 				</div>
