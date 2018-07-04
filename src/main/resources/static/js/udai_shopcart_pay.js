@@ -58,7 +58,7 @@ new Vue({
             var _this=this;
             this.$http.get("/shop/getTotalMoney").then(function (json) {
                 _this.totalMoney=json.data;
-                alert(_this.totalMoney);
+               /* alert(_this.totalMoney);*/
                /* _this.productList=json.data;
                 for (var i =0;i<json.data.length;i++){
                     _this.picPathList=json.data[i].picPath;
