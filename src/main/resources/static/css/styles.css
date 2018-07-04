@@ -479,7 +479,7 @@ body {overflow-y: scroll}
 /* 楼层样式 */
 .floor-nav {
 	z-index: 100;
-	width: 120px;
+	width: 85px;
 	padding: 10px;
 	position: absolute;
 }
