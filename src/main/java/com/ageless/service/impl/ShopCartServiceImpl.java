@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ShopCartServiceImpl implements ShopCartService {
+public class ShopCartServiceImpl implements ShopCartService{
     @Autowired
     private ShopCartMapper shoppingCartMapper;
     @Override
@@ -34,6 +34,10 @@ public class ShopCartServiceImpl implements ShopCartService {
         return shoppingCartMapper.queryShopChecked(productId);
     }
 
+    @Override
+    public int repairNumberById(ShoppingCart shoppingCart) {
+        return shoppingCartMapper.repairNumberById(shoppingCart);
+    }
 
 
 }

@@ -8,8 +8,9 @@ new Vue({
         delFlag: false,
         delId:0,
         delRessult:0,
-        picPathList:"",
+       /* picPathList:"",*/
         picList:new Array(),
+        jiuitem:[],
     },
     filters:{
       /*  formatMoney: function (value) {
@@ -20,18 +21,18 @@ new Vue({
         this.$nextTick(function () {
             this.cartView();
         })
-
     },
     methods:{
         cartView:function () {
             var _this=this;
             this.$http.get("/shop/selshopAll").then(function (json) {
-                alert(json.data.length);
+               /* alert("nihao a ");
+                alert(json.data.length);*/
                 _this.productList=json.data;
-                 for (var i =0;i<json.data.length;i++){
+                /* for (var i =0;i<json.data.length;i++){
                      _this.picPathList=json.data[i].picPath;
-                    /* alert(json.data[i].picPath);*/
-                 }
+                    /!* alert(json.data[i].picPath);*!/
+                 }*/
 
 
             });
@@ -41,6 +42,7 @@ new Vue({
             //alert(product.productQuentity);
             if (way>0){
                 product.orderamount++;
+
             }else{
                 product.orderamount--;
                 if(product.orderamount<1){
@@ -117,19 +119,22 @@ new Vue({
         enterPay: function () {
             var _this = this;
             _this.checkeItem = new Array();
+
             // alert("使用之前集合长度："+_this.checkeItem.length);
             this.productList.forEach(function (item) {
                 if (item.checked) {
-                    _this.checkeItem.push(item.productId);
+                    _this.checkeItem.push(item.id);
+                    _this.jiuitem.push(item.orderamount);
+                    alert(item.orderamount);
                 }
             });
-
+            var xinitem=_this.jiuitem;
             var totalMoney = _this.totalMoney;
             var checkeItem = _this.checkeItem;
             //alert("需要结算的价钱：" +totalMoney+ "======" + "使用后集合长度：" + checkeItem[0]);
             /* this.$router.push({name:'/shop/udai_shopcart_pay',
                  params:{totalMoney:_this.totalMoney,checkeItem:checkeItem}});*/
-            window.location.href = '/shop/udai_shopcart_pay?totalMoney='+totalMoney+"&checkeItem="+checkeItem;
+            window.location.href = '/shop/udai_shopcart_pay?totalMoney='+totalMoney+"&checkeItem="+checkeItem+"&xinitem="+xinitem;
         }
 
 
