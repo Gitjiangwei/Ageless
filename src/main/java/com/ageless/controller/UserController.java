@@ -158,6 +158,12 @@ public class UserController {
      */
     @GetMapping("/item_category.html")
     public String item_category() { return "item_category"; }
+    /**
+     * 地址
+     * @return
+     */
+    @GetMapping("/udai_shopcart_pay.html")
+    public String udai_shopcart_pay() { return "udai_shopcart_pay"; }
 
     /**
      * 首页

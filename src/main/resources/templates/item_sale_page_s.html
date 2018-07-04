@@ -27,7 +27,7 @@
 <a onclick="index(${i})">${i}</a>
 </#list>
 
-    <#if (pageindex<countpage)>
+    <#if (pageindex< countpage)>
     <a onclick="index(${pageindex+1})">下一页</a>
     </#if>
     <a class="disabled">${pageindex}/${countpage}页</a>

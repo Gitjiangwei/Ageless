@@ -2,6 +2,7 @@ package com.ageless.mapper;
 
 import com.ageless.pojo.Product;
 import com.ageless.pojo.Sort;
+import com.ageless.pojo.Sortcon;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -24,4 +25,22 @@ public interface SortMapper {
      * @return
      */
     List<Product> selectProduct(@Param("list") List<Integer> list,@Param("tiaojian")String tiaojian);
+
+    /**
+     * 根据三级下面的内容
+     * 根据价格，评论，销量
+     * 查询相对应的商品信息
+     * @param mo 模糊差的字符串
+     * @param tiaojian 传过来的字符串
+     * @return
+     */
+    List<Product> selectmohu(@Param("mo")String mo,@Param("tiaojian")String tiaojian);
+
+    /**
+     * 添加多条属性选项
+     * @param ls
+     * @return
+     */
+    int addSortcon(@Param("list") List<Sortcon> ls,@Param("id")Integer sortId);
+
 }

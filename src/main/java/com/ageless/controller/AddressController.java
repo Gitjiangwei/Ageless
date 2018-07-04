@@ -69,16 +69,24 @@ public class AddressController {
         /*Long userId= Long.valueOf(1);//用户Id*/
         address.setNameId(userId);
         System.out.println(address.toString());
-        if(address.getState()==1){
-            addressService.updatenameId(address.getNameId());
-        }
-        Integer i=addressService.insertAddress(address);
+
+
+        Integer count=addressService.count(address.getNameId());
         Object obj="";
-        if(i>0){
-            obj= "{\"add\":\"OK\"}";
+        if(count<6){
+            if(address.getState()==1){
+                addressService.updatenameId(address.getNameId());
+            }
+            Integer i=addressService.insertAddress(address);
+            if(i>0){
+                obj= "{\"add\":\"OK\"}";
+            }else{
+                obj= "{\"add\":\"NO\"}";
+            }
         }else{
-            obj= "{\"add\":\"NO\"}";
+            obj= "{\"add\":\"DOT\"}";
         }
+
         return obj;
     }
 

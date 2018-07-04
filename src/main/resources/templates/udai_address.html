@@ -279,7 +279,9 @@
                                         })
                                     } else if(data.add=="NO"){
                                         alert("添加失败");
-                                    }
+                                    }else{
+                                        alert("地址上线为6条，不可添加！");
+									}
                                 }
                             })
                         });
@@ -292,7 +294,7 @@
                                 dataType:'json',
                                 success:function (data) {
                                     if (data.sta=="OK"){
-                                        alert("设置默认地址成功");
+
                                         $.ajax({
                                             type:'post',
                                             url:'/showAdd',
