@@ -48,6 +48,34 @@ public class ProductAreaController  {
             return modelAndView;
         }
 
+    @RequestMapping("/proupdate.html")
+    public String proupdate( String up,Model model,@RequestParam(defaultValue ="1") int pageindex){
+        PageHelper.startPage(pageindex,4,true);
+        List<ProductAndPic> list= productAndPicService.listbyupdate(up);
+        PageInfo info=new PageInfo(list);
+        int countpage= info.getPages();
+        model.addAttribute("list1",list);
+        model.addAttribute("pageindex",pageindex);
+        model.addAttribute("countpage",countpage);
+        return "item_sale_page_new";
+    }
+
+
+    @RequestMapping("/probyupdate.html")
+    @ResponseBody
+    public ModelAndView probyupdate(String up, Model model, @RequestParam(defaultValue ="1") int pageindex){
+        ModelAndView modelAndView=new ModelAndView();
+        PageHelper.startPage(pageindex,4,true);
+        List<ProductAndPic> list= productAndPicService.listbyupdate(up);
+        PageInfo info=new PageInfo(list);
+        int countpage= info.getPages();
+        System.out.println(countpage);
+        model.addAttribute("list1",list);
+        modelAndView.setViewName("item_sale_page_new_s");
+        model.addAttribute("pageindex",pageindex);
+        model.addAttribute("countpage",countpage);
+        return modelAndView;
+    }
 
 
 }

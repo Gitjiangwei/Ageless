@@ -2,25 +2,40 @@ package com.ageless.controller;
 
 
 import com.ageless.pojo.*;
+import com.ageless.service.ProductAndPicService;
 import com.ageless.service.ProductService;
+import com.ageless.service.SkuService;
+import com.ageless.util.HttpServletRequestUtil;
+import com.ageless.util.UploadUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/commodity")
 public class ProductController {
 
+    private static final SimpleDateFormat sDateFormat = new SimpleDateFormat(
+            "yyyyMMdd");// 时间
+    private static final Random r = new Random();// 随机数
+
     @Resource
     private ProductService service;
+    @Autowired
+    private SkuService skuService;
+
+    @Autowired
+    private ProductAndPicService picService;
 
     @RequestMapping("/shopshow.html")
     public String shopshow(Model model,@RequestParam(value = "id",defaultValue = "2")Integer id){
@@ -137,7 +152,7 @@ public class ProductController {
 
     @GetMapping("/goxiajia")
     public String goxiajia(){
-        return "/management/category";
+        return "/management/shang";
     }
 
     @GetMapping("/goaddproject")
@@ -148,5 +163,66 @@ public class ProductController {
         model.addAttribute("twoId",twoId);
         model.addAttribute("threeId",threeId);
         return "/management/addProject";
+    }
+
+    @ResponseBody
+    @PostMapping("/addproject")
+    public Object addproject(HttpServletRequest request) throws IOException, ParseException {
+        ObjectMapper mapper = new ObjectMapper();
+        String shopStr = HttpServletRequestUtil.getString(request, "shopStr");// shopStr为前台传入的值
+        Product pro = mapper.readValue(shopStr,Product.class);
+        System.out.println(pro);
+        String propid = HttpServletRequestUtil.getString(request, "propid");
+        String propvals = HttpServletRequestUtil.getString(request, "propvals");
+        int rannum = r.nextInt(89999) + 10000;
+        String nowTimeStr = sDateFormat.format(new Date());
+        pro.setProductId(nowTimeStr + rannum);
+        pro.setUpdate(new Date());
+        String down = addMonth(nowTimeStr,1);
+        Date date = sDateFormat.parse(down);
+        pro.setDowndate(date);
+        pro.setStatus(1);
+        int res = service.add(pro);
+        String[] prop = propid.split(",");
+        String[] propval = propvals.split("-");
+        List<Sku> list = new ArrayList<Sku>();
+        for (int i = 0 ; i<propval.length;i++) {
+            Sku ssku = new Sku();
+            String[] pval = propval[i].split(",");
+            String sku = "";
+            for (int j = 0; j < prop.length; j++) {
+                sku += prop[j] + ":" + pval[j] + ",";
+            }
+            ssku.setSkuCon(sku);
+            ssku.setPrice(Double.parseDouble(pval[2]));
+            ssku.setKucun(Integer.parseInt(pval[3]));
+            list.add(ssku);
+        }
+        int res2 = skuService.addSku(list,pro.getId());
+        List<String> li = new UploadUtil().uploadPic(request,pro);
+        if(li!=null){
+            picService.addPic(li,pro.getId());
+            if(res >0 && res2 >0){
+                return "1";
+            }else {
+                return "0";
+            }
+        }
+        return "0";
+    }
+
+    public String addMonth(String date, int month) {
+        String nowDate = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        try {
+            Date parse = format.parse(date);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(parse);
+            calendar.add(Calendar.MONTH, month);
+            nowDate = format.format(calendar.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return nowDate;
     }
 }

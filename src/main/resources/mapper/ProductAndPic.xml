@@ -11,8 +11,7 @@
 	product.update,
 	downdate,
 	product.status,
-	price,
-	kucun,
+	product.kucun,
 	xiaoliang,
 	product.comment,
 	sendScore,
@@ -21,11 +20,15 @@
 	category03,
 	sortId,
 	sortconId,
-	 productpic.tuid AS tid,
-	 productpic.picPath
+	productpic.tuid AS tid,
+	productpic.picPath,
+	sku.price as skuprice
 	FROM
 	ageless.product
+	INNER JOIN sku ON product.id=sku.productId
 	INNER JOIN productpic ON  product.id=productpic.productId
+		WHERE
+		product.status=1
 	GROUP BY product.id
     ORDER BY xiaoliang DESC
 </select>
@@ -40,8 +43,7 @@
 	product.update,
 	downdate,
 	product.status,
-	price,
-	kucun,
+	product.kucun,
 	xiaoliang,
 	product.comment,
 	sendScore,
@@ -51,10 +53,14 @@
 	sortId,
 	sortconId,
 	 productpic.tuid as tid,
-	 productpic.picPath
+	 productpic.picPath,
+	sku.price as skuprice
 	FROM
 	ageless.product
+	INNER JOIN sku ON product.id=sku.productId
 	INNER JOIN productpic ON  product.id=productpic.productId
+		WHERE
+		product.status=1
 	GROUP BY product.id
     ORDER BY product.update DESC
 </select>
@@ -69,8 +75,7 @@
 		product.update,
 		downdate,
 		product.status,
-		price,
-		kucun,
+		product.kucun,
 		xiaoliang,
 		product.comment,
 		sendScore,
@@ -81,14 +86,19 @@
 		sortconId,
 		productpic.tuid as tid,
 		productpic.picPath,
-		productpic.productId as proid
+		productpic.productId as proid,
+		sku.price as skuprice
 		FROM
 		ageless.product
+		INNER JOIN sku ON product.id=sku.productId
 		INNER JOIN productpic ON  product.id=productpic.productId
+        WHERE
+        product.status=1
 
 		GROUP BY product.id
-		<if test="products!=null and products!=''">
-			ORDER BY ${products} DESC
+		ORDER BY xiaoliang desc
+		<if test="xiaoliang!=null and xiaoliang!=''">
+			,product.${xiaoliang} DESC
 		</if>
 
 	</select>
@@ -102,8 +112,7 @@
 		product.update,
 		downdate,
 		product.status,
-		price,
-		kucun,
+		product.kucun,
 		xiaoliang,
 		product.comment,
 		sendScore,
@@ -114,11 +123,19 @@
 		sortconId,
 		productpic.tuid AS tid,
 		productpic.picPath,
-		productpic.productId AS proid
+		productpic.productId AS proid,
+		sku.price as skuprice
 		FROM
 		ageless.product
+		INNER JOIN sku ON product.id=sku.productId
 		INNER JOIN productpic ON  product.id=productpic.productId
-		ORDER BY product.update DESC,xiaoliang DESC
+		WHERE
+		product.status=1
+		GROUP BY product.id
+		ORDER BY product.update DESC
+		<if test="up!=null and up!=''">
+			,product.${up} DESC
+		</if>
 	</select>
 
 
@@ -128,12 +145,21 @@
 		<result property="productName" column="productName"></result>
 		<result property="xiaoliang" column="xiaoliang"></result>
 		<result property="comment" column="comment"></result>
-
-		<collection property="productPic" ofType="ProductPic">
+		<association property="productPic" javaType="ProductPic">
 			<id property="tuid" column="tid"></id>
 			<result property="picPath" column="picPath"></result>
 			<result property="productId" column="proid"></result>
-		</collection>
+		</association>
+		<association property="sku" javaType="Sku">
+			<result property="price" column="skuprice"></result>
+		</association>
 	</resultMap>
+
+	<insert id="addPic">
+		INSERT INTO `productpic` (`picPath`, `productId`) VALUES
+		<foreach collection="list" separator="," item="item">
+			(#{item},#{productId})
+		</foreach>
+	</insert>
 
 </mapper>
