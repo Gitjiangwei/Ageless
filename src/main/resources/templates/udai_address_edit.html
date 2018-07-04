@@ -114,7 +114,10 @@
 								<div class="ui-area-text-wrap" style="height: 32px;line-height: 32px; border-radius: 5px" >
 									<span id="aa" >${address.province}${address.city}${address.area}${address.street}</span><i style="margin-top: 4px"></i>
 								</div>
-
+								<input type="hidden" class="province" value="${address.province}">
+								<input type="hidden" class="city" value="${address.city}">
+								<input type="hidden" class="area" value="${address.area}">
+								<input type="hidden" class="street" value="${address.street}">
 								<div class="ui-arear-content-wrap" name="province">
 									<!--tab页签-->
 									<div class="ui-area-tab">
@@ -197,6 +200,15 @@
                             var area=$("#area").text();
                             var street=$("#street").text();
 
+                            var area0=$("#area").val();
+                            var street0=$("#street").val();
+
+                            var province1=$(".province").val();
+                            var city1=$(".city").val();
+                            var area1=$(".area").val();
+                            var street1=$(".street").val();
+
+
                             if($("#name").val()==""){
                                 alert("请输入姓名");
                                 return;
@@ -209,12 +221,30 @@
                                 alert("请选择市");
                                 return;
                             }
+                            if(province1!=province && city1!=city && area=="请选择"){
+                                alert("请选择区")
+                                return;
+                            }
+                            if(province1==province && city1!=city && area=="请选择"){
+                                alert("请选择区")
+                                return;
+                            }
+                            if(province1!=province && city1!=city && area1!=area && street=="请选择"){
+                                alert("请选择街区")
+                                return;
+                            }
+                            if(province1==province && city1==city && area1!=area && street=="请选择"){
+                                alert("请选择街区")
+                                return;
+                            }
                             if(area=="请选择"){
                                 area="";
                             }
                             if(street=="请选择"){
                                 street="";
                             }
+
+
                             if($("#details").val()==""){
                                 alert("请输入详细地址");
                                 return;

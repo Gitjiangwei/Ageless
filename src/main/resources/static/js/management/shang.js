@@ -36,9 +36,9 @@ function nav2(){
         success:function(data){
             var oneCategory;
             var twoCategory;
-            twoCategory +='<tr>\n<th><input type="checkbox"></th><th>宝贝名称</th><th>宝贝图片</th><th>库存</th><th>总销量</th><th>下架时间</th><th>操作</th></tr>';
+            twoCategory +='<tr>\n<th><input type="checkbox"></th><th>宝贝名称</th><th>宝贝图片</th><th>库存</th><th>总销量</th><th>下架时间</th></tr>';
             data.map(function(item,index){
-                oneCategory +='<tr><td><input type="checkbox" name="box" id="id" value='+item.id+'><br />已 <br />下<br />架</td> <td>'+item.productName+'</td><td><img src="'+item.productPic.picPath+' "  height="100" width="100"></td><td>'+item.kucun+'</td> <td>'+item.xiaoliang+'</td> <td>'+item.downdate+'</td><td>修改</td></tr>';
+                oneCategory +='<tr><td><input type="checkbox" name="box" id="id" value='+item.id+'><br />已 <br />下<br />架</td> <td>'+item.productName+'</td><td><img src="'+item.productPic.picPath+' "  height="100" width="100"></td><td>'+item.kucun+'</td> <td>'+item.xiaoliang+'</td> <td>'+item.downdate+'</td></tr>';
             });
             $("#yifen").html("");
             $("#yifen").html(twoCategory+oneCategory);
