@@ -51,7 +51,6 @@ public class CategoryOneController {
     @ResponseBody
     @RequestMapping(value="/Oneinsert",method = RequestMethod.POST)
     public Object insertOne(String categoryNameList){
-        System.out.println(categoryNameList);
        if(categoryNameList!=null && categoryNameList!=""){
            String[] array = categoryNameList.split(",");
            int jie=categoryOneService.insertOne(Arrays.asList(array) );

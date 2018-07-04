@@ -51,7 +51,7 @@
     <result property="category03" column="category03"></result>
     <result property="sortId" column="sortId"></result>
     <result property="sortConId" column="sortConId"></result>
-    <collection property="productpic" javaType="ArrayList" ofType="com.ageless.pojo.ProductPic">
+    <collection property="productPic" javaType="com.ageless.pojo.ProductPic">
         <id property="tuid" column="tuid"></id>
         <result property="picPath" column="picPath"></result>
         <result property="productId" column="productId"></result>
@@ -116,7 +116,7 @@
         <result property="category03" column="category03"></result>
         <result property="sortId" column="sortId"></result>
         <result property="sortConId" column="sortConId"></result>
-        <collection property="productpic" javaType="ArrayList" ofType="com.ageless.pojo.ProductPic">
+        <collection property="productPic" javaType="com.ageless.pojo.ProductPic" >
             <id property="tuid" column="tuid"></id>
             <result property="picPath" column="picPath"></result>
             <result property="productId" column="productId"></result>
