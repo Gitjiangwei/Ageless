@@ -22,5 +22,9 @@ public interface ProductAndPicService {
      * 最热商品按条件查询
      */
     public List<ProductAndPic> listbyxiaoliang(String product);
+    /**
+     * 最新商品按条件查询
+     */
+    public List<ProductAndPic> listbyupdate(String upda);
 
 }

@@ -30,4 +30,9 @@ public class ProductAndPicServiceImpl implements ProductAndPicService {
     public List<ProductAndPic> listbyxiaoliang(String  product) {
         return productMapper.listbyxiaoliang(product);
     }
+
+    @Override
+    public List<ProductAndPic> listbyupdate(String upda) {
+        return productMapper.listbyupdate(upda);
+    }
 }

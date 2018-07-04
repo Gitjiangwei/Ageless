@@ -91,16 +91,16 @@
 			<div class="filter-box">
 				<div class="all-filter">
 					<div class="filter-value">
-						<a href="/proxiao.html?product=xiaoliang" class="sale-title active">爆款专区</a>
-						<a href="/proupdate.html?product=update" class="sale-title ">热卖专区</a>
+						<a href="/proxiao.html" class="sale-title ">爆款专区</a>
+						<a href="/proupdate.html" class="sale-title active">最新专区</a>
 					</div>
 				</div>
 			</div>
 			<div class="sort-box bgf5">
 				<div class="sort-text">排序：</div>
-				<a   onclick="sun(this)" name="xiaoliang"><div class="sort-text">销量 </div></a>
-				<a onclick="sun(this)" name="comment"><div  class="sort-text">评价</div></a>
-				<a onclick="sun(this)" name="price"><div  class="sort-text">价格 </div></a>
+				<a   onclick="upda(this)" name="xiaoliang"><div class="sort-text">销量 </div></a>
+				<a onclick="upda(this)" name="comment"><div  class="sort-text">评价</div></a>
+				<a onclick="upda(this)" name="price"><div  class="sort-text">价格 </div></a>
 				<div class="sort-total pull-right">共个商品</div>
 			</div>
 		</section>
@@ -130,22 +130,22 @@
 				<!-- 分页 -->
 				<div class="page text-right clearfix">
 					<#if (pageindex>1)>
-					<a class="disabled" onclick="index(${pageindex-1})">上一页</a>
+					<a class="disabled" onclick="indexs(${pageindex-1})">上一页</a>
 				</#if>
 
 				<#list 1..countpage as i>
-				<a  onclick="index(${i})">${i}</a>
+				<a  onclick="indexs(${i})">${i}</a>
 			</#list>
 
 				<#if (pageindex < countpage)>
-				<a onclick="index(${pageindex+1})">下一页</a>
+				<a onclick="indexs(${pageindex+1})">下一页</a>
 			</#if>
 			<a class="disabled">${pageindex}/${countpage}页</a>
 			<form action="" class="page-order">
 				到第
 				<input type="text" name="page" id="page">
 				页
-				<input class="sub" type="button" value="确定" onclick="shu(${countpage})">
+				<input class="sub" type="button" value="确定" onclick="shus(${countpage})">
 			</form>
 			</div>
 

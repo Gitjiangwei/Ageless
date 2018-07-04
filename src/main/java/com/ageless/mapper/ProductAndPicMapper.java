@@ -25,10 +25,10 @@ public interface ProductAndPicMapper {
     /**
      * 最热商品按条件查询
      */
-    public List<ProductAndPic> listbyxiaoliang(@Param("products") String product);
+    public List<ProductAndPic> listbyxiaoliang(@Param("xiaoliang") String product);
 
     /**
      * 最新商品按条件查询
      */
-    public List<ProductAndPic> listbyupdate(@Param("up")String upda,@Param("xiao") String xiaos);
+    public List<ProductAndPic> listbyupdate(@Param("up")String upda);
 }
