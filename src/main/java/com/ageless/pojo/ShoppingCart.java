@@ -12,7 +12,8 @@ public class ShoppingCart {
     private Sku  sku;           //商品sku表
     private Product product;    //商品表
 
-
+    private String SKUcon; //sku数据
+    private String optiinName;   //颜色尺寸
 
     private String picPath; //商品图片地址
     private Integer price; //商品的价格

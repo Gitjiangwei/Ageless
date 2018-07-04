@@ -39,6 +39,7 @@ public interface ShopCartMapper {
 
     public ShoppingCart queryShopChecked(Integer productId);
 
-
+    //根据商品id修改件数
+    public int repairNumberById(ShoppingCart shoppingCart);
 
 }
