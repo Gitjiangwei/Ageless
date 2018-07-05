@@ -12,7 +12,7 @@ public interface ShangService {
      * @param
      * @return
      */
-    List<Product> cha();
+   public List<Product> cha();
     /**
      *对商品状态的修改（下架）
      * @param
@@ -24,7 +24,7 @@ public interface ShangService {
      * @param
      * @return
      */
-    List<Product> cha2();
+   public List<Product> cha2();
     /**
      *对商品状态的修改（上架）
      * @param

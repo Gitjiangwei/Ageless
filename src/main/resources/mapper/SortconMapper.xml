@@ -33,7 +33,7 @@
 
     </delete>
     <delete id="delSortcon" parameterType="java.lang.Integer">
-        delete from sortcon where id=#{id}
+        delete from sortcon where sortId=#{id}
     </delete>
 
     <insert id="add" >

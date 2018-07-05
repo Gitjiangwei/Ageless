@@ -70,8 +70,9 @@ public class SortconController {
 @RequestMapping(value = "/del")
 @ResponseBody
     public Object del(@RequestParam(required = false)Integer id){
-        boolean falg=sortconService.delSort(id);
+
         boolean f=sortconService.delSortcon(id);
+         boolean falg=sortconService.delSort(id);
         if(falg==true&&f==true){
             return "true";
         }else if(falg==false&&falg==false){
