@@ -91,9 +91,8 @@
 			<div class="filter-box">
 				<div class="all-filter">
 					<div class="filter-value">
-						<a href="" class="sale-title active">爆款专区</a>
-						<a href="" class="sale-title">热卖专区</a>
-						<a href="" class="sale-title">折扣专区</a>
+						<a href="/proxiao.html?product=xiaoliang" class="sale-title active">爆款专区</a>
+						<a href="/proupdate.html?product=update" class="sale-title ">热卖专区</a>
 					</div>
 				</div>
 			</div>
@@ -102,7 +101,7 @@
 				<a   onclick="sun(this)" name="xiaoliang"><div class="sort-text">销量 </div></a>
 				<a onclick="sun(this)" name="comment"><div  class="sort-text">评价</div></a>
 				<a onclick="sun(this)" name="price"><div  class="sort-text">价格 </div></a>
-				<div class="sort-total pull-right">共${shuliang}个商品</div>
+				<div class="sort-total pull-right">共${count}个商品</div>
 			</div>
 		</section>
 		<section class="item-show__div clearfix">
@@ -117,13 +116,13 @@
 								<img src="${probyxiao.productPic.picPath}" alt="锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款" class="cover">
 								<div class="name">${probyxiao.productName}</div></a>
 							<div class="middle">
-								<div class="price"><small>￥</small>${probyxiao.price}</div>
+								<div class="price"><small>￥</small>${probyxiao.sku.price}</div>
 								<div class="sale no-hide"><a href="">满100减20</a></div>
 							</div>
 							<div class="buttom">
-								<div>销量 <b>${probyxiao.xiaoliang}</b></div>
+								<div>销量 <b>${probyxiao.xiaoliang!}</b></div>
 								<div>人气 <b></b></div>
-								<div>评论 <b>${probyxiao.comment}</b></div>
+								<div>评论 <b>${probyxiao.comment!}</b></div>
 							</div>
 						</div>
 					</#list>
@@ -146,7 +145,7 @@
 				到第
 				<input type="text" name="page" id="page">
 				页
-				<input class="sub" type="button" value="确定" onclick="shu()">
+				<input class="sub" type="button" value="确定" onclick="shu(${countpage})">
 			</form>
 			</div>
 

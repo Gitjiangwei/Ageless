@@ -31,6 +31,11 @@ public class ProductAndPicServiceImpl implements ProductAndPicService {
     }
 
     @Override
+    public List<ProductAndPic> listbyupdate(String upda) {
+        return productMapper.listbyupdate(upda);
+    }
+
+    @Override
     public int addPic(List<String> lp, Integer productId) {
         return productMapper.addPic(lp,productId);
     }
