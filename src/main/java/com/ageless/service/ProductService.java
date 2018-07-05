@@ -1,7 +1,6 @@
 package com.ageless.service;
 
 import com.ageless.pojo.*;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public interface ProductService {
 
     List<ProductPic> selectAllPicById(Integer id);
 
-    Sku selectSkuByCon(String skuCon);
+    Sku selectSkuByCon(String skuCon,Integer id);
 
     List<SkuOption> selectAllSkuoptionById(List<String> list);
 
@@ -22,4 +21,6 @@ public interface ProductService {
     Product selectPoroductById(Integer id);
 
     public List<Product> selectall(Integer id);
+
+    int add(Product pro);
 }

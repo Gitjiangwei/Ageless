@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>表格1复选行</title>
+
+	<link rel="stylesheet" type="text/css" href="/css/backstage/global.css">
+	<link rel="stylesheet" type="text/css" href="/css/backstage/table.css">
+	<link rel="stylesheet" type="text/css" href="/css/backstage/page.css">
+	<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
+
+</head>
+
+<body>
+<div class="container">
+	<h1 class="tabTitle"><span onclick="NewPage('/commodity/goxiajia')"><img src="/images/backstage/xjt.png"/></span>商品下架</h1>
+
+	<!--搜索区开始-->
+	<div class="serach">
+		<input type="button" value="已上架商品" class="button " id="button1"/>
+		<input type="button" value="下架" class="button " id="button2"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		<input type="button" value="已下架商品" class="button "id="button3" />
+		<input type="button" value="上架" class="button " id="button4"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		<!--
+
+                    <select>
+                        <option>橱窗推荐</option>
+                    </select>
+                    <input type="button" value="取消推荐" class="button " />
+                    <input type="button" value="设置评论有礼" class="button " />
+                    <input type="button" value="创建微海报" class="button " />-->
+	</div>
+	<!--搜索区结束-->
+
+	<div class="info">
+		<table id="dg" cellpadding="0" cellspacing="0" border="0" class="selectTable">
+			<thead id="yifen">
+			<tr>
+				<th><input type="checkbox"></th>
+				<th>宝贝名称</th>
+				<th>价格</th>
+				<th>库存</th>
+				<th>总销量</th>
+				<th>发布时间</th>
+				<th>操作</th>
+			</tr>
+
+			<tr>
+				<td><input type="checkbox"><br />
+					已 <br />
+					推<br />
+					荐</td>
+				<td>宝贝名称</td>
+				<td>25.00</td>
+				<td>25</td>
+				<td>1000</td>
+				<td>发布时间</td>
+				<td>操作</td>
+			</tr>
+
+			</thead>
+		</table>
+		<div class='pageStyle'></div>
+	</div>
+
+</div>
+
+<script src="/js/backstage/jquery-3.3.1.min.js"></script>
+<script src="/js/backstage/pagetion.js"></script>
+<script src="/js/management/shang.js"></script>
+<script type="text/javascript" src="/js/backstage/global.js"></script>
+<script type="text/javascript">
+    /*var pagesize = 10; //页显示多少条记录
+                $(function() {
+                    tableInit(1, pagesize); //初始默认第一页
+                });
+                //页索引 pageindex
+                function tableInit(pageindex, pagesize) {
+                    //绑定表格数据
+                    $("#dg").grid({
+                        id: "dg",
+                        url: "data1.json",
+                        data: {
+                            "pageindex": pageindex,
+                            "pagesize": pagesize
+                        },
+                        columns: [
+                            {
+                                field: 'ID',
+                                title: '编号',
+                                width: 100,
+                                align: 'center'
+                            },
+                            {
+                                field: 'name',
+                                title: '名称',
+                                width: 200,
+                                align: 'left'
+                            },
+                            {
+                                field: 'descrtion',
+                                title: '描述',
+                                width: 350,
+                                align: 'center'
+                            },
+                            {
+                                field: 'Price',
+                                title: '价格',
+                                width: 100,
+                                align: 'left'
+                            }
+                        ],
+                        pagination: true //是否分页
+
+                    });
+
+                }
+                // 每页点击页码与输入页码跳转页面
+                function show(pageindex) {
+                    tableInit(pageindex, pagesize);
+                }
+                //根据operations扩展的自定义方法
+                function delete1(id) {
+                    //alert(id)
+                }
+
+                function update1(id) {
+                    //alert(id)
+                }
+                $(function() {
+                    //绑定行单击事件开始
+                    $("#dg").on("click", "tr", function() {
+                        //单击从表格上取id值
+                        var _trId = $(this).children("td:eq(1)").html();
+
+                    });
+                    //绑定行单击事件结束
+
+                    /*绑定行双击事件开始*/
+    $("#dg").on("dblclick", "tr", function() {
+        var _trId = $(this).children("td:eq(1)").html();
+
+    });
+    /*绑定行双击事件结束*/
+
+    //})
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.ShangMapper">
+    <select id="cha" resultMap="aa" >
+        select
+             id,
+            productName,
+            descript,
+            maidian,
+            product.update,
+            downdate,
+            product.status,
+            price,
+            kucun,
+            xiaoliang,
+            product.comment,
+            sendScore,
+            category01,
+            category02,
+            category03,
+            sortId,
+            sortconId,
+            tuid,
+            picPath,
+           productpic.productId
+            from
+            product,productpic
+            where
+            status = 1
+            and
+            product.id=productpic.productId
+            GROUP BY  id
+    </select>
+       <resultMap id="aa" type="com.ageless.pojo.Product" autoMapping="true">
+    <id property="id" column="id"></id>
+    <result property="productId" column="productId"></result>
+    <result property="productName" column="productName"></result>
+    <result property="descript" column="descript"></result>
+    <result property="maidian" column="maidian"></result>
+    <result property="update" column="update"></result>
+    <result property="downdate" column="downdate"></result>
+    <result property="status" column="status"></result>
+    <result property=" price" column=" price"></result>
+    <result property=" kucun" column=" kucun"></result>
+    <result property="xiaoliang" column="xiaoliang"></result>
+    <result property="comment" column="comment"></result>
+    <result property="sendScore" column="sendScore"></result>
+    <result property="category01" column="category01"></result>
+    <result property="category02" column="category02"></result>
+    <result property="category03" column="category03"></result>
+    <result property="sortId" column="sortId"></result>
+    <result property="sortConId" column="sortConId"></result>
+    <collection property="productPic" javaType="com.ageless.pojo.ProductPic">
+        <id property="tuid" column="tuid"></id>
+        <result property="picPath" column="picPath"></result>
+        <result property="productId" column="productId"></result>
+    </collection>
+
+
+    </resultMap>
+
+
+    <update id="update" parameterType="List" >
+        update product set status=0 where id in
+        <foreach collection="list" open="(" separator="," close=")" item="haha">
+            #{haha}
+        </foreach>
+    </update>
+    <select id="cha2" resultMap="bb" >
+        select
+             id,
+            productName,
+            descript,
+            maidian,
+            product.update,
+            downdate,
+            product.status,
+            price,
+            kucun,
+            xiaoliang,
+            product.comment,
+            sendScore,
+            category01,
+            category02,
+            category03,
+            sortId,
+            sortconId,
+            tuid,
+            picPath,
+           productpic.productId
+            from
+            product,productpic
+            where
+            status = 0
+            and
+            product.id=productpic.productId
+            GROUP BY  id
+    </select>
+    <resultMap id="bb" type="com.ageless.pojo.Product" autoMapping="true">
+        <id property="id" column="id"></id>
+        <result property="productId" column="productId"></result>
+        <result property="productName" column="productName"></result>
+        <result property="descript" column="descript"></result>
+        <result property="maidian" column="maidian"></result>
+        <result property="update" column="update"></result>
+        <result property="downdate" column="downdate"></result>
+        <result property="status" column="status"></result>
+        <result property=" price" column=" price"></result>
+        <result property=" kucun" column=" kucun"></result>
+        <result property="xiaoliang" column="xiaoliang"></result>
+        <result property="comment" column="comment"></result>
+        <result property="sendScore" column="sendScore"></result>
+        <result property="category01" column="category01"></result>
+        <result property="category02" column="category02"></result>
+        <result property="category03" column="category03"></result>
+        <result property="sortId" column="sortId"></result>
+        <result property="sortConId" column="sortConId"></result>
+        <collection property="productPic" javaType="com.ageless.pojo.ProductPic" >
+            <id property="tuid" column="tuid"></id>
+            <result property="picPath" column="picPath"></result>
+            <result property="productId" column="productId"></result>
+        </collection>
+
+
+    </resultMap>
+    <update id="update1" parameterType="List" >
+        update product set status=1 where id in
+        <foreach collection="list" open="(" separator="," close=")" item="haha">
+            #{haha}
+        </foreach>
+    </update>
+</mapper>

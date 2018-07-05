@@ -4,7 +4,6 @@ function chuan(q) {
 
     var ary = shuzu();
 
-    alert(ary);
     $.ajax({
         type: "post",
         url: "/sort/qweqwe",
@@ -55,7 +54,6 @@ function shuzu() {
 function show(pageindex) {
 
     var tiaojian = $(".qu").attr("name");
-    alert(tiaojian);
     var ary = shuzu();
     $.ajax({
         type: 'post',

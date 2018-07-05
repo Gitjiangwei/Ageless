@@ -32,7 +32,7 @@ public class SortController {
 
     @RequestMapping(value = "/qwwe", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView index(Integer categorythreeId, @RequestParam(defaultValue = "1") Integer pageIndex,/*@RequestParam(defaultValue = "price")*/String tiaojian,HttpServletRequest request) {
+    public ModelAndView index(Integer categorythreeId, @RequestParam(defaultValue = "1") Integer pageIndex,String tiaojian,HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         List<Sort> selectsanji = sortService.selectsanji(categorythreeId);
         List<Integer> list =new ArrayList<Integer>();
@@ -55,7 +55,7 @@ public class SortController {
 
     @RequestMapping(value = "/qweqwe", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView er(Integer categorythreeId, @RequestParam(defaultValue = "1") Integer pageIndex,/*@RequestParam(defaultValue = "price")*/String tiaojian,HttpServletRequest request) {
+    public ModelAndView er(Integer categorythreeId, @RequestParam(defaultValue = "1") Integer pageIndex,String tiaojian,HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         List<Sort> selectsanji = sortService.selectsanji(categorythreeId);
 
@@ -79,5 +79,27 @@ public class SortController {
         return mv;
     }
 
+
+    /**
+     * 模糊查询
+     * @param
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/selectmohu", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView selectmohu(HttpServletRequest request,@RequestParam(defaultValue = "1") Integer pageIndex,String tiaojian) {
+        ModelAndView mv = new ModelAndView();
+        String mohu = request.getParameter("mohu");
+        System.out.println(mohu);
+        List<Product> selectmohu = sortService.selectmohu(mohu, tiaojian, pageIndex);
+        PageInfo<Product> info = new PageInfo<Product>(selectmohu);
+        request.setAttribute("shuliang", info.getTotal());//共多少个商品
+        request.setAttribute("pageindex", pageIndex);
+        request.setAttribute("countpage", info.getPages());
+        request.setAttribute("list1", selectmohu);
+        mv.setViewName("item_sale_page");
+        return mv;
+    }
 
 }

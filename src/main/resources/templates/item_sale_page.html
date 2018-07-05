@@ -38,15 +38,15 @@
 	<!-- 搜索栏 -->
 	<div class="top-search">
 		<div class="inner">
-			<a class="logo" href="/ageless/index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+			<a class="logo" href="index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 			<div class="search-box">
-				<form class="input-group">
-					<input placeholder="Ta们都在搜U袋网" type="text">
+				<form class="input-group" action="/sort/selectmohu" method="post">
+					<input placeholder="Ta们都在搜U袋网" type="text" name="mohu">
 					<span class="input-group-btn">
-						<button type="button">
+						<button type="submit">
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						</button>
-					</span>
+                </span>
 				</form>
 				<p class="help-block text-nowrap">
 					<a href="">连衣裙</a>
@@ -59,7 +59,7 @@
 				</p>
 			</div>
 			<div class="cart-box">
-				<a href="/shop/shopcart.html" class="cart-but">
+				<a href="udai_shopcart.html" class="cart-but">
 					<i class="iconfont icon-shopcart cr fz16"></i> 购物车 0 件
 				</a>
 			</div>
@@ -91,9 +91,8 @@
 			<div class="filter-box">
 				<div class="all-filter">
 					<div class="filter-value">
-						<a href="" class="sale-title active">爆款专区</a>
-						<a href="" class="sale-title">热卖专区</a>
-						<a href="" class="sale-title">折扣专区</a>
+						<a href="/proxiao.html?product=xiaoliang" class="sale-title active">爆款专区</a>
+						<a href="/proupdate.html?product=update" class="sale-title ">热卖专区</a>
 					</div>
 				</div>
 			</div>
@@ -102,7 +101,7 @@
 				<a   onclick="sun(this)" name="xiaoliang"><div class="sort-text">销量 </div></a>
 				<a onclick="sun(this)" name="comment"><div  class="sort-text">评价</div></a>
 				<a onclick="sun(this)" name="price"><div  class="sort-text">价格 </div></a>
-				<div class="sort-total pull-right">共${countpage}个商品</div>
+				<div class="sort-total pull-right">共${count}个商品</div>
 			</div>
 		</section>
 		<section class="item-show__div clearfix">
@@ -117,13 +116,13 @@
 								<img src="${probyxiao.productPic.picPath}" alt="锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款" class="cover">
 								<div class="name">${probyxiao.productName}</div></a>
 							<div class="middle">
-								<div class="price"><small>￥</small>${probyxiao.price}</div>
+								<div class="price"><small>￥</small>${probyxiao.sku.price}</div>
 								<div class="sale no-hide"><a href="">满100减20</a></div>
 							</div>
 							<div class="buttom">
-								<div>销量 <b>${probyxiao.xiaoliang}</b></div>
+								<div>销量 <b>${probyxiao.xiaoliang!}</b></div>
 								<div>人气 <b></b></div>
-								<div>评论 <b>${probyxiao.comment}</b></div>
+								<div>评论 <b>${probyxiao.comment!}</b></div>
 							</div>
 						</div>
 					</#list>
@@ -138,7 +137,7 @@
 				<a  onclick="index(${i})">${i}</a>
 			</#list>
 
-				<#if (pageindex<countpage)>
+				<#if (pageindex < countpage)>
 				<a onclick="index(${pageindex+1})">下一页</a>
 			</#if>
 			<a class="disabled">${pageindex}/${countpage}页</a>
@@ -146,9 +145,9 @@
 				到第
 				<input type="text" name="page" id="page">
 				页
-				<input class="sub" type="button" value="确定" onclick="shu()">
+				<input class="sub" type="button" value="确定" onclick="shu(${countpage})">
 			</form>
-	</div>
+			</div>
 
 				</div>
 

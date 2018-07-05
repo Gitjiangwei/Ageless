@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
-	<meta charset="UTF-8"/>
-	<link rel="shortcut icon" href="/favicon.ico"/>
-	<link rel="stylesheet" href="/css/iconfont.css"/>
-	<link rel="stylesheet" href="/css/global.css"/>
-	<link rel="stylesheet" href="/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
-	<link rel="stylesheet" href="/css/swiper.min.css"/>
-	<link rel="stylesheet" href="/css/styles.css"/>
-    <script src="/js/jquery-1.12.4.js" charset="UTF-8"></script>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="/css/iconfont.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/swiper.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/amazeui.css">
+    <link rel="stylesheet" href="/css/hmstyle.css">
+    <script src="/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
+    <script src="/js/bootstrap.min.js" charset="UTF-8"></script>
+    <script src="/js/swiper.min.js" charset="UTF-8"></script>
+    <script src="/js/global.js" charset="UTF-8"></script>
     <script src="/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js" charset="UTF-8"></script>
+    <script src="/js/fenye.js" charset="UTF-8"></script>
+    <script src="/js/sortcon.js" charset="UTF-8"></script>
     <script src="/js/Notice.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="/js/swiper.min.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="/js/global.js" charset="UTF-8"></script>
-	<title>U袋网</title>
+
+    <title>U袋网</title>
 </head>
 <body>
 <!-- 顶部tab -->
@@ -38,15 +43,15 @@
 <!-- 搜索栏 -->
 <div class="top-search">
     <div class="inner">
-        <a class="logo" href="/ageless/index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+        <a class="logo" href="index.html"><img src="images/icons/logo.jpg" alt="U袋网" class="cover"></a>
         <div class="search-box">
-            <form class="input-group">
-                <input placeholder="Ta们都在搜U袋网" type="text">
+            <form class="input-group" action="/sort/selectmohu" method="post">
+                <input placeholder="Ta们都在搜U袋网" type="text" name="mohu">
                 <span class="input-group-btn">
-						<button type="button">
+						<button type="submit">
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						</button>
-					</span>
+                </span>
             </form>
             <p class="help-block text-nowrap">
                 <a href="">连衣裙</a>
@@ -59,7 +64,7 @@
             </p>
         </div>
         <div class="cart-box">
-            <a href="/shop/shopcart.html" class="cart-but" id="aaa">
+            <a href="udai_shopcart.html" class="cart-but">
                 <i class="iconfont icon-shopcart cr fz16"></i> 购物车 0 件
             </a>
         </div>
@@ -118,7 +123,7 @@
 <div class="user-info__box">
     <div class="login-box">
         <div class="avt-port">
-            <img src="/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
+            <img src="images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
         </div>
         <!-- 已登录 -->
         <div class="name c6">Hi~ <span class="cr">18759808122</span></div>
@@ -196,13 +201,78 @@
 <!-- 楼层内容 -->
 <div class="content inner" style="margin-bottom: 40px;">
     	<section class="scroll-floor floor-1 clearfix">
+            <!-- 秒杀抢购 -->
+            <div class="am-container">
+
+                <div class="sale-mt">
+                    <i></i>
+                    <em class="sale-title">限时秒杀</em>
+                    <div class="s-time" id="countdown">
+                        <span class="hh">01</span>
+                        <span class="mm">20</span>
+                        <span class="ss">59</span>
+                    </div>
+                </div>
+
+
+                <div class="am-g am-g-fixed sale">
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="# "><img src="/images/timg.jpg" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="#"><p class="s-title">ZEK 莉哥o3o</p></a>
+                            <div class="s-price">￥<b>9.90</b>
+                                <a class="s-buy" href="#">秒杀</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="# "><img src="/images/timg.jpg" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="#"><p class="s-title">ZEK 莉哥o3o</p></a>
+                            <div class="s-price">￥<b>9.90</b>
+                                <a class="s-buy" href="#">秒杀</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="# "><img src="/images/timg.jpg" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="#"><p class="s-title">ZEK 莉哥o3o</p></a>
+                            <div class="s-price">￥<b>9.90</b>
+                                <a class="s-buy" href="#">秒杀</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="# "><img src="/images/timg.jpg" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="#"><p class="s-title">ZEK 莉哥o3o </p></a>
+                            <div class="s-price">￥<b>9.90</b>
+                                <a class="s-buy" href="#">秒杀</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <div class="pull-left">
                 <div class="floor-title">
                     <i class="iconfont icon-tuijian fz16"></i> 爆款推荐
-                    <a href="/proxiao.html?product=xiaoliang" class="more"><i class="iconfont icon-more"></i></a>
+                    <a href="/proxiao.html" class="more"><i class="iconfont icon-more"></i></a>
                 </div>
                 <div class="con-box">
-                    <a class="left-img hot-img" href="/proxiao.html?product=xiaoliang">
+                    <a class="left-img hot-img" href="/proxiao.html">
                         <img src="/images/floor_1.jpg" alt="" class="cover">
                     </a>
                     <div class="right-box hot-box">
@@ -213,7 +283,7 @@
                                     <img src="${product.productPic.picPath}" alt="${product.productName}" class="cover">
                                 </div>
                                 <div class="price clearfix">
-                                    <span class="pull-left cr fz16">￥${product.price}</span>
+                                    <span class="pull-left cr fz16">￥${product.sku.price}</span>
                                     <span class="pull-right c6">进货价</span>
                                 </div>
                                 <div class="name ep" title="${product.productName}">${product.productName}</div>
@@ -281,19 +351,13 @@
    </section>
 <section class="scroll-floor floor-2">
     <div class="floor-title">
-        <i class="iconfont icon-skirt fz16"></i>最新推荐
-        <div class="case-list fz0 pull-right">
-            <a href="item_category.html">最新女装</a>
-            <a href="item_category.html">时尚女装</a>
-            <a href="item_category.html">最新上装</a>
-            <a href="item_category.html">最新下装</a>
-            <a href="item_category.html">最新裙装</a>
-            <a href="item_category.html">最新内衣</a>
-        </div>
+        <i class="iconfont icon-tuijian fz16"></i>最新推荐
+        <a href="/proupdate.html" class="more"><i class="iconfont icon-more"></i></a>
     </div>
     <div class="con-box">
-        <a class="left-img hot-img" href="">
+        <a class="left-img hot-img" href="/proupdate.html">
             <img src="/images/floor_2.jpg" alt="" class="cover">
+
         </a>
         <div class="right-box">
             <#list list5 as newlist>
@@ -303,7 +367,7 @@
                     <img src="${newlist.productPic.picPath}" alt="${newlist.productName}" class="cover">
                 </div>
                 <div class="price clearfix">
-                    <span class="pull-left cr fz16">￥${newlist.price}</span>
+                    <span class="pull-left cr fz16">￥${newlist.sku.price}</span>
                     <span class="pull-right c6">进货价</span>
                 </div>
                 <div class="name ep" title="${newlist.productName}">${newlist.productName}</div>
@@ -422,7 +486,7 @@
             autoplayDisableOnInteraction : false,
             pagination: '.banner-box .swiper-pagination',
             paginationClickable: true,
-            autoplay : 5000,
+            autoplay : 3000,
         });
         // 新闻列表滚动
         var notice_swiper = new Swiper('.notice-box .swiper-container', {
@@ -450,7 +514,7 @@
         </li>
         <li class="r-toolbar-item">
             <a href="udai_shopcart.html" class="r-item-hd">
-                <i class="iconfont icon-cart" data-badge="10"></i>
+                <i class="iconfont icon-cart" ></i>
                 <div class="r-tip__box"><span class="r-tip-text">购物车</span></div>
             </a>
         </li>
@@ -483,16 +547,16 @@
     <div class="footer-tags">
         <div class="tags-box inner">
             <div class="tag-div">
-                <img src="/images/icons/footer_1.gif" alt="厂家直供">
+                <img src="images/icons/footer_1.gif" alt="厂家直供">
             </div>
             <div class="tag-div">
-                <img src="/images/icons/footer_2.gif" alt="一件代发">
+                <img src="images/icons/footer_2.gif" alt="一件代发">
             </div>
             <div class="tag-div">
-                <img src="/images/icons/footer_3.gif" alt="美工活动支持">
+                <img src="images/icons/footer_3.gif" alt="美工活动支持">
             </div>
             <div class="tag-div">
-                <img src="/images/icons/footer_4.gif" alt="信誉认证">
+                <img src="images/icons/footer_4.gif" alt="信誉认证">
             </div>
         </div>
     </div>
@@ -533,7 +597,5 @@
         </p>
     </div>
 </div>
-
-
 </body>
 </html>
