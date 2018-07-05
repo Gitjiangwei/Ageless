@@ -183,7 +183,7 @@ public class UserController {
            //用户ID key为 user
            session.setAttribute("uid",id);
           Long dongjie=  u.getDongjie();
-          if(dongjie==1){
+          if(dongjie==2){
               return "{\"mes\":\"frozen\"}";
           }else{
               return "{\"mes\":\"success\"}";
@@ -203,6 +203,7 @@ public class UserController {
     public String udai_modifypwd_step1_opwd(String opwd,HttpSession session) {
         String op= md5.string2MD5(opwd);//获取输入的密码
         User u= (User) session.getAttribute("user");
+        System.out.println("1111"+u);
         String  pwd=u.getLoginpwd();//获取用户密码
         if(op.equals(pwd)){
             return "{\"mes\":\"yes\"}";

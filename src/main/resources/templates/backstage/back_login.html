@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+
+		<link rel="stylesheet" type="text/css" href="/css/backstage/global.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/login.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/add.css" />
+	</head>
+
+	<body>
+		<div>
+			<div class="loginContent">
+				<div class="titleText">
+					<h1>花想容后台管理</h1></div>
+				<div class="user">
+					<form class="formSheet" action="#" method="post" enctype="multipart/form-data" onsubmit="return checkForm()">
+						<dl>
+							<dd>
+								<div>
+									<input type="text" class="textStyle" id="userName" name="userName" style="width:380px; height: 40px;" placeholder="请输入账号" />
+								</div>
+							</dd>
+						</dl>
+						<dl>
+							<dd>
+								<div>
+									<input type="password" class="pwdStyle" id="userPwd" style="width:380px;height: 40px;" placeholder="请输入密码" />
+								</div>
+							</dd>
+						</dl>
+						<div><span class="red">&nbsp;</span></div>
+						<div>
+						</div>
+						<div class="btnLogin">
+							<input type="button" value="登录" class="button" id="log"/>
+						</div>
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript" src='/js/backstage/jquery-3.3.1.min.js'></script>
+		<script type="text/javascript" src="/js/backstage/back_global.js"></script>
+		<script type="text/javascript">
+				$("#log").click(function () {
+                    var username = $("#userName");
+                    var tsInfo = $(".red");
+                    var userName=$("#userName").val();
+                    var userPwd=$("#userPwd").val();
+                    var membership=null;//会员名
+                    var phone=null;//手机号
+                    var mailbox=null;//邮箱
+					var nam =$("#nam").val();
+                    if(username.val() == "") {
+                        username.addClass("err");
+                        tsInfo.css("display", "block");
+                        tsInfo.text("用户名输入有误，请重新输入")
+                        return false;
+                    } else {
+                        username.removeClass("err");
+                        if(userName.indexOf("@") != -1){ //邮箱验证
+                            mailbox=userName;
+                        }else if(userName.indexOf("t") != -1){ //会员名验证
+                            membership=userName;
+                        }else{ //手机号验证
+                            phone=userName;
+                        }
+                        $.ajax({
+                            url:"/backstage/blogin",
+                            data:{membership:membership,phone:phone,
+                                mailbox:mailbox,loginpwd:userPwd},
+                            type:"post",
+                            dataType:"json",
+                            success:function (result) {
+                                var num =result.num;
+                                if (result.mes=="success"){
+                                    location.href="/backstage/index.html?num="+num;
+                                }else if(result.mes=="frozen"){
+                                    alert("该账号已被冻结！")
+                                }else if(result.mes=="frozen1"){
+                                    alert("该账号不是管理员！")
+                                }else if(result.mes=="error"){
+                                    alert("用户名或密码有误，请重新登录！")
+                                }
+                            },
+                            error:function () {
+                                alert("失败");
+                            },
+                        });
+                    }
+                });
+
+		</script>
+
+	</body>
+
+</html>
