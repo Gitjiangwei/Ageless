@@ -51,7 +51,7 @@
 					<input type="button" value="" class="button add addsortcon" id="" style="position:absolute; bottom:0; height:35px" /></p></div>
 					<div>
 						<input type="submit" value="提交"  class="button " id="insertThree">
-						<input type="submit" value="返回"  class="button ">
+						<input type="submit" value="返回" onclick="NewPage('/CateThree/goThree')" class="button ">
 					</div>
 					  <!--对话框蒙板开始-->
 					  <div class="mbStyle">&nbsp;</div>
@@ -69,6 +69,7 @@
 		<script type="text/javascript">
 			$("#dianji").click(function(){
 			$("#xianshi").show();
+			$(".aaa").siblings().remove();
 				});
 				
 			$(function(){
@@ -78,7 +79,7 @@
 					$(this).prev().append(sortcon);
 				});
                 $(document).on("click",".aaa",function(){
-                    var context = '<input type="text" class="textStyle" style="width:60px;"><span class="ti">提交</span>'
+                    var context = '<input type="text" class="textStyle" style="width:60px;"><span class="ti">提交</span>&nbsp;&nbsp;<span onclick=NewPage("/CateThree/goThree")>返回</span>'
                     $(this).next().html(context);
                 });
 			});
