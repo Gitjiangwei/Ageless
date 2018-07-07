@@ -1,4 +1,4 @@
-/*package com.ageless.controller;
+package com.ageless.controller;
 
 import com.ageless.pojo.User;
 import com.ageless.service.UserService;
@@ -6,12 +6,12 @@ import com.ageless.util.GetSMS;
 import com.ageless.util.MD5;
 import com.ageless.util.RandUtil;
 import com.alipay.api.internal.util.StringUtils;
-*//*import com.qq.connect.QQConnectException;
+/*import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
 import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
-import com.qq.connect.oauth.Oauth;*//*
+import com.qq.connect.oauth.Oauth;*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +31,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-*//**
+/**
  * 用户
  * 用户信息 key为 user
  * 以保存该用户所用信息
- *//*
+ */
 @Controller
 public class UserController {
 
@@ -54,123 +54,123 @@ public class UserController {
     private Date data1;
     private Date data2;
 
-    *//**
+    /**
      * 登录
      * @return
-     *//*
+     */
     @GetMapping("/login.html")
     public String login() {
         return "login";
     }
-    *//**
+    /**
      * 我的U袋
      * @return
-     *//*
+     */
     @GetMapping("/udai_welcome.html")
     public String udai_welcome() {
         return "udai_welcome";
     }
-    *//**
+    /**
      * 个人资料
      * @return
-     *//*
+     */
     @GetMapping("/udai_setting.html")
     public String udai_setting() {
         return "udai_setting";
     }
-    *//**
+    /**
      * 收货地址
      * @return
-     *//*
+     */
     @GetMapping("/udai_address.html")
     public String udai_address() {
         return "udai_address";
     }
-    *//**
+    /**
      * 修改支付密码
      * @return
-     *//*
+     */
     @GetMapping("/udai_paypwd_modify.html")
     public String udai_paypwd_modify() {
         return "udai_paypwd_modify";
     }
-    *//**
+    /**
      * 修改支付密码--直接修改
      * @return
-     *//*
+     */
     @GetMapping("/udai_modifypay_step.html")
     public String udai_modifypay_step() {
         return "udai_modifypay_step";
     }
-    *//**
+    /**
      * 修改支付密码--输入旧密码
      * @return
-     *//*
+     */
     @GetMapping("/udai_modifypay_step1.html")
     public String udai_modifypay_step1() {
         return "udai_modifypay_step1";
     }
-    *//**
+    /**
      * 修改支付密码--输入新密码
      * @return
-     *//*
+     */
     @GetMapping("/udai_modifypay_step2.html")
     public String udai_modifypay_step2() {
         return "udai_modifypay_step2";
     }
-    *//**
+    /**
      * 修改支付密码--完成
      * @return
-     *//*
+     */
     @GetMapping("/udai_modifypay_step3.html")
     public String udai_modifypay_step3() {
         return "udai_modifypay_step3";
     }
-    *//**
+    /**
      * 修改登录密码
      * @return
-     *//*
+     */
     @GetMapping("/udai_pwd_modify.html")
     public String udai_pwd_modify() {
         return "udai_pwd_modify";
     }
-    *//**
+    /**
      * 修改登录密码--输入旧密码
      * @return
-     *//*
+     */
     @GetMapping("/udai_modifypwd_step1.html")
     public String udai_modifypwd_step1() { return "udai_modifypwd_step1"; }
-    *//**
+    /**
      * 修改登录密码--输入新密码
      * @return
-     *//*
+     */
     @GetMapping("/udai_modifypwd_step2.html")
     public String udai_modifypwd_step2() { return "udai_modifypwd_step2"; }
-    *//**
+    /**
      * 修改登录密码--完成
      * @return
-     *//*
+     */
     @GetMapping("/udai_modifypwd_step3.html")
     public String udai_modifypwd_step3() { return "udai_modifypwd_step3"; }
-    *//**
+    /**
      * 商品
      * @return
-     *//*
+     */
     @GetMapping("/item_category.html")
     public String item_category() { return "item_category"; }
-    *//**
-     * 地址
+    /**
+     * 支付地址
      * @return
-     *//*
+     */
     @GetMapping("/udai_shopcart_pay.html")
     public String udai_shopcart_pay() { return "udai_shopcart_pay"; }
 
-    *//**
+    /**
      * 首页
      * 用户信息 key为 user 值为user对象
      * 用户ID key为 uid   值为用户Id
      * @return
-     *//*
+     */
     @PostMapping(value="/user/loginUser")
     @ResponseBody
     public String loginUser(@Valid User user,HttpSession session) {
@@ -198,12 +198,12 @@ public class UserController {
         return "{\"mes\":\"error\"}";
     }
 
-    *//**
+    /**
      * 判断登录旧密码是否正确
      * @param opwd
      * @param session
      * @return
-     *//*
+     */
     @ResponseBody
     @PostMapping("/udai_modifypwd_step1_opwd")
     public String udai_modifypwd_step1_opwd(String opwd,HttpSession session) {
@@ -218,12 +218,12 @@ public class UserController {
         }
     }
 
-    *//**
+    /**
      * 修改登录密码
      * @param npwd
      * @param session
      * @return
-     *//*
+     */
     @ResponseBody
     @PostMapping("/udai_modifypwd_step2_npwd")
     public String udai_modifypwd_step2_npwd(String npwd,HttpSession session) {
@@ -240,12 +240,12 @@ public class UserController {
             return "{\"mes\":\"no\"}";
         }
     }
-    *//**
+    /**
      * 判断支付旧密码是否正确
      * @param opay
      * @param session
      * @return
-     *//*
+     */
     @ResponseBody
     @PostMapping("/udai_modifypay_step1_opay")
     public String udai_modifypay_step1_opay(String opay,HttpSession session) {
@@ -260,12 +260,12 @@ public class UserController {
         }
     }
 
-    *//**
+    /**
      * 修改支付密码
      * @param npay
      * @param session
      * @return
-     *//*
+     */
     @ResponseBody
     @PostMapping("/udai_modifypay_step2_opay")
     public String udai_modifypay_step2_opay(String npay,HttpSession session) {
@@ -283,12 +283,12 @@ public class UserController {
         }
     }
 
-    *//**
+    /**
      * 修改個人信息
      * @param user
      * @param session
      * @return
-     *//*
+     */
     @PostMapping("/udai_updateUser")
     @ResponseBody
     public String udai_updateUser(User user,HttpSession session){
@@ -321,10 +321,10 @@ public class UserController {
         }
     }
 
-    *//**
+    /**
      * 发送短信验证码
      * @return
-     *//*
+     */
     @RequestMapping("/sendMessage")
     @ResponseBody
     public Object sendMessage(@RequestParam(required = false) String yzNum){
@@ -340,21 +340,21 @@ public class UserController {
             object="{\"back\":\"成功\"}";
         }
 
-        *//*try {
+        /*try {
             rum =Integer.parseInt(randum);
         } catch (NumberFormatException e) {
             e.printStackTrace();
-        }*//*
+        }*/
         return object;
     }
 
-    *//**
+    /**
      * 添加手机号注册的用户
      * @param numBack
      * @param phoneNo
      * @param pwdNum
      * @return
-     *//*
+     */
     @RequestMapping("/addMember")
     @ResponseBody
     public Object addMember(@RequestParam(required = false) String numBack, @RequestParam(required = false) String phoneNo, @RequestParam(required = false) String pwdNum){
@@ -395,11 +395,11 @@ public class UserController {
         return object;
     }
 
-    *//**
+    /**
      * 发送邮箱验证码
      * @param yzNum
      * @return
-     *//*
+     */
     @RequestMapping("/sendEmail")
     @ResponseBody
     public Object send(@RequestParam(required = false)String yzNum){
@@ -426,13 +426,13 @@ public class UserController {
         }
         return object;
     }
-    *//**
+    /**
      * 生成QQ授权
      *
      * @param request
      * @return
      * @throws QQConnectException
-     *//**//*
+     *//*
     @GetMapping("/authorizeUrl.html")
     public String authorizeUrl(HttpServletRequest request) {
         String authorizeUrl = null;
@@ -498,5 +498,5 @@ public class UserController {
             e.printStackTrace();
         }
         return "redirect:../../web/index";
-    }*//*
-}*/
+    }*/
+}
