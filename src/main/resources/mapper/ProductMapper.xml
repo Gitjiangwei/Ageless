@@ -77,6 +77,7 @@
             ageless.sku
             where
             productId = #{id}
+            ORDER BY SKUId
     </select>
     
     <select id="selectAllSkuoptionById" resultType="com.ageless.pojo.SkuOption">

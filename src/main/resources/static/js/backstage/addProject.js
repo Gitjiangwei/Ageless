@@ -26,6 +26,7 @@ $(function(){
 
 
 	function selectAllSort(id){
+
         $.ajax({
             type:"post",
             url:"/sort/selects",

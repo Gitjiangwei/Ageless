@@ -27,11 +27,7 @@ public class SkuproPertyController {
     @GetMapping("/cha")
     public  Object cha(@RequestParam(value="id",required = false)int id ,@RequestParam(value = "nam",required = false)String name){
 
-        System.out.println("id======"+id);
-        System.out.println("nam======="+name);
-        System.out.println();
         List<SkuProperty> list=skuPropertyService.seleAll(id,name);
-        System.out.println(list);
         Object obj= JSON.toJSONString(list);
         System.out.println(obj);
         return obj;
