@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/swiper.min.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/amazeui.css">
+    <link rel="stylesheet" href="/css/hmstyle.css">
     <script src="/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
     <script src="/js/bootstrap.min.js" charset="UTF-8"></script>
     <script src="/js/swiper.min.js" charset="UTF-8"></script>
@@ -16,6 +18,8 @@
     <script src="/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
     <script src="/js/fenye.js" charset="UTF-8"></script>
     <script src="/js/sortcon.js" charset="UTF-8"></script>
+    <script src="/js/Notice.js" charset="UTF-8"></script>
+
     <title>U袋网</title>
 </head>
 <body>
@@ -180,11 +184,11 @@
 <!-- 顶部轮播 -->
 <div class="swiper-container banner-box">
     <div class="swiper-wrapper">
-        <div class="swiper-slide"><a href="item_show.html"><img src="images/temp/banner_1.jpg" class="cover"></a></div>
-        <div class="swiper-slide"><a href="item_show.html"><img src="images/temp/banner_2.jpg" class="cover"></a></div>
-        <div class="swiper-slide"><a href="item_category.html"><img src="images/temp/banner_3.jpg" class="cover"></a></div>
-        <div class="swiper-slide"><a href="item_show.html"><img src="images/temp/banner_4.jpg" class="cover"></a></div>
-        <div class="swiper-slide"><a href="item_sale_page.html"><img src="images/temp/banner_5.jpg" class="cover"></a></div>
+        <div class="swiper-slide"><a href="item_show.html"><img src="/images/temp/banner_1.jpg" class="cover"></a></div>
+        <div class="swiper-slide"><a href="item_show.html"><img src="/images/temp/banner_2.jpg" class="cover"></a></div>
+        <div class="swiper-slide"><a href="item_category.html"><img src="/images/temp/banner_3.jpg" class="cover"></a></div>
+        <div class="swiper-slide"><a href="item_show.html"><img src="/images/temp/banner_4.jpg" class="cover"></a></div>
+        <div class="swiper-slide"><a href="item_sale_page.html"><img src="/images/temp/banner_5.jpg" class="cover"></a></div>
     </div>
     <div class="swiper-pagination"></div>
 </div>
@@ -197,14 +201,79 @@
 <!-- 楼层内容 -->
 <div class="content inner" style="margin-bottom: 40px;">
     	<section class="scroll-floor floor-1 clearfix">
+            <!-- 秒杀抢购 -->
+            <div class="am-container">
+
+                <div class="sale-mt">
+                    <i></i>
+                    <em class="sale-title">限时秒杀</em>
+                    <div class="s-time" id="countdown">
+                        <span class="hh">01</span>
+                        <span class="mm">20</span>
+                        <span class="ss">59</span>
+                    </div>
+                </div>
+
+
+                <div class="am-g am-g-fixed sale">
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="# "><img src="/images/timg.jpg" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="#"><p class="s-title">ZEK 莉哥o3o</p></a>
+                            <div class="s-price">￥<b>9.90</b>
+                                <a class="s-buy" href="#">秒杀</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="# "><img src="/images/timg.jpg" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="#"><p class="s-title">ZEK 莉哥o3o</p></a>
+                            <div class="s-price">￥<b>9.90</b>
+                                <a class="s-buy" href="#">秒杀</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="# "><img src="/images/timg.jpg" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="#"><p class="s-title">ZEK 莉哥o3o</p></a>
+                            <div class="s-price">￥<b>9.90</b>
+                                <a class="s-buy" href="#">秒杀</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="# "><img src="/images/timg.jpg" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="#"><p class="s-title">ZEK 莉哥o3o </p></a>
+                            <div class="s-price">￥<b>9.90</b>
+                                <a class="s-buy" href="#">秒杀</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <div class="pull-left">
                 <div class="floor-title">
                     <i class="iconfont icon-tuijian fz16"></i> 爆款推荐
-                    <a href="/proxiao.html?product=xiaoliang" class="more"><i class="iconfont icon-more"></i></a>
+                    <a href="/proxiao.html" class="more"><i class="iconfont icon-more"></i></a>
                 </div>
                 <div class="con-box">
-                    <a class="left-img hot-img" href="/proxiao.html?product=xiaoliang">
-                        <img src="images/floor_1.jpg" alt="" class="cover">
+                    <a class="left-img hot-img" href="/proxiao.html">
+                        <img src="/images/floor_1.jpg" alt="" class="cover">
                     </a>
                     <div class="right-box hot-box">
                         <#list list4 as product>
@@ -214,7 +283,7 @@
                                     <img src="${product.productPic.picPath}" alt="${product.productName}" class="cover">
                                 </div>
                                 <div class="price clearfix">
-                                    <span class="pull-left cr fz16">￥${product.price}</span>
+                                    <span class="pull-left cr fz16">￥${product.sku.price}</span>
                                     <span class="pull-right c6">进货价</span>
                                 </div>
                                 <div class="name ep" title="${product.productName}">${product.productName}</div>
@@ -232,7 +301,7 @@
                     <div class="con-box">
                         <div class="notice-box bgf5">
                             <div class="swiper-container">
-                        <div class="swiper-wrapper">
+                        <div class="swiper-wrapper" id="info">
                             <a class="swiper-slide ep" href="udai_notice.html">【公告】U袋网平台已上线，您还在等什么呢？是吧~</a>
                             <a class="swiper-slide ep" href="udai_notice.html">【资讯】P站服务器爆炸啦。国内86%地区IP被限制~</a>
                             <a class="swiper-slide ep" href="udai_notice.html">【公告】六趣公司9月底将彻底关闭66RPG论坛~</a>
@@ -282,19 +351,13 @@
    </section>
 <section class="scroll-floor floor-2">
     <div class="floor-title">
-        <i class="iconfont icon-skirt fz16"></i>最新推荐
-        <div class="case-list fz0 pull-right">
-            <a href="item_category.html">最新女装</a>
-            <a href="item_category.html">时尚女装</a>
-            <a href="item_category.html">最新上装</a>
-            <a href="item_category.html">最新下装</a>
-            <a href="item_category.html">最新裙装</a>
-            <a href="item_category.html">最新内衣</a>
-        </div>
+        <i class="iconfont icon-tuijian fz16"></i>最新推荐
+        <a href="/proupdate.html" class="more"><i class="iconfont icon-more"></i></a>
     </div>
     <div class="con-box">
-        <a class="left-img hot-img" href="">
-            <img src="images/floor_2.jpg" alt="" class="cover">
+        <a class="left-img hot-img" href="/proupdate.html">
+            <img src="/images/floor_2.jpg" alt="" class="cover">
+
         </a>
         <div class="right-box">
             <#list list5 as newlist>
@@ -304,7 +367,7 @@
                     <img src="${newlist.productPic.picPath}" alt="${newlist.productName}" class="cover">
                 </div>
                 <div class="price clearfix">
-                    <span class="pull-left cr fz16">￥${newlist.price}</span>
+                    <span class="pull-left cr fz16">￥${newlist.sku.price}</span>
                     <span class="pull-right c6">进货价</span>
                 </div>
                 <div class="name ep" title="${newlist.productName}">${newlist.productName}</div>
@@ -328,12 +391,12 @@
     </div>
     <div class="con-box">
         <a class="left-img hot-img" href="">
-            <img src="images/floor_3.jpg" alt="" class="cover">
+            <img src="/images/floor_3.jpg" alt="" class="cover">
         </a>
         <div class="right-box">
             <a href="item_show.html" class="floor-item">
                 <div class="item-img hot-img">
-                    <img src="images/temp/M-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+                    <img src="/images/temp/M-001.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
                 </div>
                 <div class="price clearfix">
                     <span class="pull-left cr fz16">￥18.0</span>
@@ -343,7 +406,7 @@
             </a>
             <a href="item_show.html" class="floor-item">
                 <div class="item-img hot-img">
-                    <img src="images/temp/M-002.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+                    <img src="/images/temp/M-002.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
                 </div>
                 <div class="price clearfix">
                     <span class="pull-left cr fz16">￥18.0</span>
@@ -353,7 +416,7 @@
             </a>
             <a href="item_show.html" class="floor-item">
                 <div class="item-img hot-img">
-                    <img src="images/temp/M-003.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+                    <img src="/images/temp/M-003.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
                 </div>
                 <div class="price clearfix">
                     <span class="pull-left cr fz16">￥18.0</span>
@@ -363,7 +426,7 @@
             </a>
             <a href="item_show.html" class="floor-item">
                 <div class="item-img hot-img">
-                    <img src="images/temp/M-004.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+                    <img src="/images/temp/M-004.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
                 </div>
                 <div class="price clearfix">
                     <span class="pull-left cr fz16">￥18.0</span>
@@ -373,7 +436,7 @@
             </a>
             <a href="item_show.html" class="floor-item">
                 <div class="item-img hot-img">
-                    <img src="images/temp/M-005.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+                    <img src="/images/temp/M-005.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
                 </div>
                 <div class="price clearfix">
                     <span class="pull-left cr fz16">￥18.0</span>
@@ -383,7 +446,7 @@
             </a>
             <a href="item_show.html" class="floor-item">
                 <div class="item-img hot-img">
-                    <img src="images/temp/M-006.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+                    <img src="/images/temp/M-006.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
                 </div>
                 <div class="price clearfix">
                     <span class="pull-left cr fz16">￥18.0</span>
@@ -393,7 +456,7 @@
             </a>
             <a href="item_show.html" class="floor-item">
                 <div class="item-img hot-img">
-                    <img src="images/temp/M-007.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+                    <img src="/images/temp/M-007.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
                 </div>
                 <div class="price clearfix">
                     <span class="pull-left cr fz16">￥18.0</span>
@@ -403,7 +466,7 @@
             </a>
             <a href="item_show.html" class="floor-item">
                 <div class="item-img hot-img">
-                    <img src="images/temp/M-008.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
+                    <img src="/images/temp/M-008.jpg" alt="纯色圆领短袖T恤活a动衫弹" class="cover">
                 </div>
                 <div class="price clearfix">
                     <span class="pull-left cr fz16">￥18.0</span>
@@ -423,7 +486,7 @@
             autoplayDisableOnInteraction : false,
             pagination: '.banner-box .swiper-pagination',
             paginationClickable: true,
-            autoplay : 5000,
+            autoplay : 3000,
         });
         // 新闻列表滚动
         var notice_swiper = new Swiper('.notice-box .swiper-container', {
@@ -451,7 +514,7 @@
         </li>
         <li class="r-toolbar-item">
             <a href="udai_shopcart.html" class="r-item-hd">
-                <i class="iconfont icon-cart" data-badge="10"></i>
+                <i class="iconfont icon-cart" ></i>
                 <div class="r-tip__box"><span class="r-tip-text">购物车</span></div>
             </a>
         </li>

@@ -11,7 +11,8 @@
 		<link rel="stylesheet" type="text/css" href="/css/backstage/popup.css" />
 		<link rel="stylesheet" type="text/css" href="/css/backstage/table.css" />
 		<link rel="stylesheet" type="text/css" href="/css/backstage/upload.css" />
-		<link rel="stylesheet" href="/css/backstage/sku_style.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/sku_style.css" />
+		<link rel="stylesheet" type="text/css" href="/js/management/kindeditor/themes/default/default.css" />
 	</head>
 	<style type="text/css">
 		.hide111{display:none}
@@ -30,11 +31,11 @@
 					<dl>
 						<dt><span>类目</span></dt>
 						<dd>
-							<span class="leimu">${context}</span>
-							<input type="hidden" name="category01" class="category01" value="${oneId}">
-							<input type="hidden" name="category02" class="category02" value="${twoId}">
-							<input type="hidden" name="category03" class="category03" value="${threeId}">
-							<input type="button" value="编辑商品类目" class="button return" />
+							<input type="text" name="leimu" class="leimu" value="${context}" readonly />
+							<input type="hidden" name="category01" class="category01" value="${oneId}" />
+							<input type="hidden" name="category02" class="category02" value="${twoId}" />
+							<input type="hidden" name="category03" class="category03" value="${threeId}" />
+							<input type="button" value="编辑商品类目" class="button bianji" />
 						</dd>
 					</dl>
 					<dl>
@@ -71,9 +72,13 @@
 						    <input type="file" name="attach" id="pic1" class="hide111"/>
      						<input type="file" name="attach" id="pic2" class="hide111"/>
      						<input type="file" name="attach" id="pic3" class="hide111"/>
+								<input type="file" name="attach" id="pic4" class="hide111"/>
+								<input type="file" name="attach" id="pic5" class="hide111"/>
      						<label for="pic1" class="labelBtn2">上传图片</label>
 						    <label for="pic2" class="labelBtn2" style="display:none">上传图片</label>
      						<label for="pic3" class="labelBtn2" style="display:none">上传图片</label>
+								<label for="pic4" class="labelBtn2" style="display:none">上传图片</label>
+								<label for="pic5" class="labelBtn2" style="display:none">上传图片</label>
 						    </dd>
 						   </dl>
 						   <dl>
@@ -82,6 +87,8 @@
 						     <img src="#" width="80" height="80" class="tupian1" />
 						     <img src="#" width="80" height="80" class="tupian2"/>
 						     <img src="#" width="80" height="80" class="tupian3"/>
+								<img src="#" width="80" height="80" class="tupian4"/>
+								<img src="#" width="80" height="80" class="tupian5"/>
 						    </dd>
 						   </dl>
 							
@@ -91,48 +98,8 @@
 					<dl>
 						<dt><span>商品规格</span></dt>
 						<dd class="guige">
-							<ul class="SKU_TYPE">
-								<li is_required='1' propid='1' sku-type-name="存储"><em>*</em>存储：</li>
-							</ul>
-							<ul>
-								<li><label><input type="checkbox" class="sku_value" propvalid='11' value="16G" />16G</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='12' value="32G" />32G</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='13' value="64G" />64G</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='14' value="128G" />128G</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='15' value="256G" />256G</label></li>
-							</ul>
-							<div class="clear"></div>
-							<ul class="SKU_TYPE">
-								<li is_required='1' propid='2' sku-type-name="版本"><em>*</em>版本：</li>
-							</ul>
-							<ul>
-								<li><label><input type="checkbox" class="sku_value" propvalid='21' value="中国大陆版" />中国大陆版</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='22' value="港版" />港版</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='23' value="韩版" />韩版</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='24' value="美版" />美版</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='25' value="日版" />日版</label></li>
-							</ul>
-							<div class="clear"></div>
-
-							<ul class="SKU_TYPE">
-								<li is_required='0' propid='3' sku-type-name="颜色">颜色：</li>
-							</ul>
-							<ul>
-								<li><label><input type="checkbox" class="sku_value" propvalid='31' value="土豪金" />土豪金</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='32' value="银白色" />银白色</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='33' value="深空灰" />深空灰</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='34' value="黑色" />黑色</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='33' value="玫瑰金" />玫瑰金</label></li>
-							</ul>
-							<div class="clear"></div>
-							<ul class="SKU_TYPE">
-								<li is_required='1' propid='4' sku-type-name="类型"><em>*</em>类型：</li>
-							</ul>
-							<ul>
-								<li><label><input type="checkbox" class="sku_value" propvalid='41' value="儿童" />儿童</label></li>
-								<li><label><input type="checkbox" class="sku_value" propvalid='42' value="成人" />成人</label></li>
-							</ul>
-							<div class="clear"></div>
+							<div class="gg">
+							</div>
 							<!--<button class="cloneSku">添加自定义sku属性</button>-->
 
 							<!--sku模板,用于克隆,生成自定义sku-->
@@ -161,21 +128,24 @@
 							</li>
 							<div class="clear"></div>
 							<div id="skuTable"></div>
-
-							<input type="button" value="保存" class="button getSetSkuVal" />
-
-
 						</dd>
+					</dl>
+
+					<dl>
+						<dt><span>商品详情</span></dt>
+						<textarea id="editor_id" name="content" style="width:700px;height:300px;"></textarea>
 					</dl>
 
 					<dl>
 						<dt>&nbsp;</dt>
 						<dd>
-							<input type="submit" value="保存" class="button save" />
+							<input type="button" value="保存" class="button save getSetSkuVal" />
 						</dd>
 					</dl>
 
 				</form>
+
+
 			</div>
 		</div>
 
@@ -194,19 +164,28 @@
 			</div>
 		</div>
 		<!--蒙板结束-->
+		<!--对话框蒙板开始-->
+		<div class="mbStyle">&nbsp;</div>
+
 
 		<script type="text/javascript" src='/js/backstage/jquery-3.3.1.min.js'></script>
 		<script type="text/javascript" src="/js/backstage/global.js"></script>
+		<script type="text/javascript" src="/js/backstage/table.js"></script>
 		<script type="text/javascript" src="/js/backstage/popup.js"></script>
 		<script type="text/javascript" src="/js/backstage/upload.js"></script>
 		<script type="text/javascript" src="/js/management/addProject.js"></script>
-
-		<script type="text/javascript" src="/js/management/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/management/kindeditor/kindeditor-all-min.js"></script>
+		<script type="text/javascript" src="/js/management/kindeditor/lang/zh-CN.js"></script>
 		<script type="text/javascript" src="/js/management/createSkuTable.js"></script>
 		<script type="text/javascript" src="/js/management/customSku.js"></script>
 		<script type="text/javascript" src="/js/management/layer.js"></script>
 		<script type="text/javascript" src="/js/management/getSetSkuVals.js"></script>
 		<script type="text/javascript">
+
+            KindEditor.ready(function(K) {
+                window.editor = K.create('#editor_id');
+            });
+
 			//上传弹窗
 			$(function() {
 				$("#upload").click(function() {
@@ -215,6 +194,10 @@
 					//弹框
 					mask(420, 270, true, "upfile");
 				});
+
+				$(".bianji").click(function () {
+					window.location.href="/commodity/goshangjia";
+                })
 
 			});
 			//表单验证   注意：文本提示的信息应在开始的时候全部写在placeholder中

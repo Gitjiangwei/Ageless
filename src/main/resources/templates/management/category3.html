@@ -8,17 +8,17 @@
 		<link rel="stylesheet" type="text/css" href="/css/backstage/global.css">
 		<link rel="stylesheet" type="text/css" href="/css/backstage/table.css">
 		<link rel="stylesheet" type="text/css" href="/css/backstage/page.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/popup.css" />
 		<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
 	</head>
 
 	<body>
 		<div class="container">
-			<h1 class="tabTitle"><span onclick="NewPage('table.html')"><img src="/images/backstage/xjt.png"/></span>三级分类</h1>
+			<h1 class="tabTitle"><span onclick="NewPage('/CateThree/goThree')"><img src="/images/backstage/xjt.png"/></span>三级分类</h1>
 			<div class="serach">
 				
 				一级分类：<select class="textStyle" style="width:80px;" id="onecate">
-						<option>衣服</option>
-						<option>鲜花</option>
+
 					</select>
 				二级分类：<select class="textStyle" style="width:80px;" id="twocate">
 
@@ -29,54 +29,12 @@
 				
 				
 			</div>
+			<div class="mbStyle">&nbsp;</div>
 
 			<!--搜索区结束-->
 			<div class="info">
 				<table cellpadding="0" cellspacing="0" border="0" class="selectTable" id="tableData">
 					<thead id="there">
-						<tr>
-							<th>&nbsp;</th>
-							<th>编号</th>
-							<th>分类名</th>
-                            						<th>操作</th>
-						</tr>
-						<tr>
-							<th>&nbsp;</th>
-							<th>001</th>
-							<th>栀子花</th>
-                            						<th>删除 <span  class="aaa">修改</span><span  style="display:none;"><input type="text" class="textStyle" style="width:60px;"><a>提交</a></span></th>
-						</tr>
-						<tr>
-							<th>&nbsp;</th>
-							<th>002</th>
-							<th>月季</th>
-                            						<th>删除 <span  class="aaa">修改</span><span  style="display:none;"><input type="text" class="textStyle" style="width:60px;"><a>提交</a></span></th>
-						</tr>
-						<tr>
-							<th>&nbsp;</th>
-							<th>003</th>
-							<th>康乃馨</th>
-                            						<th>删除 <span  class="aaa">修改</span><span  style="display:none;"><input type="text" class="textStyle" style="width:60px;"><a>提交</a></span></th>
-						</tr>
-						<tr>
-							<th>&nbsp;</th>
-							<th>004</th>
-							<th>茉莉花</th>
-                            						<th>删除 <span  class="aaa">修改</span><span  style="display:none;"><input type="text" class="textStyle" style="width:60px;"><a>提交</a></span></th>
-						</tr>
-						<tr>
-							<th>&nbsp;</th>
-							<th>005</th>
-							<th>曼陀罗</th>
-                            						<th>删除 <span  class="aaa">修改</span><span  style="display:none;"><input type="text" class="textStyle" style="width:60px;"><a>提交</a></span></th>
-						</tr>
-						<tr>
-							<th>&nbsp;</th>
-							<th>006</th>
-							<th>桂花</th>
-                            						<th>删除 <span  class="aaa">修改</span><span  style="display:none;"><input type="text" class="textStyle" style="width:60px;"><a >提交</a></span></th>
-						</tr>
-
 
 					</thead>
 					<!-- <tbody>
@@ -93,7 +51,7 @@
 					<input type="button" value="" class="button add addsortcon" id="" style="position:absolute; bottom:0; height:35px" /></p></div>
 					<div>
 						<input type="submit" value="提交"  class="button " id="insertThree">
-						<input type="submit" value="返回"  class="button ">
+						<input type="submit" value="返回" onclick="NewPage('/CateThree/goThree')" class="button ">
 					</div>
 					  <!--对话框蒙板开始-->
 					  <div class="mbStyle">&nbsp;</div>
@@ -105,10 +63,13 @@
 
 		<script src="/js/backstage/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="/js/backstage/table.js"></script>
+		<script type="text/javascript" src="/js/backstage/popup.js"></script>
 		<script type="text/javascript" src="/js/management/category3.js"></script>
+		<script type="text/javascript" src="/js/backstage/global.js"></script>
 		<script type="text/javascript">
 			$("#dianji").click(function(){
 			$("#xianshi").show();
+			$(".aaa").siblings().remove();
 				});
 				
 			$(function(){
@@ -117,9 +78,10 @@
 					var sortcon = '<input type="text" class="textStyle threetext" name="sProblem" style="width:80px;" onchange="addsortcon()">';
 					$(this).prev().append(sortcon);
 				});
-				$("#there").on("click",".aaa",	function(){
-					$(this).next().show();
-				});
+                $(document).on("click",".aaa",function(){
+                    var context = '<input type="text" class="textStyle" style="width:60px;"><span class="ti">提交</span>&nbsp;&nbsp;<span onclick=NewPage("/CateThree/goThree")>返回</span>'
+                    $(this).next().html(context);
+                });
 			});
 
 		</script>

@@ -183,13 +183,16 @@
 						</div>
 					</div>
 					<script src="js/jquery.citys.js"></script>
-					<script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
+					<!--<script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>-->
 					<script>
                         $(".but").click(function () {
                             var province=$("#province").text();
                             var city=$("#city").text();
                             var area=$("#area").text();
                             var street=$("#street").text();
+
+                            var ds_area = $("#ds_area").text();
+                            var ds_town = $("#ds_town").text();
 
                             if($("#name").val()==""){
                                 alert("请输入姓名");
@@ -202,6 +205,20 @@
                             if(city=="请选择"){
                                 alert("请选择市");
                                 return;
+                            }
+                            if(ds_area!="" && area=="请选择"){
+                                alert("请选择区")
+								 return;
+							}
+                            if(ds_town!="" && street=="请选择"){
+                                alert("请选择街区")
+                                return;
+                            }
+                            if(ds_area==""){
+                                area="";
+                            }
+                            if(ds_town==""){
+                                street="";
                             }
                             if(area=="请选择"){
                                 area="";
@@ -454,7 +471,7 @@
 					<div class="tdf2">所在地</div>
 					<div class="tdf3"><div class="tdt-a_l">详细地址</div></div>
 					<!-- <div class="tdf1">邮编</div> -->
-					<div class="tdf1">电话/手机</div>
+					<div class="tdf1">手机号</div>
 					<div class="tdf1">操作</div>
 					<div class="tdf1"></div>
 				</div>

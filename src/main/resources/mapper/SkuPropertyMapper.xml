@@ -8,7 +8,7 @@
 		FROM `skuoption` AS a,`skuproperty` AS s,`categorythree` AS d
 		WHERE a.productId =s.id AND s.categoryId =d.id
 		<if test="id != 0">
-			AND d.parentId =${id}
+			AND s.categoryId =${id}
 		</if>
 		<if test="name != null and name !=''">
 			AND s.propertyName   LIKE CONCAT("%",#{name},"%")
@@ -19,7 +19,7 @@
 		<result column="propertyName" property="propertyName"></result>
 		<result column="categoryName" property="categoryName"></result>
 		<collection property="list" ofType="SkuOption">
-			<id column="oid" property="productId"></id>
+			<id column="oid" property="id"></id>
 			<result column="optionName" property="optionName"></result>
 		</collection>
 	</resultMap>

@@ -15,7 +15,7 @@ function nav(){
             three +='<tr><th>&nbsp;</th> <th>编号</th> <th>分类名</th><th>操作</th></tr>'
             data.map(function(item,index){
                 threeCategory +='<tr><th>&nbsp;</th><th>'+item.id+'</th><th>'+item.categoryName+'</th>'
-                    +'<th><button class="del" value='+item.id+'>删除</button> <span  class="aaa">修改</span><span  style="display:none;"><input type="text" class="textStyle" style="width:60px;" id="threename"><a  id="threetijiao">提交</ a></span></th></tr>';
+                    +'<th><button class="del" onclick="nav2('+item.id+')">删除</button> <span  class="aaa">修改</span><span cid='+item.id+'></span></th></tr>';
             });
             $("#there").html("");
             $("#there").html(three+threeCategory);
@@ -72,16 +72,16 @@ $("#sousuo").click(function(){
             three +='<tr><th>&nbsp;</th> <th>编号</th> <th>分类名</th><th>操作</th></tr>'
             data.map(function(item,index){
                 threeCategory +='<tr><th>&nbsp;</th><th>'+item.id+'</th><th>'+item.categoryName+'</th>'
-                    +'<th><button class="del" value='+item.id+' >删除</button> <span  class="aaa">修改</span><span  style="display:none;"><input type="text" class="textStyle" style="width:60px;" id="threename"><a id="threetijiao">提交</ a></span></th></tr>';
+                    +'<th><button class="del" onclick="nav2('+item.id+')" >删除</button> <span  class="aaa">修改</span><span cid='+item.id+'></span></th></tr>';
             });
             $("#there").html("");
             $("#there").html(three+threeCategory);
         }
     });
 });
-$("#there").on("click","#threetijiao",	function(){
-    var name=$("#threename").val();
-    var id=$(".del").val();
+$(document).on("click",".ti",function(){
+    var name = $(this).prev().val();
+    var id = $(this).parent().attr("cid");
    $.ajax({
         type:"GET",
         url:"/CateThree/Threeupdate",
@@ -89,32 +89,39 @@ $("#there").on("click","#threetijiao",	function(){
         dataType:"JSON",
         success:function(data) {
             if(data=="1"){
-                alert("修改成功");
+                showWebAlert("修改成功");
                 nav();
+            }else{
+                showWebAlert("修改失败");
             }
         },error:function(){
-           alert("失败");
+           showWebAlert("系统错误");
        }
     });
 });
-$("#there").on("click",".del",	function(){
-    var id=$(this).val();
-    alert(id);
-    $.ajax({
-        type:"GET",
-        url:"/CateThree/Threedelete",
-        data:{"id":id},
-        dataType:"JSON",
-        success:function(data) {
-            if(data=="1"){
-                alert("删除成功");
-                nav();
+function nav2(id) {
+    deleteShowAlert('删除提示', '确定要删除吗？', '确定', '取消', id,'删除后该类型下面的信息将全部删除');
+}
+function result(bz, choose) {
+    if(choose) {
+        $.ajax({
+            type: "GET",
+            url: "/CateThree/Threedelete",
+            data: {"id": bz},
+            dataType: "JSON",
+            success: function (data) {
+                if (data == "1") {
+                    showWebAlert("删除成功");
+                    nav();
+                } else {
+                    showWebAlert("删除失败");
+                }
+            }, error: function () {
+                showWebAlert("系统错误");
             }
-        },error:function(){
-            alert("失败");
-        }
-    });
-});
+        });
+    }
+}
 $("#insertThree").click(function(){
     var id=$("#twocate").val();
     var name=$(".threetext");
@@ -124,7 +131,6 @@ $("#insertThree").click(function(){
         tempObj=$(item).val();
         names.push(tempObj);
     });
-    alert(names.toString());
    if(id!=null && id!=""){
        $.ajax({
            type:"GET",
@@ -133,15 +139,20 @@ $("#insertThree").click(function(){
            dataType:"JSON",
            success:function(data) {
                if(data.result=="success"){
-                   alert("添加成功");
+                   showWebAlert("添加成功");
                    nav();
+                   $("#xianshi").hide();
+                   $(".sortcon :first").val("");
+                   $(".sortcon :first").siblings().remove();
+               }else{
+                   showWebAlert("添加失败");
                }
            },error:function(){
-               alert("失败");
+               showWebAlert("系统错误");
            }
        });
    }else{
-       alert("请选择二级分类");
+       showWebAlert("请选择二级分类");
    }
 
 });

@@ -28,6 +28,9 @@ public interface ShopCartService {
      */
 
     public int delshop(Integer id );
+    //根据id查询
     public ShoppingCart queryShopChecked(Integer productId);
 
+    //根据商品id修改件数
+    public int repairNumberById(ShoppingCart shoppingCart);
 }

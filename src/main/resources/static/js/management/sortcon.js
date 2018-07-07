@@ -115,7 +115,7 @@ $('#dianji').click(function () {
    if(zhi>0){
        $("#yc").css("display","block");
    }else{
-       alert("请选择要添加属性的三级分类");
+       showWebAlert("三级分类不能为空！");
    }
 
     });
@@ -176,7 +176,7 @@ $('#dianji').click(function () {
             });
         }
         if(isHaveThisSkuType){
-            alert("该SKU类型已经存在!");
+            showWebAlert("该SKU类型已经存在!");
             $(this).val("");
             fag=false;
         }
@@ -208,7 +208,7 @@ $('#dianji').click(function () {
         });
 
         if(isHaveSkuVal){
-            alert("该SKU类型已经存在!");
+            showWebAlert("该SKU类型已经存在!");
             $(this).val("");
             fag=false;
         }
@@ -302,9 +302,9 @@ if(fag){
         dataType: "json",
         success: function (data) {
             if(data==true){
-                alert("添加成功")
+                showWebAlert("添加成功")
             }else{
-                alert("添加失败")
+                showWebAlert("添加失败")
             }
             window.location.href="/sort/sortcon";
         },

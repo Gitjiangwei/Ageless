@@ -29,7 +29,7 @@
 
 		,productpic.picPath,product.productName,sku.SKUcon FROM shoppingcart
 
-		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
+		LEFT  JOIN sku ON shoppingcart.skuid=sku.skuid
 
 		LEFT  JOIN productpic ON shoppingcart.productId=productpic.tuid
 
@@ -38,29 +38,36 @@
 		ORDER BY shoppingcart.id DESC
 
 
+
      </select>
      <delete id="delshop" parameterType="ShoppingCart" >
             DELETE FROM shoppingcart WHERE id = #{id}
 	 </delete>
 
 	<!--查询购物车中要进行结算的商品-->
-	<select id="queryShopChecked" resultType="ShoppingCart" parameterType="int">
+	<select id="queryShopChecked" resultType="ShoppingCart" parameterType="Integer">
+
 
 	SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
 
 		,productpic.picPath,product.productName,sku.SKUcon  FROM shoppingcart
 
-		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
+		LEFT  JOIN sku ON shoppingcart.skuid=sku.SKUId
 
 		LEFT  JOIN productpic ON shoppingcart.productId=productpic.tuid
 
 		LEFT  JOIN product ON shoppingcart.productId=product.productId
-			WHERE shoppingcart.productId in (#{ productId })
+			WHERE shoppingcart.id = #{productId}
 		 GROUP BY shoppingcart.id
 
 		ORDER BY shoppingcart.id DESC
 
 
      </select>
+
+
+	<update id="repairNumberById" parameterType="ShoppingCart" >
+		UPDATE shoppingcart SET orderamount=#{orderamount} WHERE id=#{id}
+	</update>
 
 </mapper>

@@ -1,7 +1,6 @@
 package com.ageless.service;
 
 import com.ageless.pojo.*;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +21,8 @@ public interface ProductService {
     Product selectPoroductById(Integer id);
 
     public List<Product> selectall(Integer id);
+
+    int add(Product pro);
+
+    int modifyProduct(Product pro);
 }
