@@ -183,7 +183,7 @@
 						</div>
 					</div>
 					<script src="js/jquery.citys.js"></script>
-					<script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
+					<!--<script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>-->
 					<script>
                         $(".but").click(function () {
                             var province=$("#province").text();
@@ -204,6 +204,14 @@
                             }
                             if(city=="请选择"){
                                 alert("请选择市");
+                                return;
+                            }
+                            if(ds_area!="" && area=="请选择"){
+                                alert("请选择区")
+								 return;
+							}
+                            if(ds_town!="" && street=="请选择"){
+                                alert("请选择街区")
                                 return;
                             }
                             if(ds_area==""){

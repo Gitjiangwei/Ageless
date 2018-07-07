@@ -1,8 +1,6 @@
 package com.ageless.service;
 
 import com.ageless.pojo.Product;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -31,4 +29,6 @@ public interface ShangService {
      * @return
      */
     public int update1(List list);
+
+    public int updateByTime(String date);
 }

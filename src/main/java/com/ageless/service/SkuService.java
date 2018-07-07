@@ -8,4 +8,7 @@ public interface SkuService {
 
     int addSku(List<Sku> sk, Integer productId);
 
+    /*int modifySku(Sku sku);*/
+
+    int deleteSku(Integer productId);
 }

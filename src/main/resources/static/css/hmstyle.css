@@ -788,9 +788,15 @@ filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#f8c375',endCo
 
 
 
-}   
-	   
-	   
+}
+
+.kucun{
+	width: 100px;
+	color: #999;
+}
+.s-title{
+	height: 40px;
+}
 	   
 	   
 	   

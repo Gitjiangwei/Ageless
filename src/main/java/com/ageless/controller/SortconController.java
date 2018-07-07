@@ -1,17 +1,23 @@
 package com.ageless.controller;
 
+import com.ageless.mapper.CategoryOneMapper;
+import com.ageless.mapper.SortMapper;
 import com.ageless.pojo.CategoryOne;
+import com.ageless.pojo.CategoryThree;
 import com.ageless.pojo.Sort;
+import com.ageless.pojo.Sortcon;
 import com.ageless.service.CategoryOneService;
 import com.ageless.service.SortService;
 import com.ageless.service.SortconService;
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/sort")
@@ -25,14 +31,14 @@ public class SortconController {
 
     @RequestMapping(value = "/sortcon")
     public String selectAll(@RequestParam(required = false) String name,@RequestParam(required = false)String categoryName,
-                            @RequestParam(required = false)Integer categoryThree, HttpSession session){
+                            @RequestParam(required = false)Integer categoryThree,@RequestParam(required = false)Integer sortId, HttpSession session){
         System.out.print(categoryThree+"------------------------------");
         if (name == "") {
             name=null;
         }
 
         List<CategoryOne> lg=categoryOneService.Onelist(categoryName);
-        List<Sort> ls= sortconService.selectAll(name,categoryThree);
+        List<Sort> ls= sortconService.selectAll(name,categoryThree,sortId);
         session.setAttribute("category",lg);
 
 
@@ -41,25 +47,16 @@ public class SortconController {
         return "/management/sortcon";
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/selects")
-    public Object selects(@RequestParam(required = false)Integer categoryThree){
-        List<Sort> ls= sortconService.selectAll(null,categoryThree);
-        System.out.println(ls.get(0).getSortcons());
-        Object ob = JSONArray.toJSONString(ls);
-        return ob;
-    }
-
     @RequestMapping(value = "/sortcon",method = RequestMethod.POST)
     public String selectAll1(@RequestParam(required = false) String name,@RequestParam(required = false)String categoryName,
-                            @RequestParam(required = false)Integer categoryThree, HttpSession session){
+                            @RequestParam(required = false)Integer categoryThree,@RequestParam(required = false)Integer sortId, HttpSession session){
         System.out.print(categoryThree+"------------------------------");
         if (name == "") {
             name=null;
         }
 
         List<CategoryOne> lg=categoryOneService.Onelist(categoryName);
-        List<Sort> ls= sortconService.selectAll(name,categoryThree);
+        List<Sort> ls= sortconService.selectAll(name,categoryThree,sortId);
         session.setAttribute("category",lg);
 
 
@@ -70,9 +67,13 @@ public class SortconController {
 @RequestMapping(value = "/del")
 @ResponseBody
     public Object del(@RequestParam(required = false)Integer id){
-
         boolean f=sortconService.delSortcon(id);
-         boolean falg=sortconService.delSort(id);
+        boolean falg=false;
+        if(f==true){
+            falg=sortconService.delSort(id);
+        }
+
+
         if(falg==true&&f==true){
             return "true";
         }else if(falg==false&&falg==false){
@@ -102,7 +103,44 @@ public class SortconController {
      }else{
          return "error";
      }
-
   }
+
+    @RequestMapping(value = "/xiugai")
+    @ResponseBody
+    public Object xiugai(@RequestParam(required = false)Integer categoryThree,@RequestParam(required = false)Integer sortId,HttpSession session){
+       System.out.println(sortId);
+        List<Sort> ls= sortconService.selectAll(null,null,sortId);
+        Object obj=JSON.toJSONString(ls);
+        System.out.println(obj);
+          return obj;
+    }
+
+
+    @RequestMapping(value = "/xiu")
+    @ResponseBody
+    public Object xiugai1(@RequestParam(required = false)Integer id,@RequestParam(required = false)String name,HttpSession session){
+        System.out.println(id);
+        int result=sortconService.update(id,name) ;
+       if(result>0){
+           return "1";
+       }else {
+           return "0";
+       }
+
+    }
+
+    @RequestMapping(value = "/update")
+    @ResponseBody
+    public Object update(@RequestParam(required = false)Integer sortconid,@RequestParam(required = false)String sortconname,HttpSession session){
+        System.out.println(sortconid);
+        int result=sortService.update(sortconid,sortconname);
+        if(result>0){
+            return "1";
+        }else {
+            return "0";
+        }
+
+    }
+
 }
 

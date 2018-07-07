@@ -25,5 +25,7 @@ public interface ProductMapper {
 
      int add(Product pro);
 
+     int modifyProduct(Product pro);
+
      List<Sku> selectNullSkuByOptId(@Param("list") List<Integer> list,@Param("productId") Integer productId);
 }

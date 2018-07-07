@@ -3,6 +3,7 @@ package com.ageless.service;
 import com.ageless.pojo.Product;
 import com.ageless.pojo.Sort;
 import com.ageless.pojo.Sortcon;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -45,4 +46,7 @@ public interface SortService {
      * @return
      */
     int addSortcon(List<Sortcon> ls,Integer id);
+
+
+    int update(Integer sortconid,String sortconname);
 }

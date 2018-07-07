@@ -21,9 +21,12 @@ public class UploadUtil {
         if (commonsMultipartResolver.isMultipart(request)) {
             MultipartHttpServletRequest multipartHttpServletRequest =(MultipartHttpServletRequest)request;
             List<String> li = new ArrayList<>();
-            for (int i = 1 ; i<=3 ; i++){
+            for (int i = 1 ; i<=Contants.imgNums ; i++){
                 String name = "shopImg"+i;
                 shopImg =multipartHttpServletRequest.getFile(name);
+                if(shopImg == null){
+                    break;
+                }
                 String img = addImg(pro,shopImg.getInputStream(),shopImg.getOriginalFilename());
                 li.add(img);
             }

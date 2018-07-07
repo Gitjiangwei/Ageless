@@ -1,7 +1,6 @@
 package com.ageless.service;
 
 import com.ageless.pojo.*;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,4 +25,6 @@ public interface ProductService {
     int add(Product pro);
 
     List<Sku> selectNullSkuByOptId(List<Integer> list,Integer productId);
+
+    int modifyProduct(Product pro);
 }

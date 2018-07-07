@@ -17,6 +17,11 @@ public class ShangServiceImpl implements ShangService {
         return result;
     }
 
+    @Override
+    public int updateByTime(String date) {
+        return shangmapper.updateByTime(date);
+    }
+
 
     @Override
     public  List<Product> cha2() {

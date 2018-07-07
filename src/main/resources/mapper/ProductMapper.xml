@@ -154,8 +154,8 @@
         #{downdate},
         #{status},
         #{kucun},
-        #{xiaoliang},
-        #{comment},
+        0,
+        0,
         #{sendScore},
         #{category01},
         #{category02},
@@ -164,6 +164,36 @@
         #{sortConId}
         )
     </insert>
+
+    <update id="modifyProduct" parameterType="Product">
+        update product
+        <set>
+            <if test="productName!=null and productName!=''">
+                productName = #{productName},
+            </if>
+            <if test="descript!=null and descript!=''">
+                descript = #{descript},
+            </if>
+            <if test="maidian!=null and maidian!=''">
+                maidian = #{maidian},
+            </if>
+            <if test="status!=null and status!=0">
+                status = #{status},
+            </if>
+            <if test="price!=null and price!=0">
+                price = #{price},
+            </if>
+            <if test="kucun!=null and kucun!=0">
+                kucun = #{kucun},
+            </if>
+            <if test="sortConId!=null and sortConId!=''">
+                sortconId = #{sortConId},
+            </if>
+            `update`= #{update},
+            downdate = #{downdate}
+        </set>
+        where id = #{id}
+    </update>
 
     <select id="selectNullSkuByOptId" resultType="com.ageless.pojo.Sku">
         SELECT 	SKUId,
