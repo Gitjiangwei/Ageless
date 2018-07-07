@@ -286,10 +286,10 @@
                     success: function (data) {
 
                         $("#option").html("");
-                        var str='<p>属性名：<input type="text" class="textStyle" style="width:80px;"value='+data[0].name+'  readonly="readonly"  /> <a href="#"  class="aaa"> 修改</a><span cid='+data[0].id+' class="t"></span></p><p>属性选项：'
+                        var str='<p>属性名：<input type="text" class="textStyle ming" style="width:80px;"value='+data[0].name+'  readonly="readonly"  /> <a href="#"  class="aaa"> 修改</a><span cid='+data[0].id+' class="t"></span></p><p>属性选项：'
                         $.each(data[0].sortcons, function (i, item) {
 
-                            str+='<input type=\"text\" class=\"textStyle\" name=\"sProblem\" style=\"width:80px;\" value='+item.sortconname+'  readonly="readonly" /><a href="#" class="bbb">修改</a><span sid='+item.sortconid+' class="t"></span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+                            str+='<input type=\"text\" id=\"op'+item.sortconid+'\" class=\"textStyle\" name=\"sProblem\" style=\"width:80px;\" value='+item.sortconname+'  readonly="readonly" /><a href="#" class="bbb">修改</a><span sid='+item.sortconid+' class="t"></span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
                         });
 
                         str+='</p>'
