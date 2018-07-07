@@ -129,6 +129,9 @@ $(function(){
         var shopImg3 = $("#pic3")[0].files[0];
         var shopImg4 = $("#pic4")[0].files[0];
         var shopImg5 = $("#pic5")[0].files[0];
+        if(shopImg1==null || shopImg1==""){
+            alert("请输入商品照片！");
+        }
         var formData = new FormData();
         formData.append("shopImg1",shopImg1);
         formData.append("shopImg2",shopImg2);
