@@ -20,7 +20,7 @@ public class SkuproPertyController {
     public String su(ModelAndView mv){
 
 
-            return "/management/sortcon1";
+            return "/backstage/sortcon1";
 
     }
     @ResponseBody
