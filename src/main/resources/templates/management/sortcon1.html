@@ -9,8 +9,106 @@
     <link rel="stylesheet" type="text/css" href="/css/backstage/table.css">
     <link rel="stylesheet" type="text/css" href="/css/backstage/page.css">
     <link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
+    <link rel="stylesheet" type="text/css" href="/css/backstage/popup.css" />
     <link rel="stylesheet" type="text/css" href="/css/backstage/add.css" />
     <link rel="stylesheet" type="text/css" href="/css/backstage/popup.css" />
+    <style type="text/css">
+
+
+        /*sku选择样式*/
+        li{list-style: none;margin-right:10px;}
+        li label{cursor: pointer;}
+        li{float: left;line-height: 30px;}
+        .clear{
+            clear: both;
+        }
+        .delCusSkuVal,
+        .delCusSkuType {
+            font-size: 14px;
+            text-decoration: none;
+            color: #666;
+        }
+
+        /*输入框样式*/
+        input[type="text"]{
+            height: 24px;
+            display: inline-block;
+            padding: 2px 12px;
+            font-size: 14px;
+            line-height: 24px;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        }
+        li input[type="text"]:focus {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+        }
+
+        /*按钮样式*/
+        .bc{
+            padding: 4px 10px;
+            border: none;
+            background: #34495e;
+            color: white;
+            font-size: 16.5px;
+            text-decoration: none;
+            text-shadow: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            -webkit-transition: 0.25s;
+            -moz-transition: 0.25s;
+            -o-transition: 0.25s;
+            transition: 0.25s;
+            -webkit-backface-visibility: hidden;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .quxiao{
+            padding: 4px 10px;
+            border: none;
+            background: #34495e;
+            color: white;
+            font-size: 16.5px;
+            text-decoration: none;
+            text-shadow: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            -webkit-transition: 0.25s;
+            -moz-transition: 0.25s;
+            -o-transition: 0.25s;
+            transition: 0.25s;
+            -webkit-backface-visibility: hidden;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .cloneSku{
+            margin: 10px 0 0 40px;
+            background-color: #3498db;
+        }
+        button:focus {
+            outline: none;
+        }
+        /*其他样式*/
+
+    </style>
 
 </head>
 
@@ -19,26 +117,23 @@
     <h1 class="tabTitle"><span onclick="NewPage('/sku/su')"><img src="/images/backstage/xjt.png"/></span>商品属性</h1>
     <div class="serach">
 
-        一级分类：<select class="textStyle" style="width:80px;">
-        <option>衣服</option>
-        <option>鲜花</option>
+        一级分类：
+
+        <select class="textStyle"  style="width:80px;" name="categoryLevel1" id="categoryLevel1" >
+            <option value="0">--请选择--</option>
+            <#list category as c> <option value="${c.id}">${c.categoryName}</option></#list>
+
+        </select>
+        二级分类：<select class="textStyle" style="width:80px;" name="categoryLevel2" id="categoryLevel2">
+        <option value="0">--请选择--</option>
     </select>
-        二级分类：<select class="textStyle" style="width:80px;">
-        <option>衣服</option>
-        <option>鲜花</option>
-    </select>
-        三级分类：<select class="textStyle" style="width:80px;" id="sid">
-        <option value="0">-.-</option>
-        <option value="1">衣服</option>
-        <option>鲜花</option>
+        三级分类：<select class="textStyle" style="width:80px;" id="sid" name="categoryThree">
+        <option value="0">--请选择--</option>
     </select>
         属性名：<input type="text" class="textStyle" style="width:120px;" id="sname"/>
         <input type="button" value="搜索" class="button search"  id="sousou"/>
-        <input type="button" value="新增" class="button add" id="dianji"/>
-
-
+        <input type="button" value="新增" class="button add"  id="dianji" />
     </div>
-
     <!--搜索区结束-->
     <div class="info">
         <table cellpadding="0" cellspacing="0" border="0" class="selectTable " id="tableData">
@@ -65,60 +160,126 @@
 
         <!--弹出框开始    "mb_"后面的值与里面的div名称必须保持一致-->
 
-        <div id="mb_stuInfo">&nbsp;</div>
-        <div class="popup" id="stuInfo">
-            <h1>新增属性<span class="closeX" onclick="closeMask('stuInfo')">X</span></h1>
-            <div class="pInfo">
-                <from action="" method="post">
-                    <br/>
-                    <div class="sort">
-                        <p>属性名：<input type="text" class="textStyle" style="width:80px;"/>
-                            <input type="button" value="" class="button add addsort"  /></p>
+        <!--弹出框开始    "mb_"后面的值与里面的div名称必须保持一致-->
+        <div class="mbStyle">&nbsp;</div>
+        <div id="yc" style="display: none;">
 
-                        <p>属性选项：<span class="sortcon"><input type="text" class="textStyle" name="sProblem" style="width:80px;" /></span>
-                            <input type="button" value="" class="button add addsortcon"  /></p></div>
+            <input type="button" value="添加属性" class="button add cloneSku" />
+            <!--sku模板,用于克隆,生成自定义sku-->
+            <div id="skuCloneModel" style="display: none;">
+                <div class="clear"></div>
+                <ul class="SKU_TYPE">
+                    <li is_required='0' propid='' sku-type-name="" >
+                        属性名：
 
-                </from>
+                        <input type="text" class="cusSkuTypeInput" />
+                        <a href="javascript:void(0);" class="delCusSkuType">删除</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+
+                        <input type="text" class="cusSkuValInput"  name="sortconname"/>
+                    </li>
+
+                    <input type="button" value="添加属性选项" class="button add cloneSkuVal" />
+                </ul>
+                <div class="clear"></div>
             </div>
-            <div class="pfooter">
-                <input type="button" value="保存" class="button save" />
-                <input type="button" value="返回" class="button" />
+            <!--单个sku值克隆模板-->
+            <li style="display: none;" id="onlySkuValCloneModel">
+                <input type="checkbox" class="model_sku_val" propvalid='' value="" />
+                <input type="text" class="cusSkuValInput"  />
+                <a href="javascript:void(0);" class="delCusSkuVal">删除</a>
+            </li>
+            <div class="clear"></div>
+            <div id="skuTable"></div>
 
-            </div>
+
+
+
+            <button class="bc">提交</button>
+            <button onclick="NewPage('/sort/sortcon')" class="bc">返回</button>
+
         </div>
 
     </div>
 
+
+
 </div>
+
+<div id="mb_stuInfo">&nbsp;</div>
+<div class="popup" id="stuInfo">
+    <h1>新增属性<span class="closeX" onclick="closeMask('stuInfo')">X</span></h1>
+    <div class="pInfo">
+        <from action="" method="post" id="option">
+            <br/>
+            <div class="sort">
+                <p>属性名：<input type="text" class="textStyle" style="width:80px;"/>
+                    <input type="button" value="" class="button add addsort"  /></p>
+
+                <p>属性选项：<span class="sortcon"><input type="text" class="textStyle" name="sProblem" style="width:80px;" /></span>
+                    <input type="button" value="" class="button add addsortcon"  /></p></div>
+
+        </from>
+    </div>
+    <div class="pfooter">
+        <input type="button" value="返回" class="button fanhui" />
+
+    </div>
+
+
+
+</div>
+</div>
+
 
 <script src="/js/backstage/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/js/backstage/table.js"></script>
 <script type="text/javascript" src="/js/backstage/global.js"></script>
-<script type="text/javascript" src="/js/backstage/popup.js"></script>
 <script type="text/javascript" src="/js/backstage/index.js"></script>
+<script type="text/javascript" src="/js/backstage/popup.js"></script>
 <script type="text/javascript" src="/js/backstage/sortcon1.js"></script>
 <script type="text/javascript">
+        $(function() {
+            $(document).on("click",".xg",function () {
+                    mask(400, 320, true, "stuInfo");
+                });
 
 
+            }
 
-    $(function(){
-        $("#dianji").click(function(){
-            mask(660, 540, true, "stuInfo");
-        });
+        );
 
-        $(".sort").on("click",".addsort",function(){
-            var sortcon = '<p>属性名：<input type="text" class="textStyle" style="width:80px;"/>'
-                +'<input type="button" value="" class="button add addsort" id="dianji" /></p>'
-                +'<p>属性选项：<span class="sortcon"><input type="text" class="textStyle" name="sProblem" style="width:80px;" /></span>'
-                +'<input type="button" value="" class="button add addsortcon" id="dianji" /></p>';
-            $(".sort").append(sortcon);
-            $(this).hide();
-        });
+    function xiu(num) {
+        $ .ajax({
+            type: "GET",
+            url: "/sku/xiugai",
+            data:{id:num},
+            dataType: "json",
+            success: function (data) {
 
-        $(".sort").on("click",".addsortcon",function(){
-            var sortcon = '<input type="text" class="textStyle" name="sProblem" style="width:80px;" onchange="addsortcon()">';
-            $(this).prev().append(sortcon);
-        });
+                $("#option").html("");
+                var str='<p>属性名：<input type="text" class="textStyle" style="width:80px;"value='+data[0].propertyName+'  readonly="readonly"  /> <a href="#"  class="aaa"> 修改</a><span cid='+data[0].id+' class="t"></span></p><p>属性选项：'
+                $.each(data[0].list, function (i, item) {
+
+                    str+='<input type=\"text\" class=\"textStyle\" name=\"sProblem\" style=\"width:80px;\" value='+item.optionName+'  readonly="readonly" /><a href="#" class="bbb">修改</a><span sid='+item.id+' class="t"></span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+                });
+
+                str+='</p>'
+                $("#option").html(str);
+            },
+
+        } );
+    }
+    $(document).on("click",".aaa",function(){
+        var context = '<span class="t"><input type="text" class="textStyle" style="width:60px;"><a href="#" class="ti t">提交</a><a href="#" class="qx">取消</a></span>'
+        $(this).next().html(context);
+    });
+    $(document).on("click",".bbb",function(){
+        var context = '<span ><input type="text" class="textStyle" style="width:60px;"><a href="#" class="tij">提交</a><a href="#" class="qx">取消</a></span>'
+        $(this).next().html(context);
     });
 
 </script>

@@ -9,12 +9,5 @@ public class SkuOption {
     private String optionName;
     private Integer productId;
 
-    @Override
-    public String toString() {
-        return "SkuOption{" +
-                "id=" + id +
-                ", optionName='" + optionName + '\'' +
-                ", productId=" + productId +
-                '}';
-    }
+
 }
