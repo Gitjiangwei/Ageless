@@ -71,18 +71,43 @@ $(function(){
 
        var product = {};
         product.productName = $("#productName").val();
+        alert(product.productName);
         product.maidian = $("#maidian").val();
-
+        if( product.productName ==null ||  product.productName==""){
+            showWebAlert("请输入完整信息！");
+            return false;
+        }
+        if( product.maidian ==null ||  product.maidian==""){
+            showWebAlert("请输入完整信息！");
+            return false;
+        }
         var propid = "";
         $(".sku_table_ss").map(function (index,item){
             propid += $(item).attr("propid")+",";//SKU值主键
         });
+        if(propid ==null || propid==""){
+            showWebAlert("请输入完整信息！");
+            return false;
+        }
         var nums = 0;
         var propvals = "";
         $(".sku_table_tr").map(function (index,item){
             var propvalids = $(item).attr("propvalids");//SKU值主键
-			var price = $(item).find(".setting_sku_price").val();
-			var kucun = $(item).find(".setting_sku_stock").val();
+            var price = $(item).find(".setting_sku_price").val();
+            if(price ==null || price=="" ){
+                alert("请输入完整信息！");
+                return false;
+            }else  if(isNaN(price)==true){
+                alert("价格只能为数字！");
+                return false;
+            }
+
+            var kucun = $(item).find(".setting_sku_stock").val();
+            if(kucun ==null || kucun=="" ){
+                alert("请输入完整信息！");
+            }else  if(isNaN(kucun)==true){
+                alert("库存只能为数字！");
+            }
             var propval = propvalids+","+price +","+kucun;
             propvals += propval + "-";
             nums += parseInt(kucun);
