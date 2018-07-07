@@ -26,7 +26,7 @@ public class SkuproPertyController {
     public String su(ModelAndView mv,@RequestParam(required = false)String categoryName, HttpSession session){
         List<CategoryOne> lg=categoryOneService.Onelist(categoryName);
         session.setAttribute("category",lg);
-            return "/management/sortcon1";
+            return "/backstage/sortcon1";
 
     }
     @ResponseBody
