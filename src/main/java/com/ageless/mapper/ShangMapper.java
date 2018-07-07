@@ -31,4 +31,5 @@ public interface ShangMapper {
      */
     public int update1(@Param("list")List list);
 
+    public int updateByTime(String date);
 }

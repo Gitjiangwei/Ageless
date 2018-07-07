@@ -130,4 +130,9 @@
             #{haha}
         </foreach>
     </update>
+    
+    <update id="updateByTime" parameterType="String">
+        update product set status = 0
+        where downdate = #{date}
+    </update>
 </mapper>
