@@ -127,7 +127,7 @@ public class ShangController {
         System.out.println(options);
         model.addAttribute("productId",id);
         model.addAttribute("options",options);
-        return "/management/modifyProject";
+        return "/backstage/modifyProject";
     }
 
     @ResponseBody

@@ -24,5 +24,7 @@ public interface ProductService {
 
     int add(Product pro);
 
+    List<Sku> selectNullSkuByOptId(List<Integer> list,Integer productId);
+
     int modifyProduct(Product pro);
 }

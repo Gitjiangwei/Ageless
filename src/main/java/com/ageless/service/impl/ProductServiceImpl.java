@@ -64,4 +64,9 @@ public class ProductServiceImpl implements ProductService {
     public int modifyProduct(Product pro) {
         return mapper.modifyProduct(pro);
     }
+
+    @Override
+    public List<Sku> selectNullSkuByOptId(List list,Integer productId) {
+        return mapper.selectNullSkuByOptId(list,productId);
+    }
 }

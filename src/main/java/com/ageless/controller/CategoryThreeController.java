@@ -2,7 +2,6 @@ package com.ageless.controller;
 
 import com.ageless.pojo.CategoryThree;
 import com.ageless.service.CategoryThreeService;
-import com.ageless.service.impl.CategoryThreeServiceImpl;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,7 +80,7 @@ public class CategoryThreeController {
     @RequestMapping(value="/goThree")
     public String GoTh(){
 
-        return "/management/category3";
+        return "/backstage/category3";
     }
 
     /**

@@ -23,7 +23,7 @@
 	<div class="tab-header">
 		<div class="inner">
 			<div class="pull-left">
-				<div class="pull-left">嗨，欢迎来到<span class="cr">U袋网</span></div>
+				<div class="pull-left">嗨，<span id="userName"></span>欢迎来到 <span class="cr">U袋网</span></div>
 				<a href="agent_level.html">网店代销</a>
 				<a href="temp_article/udai_article4.html">帮助中心</a>
 			</div>
@@ -119,13 +119,13 @@
 						<div class="user-form-group">
 							<label>生&nbsp;&nbsp;&nbsp;日：</label>
 							<select name="year" id="year">
-								<option value="">选择年份</option>
+								<option value="" id="years" >选择年份</option>
 							</select>
 							<select name="month" id="month">
-								<option value="">选择月份</option>
+								<option value="" id="months">选择月份</option>
 							</select>
 							<select id="days" class="day">
-								<option value="">选择日期</option>
+								<option value="" id="dayss">选择日期</option>
 							</select>
 
 						</div>
@@ -308,6 +308,62 @@
 </body>
 <script>
     $(function(){
+        $.ajax({
+            url:"/getUserInfo",
+            type:"post",
+            dataTyep:"text",
+            success:function (data) {
+                $("#userName").html(data.membership)
+                $("#membership").val(data.membership)
+                if(data.name==null){
+                    $("#user-id").val(data.name)
+                }else {
+                    $("#user-id").val(data.name)
+                }
+                if(data.sex=1){
+
+                }
+
+                if(data.sex!=null){
+                    alert(data.sex)
+                    switch (data.sex){
+                        case 1:$(".sex").val(1);break;
+                        case 2:$(".sex").val(2);break;
+                        default:$(".sex").val(0);break;
+                    }
+
+                }
+                var str=data.regtime
+                /**
+                 * 时间日期转换
+                 * @param str
+                 * @returns {string}
+                 */
+                function getMyDate(str){
+                    var oDate = new Date(str),
+                        oYear = oDate.getFullYear(),
+                        oMonth = oDate.getMonth()+1,
+                        oDay = oDate.getDate()
+                    oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) //最后拼接时间
+                    return oTime;
+                };
+                //补0操作
+                function getzf(num){
+                    if(parseInt(num) < 10){
+                        num = '0'+num;
+                    }
+                    return num;
+                }
+                var time=getMyDate(str)
+                var times=time.split("-")
+                $("#years").html(times[0]+"年")
+                $("#months").html(times[1]+"月")
+                $("#dayss").html(times[2]+"日")
+                $("#user-truename").val(data.truename)
+                $("#phone").val(data.phone)
+                $("#mailbox").val(data.mailbox)
+            }
+        })
         /**
 		 * 日期插件
 		 **/

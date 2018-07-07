@@ -44,7 +44,7 @@ public class SortconController {
 
         session.setAttribute("lis",ls);
         System.out.println("-----------"+ls);
-        return "/management/sortcon";
+        return "/backstage/sortcon";
     }
 
     @RequestMapping(value = "/sortcon",method = RequestMethod.POST)
@@ -62,7 +62,7 @@ public class SortconController {
 
         session.setAttribute("lis",ls);
         System.out.println("-----------"+ls);
-        return "/management/sortcon";
+        return "/backstage/sortcon";
     }
 @RequestMapping(value = "/del")
 @ResponseBody

@@ -37,11 +37,11 @@
                         <#if options?? && (options?size > 0) >
                             <#list options as opt>
                             <#if (opt.productId==pro.id)>
-                            <li onclick="sku(this)">
-                                <a <#list thefirst as fir><#if (opt.id==fir)>class="on" </#if></#list> role="button" data-value="${opt.optionName}" name="${opt.id}" aria-disabled="true">
-                                    <span>${opt.optionName}</span>
-                                </a>
-                            </li>
+                                <li <#if skuOptionIdss?? && (skuOptionIdss?size > 0) ><#if !skuOptionIdss?seq_contains(opt.id)> onclick="sku(this)" </#if><#else>onclick="sku(this)"</#if>>
+                                    <a <#list thefirst as fir><#if (opt.id==fir)>class="on" </#if></#list> role="button" data-value="${opt.optionName}" name="${opt.id}" <#if skuOptionIdss?? && (skuOptionIdss?size > 0) ><#list skuOptionIdss as opts><#if (opt.id==opts) && !thefirst?seq_contains(opt.id)> style="background-color: #ebebeb;cursor: not-allowed" </#if></#list></#if> aria-disabled="true">
+                                        <span>${opt.optionName}</span>
+                                    </a>
+                                </li>
                             </#if>
                             </#list>
                         </#if>
