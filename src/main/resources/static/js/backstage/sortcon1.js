@@ -358,6 +358,7 @@ $(document).on("click",".ti",function () {
             success: function (data) {
                 if(data==true){
                     alert("修改成功");
+                    $(".ming").val(name);
                     $(".t").html("");
                 }else{
                     alert("修改失败");
@@ -384,6 +385,7 @@ $(document).on("click",".tij",function () {
 
                 if(data==true){
                     alert("修改成功");
+                    $("#op"+sid).val(sortconname);
                     $(".t").html("");
                 }else{
                     alert("修改失败");
