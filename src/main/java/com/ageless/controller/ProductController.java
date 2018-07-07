@@ -149,12 +149,12 @@ public class ProductController {
 
     @GetMapping("/goshangjia")
     public String goshangjia(){
-        return "/management/category";
+        return "/backstage/category";
     }
 
     @GetMapping("/goxiajia")
     public String goxiajia(){
-        return "/management/shang";
+        return "/backstage/shang";
     }
 
     @GetMapping("/goaddproject")
@@ -164,7 +164,7 @@ public class ProductController {
         model.addAttribute("oneId",oneId);
         model.addAttribute("twoId",twoId);
         model.addAttribute("threeId",threeId);
-        return "/management/addProject";
+        return "/backstage/addProject";
     }
 
     @ResponseBody
