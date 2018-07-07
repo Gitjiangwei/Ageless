@@ -1,4 +1,4 @@
-package com.ageless.service.impl;
+/*package com.ageless.service.impl;
 
 import com.alipay.api.internal.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +53,4 @@ public class RedisUtil {
         return stringRedisTemplate.opsForValue().get(key);
     }
 
-}
+}*/

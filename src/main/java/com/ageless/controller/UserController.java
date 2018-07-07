@@ -5,13 +5,7 @@ import com.ageless.service.UserService;
 import com.ageless.util.GetSMS;
 import com.ageless.util.MD5;
 import com.ageless.util.RandUtil;
-import com.alipay.api.internal.util.StringUtils;
-/*import com.qq.connect.QQConnectException;
-import com.qq.connect.api.OpenID;
-import com.qq.connect.api.qzone.UserInfo;
-import com.qq.connect.javabeans.AccessToken;
-import com.qq.connect.javabeans.qzone.UserInfoBean;
-import com.qq.connect.oauth.Oauth;*/
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +14,20 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+/*import com.qq.connect.QQConnectException;
+import com.qq.connect.api.OpenID;
+import com.qq.connect.api.qzone.UserInfo;
+import com.qq.connect.javabeans.AccessToken;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
+import com.qq.connect.oauth.Oauth;*/
 
 /**
  * 用户
@@ -425,6 +423,19 @@ public class UserController {
             object="{\"back\":\"成功\"}";
         }
         return object;
+    }
+    /**
+     * 获取登录用户基本信息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getUserInfo")
+    public Object getUserInfo(HttpSession session){
+        Object object=null;
+        User user  = (User)session.getAttribute("user");
+        Object json = JSON.toJSON(user);
+        System.out.println("===================="+json);
+        return json;
     }
     /**
      * 生成QQ授权

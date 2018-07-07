@@ -7,11 +7,14 @@
 		SELECT a.id AS oid ,a.optionName,a.productId,s.id AS sid ,s.propertyName,s.categoryId,d.categoryName
 		FROM `skuoption` AS a,`skuproperty` AS s,`categorythree` AS d
 		WHERE a.productId =s.id AND s.categoryId =d.id
-		<if test="id != 0">
+		<if test="id != 0 and id!=null">
 			AND s.categoryId =${id}
 		</if>
 		<if test="name != null and name !=''">
 			AND s.propertyName   LIKE CONCAT("%",#{name},"%")
+		</if>
+		<if test="pid!=null and pid!=''">
+			and s.id=#{pid}
 		</if>
 	</select>
 	<resultMap id="sela" type="SkuProperty">
@@ -29,4 +32,32 @@
 	<delete id="shan1">
  		DELETE FROM `skuoption` WHERE productId =#{id}
 	</delete>
+
+
+	<insert id="add" >
+		<selectKey  keyProperty="id" resultType="int" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+		insert into skuproperty(propertyName,categoryId) VALUES(#{propertyName},#{categoryId});
+
+	</insert>
+	<!--添加sku选项-->
+	<insert id="addSkuOption" >
+
+		insert into skuoption(optionName,productId) values
+		<foreach collection="list" separator="," item="item">
+			(#{item.optionName},#{id})
+
+
+		</foreach>
+
+	</insert>
+
+	<update id="updateSku">
+		update skuproperty set propertyName=#{name} where id=#{id}
+	</update>
+
+	<update id="updateOption">
+		update skuoption set optionName=#{name} where id=#{id}
+	</update>
 </mapper>

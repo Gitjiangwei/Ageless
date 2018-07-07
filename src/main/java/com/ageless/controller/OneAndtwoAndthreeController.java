@@ -1,9 +1,12 @@
+/*
 package com.ageless.controller;
 
 import com.ageless.pojo.ProductAndPic;
+import com.ageless.pojo.Seckill;
 import com.ageless.pojo.oneAndtwoAndthree;
 import com.ageless.service.OneAndtwoAndthreeService;
 import com.ageless.service.ProductAndPicService;
+import com.ageless.service.SeckillService;
 import com.ageless.service.impl.RedisUtil;
 import com.alibaba.fastjson.JSON;
 import net.sf.json.JSONArray;
@@ -27,6 +30,8 @@ public class OneAndtwoAndthreeController {
     private ProductAndPicService productService;
     @Autowired
     RedisUtil redisUtil;
+    @Autowired
+    private SeckillService seckillService;
 
     @RequestMapping("/index.html")
     public String lists(Model model){
@@ -49,7 +54,10 @@ public class OneAndtwoAndthreeController {
         model.addAttribute("list4",list4);
         List<ProductAndPic> list5 =productService.Newlist();
         model.addAttribute("list5",list5);
+        List<Seckill> list6 = seckillService.selectSeckill();
+        model.addAttribute("list6",list6);
         return "index";
     }
 
 }
+*/

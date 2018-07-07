@@ -50,6 +50,26 @@ function shuzu() {
     return ary;
 }
 
+function paixumo(fu) {
+
+    $(fu).siblings('a').removeClass('qu');  // 删除其他兄弟元素的样式
+    $(fu).addClass('qu');// 添加当前元素的样式
+
+    var tiaojian = $(".qu").attr("name");
+    var mohu = $("#mohu").val();
+    $.ajax({
+        type: "post",
+        url: "/sort/selectmohufan",
+        data: {mohu:mohu,tiaojian: tiaojian},
+        success: function (data) {
+            $(".xuan").empty();
+            $(".xuan").append(data);
+        }, error: function () {
+            alert("no");
+        }
+    });
+}
+
 
 function show(pageindex) {
 
@@ -59,6 +79,24 @@ function show(pageindex) {
         type: 'post',
         url: '/sort/qweqwe',
         data: {list: ary, pageIndex: pageindex, tiaojian: tiaojian},
+        success: function (data) {
+            $(".xuan").empty();
+            $(".xuan").append(data);
+        }, error: function () {
+            alert("no");
+        }
+    })
+
+}
+
+function showmo(pageindex) {
+
+    var tiaojian = $(".qu").attr("name");
+    var mohu = $("#mohu").val();
+    $.ajax({
+        type: 'post',
+        url: '/sort/selectmohufan',
+        data: {mohu:mohu,pageIndex: pageindex, tiaojian: tiaojian},
         success: function (data) {
             $(".xuan").empty();
             $(".xuan").append(data);
@@ -85,7 +123,33 @@ function show1(pageCount) {
     $.ajax({
         type: 'post',
         url: '/sort/qweqwe',
-        data: {list: ary, pageIndex: ye, tiaojian: tiaojian},
+        data: {list: ary,pageIndex: ye, tiaojian: tiaojian},
+        success: function (data) {
+            $(".xuan").empty();
+            $(".xuan").append(data);
+        }, error: function () {
+            alert("no");
+        }
+    })
+}
+
+function show1mo(pageCount) {
+    var ye = document.getElementById("ye").value;
+    if (ye > pageCount) {
+        alert("输入错误");
+        return;
+    }
+    if (ye < 1) {
+        alert("输入错误");
+        return;
+    }
+    var tiaojian = $(".qu").attr("name");
+    var mohu = $("#mohu").val();
+
+    $.ajax({
+        type: 'post',
+        url: '/sort/selectmohufan',
+        data: {mohu: mohu, pageIndex: ye, tiaojian: tiaojian},
         success: function (data) {
             $(".xuan").empty();
             $(".xuan").append(data);

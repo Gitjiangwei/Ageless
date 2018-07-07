@@ -1,16 +1,17 @@
 package com.ageless.controller;
 
 import com.ageless.pojo.Product;
-import com.ageless.pojo.Property;
 import com.ageless.pojo.Sort;
-import com.ageless.pojo.Sortcon;
 import com.ageless.service.SortService;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,14 +92,32 @@ public class SortController {
     public ModelAndView selectmohu(HttpServletRequest request,@RequestParam(defaultValue = "1") Integer pageIndex,String tiaojian) {
         ModelAndView mv = new ModelAndView();
         String mohu = request.getParameter("mohu");
-        System.out.println(mohu);
         List<Product> selectmohu = sortService.selectmohu(mohu, tiaojian, pageIndex);
         PageInfo<Product> info = new PageInfo<Product>(selectmohu);
         request.setAttribute("shuliang", info.getTotal());//共多少个商品
-        request.setAttribute("pageindex", pageIndex);
-        request.setAttribute("countpage", info.getPages());
-        request.setAttribute("list1", selectmohu);
-        mv.setViewName("item_sale_page");
+        request.setAttribute("pageIndex", pageIndex);
+        request.setAttribute("pageCount", info.getPages());
+        request.setAttribute("mohu", mohu);
+        request.setAttribute("selectmohu", selectmohu);
+        mv.setViewName("item_category_mohu");
+        return mv;
+    }
+
+
+
+    @RequestMapping(value = "/selectmohufan", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView selectmohufan(HttpServletRequest request,@RequestParam(defaultValue = "1") Integer pageIndex,String tiaojian) {
+        ModelAndView mv = new ModelAndView();
+        String mohu = request.getParameter("mohu");
+        List<Product> selectmohu = sortService.selectmohu(mohu, tiaojian, pageIndex);
+        PageInfo<Product> info = new PageInfo<Product>(selectmohu);
+        request.setAttribute("shuliang", info.getTotal());//共多少个商品
+        request.setAttribute("pageIndex", pageIndex);
+        request.setAttribute("pageCount", info.getPages());
+        request.setAttribute("mohu", mohu);
+        request.setAttribute("selectmohu", selectmohu);
+        mv.setViewName("item_category_mohu_x");
         return mv;
     }
 

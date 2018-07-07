@@ -1,4 +1,4 @@
-package com.ageless.service.impl;
+/*package com.ageless.service.impl;
 
 import com.ageless.mapper.oneAndtwoAndthreeMapper;
 import com.ageless.pojo.oneAndtwoAndthree;
@@ -23,4 +23,4 @@ public class OneAndtwoAndthreeServiceImpl implements OneAndtwoAndthreeService {
     }
 
 
-}
+}*/

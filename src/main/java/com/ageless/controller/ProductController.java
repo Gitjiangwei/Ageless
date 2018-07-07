@@ -222,8 +222,9 @@ public class ProductController {
 
         String[] prop = propid.split(",");
         String[] propval = propvals.split("-");
+        System.out.println(propvals);
         String[] nums = propval[0].split(",");
-        pro.setPrice(Double.parseDouble(nums[2]));
+        pro.setPrice(Double.parseDouble(nums[nums.length-2]));
         int res = service.add(pro);
         List<Sku> list = new ArrayList<Sku>();
         for (int i = 0 ; i<propval.length;i++) {
@@ -234,8 +235,8 @@ public class ProductController {
                 sku += prop[j] + ":" + pval[j] + ",";
             }
             ssku.setSkuCon(sku);
-            ssku.setPrice(Double.parseDouble(pval[2]));
-            ssku.setKucun(Integer.parseInt(pval[3]));
+            ssku.setPrice(Double.parseDouble(pval[pval.length-2]));
+            ssku.setKucun(Integer.parseInt(pval[pval.length-1]));
             list.add(ssku);
 
         }
@@ -285,8 +286,9 @@ public class ProductController {
 
         String[] prop = propid.split(",");
         String[] propval = propvals.split("-");
+
         String[] nums = propval[0].split(",");
-        pro.setPrice(Double.parseDouble(nums[2]));
+        pro.setPrice(Double.parseDouble(nums[nums.length-2]));
         System.out.println(pro);
         int res = service.modifyProduct(pro);
 
@@ -300,8 +302,8 @@ public class ProductController {
                 sku += prop[j] + ":" + pval[j] + ",";
             }
             ssku.setSkuCon(sku);
-            ssku.setPrice(Double.parseDouble(pval[2]));
-            ssku.setKucun(Integer.parseInt(pval[3]));
+            ssku.setPrice(Double.parseDouble(pval[pval.length-2]));
+            ssku.setKucun(Integer.parseInt(pval[pval.length-1]));
             list.add(ssku);
         }
         int res2 = skuService.addSku(list,pro.getId());
