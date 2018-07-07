@@ -5,6 +5,7 @@ import com.ageless.service.UserService;
 import com.ageless.util.GetSMS;
 import com.ageless.util.MD5;
 import com.ageless.util.RandUtil;
+import com.alibaba.fastjson.JSON;
 import com.alipay.api.internal.util.StringUtils;
 /*import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
@@ -425,6 +426,19 @@ public class UserController {
             object="{\"back\":\"成功\"}";
         }
         return object;
+    }
+    /**
+     * 获取登录用户基本信息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getUserInfo")
+    public Object getUserInfo(HttpSession session){
+        Object object=null;
+        User user  = (User)session.getAttribute("user");
+        Object json = JSON.toJSON(user);
+        System.out.println("===================="+json);
+        return json;
     }
     /**
      * 生成QQ授权
