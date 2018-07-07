@@ -53,15 +53,7 @@
 						</button>
                 </span>
             </form>
-            <p class="help-block text-nowrap">
-                <a href="">连衣裙</a>
-                <a href="">裤</a>
-                <a href="">衬衫</a>
-                <a href="">T恤</a>
-                <a href="">女包</a>
-                <a href="">家居服</a>
-                <a href="">2017新款</a>
-            </p>
+            <p class="help-block text-nowrap">-</p>
         </div>
         <div class="cart-box">
             <a href="udai_shopcart.html" class="cart-but">
@@ -213,59 +205,26 @@
                         <span class="ss">59</span>
                     </div>
                 </div>
-
-
                 <div class="am-g am-g-fixed sale">
+              <#list list6 as seckill>
+
                     <div class="am-u-sm-3 sale-item">
                         <div class="s-img">
-                            <a href="# "><img src="/images/timg.jpg" /></a>
+                            <a href="# "><img src="${seckill.picPath}" /></a>
                         </div>
                         <div class="s-info">
-                            <a href="#"><p class="s-title">ZEK 莉哥o3o</p></a>
-                            <div class="s-price">￥<b>9.90</b>
+                            <a href="#"><p class="s-title">${seckill.productName}</p></a>
+                            <p class="kucun">库存: <span>${seckill.count}</span>件</p>
+                            <div class="s-price">￥<b>${seckill.price}</b>
                                 <a class="s-buy" href="#">秒杀</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="am-u-sm-3 sale-item">
-                        <div class="s-img">
-                            <a href="# "><img src="/images/timg.jpg" /></a>
-                        </div>
-                        <div class="s-info">
-                            <a href="#"><p class="s-title">ZEK 莉哥o3o</p></a>
-                            <div class="s-price">￥<b>9.90</b>
-                                <a class="s-buy" href="#">秒杀</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="am-u-sm-3 sale-item">
-                        <div class="s-img">
-                            <a href="# "><img src="/images/timg.jpg" /></a>
-                        </div>
-                        <div class="s-info">
-                            <a href="#"><p class="s-title">ZEK 莉哥o3o</p></a>
-                            <div class="s-price">￥<b>9.90</b>
-                                <a class="s-buy" href="#">秒杀</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="am-u-sm-3 sale-item">
-                        <div class="s-img">
-                            <a href="# "><img src="/images/timg.jpg" /></a>
-                        </div>
-                        <div class="s-info">
-                            <a href="#"><p class="s-title">ZEK 莉哥o3o </p></a>
-                            <div class="s-price">￥<b>9.90</b>
-                                <a class="s-buy" href="#">秒杀</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+            </#list>
             </div>
+
+
             <div class="pull-left">
                 <div class="floor-title">
                     <i class="iconfont icon-tuijian fz16"></i> 爆款推荐
