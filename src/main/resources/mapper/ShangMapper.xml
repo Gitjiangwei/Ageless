@@ -5,7 +5,6 @@
     <select id="cha" resultMap="aa" >
         select
              id,
-            product.productId,
             productName,
             descript,
             maidian,
@@ -30,7 +29,8 @@
             where
             status = 1
             and
-            product.productId=productpic.productId
+            product.id=productpic.productId
+            GROUP by product.id
     </select>
        <resultMap id="aa" type="com.ageless.pojo.Product" autoMapping="true">
     <id property="id" column="id"></id>
@@ -70,7 +70,6 @@
     <select id="cha2" resultMap="bb" >
         select
              id,
-            product.productId,
             productName,
             descript,
             maidian,
@@ -95,7 +94,8 @@
             where
             status = 0
             and
-            product.productId=productpic.productId
+            product.id=productpic.productId
+            GROUP by product.id
     </select>
     <resultMap id="bb" type="com.ageless.pojo.Product" autoMapping="true">
         <id property="id" column="id"></id>

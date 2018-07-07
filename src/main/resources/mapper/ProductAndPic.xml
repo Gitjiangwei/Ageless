@@ -142,5 +142,9 @@
 			(#{item},#{productId})
 		</foreach>
 	</insert>
+	
+	<delete id="deletePic" parameterType="Integer">
+		DELETE from productpic where productId = #{productId}
+	</delete>
 
 </mapper>

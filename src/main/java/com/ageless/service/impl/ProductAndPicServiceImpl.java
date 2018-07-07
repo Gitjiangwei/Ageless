@@ -34,4 +34,9 @@ public class ProductAndPicServiceImpl implements ProductAndPicService {
     public int addPic(List<String> lp, Integer productId) {
         return productMapper.addPic(lp,productId);
     }
+
+    @Override
+    public int deletePic(Integer productId) {
+        return productMapper.deletePic(productId);
+    }
 }

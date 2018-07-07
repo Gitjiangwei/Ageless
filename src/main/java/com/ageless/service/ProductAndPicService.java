@@ -24,4 +24,6 @@ public interface ProductAndPicService {
 
     public int addPic(List<String> lp,Integer productId);
 
+    int deletePic(Integer productId);
+
 }

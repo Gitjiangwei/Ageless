@@ -24,4 +24,6 @@ public interface ProductMapper {
      List<Product> selectall(@Param("id") Integer id);
 
      int add(Product pro);
+
+     int modifyProduct(Product pro);
 }

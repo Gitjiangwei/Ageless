@@ -23,4 +23,6 @@ public interface ProductService {
     public List<Product> selectall(Integer id);
 
     int add(Product pro);
+
+    int modifyProduct(Product pro);
 }
