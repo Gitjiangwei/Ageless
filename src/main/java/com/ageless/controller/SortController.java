@@ -91,14 +91,32 @@ public class SortController {
     public ModelAndView selectmohu(HttpServletRequest request,@RequestParam(defaultValue = "1") Integer pageIndex,String tiaojian) {
         ModelAndView mv = new ModelAndView();
         String mohu = request.getParameter("mohu");
-        System.out.println(mohu);
         List<Product> selectmohu = sortService.selectmohu(mohu, tiaojian, pageIndex);
         PageInfo<Product> info = new PageInfo<Product>(selectmohu);
         request.setAttribute("shuliang", info.getTotal());//共多少个商品
-        request.setAttribute("pageindex", pageIndex);
-        request.setAttribute("countpage", info.getPages());
-        request.setAttribute("list1", selectmohu);
-        mv.setViewName("item_sale_page");
+        request.setAttribute("pageIndex", pageIndex);
+        request.setAttribute("pageCount", info.getPages());
+        request.setAttribute("mohu", mohu);
+        request.setAttribute("selectmohu", selectmohu);
+        mv.setViewName("item_category_mohu");
+        return mv;
+    }
+
+
+
+    @RequestMapping(value = "/selectmohufan", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView selectmohufan(HttpServletRequest request,@RequestParam(defaultValue = "1") Integer pageIndex,String tiaojian) {
+        ModelAndView mv = new ModelAndView();
+        String mohu = request.getParameter("mohu");
+        List<Product> selectmohu = sortService.selectmohu(mohu, tiaojian, pageIndex);
+        PageInfo<Product> info = new PageInfo<Product>(selectmohu);
+        request.setAttribute("shuliang", info.getTotal());//共多少个商品
+        request.setAttribute("pageIndex", pageIndex);
+        request.setAttribute("pageCount", info.getPages());
+        request.setAttribute("mohu", mohu);
+        request.setAttribute("selectmohu", selectmohu);
+        mv.setViewName("item_category_mohu_x");
         return mv;
     }
 
