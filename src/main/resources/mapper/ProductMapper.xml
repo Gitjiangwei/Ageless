@@ -164,4 +164,22 @@
         #{sortConId}
         )
     </insert>
+
+    <select id="selectNullSkuByOptId" resultType="com.ageless.pojo.Sku">
+        SELECT 	SKUId,
+            productId,
+            SKUcon,
+            kucun,
+            price
+
+            FROM
+            ageless.sku
+            WHERE
+            1=2
+            <foreach item="item" index="index" collection="list">
+                OR SKUcon LIKE CONCAT('%:', '${item}',',%')
+                AND kucun = 0
+                AND productId = #{productId}
+            </foreach>
+    </select>
 </mapper>
