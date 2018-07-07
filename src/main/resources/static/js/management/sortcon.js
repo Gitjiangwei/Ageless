@@ -254,7 +254,9 @@ $('#dianji').click(function () {
         //触发change事件,重绘表格
         $("input[type='checkbox']").first().trigger("change");
     });
-
+$(document).on("click",".quxiao",function(){
+    $("#yc").css("display","none");
+});
 
     //提交
     $(document).on("click",".bc",function(){
@@ -312,4 +314,67 @@ if(fag){
     });
 }
 
-} )
+} );
+
+$(document).on("click",".ti",function () {
+    var id = $(this).parent().parent().attr("cid");
+
+    var name = $(this).prev().val();
+
+    if(name !=null && name!=""){
+        $.ajax({
+            type: "GET",
+            url: "/sort/xiu",
+            data: {id: id,name:name},
+            dataType: "json",
+            success: function (data) {
+                if(data=="1"){
+                    alert("修改成功");
+                    $(".t").html("");
+                }else{
+                    alert("修改失败");
+                }
+            }
+        });
+
+    }else{
+        alert("对不起修改内容为空！");
+    }
+});
+$(document).on("click",".tij",function () {
+    var sid = $(this).parent().parent().attr("sid");
+
+    var sortconname = $(this).prev().val();
+
+    if(sortconname !=null && sortconname!=""){
+        $.ajax({
+            type: "GET",
+            url: "/sort/update",
+            data: {sortconid: sid,sortconname:sortconname},
+            dataType: "json",
+            success: function (data) {
+                if(data=="1"){
+                    alert("修改成功");
+                    $(".t").html("");
+                }else{
+                    alert("修改失败");
+                }
+            }
+        });
+
+    }else{
+        alert("对不起修改内容为空！");
+    }
+});
+
+$(document).on("click",".qx",function (){
+
+    $(".t").html("");
+
+
+
+});
+
+$(".fanhui").click(function () {
+    window.location.href="/sort/sortcon";
+});

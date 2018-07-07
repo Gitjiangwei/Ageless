@@ -43,4 +43,13 @@ public interface SortMapper {
      */
     int addSortcon(@Param("list") List<Sortcon> ls,@Param("id")Integer sortId);
 
+    /**
+     * 修改属性选项
+     * @param sortconid
+     * @param sortconname
+     * @return
+     */
+
+    int update(@Param("sortconid")Integer sortconid,@Param("sortconname")String sortconname);
+
 }

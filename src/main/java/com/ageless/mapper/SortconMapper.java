@@ -13,7 +13,8 @@ public interface SortconMapper {
      * @return
      */
     public List<Sort> selectAll(@Param("name")String name,
-                                @Param("categoryThree")Integer categoryThree);
+                                @Param("categoryThree")Integer categoryThree,
+                                 @Param("sortId")Integer sortId);
 
     /**
      *
@@ -34,5 +35,13 @@ public interface SortconMapper {
      * @param s
      * @return
      */
-    public int add(Sort s);
+   int add(Sort s);
+
+
+   int update(@Param("id")Integer id,@Param("name")String name);
+
+
+
+
+
 }

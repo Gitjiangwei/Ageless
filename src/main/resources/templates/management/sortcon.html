@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="/css/backstage/table.css">
 		<link rel="stylesheet" type="text/css" href="/css/backstage/page.css">
 		<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/popup.css" />
 		<link rel="stylesheet" type="text/css" href="/css/backstage/add.css" />
 
 	<style type="text/css">
@@ -76,6 +77,28 @@
 			font-size: 14px;
 			cursor: pointer;
 		}
+		.quxiao{
+			padding: 4px 10px;
+			border: none;
+			background: #34495e;
+			color: white;
+			font-size: 16.5px;
+			text-decoration: none;
+			text-shadow: none;
+			-webkit-box-shadow: none;
+			-moz-box-shadow: none;
+			box-shadow: none;
+			-webkit-transition: 0.25s;
+			-moz-transition: 0.25s;
+			-o-transition: 0.25s;
+			transition: 0.25s;
+			-webkit-backface-visibility: hidden;
+			-webkit-border-radius: 6px;
+			-moz-border-radius: 6px;
+			border-radius: 6px;
+			font-size: 14px;
+			cursor: pointer;
+		}
 		.cloneSku{
 			margin: 10px 0 0 40px;
 			background-color: #3498db;
@@ -96,7 +119,7 @@
 				
 				一级分类：
 
-				<select class="textStyle"  style="width:80px;" name="categoryLevel1" id="categoryLevel1">
+				<select class="textStyle"  style="width:80px;" name="categoryLevel1" id="categoryLevel1" >
 					<option value="0">--请选择--</option>
 					<#list category as c> <option value="${c.id}">${c.categoryName}</option></#list>
 
@@ -141,7 +164,9 @@
 						</#list>
                         </th>
                         <th>${list.three.categoryName}</th>
-                        <th><a href="#" onclick="nav(${list.id})">删除</a></th>
+
+
+                        <th><a href="#"  onclick="xiu(${list.id})" class="xg">修改</a><span></span><a href="#" onclick="nav(${list.id})">删除</a></th>
                     </tr>
 				</#list>
 
@@ -155,7 +180,7 @@
 				</table>
 
 				<!--弹出框开始    "mb_"后面的值与里面的div名称必须保持一致-->
-
+				<div class="mbStyle">&nbsp;</div>
 				<div id="yc" style="display: none;">
 
 					<input type="button" value="添加属性" class="button add cloneSku" />
@@ -172,7 +197,7 @@
 						</ul>
 						<ul>
 							<li>
-								<input type="checkbox" class="model_sku_val" propvalid='' value="" />
+
 								<input type="text" class="cusSkuValInput"  name="sortconname"/>
 							</li>
 
@@ -193,19 +218,86 @@
 
 
 					<button class="bc">提交</button>
-
+                     <button class="quxiao">取消</button>
 				</div>
 			
 			</div>
 
+			<div id="mb_stuInfo">&nbsp;</div>
+			<div class="popup" id="stuInfo">
+				<h1>新增属性<span class="closeX" onclick="closeMask('stuInfo')">X</span></h1>
+				<div class="pInfo">
+					<from action="" method="post" id="option">
+						<br/>
+						<div class="sort">
+							<p>属性名：<input type="text" class="textStyle" style="width:80px;"/>
+								<input type="button" value="" class="button add addsort"  /></p>
+
+							<p>属性选项：<span class="sortcon"><input type="text" class="textStyle" name="sProblem" style="width:80px;" /></span>
+								<input type="button" value="" class="button add addsortcon"  /></p></div>
+
+					</from>
+				</div>
+				<div class="pfooter">
+					<input type="button" value="返回" class="button fanhui" />
+
+				</div>
+
+
+
+			</div>
 		</div>
 
 		<script src="/js/backstage/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="/js/backstage/table.js"></script>
 		<script type="text/javascript" src="/js/backstage/global.js"></script>
 		<script type="text/javascript" src="/js/backstage/index.js"></script>
+		<script type="text/javascript" src="/js/backstage/popup.js"></script>
 		<script type="text/javascript" src="/js/management/sortcon.js"></script>
 
+        <script type="text/javascript">
+
+            $(function() {
+                $(".xg").click(function () {
+                    mask(400, 320, true, "stuInfo");
+                });
+
+
+			}
+
+			);
+
+            function xiu(num) {
+                $ .ajax({
+                    type: "GET",
+                    url: "/sort/xiugai",
+                    data:{sortId:num},
+                    dataType: "json",
+                    success: function (data) {
+
+                        $("#option").html("");
+                        var str='<p>属性名：<input type="text" class="textStyle" style="width:80px;"value='+data[0].name+'  readonly="readonly"  /> <a href="#"  class="aaa"> 修改</a><span cid='+data[0].id+' class="t"></span></p><p>属性选项：'
+                        $.each(data[0].sortcons, function (i, item) {
+
+                            str+='<input type=\"text\" class=\"textStyle\" name=\"sProblem\" style=\"width:80px;\" value='+item.sortconname+'  readonly="readonly" /><a href="#" class="bbb">修改</a><span sid='+item.sortconid+' class="t"></span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+                        });
+
+                        str+='</p>'
+                        $("#option").html(str);
+                    },
+
+                } );
+            }
+            $(document).on("click",".aaa",function(){
+                var context = '<span class="t"><input type="text" class="textStyle" style="width:60px;"><a href="#" class="ti t">提交</a><a href="#" class="qx">取消</a></span>'
+                $(this).next().html(context);
+            });
+            $(document).on("click",".bbb",function(){
+                var context = '<span ><input type="text" class="textStyle" style="width:60px;"><a href="#" class="tij">提交</a><a href="#" class="qx">取消</a></span>'
+                $(this).next().html(context);
+            });
+
+		</script>
 
 	</body>
 
