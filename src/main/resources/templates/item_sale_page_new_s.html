@@ -21,20 +21,20 @@
 <!-- 分页 -->
 <div class="page text-right clearfix">
     <#if (pageindex>1)>
-    <a class="disabled" onclick="index(${pageindex-1})">上一页</a>
+    <a class="disabled" onclick="indexs(${pageindex-1})">上一页</a>
     </#if>
 <#list 1..countpage as i>
-<a onclick="index(${i})">${i}</a>
+<a onclick="indexs(${i})">${i}</a>
 </#list>
 
     <#if (pageindex< countpage)>
-    <a onclick="index(${pageindex+1})">下一页</a>
+    <a onclick="indexs(${pageindex+1})">下一页</a>
     </#if>
     <a class="disabled">${pageindex}/${countpage}页</a>
     <form  class="page-order">
         到第
         <input type="text" name="page" id="page">
         页
-        <input class="sub" type="button" value="确定" onclick="shu(${countpage})">
+        <input class="sub" type="button" value="确定" onclick="shus(${countpage})">
     </form>
 </div>

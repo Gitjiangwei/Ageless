@@ -8,4 +8,5 @@ public class CategoryTwo {
     private Integer id;
     private String categoryName;
     private Integer parentId;
+
 }

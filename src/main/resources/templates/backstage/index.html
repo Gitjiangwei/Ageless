@@ -21,11 +21,11 @@
 <li class="hav_li">积分</li> -->
 			</ul>
 			<div class="login" id="admin"> 
-				<span class="loginUser">管理员-XXX</span>
+				<span class="loginUser">管理员-</span>
 				<div class="person"> 
 				   <span>个人中心</span> 
 				   <span>修改密码</span> 
-				   <span onclick="openPage('login.html')";>退出</span> 
+				   <span onclick="openPage('/backstage/back_login.html')";>退出</span>
 				</div>
 			</div>
 		</div>
@@ -39,13 +39,9 @@
 					<ul class="nav_ul">
 						<li>
 							<div class="nav_title">用户管理</div>
-									<ul class='second'>
-										<li>添加</li>
-										<li>
-											查看
-										</li>
-										
-									</ul>
+							<ul class='second'>
+								<li onclick="NewPage('/backstage/back_table.html')">会员列表</li>
+							</ul>
 						</li>
 						<li>
 							<div class="nav_title">积分设置</div>
@@ -125,7 +121,7 @@
 			</div>
 
 			<div class="right">
-				<iframe class="iframe" name="frmright" src="add.html" frameborder="0" scrolling="yes"></iframe>
+				<iframe class="iframe" name="frmright" src="/backstage/back_table.html" frameborder="0" scrolling="yes"></iframe>
 			</div>
 
 		</div>
@@ -134,7 +130,17 @@
 		<script type="text/javascript" src="/js/backstage/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="/js/backstage/index.js"></script>
 		<script type="text/javascript" src="/js/backstage/global.js"></script>
-        
+        <script>
+			$(function () {
+				$.ajax()
+            });
+            var result;
+            var url=window.location.search; //获取url中"?"符后的字串
+            if(url.indexOf("?")!=-1){
+                result = url.substr(url.indexOf("=")+1);
+            }
+            $(".loginUser").text("管理员-"+result);
+		</script>
 	</body>
 
 </html>

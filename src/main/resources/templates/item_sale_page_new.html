@@ -14,8 +14,7 @@
 	<script src="/js/swiper.min.js" charset="UTF-8"></script>
 	<script src="/js/global.js" charset="UTF-8"></script>
 	<script src="/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
-	<script src="/js/Notice.js" charset="UTF-8"></script>
-	<script src="/js/Notices.js" charset="UTF-8"></script>
+	<script src="/js/fenye.js"></script>
 	<title>U袋网</title>
 </head>
 <body>
@@ -39,7 +38,7 @@
 	<!-- 搜索栏 -->
 	<div class="top-search">
 		<div class="inner">
-			<a class="logo" href="index.html"><img src="images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+			<a class="logo" href="index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 			<div class="search-box">
 				<form class="input-group" action="/sort/selectmohu" method="post">
 					<input placeholder="Ta们都在搜U袋网" type="text" name="mohu">
@@ -84,58 +83,94 @@
 		</div>
 	</div>
 	<div class="content inner">
-		<section class="panel__div panel-message__div clearfix">
-			<div class="filter-value">
-				<div class="filter-title">平台公告</div>
+		<section class="filter-section clearfix">
+			<ol class="breadcrumb">
+				<li><a href="index.html">首页</a></li>
+				<li class="active">满减专区</li>
+			</ol>
+			<div class="filter-box">
+				<div class="all-filter">
+					<div class="filter-value">
+						<a href="/proxiao.html" class="sale-title ">爆款专区</a>
+						<a href="/proupdate.html" class="sale-title active">最新专区</a>
+					</div>
+				</div>
 			</div>
+			<div class="sort-box bgf5">
+				<div class="sort-text">排序：</div>
+				<a   onclick="upda(this)" name="xiaoliang"><div class="sort-text">销量 </div></a>
+				<a onclick="upda(this)" name="comment"><div  class="sort-text">评价</div></a>
+				<a onclick="upda(this)" name="price"><div  class="sort-text">价格 </div></a>
+				<div class="sort-total pull-right">共${counts}个商品</div>
+			</div>
+		</section>
+		<section class="item-show__div clearfix">
 			<div class="pull-left">
-				<input type="hidden" value="${xid}" id="xid">
-				<input type="hidden" value="${yid}" id="yid">
-				<div class="msg-list" id="linfo">
-					<a class="ep active" href="">【公告】U袋网平台已上线，您还在等什么呢？是吧~</a>
-					<a class="ep" href="">【公告】六趣公司9月底将彻底关闭66RPG论坛~</a>
-					<a class="ep" href="">【新闻】央行决定对普惠金融实施定向降准政策 最高下调1.5个百分点</a>
-					<a class="ep" href="">【新闻】那些年看的剧里十大虐心情节，谁戳中了你的泪点？</a>
-					<a class="ep" href="">【新闻】惨遭魔改？派拉蒙将拍真人版《你的名字。》</a>
-					<a class="ep" href="">【新闻】外媒称中国限制日本跟团游?旅行社:仍正常发团</a>
-					<a class="ep" href="">【新闻】广电总局：电台电视台应在重要法定节日播放国歌</a>
-					<a class="ep" href="">【新闻】高校性教育课成"爆款" 老师都讲哪些"大尺度"内容?</a>
-					<a class="ep" href="">【新闻】vivo X20全面屏手机首销火爆 陈赫欧豪现身助力</a>
-					<a class="ep" href="">【新闻】“拒绝妻子手术”现场医生：病人丈夫被冤枉了</a>
-					<a class="ep" href="">【新闻】游客们注意了！国庆你要避开十大坑</a>
-					<a class="ep" href="">【新闻】他卖了1.5万双假货，现在面临10年牢狱！</a>
-					<a class="ep" href="">【新闻】10月1日起国家再次提高部分优抚对象抚恤补助标准 烈属抚恤每年23130元</a>
-					<a class="ep" href="">【新闻】vivo X20全面屏手机首销火爆 陈赫欧豪现身助力</a>
-					<a class="ep" href="">【新闻】“拒绝妻子手术”现场医生：病人丈夫被冤枉了</a>
-					<a class="ep" href="">【新闻】游客们注意了！国庆你要避开十大坑</a>
-					<a class="ep" href="">【新闻】他卖了1.5万双假货，现在面临10年牢狱！</a>
-					<a class="ep" href="">【新闻】10月1日起国家再次提高部分优抚对象抚恤补助标准 烈属抚恤每年23130元</a>
-					<a class="ep" href="">【新闻】广电总局：电台电视台应在重要法定节日播放国歌</a>
-					<a class="ep" href="">【新闻】高校性教育课成"爆款" 老师都讲哪些"大尺度"内容?</a>
+				<div class="mv">
+
+					<div class="item-list__area clearfix">
+						<#list list1 as probyxiao>
+
+						<div class="item-card">
+							<a href="/commodity/shopshow.html?id=${probyxiao.id}" class="photo">
+								<img src="${probyxiao.productPic.picPath}" alt="锦瑟 原创传统日常汉服男绣花交领衣裳cp情侣装春夏款" class="cover">
+								<div class="name">${probyxiao.productName}</div></a>
+							<div class="middle">
+								<div class="price"><small>￥</small>${probyxiao.sku.price}</div>
+								<div class="sale no-hide"><a href="">满100减20</a></div>
+							</div>
+							<div class="buttom">
+								<div>销量 <b>${probyxiao.xiaoliang!}</b></div>
+								<div>人气 <b></b></div>
+								<div>评论 <b>${probyxiao.comment!}</b></div>
+							</div>
+						</div>
+					</#list>
 				</div>
+				<!-- 分页 -->
 				<div class="page text-right clearfix">
-					<a class="disabled">上一页</a>
-					<a class="select">1</a>
-					<a href="">2</a>
-					<a href="">3</a>
-					...
-					<a class="" href="">下一页</a>
-				</div>
+					<#if (pageindex>1)>
+					<a class="disabled" onclick="indexs(${pageindex-1})">上一页</a>
+				</#if>
+
+				<#list 1..countpage as i>
+				<a  onclick="indexs(${i})">${i}</a>
+			</#list>
+
+				<#if (pageindex < countpage)>
+				<a onclick="indexs(${pageindex+1})">下一页</a>
+			</#if>
+			<a class="disabled">${pageindex}/${countpage}页</a>
+			<form action="" class="page-order">
+				到第
+				<input type="text" name="page" id="page">
+				页
+				<input class="sub" type="button" value="确定" onclick="shus(${countpage})">
+			</form>
 			</div>
-			<div class="message-box pull-right">
-				<div class="head-div clearfix posr">
-					<div class="title">【资讯】U袋网平台已上线，您还在等什么？</div>
-					<div class="time pull-right">发布时间：2017-09-22 15:20</div>
+
 				</div>
-				<div class="html-code">
-					<p></p>
-					<p style="text-indent: 2em">因为全国遭遇罕见强寒潮天气，各大快递公司纷纷在1月25 日左右结束收派件业务，提前放假过年；各品牌厂家近期也年末清仓，货源极度不稳定，断货、下架的情况也是蛮多的！</p>
-					<p><br></p>
-					<p>综合各种因素，年前工作安排如下： </p>
-					<p style="text-indent: 2em">2月1日——2月17日春节放假    2月18日（正月十一）正式上班。</p>
-					<p><br></p>
-					<p style="text-indent: 2em">在此期间，您仍可通过以下方式联络我们： 400-6123-091</p>
-					<p style="text-indent: 2em">非常感谢您对我公司一直以来的支持！祝您新春愉快！</p>
+
+
+			</div>
+			<div class="pull-right">
+				
+				<div class="desc-segments__content">
+					<div class="lace-title">
+						<span class="c6">爆款推荐</span>
+					</div>
+					<div class="picked-box">
+						<a href="" class="picked-item"><img src="/images/temp/S-001.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-002.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-003.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-004.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-005.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-006.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-007.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-008.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-009.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+						<a href="" class="picked-item"><img src="/images/temp/S-010.jpg" alt="" class="cover"><span class="look_price">¥134.99</span></a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -187,16 +222,16 @@
 		<div class="footer-tags">
 			<div class="tags-box inner">
 				<div class="tag-div">
-					<img src="images/icons/footer_1.gif" alt="厂家直供">
+					<img src="/images/icons/footer_1.gif" alt="厂家直供">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_2.gif" alt="一件代发">
+					<img src="/images/icons/footer_2.gif" alt="一件代发">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_3.gif" alt="美工活动支持">
+					<img src="/images/icons/footer_3.gif" alt="美工活动支持">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_4.gif" alt="信誉认证">
+					<img src="/images/icons/footer_4.gif" alt="信誉认证">
 				</div>
 			</div>
 		</div>

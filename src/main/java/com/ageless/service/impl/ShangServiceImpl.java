@@ -19,9 +19,9 @@ public class ShangServiceImpl implements ShangService {
 
 
     @Override
-    public List<Product> cha2() {
-        List<Product> product = shangmapper.cha2();
-        return product;
+    public  List<Product> cha2() {
+        List<Product>  xia= shangmapper.cha2();
+        return xia;
     }
 
 
@@ -33,8 +33,8 @@ public class ShangServiceImpl implements ShangService {
 
 
     @Override
-    public List<Product> cha() {
-        List<Product> product = shangmapper.cha();
-        return product;
+    public List<Product>  cha() {
+        List<Product>  shang = shangmapper.cha();
+        return shang;
     }
 }

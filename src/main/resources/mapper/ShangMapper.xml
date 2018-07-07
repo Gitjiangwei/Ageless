@@ -30,7 +30,7 @@
             status = 1
             and
             product.id=productpic.productId
-            GROUP by product.id
+            GROUP BY  id
     </select>
        <resultMap id="aa" type="com.ageless.pojo.Product" autoMapping="true">
     <id property="id" column="id"></id>

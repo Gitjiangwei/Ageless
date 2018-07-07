@@ -1,0 +1,177 @@
+<!doctype html>
+
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>表格3自定义表格</title>
+
+		<link rel="stylesheet" type="text/css" href="/css/backstage/global.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/table.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/page.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
+
+	</head>
+
+	<body>
+		<div class="container">
+			<h1 class="tabTitle"><span onclick="NewPage('table.html')"><img src="/images/backstage/xjt.png"/></span>数据表格</h1>
+			<!--搜索区结束-->
+			<div class="info">
+				<table cellpadding="0" cellspacing="0" border="0" class="selectTable" id="tableData">
+					<thead>
+						<tr>
+							<th>&nbsp;</th>
+							<th>会员名</th>
+							<th>是否冻结</th>
+							<th>注册时间</th>
+							<th>积分</th>
+                            <th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="showList">
+						<tr>
+							<td colspan="11"><img src='images/loading.gif' /></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class='pageStyle'></div>
+			</div>
+
+		</div>
+
+		<script src="/js/backstage/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="/js/backstage/back_table.js"></script>
+		<script type="text/javascript">
+            var dong =2;
+			$(function() {
+				$.ajax({
+					url: "/backstage/selectA",
+					type: "get",
+					dataType: "json",
+					async: true,
+					success: function(data) {
+						var tbody = $('<tbody></tbody>');
+						for (var i=0;i<data.length;i++){
+						   /* $("#showList").append("<tr><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td><span onclick=update("+data[i].membership+");>冻结</span><span onclick=update("+data[i].membership+");><a href='back_add.html'>详情信息</a></span></td></tr>");*/
+
+                            var tr = $('<tr></tr>');
+                            tr.append("<td width='40'><input type='checkbox' name='CheckBox' value='pro1'/></td>");
+                            tr.append("<td>" + data[i].membership + "</td>");
+                            if(data[i].dongjie==2){
+                                tr.append("<td>已冻结</td>");
+                                tr.append("<td>" + getMyDate(data[i].regtime) + "</td>");
+                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                tr.append("<td><span onclick=jiedong(\""+data[i].membership+"\");>解冻</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span></td>");
+							}else{
+                                tr.append("<td>未冻结</td>");
+                                tr.append("<td>" + getMyDate(data[i].regtime) + "</td>");
+                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                tr.append("<td><span onclick=dongjie(\""+data[i].membership+"\");>冻结</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span></td>");
+							}
+                            tbody.append(tr);
+						}
+						$('#tableData tbody').replaceWith(tbody);
+						showPage(1, 10, 46);
+					},
+					error: function() {
+						alert("出现异常！");
+					}
+
+				});
+
+			});
+			/*冻结账号*/
+			function dongjie(member){
+                if(window.confirm('你确定要冻结该账号吗？')){
+                    $.ajax({
+                        url: "/backstage/dongjie",
+                        type: "POST",
+                        data:"member="+member,
+                        dataType: "json",
+                        async: true,
+                        success: function(data) {
+                            if(data.mes=='yes'){
+                                location.href="/backstage/back_table.html";
+                            }else {
+                                alert("bucheng");
+                            }
+                        },
+                        error: function() {
+                            alert("出现异常！");
+                        }
+                    });
+                }else{
+                    //alert("取消");
+                    return false;
+                }
+			}
+			/*解除冻结*/
+            function jiedong(member){
+                if(window.confirm('你确定要解冻该账号吗？')){
+                    $.ajax({
+                        url: "/backstage/dongjie",
+                        type: "POST",
+                        data:"member="+member+"&dong="+dong,
+                        dataType: "json",
+                        async: true,
+                        success: function(data) {
+                            if(data.mes=='yes'){
+                                location.href="/backstage/back_table.html";
+                            }else {
+                                alert("bucheng");
+                            }
+                        },
+                        error: function() {
+                            alert("出现异常！");
+                        }
+                    });
+                }else{
+                    //alert("取消");
+                    return false;
+                }
+            }
+            /*点击详情*/
+            function xiangqing(member){
+                $.ajax({
+                    url: "/backstage/xiangqing",
+                    type: "get",
+                    data:"member="+member,
+                    dataType: "json",
+                    success: function(data) {
+                        location.href="/backstage/back_add.html";
+                    },
+                    error: function() {
+                        alert("出现异常！");
+                    }
+                });
+            }
+
+            /**
+			 * 时间日期转换
+             * @param str
+             * @returns {string}
+             */
+            function getMyDate(str){
+                var oDate = new Date(str),
+                    oYear = oDate.getFullYear(),
+                    oMonth = oDate.getMonth()+1,
+                    oDay = oDate.getDate(),
+                    oHour = oDate.getHours(),
+                    oMin = oDate.getMinutes(),
+                    oSen = oDate.getSeconds(),
+                    oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+                return oTime;
+            };
+            //补0操作
+            function getzf(num){
+                if(parseInt(num) < 10){
+                    num = '0'+num;
+                }
+                return num;
+            }
+		</script>
+	</body>
+</html>
+</setting>
