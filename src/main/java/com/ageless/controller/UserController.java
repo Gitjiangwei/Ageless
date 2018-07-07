@@ -159,7 +159,7 @@ public class UserController {
     @GetMapping("/item_category.html")
     public String item_category() { return "item_category"; }
     /**
-     * 地址
+     * 支付地址
      * @return
      */
     @GetMapping("/udai_shopcart_pay.html")
