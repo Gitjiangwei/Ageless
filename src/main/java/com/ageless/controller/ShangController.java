@@ -7,6 +7,7 @@ import com.ageless.service.ShangService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 @RequestMapping(value="/shang")
 public class ShangController {
+
+    private static final SimpleDateFormat sDateFormat = new SimpleDateFormat(
+            "yyyyMMdd");// 时间
     @Autowired
     private ShangService shangservice;
     /**
@@ -132,4 +138,9 @@ public class ShangController {
         return obj;
     }
 
+    @Scheduled(cron = "0 0 2 * * *" )
+    public void dingshiXiajia(){
+        String nowTimeStr = sDateFormat.format(new Date());
+        shangservice.updateByTime(nowTimeStr);
+    }
 }
