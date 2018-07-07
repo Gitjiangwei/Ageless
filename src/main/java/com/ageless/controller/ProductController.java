@@ -127,8 +127,36 @@ public class ProductController {
         List<Integer> thefirst = new ArrayList();
         String[] thenext = request.getParameterValues("ary[]");
         for (int i = 0;i < thenext.length;i++){
-            thefirst.add(Integer.parseInt(thenext[i]));
+            if (!thefirst.contains(Integer.parseInt(thenext[i]))){
+                thefirst.add(Integer.parseInt(thenext[i]));
+            }
         }
+        List<Sku> ssku = service.selectNullSkuByOptId(thefirst,id);
+        List<Integer> skuOptionIdss = new ArrayList<>();
+        for (int k = 0;k < ssku.size();k++){
+            String string = ssku.get(k).getSkuCon();
+            String substring = string.substring(0, string.length()-1);//截取最后一个
+            System.out.println(substring);
+            String[] split = substring.split(",");//以逗号分割
+            Integer len = split.length;
+            for (String string2 : split) {
+                int q = 0;
+                for(int i=0;i<string2.length();i++) {
+                    if(string2.indexOf(":", i)!=-1){
+                        q++;
+                    }
+                }
+                String skucon1 = string2.substring(q,string2.length());
+
+                if (!skuOptionIdss.contains(skucon1)){
+                    skuOptionIdss.add(Integer.parseInt(skucon1));
+                }
+            }
+        }
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println(skuOptionIdss);
+        System.out.println(ssku.size());
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         StringBuffer skucon2 = new StringBuffer();
         Integer emm = 0;
         System.out.println(thefirst);
@@ -137,12 +165,19 @@ public class ProductController {
             skucon2.append(skupro.getId() + ":" + thefirst.get(emm) + ",");
             emm ++;
         }
+        System.out.println("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+        for (SkuOption ss :
+                options) {
+            System.out.println(ss.getProductId());
+        }
+        System.out.println("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
         Sku sku = service.selectSkuByCon(skucon2.toString(),id);
         modelAndView.addObject("options",options);
         modelAndView.addObject("properties",properties);
         modelAndView.addObject("product",product);
         modelAndView.addObject("thefirst",thefirst);
         modelAndView.addObject("sku",sku);
+        modelAndView.addObject("skuOptionIdss",skuOptionIdss);
         modelAndView.setViewName("item_right");
         return modelAndView;
     }

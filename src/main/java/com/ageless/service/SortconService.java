@@ -12,7 +12,7 @@ public interface SortconService {
      * @param categoryThree
      * @return
      */
-    public List<Sort> selectAll(String name,Integer categoryThree);
+    public List<Sort> selectAll(String name,Integer categoryThree,Integer sortId);
 
     /**
      *
@@ -34,4 +34,6 @@ public interface SortconService {
      * @return
      */
     public int add(Sort s);
+
+    int update(Integer id,String name);
 }

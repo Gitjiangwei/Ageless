@@ -17,9 +17,9 @@ public class SortconServiceImpl implements SortconService {
 
     @Override
     @Transactional
-    public List<Sort> selectAll(String name,Integer categoryThree) {
+    public List<Sort> selectAll(String name,Integer categoryThree,Integer sortId) {
 
-        return sortconMapper.selectAll( name,categoryThree);
+        return sortconMapper.selectAll( name,categoryThree,sortId);
     }
 
     @Override
@@ -47,5 +47,11 @@ public class SortconServiceImpl implements SortconService {
 
 
         return  sortconMapper.add(s);
+    }
+
+    @Override
+    public int update(Integer id, String name) {
+
+        return sortconMapper.update(id,name);
     }
 }

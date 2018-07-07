@@ -104,4 +104,9 @@
         </foreach>
 
     </insert>
+
+    <update id="update" >
+        update sortcon set sortconname=#{sortconname} where sortconid=#{sortconid}
+
+    </update>
 </mapper>
