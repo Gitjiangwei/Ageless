@@ -5,13 +5,15 @@ import com.ageless.pojo.*;
 import com.ageless.service.ProductAndPicService;
 import com.ageless.service.ProductService;
 import com.ageless.service.SkuService;
-import com.ageless.util.HttpServletRequestUtil;
-import com.ageless.util.UploadUtil;
+import com.ageless.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -171,10 +173,10 @@ public class ProductController {
         ObjectMapper mapper = new ObjectMapper();
         String shopStr = HttpServletRequestUtil.getString(request, "shopStr");// shopStr为前台传入的值
         Product pro = mapper.readValue(shopStr,Product.class);
-        System.out.println(pro);
+
         String propid = HttpServletRequestUtil.getString(request, "propid");
         String propvals = HttpServletRequestUtil.getString(request, "propvals");
-        int rannum = r.nextInt(89999) + 10000;
+        int rannum = r.nextInt(89) + 10;
         String nowTimeStr = sDateFormat.format(new Date());
         pro.setProductId(nowTimeStr + rannum);
         pro.setUpdate(new Date());
@@ -182,9 +184,12 @@ public class ProductController {
         Date date = sDateFormat.parse(down);
         pro.setDowndate(date);
         pro.setStatus(1);
-        int res = service.add(pro);
+
         String[] prop = propid.split(",");
         String[] propval = propvals.split("-");
+        String[] nums = propval[0].split(",");
+        pro.setPrice(Double.parseDouble(nums[2]));
+        int res = service.add(pro);
         List<Sku> list = new ArrayList<Sku>();
         for (int i = 0 ; i<propval.length;i++) {
             Sku ssku = new Sku();
@@ -197,6 +202,7 @@ public class ProductController {
             ssku.setPrice(Double.parseDouble(pval[2]));
             ssku.setKucun(Integer.parseInt(pval[3]));
             list.add(ssku);
+
         }
         int res2 = skuService.addSku(list,pro.getId());
         List<String> li = new UploadUtil().uploadPic(request,pro);
@@ -224,5 +230,69 @@ public class ProductController {
             e.printStackTrace();
         }
         return nowDate;
+    }
+
+    @ResponseBody
+    @PostMapping("/modifyproject")
+    public Object modifyproject(HttpServletRequest request) throws IOException, ParseException {
+        ObjectMapper mapper = new ObjectMapper();
+        String shopStr = HttpServletRequestUtil.getString(request, "shopStr");// shopStr为前台传入的值
+        Product pro = mapper.readValue(shopStr,Product.class);
+        System.out.println(pro);
+        String propid = HttpServletRequestUtil.getString(request, "propid");
+        String propvals = HttpServletRequestUtil.getString(request, "propvals");
+        String nowTimeStr = sDateFormat.format(new Date());
+        pro.setUpdate(new Date());
+        String down = addMonth(nowTimeStr,1);
+        Date date = sDateFormat.parse(down);
+        pro.setDowndate(date);
+        pro.setStatus(1);
+
+        String[] prop = propid.split(",");
+        String[] propval = propvals.split("-");
+        String[] nums = propval[0].split(",");
+        pro.setPrice(Double.parseDouble(nums[2]));
+        System.out.println(pro);
+        int res = service.modifyProduct(pro);
+
+        int result = skuService.deleteSku(pro.getId());
+        List<Sku> list = new ArrayList<Sku>();
+        for (int i = 0 ; i<propval.length;i++) {
+            Sku ssku = new Sku();
+            String[] pval = propval[i].split(",");
+            String sku = "";
+            for (int j = 0; j < prop.length; j++) {
+                sku += prop[j] + ":" + pval[j] + ",";
+            }
+            ssku.setSkuCon(sku);
+            ssku.setPrice(Double.parseDouble(pval[2]));
+            ssku.setKucun(Integer.parseInt(pval[3]));
+            list.add(ssku);
+        }
+        int res2 = skuService.addSku(list,pro.getId());
+        MultipartFile shopImg = null;
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(
+                request.getSession().getServletContext());// 图片解析器
+        if (commonsMultipartResolver.isMultipart(request)) {
+            MultipartHttpServletRequest multipartHttpServletRequest =(MultipartHttpServletRequest)request;
+            for (int i = 1; i<= Contants.imgNums ; i++){
+                String name = "shopImg"+i;
+                shopImg =multipartHttpServletRequest.getFile(name);
+                if(shopImg != null){
+                    picService.deletePic(pro.getId());
+                    ImagesUtil.deleteFileOrPath(PathUtil.getShopImagePath(pro.getId()));
+                    List<String> li = new UploadUtil().uploadPic(request,pro);
+                    if(li!=null){
+                        picService.addPic(li,pro.getId());
+                    }
+                }
+            }
+
+        }
+        if(res >0 && result > 0 && res2 >0){
+            return "1";
+        }else {
+            return "0";
+        }
     }
 }

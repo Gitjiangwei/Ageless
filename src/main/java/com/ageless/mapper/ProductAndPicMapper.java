@@ -36,4 +36,6 @@ public interface ProductAndPicMapper {
      * 新增商品图片
      */
     int addPic(@Param("list") List<String> lp,@Param("productId")Integer productId);
+
+    int deletePic(Integer productId);
 }

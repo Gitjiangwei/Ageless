@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="/css/backstage/page.css">
 		<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
 		<link rel="stylesheet" type="text/css" href="/css/backstage/add.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/popup.css" />
 
 	<style type="text/css">
 
@@ -90,7 +91,7 @@
 
 	<body>
 		<div class="container">
-			<h1 class="tabTitle"><span onclick="NewPage('table.html')"><img src="/images/backstage/xjt.png"/></span>商品属性</h1>
+			<h1 class="tabTitle"><span onclick="NewPage('/sort/sortcon')"><img src="/images/backstage/xjt.png"/></span>商品属性</h1>
 			<form action="/sort/sortcon" method="post">
 			<div class="serach">
 				
@@ -113,7 +114,10 @@
 				
 				
 			</div>
+
 			</form>
+			<!--弹框-->
+			<div class="mbStyle">&nbsp;</div>
 			<!--搜索区结束-->
 			<div class="info">
 				<table cellpadding="0" cellspacing="0" border="0" class="selectTable" id="tableData">
@@ -193,6 +197,7 @@
 
 
 					<button class="bc">提交</button>
+					<button onclick="NewPage('/sort/sortcon')" class="bc">返回</button>
 
 				</div>
 			
@@ -205,6 +210,7 @@
 		<script type="text/javascript" src="/js/backstage/global.js"></script>
 		<script type="text/javascript" src="/js/backstage/index.js"></script>
 		<script type="text/javascript" src="/js/management/sortcon.js"></script>
+		<script type="text/javascript" src="/js/backstage/popup.js"></script>
 
 
 	</body>

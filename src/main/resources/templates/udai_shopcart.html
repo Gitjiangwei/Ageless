@@ -60,13 +60,15 @@
 						</thead>
 						<tbody>
 						<tr v-for="item in productList">
-							<th scope="row cart-tab-1"  >
+
+							<th scope="row cart-tab-1"  class="jddw">
 								<div class="cart-item-check">
-									<a href="javascript:void 0" class="item-check-btn" v-bind:class="{'check':item.checked}" @click="selectedProduct(item)">
+									<a href="javascript:void 0" class="item-check-btn" :class="{'check':item.checked}" @click="selectedProduct(item)">
 										<svg class="icon icon-ok"><use xlink:href="#icon-ok"></use></svg>
 									</a>
 								</div>
-								<div  class="img"><!--<img src="/images/temp/item.picPath" alt="" class="cover">--><img :src="item.picPath" style="width: 150px">{{item.picPath}}</div><!-- v-bind:src="item.productImage"-->
+
+								<div  class="img" style="width: 100px;display: inline-block;margin-left: 20px"><!--<img src="/images/temp/item.picPath" alt="" class="cover">--><img :src="item.picPath" style="width: 100px">{{item.picPath}}</div><!-- v-bind:src="item.productImage"-->
 								</label>
 							</th>
 							<td>

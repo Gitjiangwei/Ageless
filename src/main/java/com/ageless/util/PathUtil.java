@@ -8,7 +8,7 @@ public class PathUtil {
 		String os = System.getProperty("os.name");
 		String basePath = "";
 		if (os.toLowerCase().startsWith("win")) {
-			basePath = "E:/beidaqingniao/image/";
+			basePath = "E:/IdeaProjects/Ageless/src/main/resources/static/";
 		} else {
 			basePath = "/home/xiangze/image/";
 		}
@@ -17,7 +17,7 @@ public class PathUtil {
 	}
 
 	public static String getShopImagePath(long shopId) {
-		String imagePath = "/upload/item/shop/" + shopId + "/";
+		String imagePath = "/images/item/" + shopId + "/";
 		return imagePath.replace("/", seperator);
 	}
 }

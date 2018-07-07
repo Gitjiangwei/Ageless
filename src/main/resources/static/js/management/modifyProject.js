@@ -1,6 +1,12 @@
 $(function(){
 	var categoryThreeId = $(".category03").val();
 
+    var sortconId = $(".sortconId").val();
+    var sortlist = sortconId.split(",");
+
+    var options = $(".options").val();
+    var option = options.split(",");
+
 	selectAllSort(categoryThreeId);
     selectAllSku(categoryThreeId);
 
@@ -8,10 +14,10 @@ $(function(){
 	var i = 0;
 	
 	$(".hide111").change(function(){
-		if(i>4){
-			alert("No more than 5");
-			return;
-		}
+        if(i>4){
+            alert("No more than 5");
+            return;
+        }
 		i++;
 		var file =document.getElementById("pic"+i);
 		var imgUrl =window.URL.createObjectURL(file.files[0]);
@@ -36,12 +42,24 @@ $(function(){
                 data.map(function(item,index){
                     allsort +='<dl><dt><span>'+item.name+'</span></dt><dd><div class="fbox">'
                         +'<select class="textStyle xuanzhong" style="width:210px;">';
+                    var k = -1;
                     for(var i = 0 ; i< item.sortcons.length; i++ ){
-                        allsort += '<option value="'+item.sortcons[i].sortconid+'">'+item.sortcons[i].sortconname+'</option>'
+                        for(var j = 0;j<sortlist.length-1; j++){
+                            if(item.sortcons[i].sortconid == sortlist[j]){
+                                k = i;
+                                break;
+                            }
+                        }
+                        if(i == k){
+                            allsort += '<option value="'+item.sortcons[i].sortconid+'" selected>'+item.sortcons[i].sortconname+'</option>';
+                        }else{
+                            allsort += '<option value="'+item.sortcons[i].sortconid+'">'+item.sortcons[i].sortconname+'</option>';
+                        }
                     }
                     allsort +='</select></div></dd></dl>';
                 });
                 $(".shuxing").html(allsort);
+
             }
         });
     }
@@ -54,15 +72,40 @@ $(function(){
             success:function(data){
                 var allsort="";
                 data.map(function(item,index){
-
+                    var k = -1;
                     allsort +='<ul class="SKU_TYPE"><li class="sku_table_ss" is_required="1" propid="'+item.id+'" sku-type-name="'+item.propertyName+'"><em>*</em>'+item.propertyName+'：</li></ul><ul>';
                     for(var i = 0 ; i< item.list.length; i++ ){
-                        allsort += '<li><label><input type="checkbox" class="sku_value" propvalid="'+item.list[i].id+'" value="'+item.list[i].optionName+'" />'+item.list[i].optionName+'</label></li>';
+                        for(var j = 0;j<option.length-1; j++){
+                            if(item.list[i].id == option[j]){
+                                k = i;
+                                break;
+                            }
+                        }
+                        if(i == k){
+                            allsort += '<li><label><input type="checkbox" class="sku_value" propvalid="'+item.list[i].id+'" value="'+item.list[i].optionName+'" checked/>'+item.list[i].optionName+'</label></li>';
+                        }else{
+                            allsort += '<li><label><input type="checkbox" class="sku_value" propvalid="'+item.list[i].id+'" value="'+item.list[i].optionName+'" />'+item.list[i].optionName+'</label></li>';
+                        }
                     }
                     allsort +='</ul><div class="clear"></div>';
                 });
                 $(".gg").html("");
                 $(".gg").html(allsort);
+                $(".sku_value").change();
+                var proId = $(".productId").val();
+                $.ajax({
+                    type:"get",
+                    url:"/shang/chasku",
+                    data:{id:proId},
+                    dataType:"json",
+                    success:function (data) {
+                        $("tr[class*='sku_table_tr']").map(function(index,item){
+                            $(item).find(".setting_sku_price").val(data[index].price);
+                            $(item).find(".setting_sku_stock").val(data[index].kucun);
+                        });
+                    }
+                });
+
             }
         });
     }
@@ -71,8 +114,8 @@ $(function(){
 
        var product = {};
         product.productName = $("#productName").val();
-        alert(product.productName);
         product.maidian = $("#maidian").val();
+        product.id = $(".productId").val();
         if( product.productName ==null ||  product.productName==""){
             showWebAlert("请输入完整信息！");
             return false;
@@ -93,7 +136,8 @@ $(function(){
         var propvals = "";
         $(".sku_table_tr").map(function (index,item){
             var propvalids = $(item).attr("propvalids");//SKU值主键
-            var price = $(item).find(".setting_sku_price").val();
+			var price = $(item).find(".setting_sku_price").val();
+			var kucun = $(item).find(".setting_sku_stock").val();
             if(price ==null || price=="" ){
                 alert("请输入完整信息！");
                 return false;
@@ -102,7 +146,6 @@ $(function(){
                 return false;
             }
 
-            var kucun = $(item).find(".setting_sku_stock").val();
             if(kucun ==null || kucun=="" ){
                 alert("请输入完整信息！");
             }else  if(isNaN(kucun)==true){
@@ -116,6 +159,7 @@ $(function(){
         product.category01 = $(".category01").val();
         product.category02 = $(".category02").val();
         product.category03 = $(".category03").val();
+
         editor.sync();//将KindEditor的数据同步到textarea标签。
         product.descript = $("#editor_id").val();
 
@@ -139,7 +183,7 @@ $(function(){
         formData.append("propvals",propvals);
         formData.append("shopStr",JSON.stringify(product));
         $.ajax({
-            url:"/commodity/addproject",
+            url:"/commodity/modifyproject",
             type:"post",
             data:formData,
             contentType:false,
@@ -147,10 +191,10 @@ $(function(){
             cache:false,
             success:function(data){
                 if(data == "1"){
-                    alert("商品添加成功！");
+                    alert("商品修改成功！");
                     window.location.href="/commodity/goxiajia";
                 }else{
-                    showWebAlert("商品添加失败！");
+                    showWebAlert("商品修改失败！");
                 }
             }
         });

@@ -29,7 +29,7 @@ $(function () {
             });
 
         }else{
-            showWebAlert("对不起修改内容为空！");
+            showWebAlert("请填写修改内容！");
         }
     });
 
@@ -52,6 +52,9 @@ $(function () {
             if(data.result=="success"){
                 showWebAlert("添加成功！");
                 getCategoryListOne(null);
+                $("#xianshi").hide();
+                $(".sortcon :first").val("");
+                $(".sortcon :first").siblings().remove();
             }else{
                 showWebAlert("添加失败！");
             }
@@ -91,11 +94,11 @@ function result(bz, choose) {
             dataType: "json",
             success: function (data) {
                 if (data == "1") {
-                    showWebAlert("删除成功！");
+                    showWebAlert("删除一二三级分类成功！");
                 } else if(data=="2"){
-                    showWebAlert("删除成功！但不存在对应的三级标签");
+                    showWebAlert("删除一二级分类成功！");
                 }else if(data=="3"){
-                    showWebAlert("删除成功！但不存在对应的二级和三级标签");
+                    showWebAlert("删除该分类成功！");
                 }else{
                     showWebAlert("删除失败！");
                 }

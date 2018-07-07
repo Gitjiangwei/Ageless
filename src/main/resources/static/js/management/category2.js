@@ -52,7 +52,7 @@ $('#sousuo').click(function () {
             var twoCategory;
             twoCategory+='<tr> <th>&nbsp;</th> <th>编号</th> <th>分类名</th> <th>操作</th> </tr>';
             data.map(function(item,index){
-                oneCategory +='<tr><th>&nbsp;</th><th>'+item.id+'</th><th>'+item.categoryName+'</th><th><button class="del" onclick="nav('+item.id+')">删除</button>  <span  class="aaa">修改</span><span cid='+item.id+' cparentId='+item.parentId+'></span></th></tr>';
+                oneCategory +='<tr><th>&nbsp;</th><th>'+item.id+'</th><th>'+item.categoryName+'</th><th><button class="del" onclick="nav('+item.id+')">删除</button>  <span  class="aaa">修改</span><span cid='+item.id+'></span></th></tr>';
             });
             $("#fen2").html("");
             $("#fen2").html(twoCategory+oneCategory);
@@ -75,20 +75,22 @@ $(".save").click(function () {
            dataType:"json",
            success:function(data){
                if(data.result=="success"){
-                   //showWebAlert();
-                   alert("添加成功！");
+                   showWebAlert("添加成功！");
                    loadAjax();
+                   $("#xianshi").hide();
+                   $(".sortcon :first").val("");
+                   $(".sortcon :first").siblings().remove();
                }else{
-                   alert("添加失败！")
-                   //showWebAlert("添加失败！");
+                   showWebAlert("添加失败！")
+
                }
            },
            error:function () {
-               alert("系统错误");
+               showWebAlert("系统错误");
            }
        });
    }else{
-       alert("对不起，所选一级分类不能为空");
+       showWebAlert("请选择一级分类");
    }
 
 });
@@ -104,11 +106,11 @@ function result(bz, choose) {
                 dataType: "json",
                 success: function (data) {
                     if (data == "1") {
-                        alert("删除成功！");
+                        showWebAlert("删除二三级分类成功！");
                     } else if(data=="2"){
-                        alert("删除成功！但不存在对应的三级标签");
+                        showWebAlert("删除该分类成功！");
                     }else{
-                        alert("删除失败！");
+                        showWebAlert("删除失败！");
                     }
                     loadAjax();
                 }
@@ -134,15 +136,15 @@ $(document).on("click",".ti",function () {
             dataType: "json",
             success: function (data) {
                 if(data=="1"){
-                    alert("修改成功");
+                    showWebAlert("修改成功");
                     loadAjax();
                 }else{
-                    alert("修改失败");
+                    showWebAlert("修改失败");
                 }
             }
         });
 
     }else{
-        alert("对不起修改内容为空！");
+        showWebAlert("请填写修改内容！");
     }
 });
