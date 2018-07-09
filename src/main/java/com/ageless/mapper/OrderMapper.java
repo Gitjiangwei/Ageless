@@ -32,4 +32,10 @@ public interface OrderMapper {
      * @return
      */
     List<Order> order_product(@Param("id") Integer id);
+
+    //订单后台需要
+    List<Order> seleAll(@Param("number")String number, @Param("id") int id, @Param("createDate") String createDate);
+    List<Order> selenid(@Param("number")String number);
+    int delete(@Param("number")String number);
+    int dall(List<String> number);
 }

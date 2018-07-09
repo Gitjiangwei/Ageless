@@ -148,6 +148,11 @@ $(function(){
             contentType:false,
             processData:false,
             cache:false,
+            beforeSend:function(XMLRequest){
+               // $("#tableuserlist").html("");
+                $("#tableuserlist").append(
+                    "<tr><td colspan='3'><img src='/images/backstage/loading.gif' /></td></tr>");
+            },
             success:function(data){
                 if(data == "1"){
                     alert("商品添加成功！");

@@ -48,4 +48,42 @@
             GROUP BY productpic.productId
 
        </select>
+
+
+    <!-- 订单后台需要 -->
+    <select id="seleAll" resultType="Order">
+        SELECT `order`.`number`,`order`.`order_price`,`status` ,`name`
+        FROM `order`
+        INNER JOIN `user` ON `order`.`userId`=`user`.`id`
+        INNER JOIN `order_status` ON `order`.`OrderStatus`=`order_status`.`id`
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="number!=null and number!=''">
+                and `number` like CONCAT('%',#{number},'%')
+            </if>
+            <if test="id!=0">
+                and OrderStatus = #{id}
+            </if>
+            <if test="createDate!=null and createDate!=''">
+                and `name` like CONCAT('%',#{createDate},'%')
+            </if>
+        </trim>
+        ORDER BY `order`.`id` DESC
+    </select>
+    <select id="selenid" resultType="Order">
+        SELECT `order`.`number`,`order`.`atch`,`order`.`order_price`,`status` ,`name`,`address`.`province`,`address`.`city`,`address`.`area`,`address`.`street`,`address`.`details`,`order`.`createDate`
+        FROM `order`
+        INNER JOIN `user` ON `order`.`userId`=`user`.`id`
+        INNER JOIN `order_status` ON `order`.`OrderStatus`=`order_status`.`id`
+        INNER JOIN `address` ON `order`.`addressid`=`address`.`id`
+        WHERE `order`.`number`=#{number}
+    </select>
+    <delete id="delete">
+        delete from `order` where `number`=#{number}
+    </delete>
+    <delete id="dall">
+        delete from `order` where `number` in
+        <foreach collection="list" item="number" open="(" close=")" separator=",">
+            #{number}
+        </foreach>
+    </delete>
 </mapper>
