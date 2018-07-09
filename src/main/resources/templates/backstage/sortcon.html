@@ -131,7 +131,7 @@
 					三级分类：<select class="textStyle" style="width:80px;" id="categoryLevel3" name="categoryThree">
 				         <option value="0">--请选择--</option>
 					</select>
-				属性名：<input type="text" class="textStyle" style="width:120px;" name="name"/>
+				属性名：<input type="text" class="textStyle" style="width:120px;height: 28px;" name="name"/>
 				<input type="submit" value="搜索" class="button search" />
 				<input type="button" value="新增" class="button add"  id="dianji" />
 				
@@ -170,7 +170,7 @@
                         <th>${list.three.categoryName}</th>
 
 
-                        <th><a href="#"  onclick="xiu(${list.id})" class="xg">修改</a><span>&nbsp;&nbsp;&nbsp;</span><a href="#" onclick="nav(${list.id})">删除</a></th>
+                        <th><button style="height: 28px;width: 65px" onclick="xiu(${list.id})" class="button xg">修改</button>&nbsp;&nbsp;<button style="height: 28px;width: 65px" onclick="nav(${list.id})" class="button">删除</button></th>
                     </tr>
 				</#list>
 
@@ -195,25 +195,26 @@
 							<li is_required='0' propid='' sku-type-name="" >
 								属性名：
 
-								<input type="text" class="cusSkuTypeInput" name="name"/>
-								<a href="javascript:void(0);" class="delCusSkuType">删除</a>
+								<input type="text" class="cusSkuTypeInput" style="height: 28px;width: 100px;"name="name"/>
+
 							</li>
 						</ul>
 						<ul>
 							<li>
-
-								<input type="text" class="cusSkuValInput"  name="sortconname"/>
+								属性选项：
+								<input type="text" class="cusSkuValInput" style="height: 28px;width: 100px;" name="sortconname"/>
 							</li>
 
 							<input type="button" value="添加属性选项" class="button add cloneSkuVal" />
+							<a href="javascript:void(0);" class="delCusSkuType">删除整条</a>
 						</ul>
 						<div class="clear"></div>
 					</div>
 					<!--单个sku值克隆模板-->
 					<li style="display: none;" id="onlySkuValCloneModel">
 						<input type="checkbox" class="model_sku_val" propvalid='' value="" />
-						<input type="text" class="cusSkuValInput"  name="sortconname"/>
-						<a href="javascript:void(0);" class="delCusSkuVal">删除</a>
+						<input type="text" class="cusSkuValInput" style="height: 28px;width: 100px;" name="sortconname"/>
+						<a href="javascript:void(0);" class="delCusSkuVal">删除属性选项</a>
 					</li>
 					<div class="clear"></div>
 					<div id="skuTable"></div>
@@ -221,8 +222,8 @@
 
 
 
-					<button class="bc">提交</button>
-					<button onclick="NewPage('/sort/sortcon')" class="bc">返回</button>
+					<button class="button bc">提交</button>
+					<button onclick="NewPage('/sort/sortcon')" class="button bc">返回</button>
 
 				</div>
 			
@@ -286,10 +287,10 @@
                     success: function (data) {
 
                         $("#option").html("");
-                        var str='<p>属性名：<input type="text" class="textStyle ming" style="width:80px;"value='+data[0].name+'  readonly="readonly"  /> <a href="#"  class="aaa"> 修改</a><span cid='+data[0].id+' class="t"></span></p><p>属性选项：'
+                        var str='<p>属性名：<input type="text" class="textStyle ming" style="width:80px;height: 28px"value='+data[0].name+'  readonly="readonly"  /> <button style="height: 28px;width: 65px" class="button aaa"> 修改</button><span cid='+data[0].id+' class="t"></span></p><p>属性选项：'
                         $.each(data[0].sortcons, function (i, item) {
 
-                            str+='<input type=\"text\" id=\"op'+item.sortconid+'\" class=\"textStyle\" name=\"sProblem\" style=\"width:80px;\" value='+item.sortconname+'  readonly="readonly" /><a href="#" class="bbb">修改</a><span sid='+item.sortconid+' class="t"></span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+                            str+='<input type="text" id=\"op'+item.sortconid+'\" class="textStyle" name=\"sProblem\" style="width:80px;height:28px" value='+item.sortconname+'  readonly="readonly" /><button style="height: 28px;width: 65px" class="button bbb">修改</button><span sid='+item.sortconid+' class="t"></span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
                         });
 
                         str+='</p>'
@@ -299,11 +300,11 @@
                 } );
             }
             $(document).on("click",".aaa",function(){
-                var context = '<span class="t"><input type="text" class="textStyle" style="width:60px;"><a href="#" class="ti t">提交</a><a href="#" class="qx">取消</a></span>'
+                var context = '<span class="t"><input type="text" class="textStyle" style="width:60px;height: 28px"><button  style="height: 28px;width: 65px" class="button ti t">提交</button><button style="height: 28px;width: 65px" class="button qx">取消</button></span>'
                 $(this).next().html(context);
             });
             $(document).on("click",".bbb",function(){
-                var context = '<span ><input type="text" class="textStyle" style="width:60px;"><a href="#" class="tij">提交</a><a href="#" class="qx">取消</a></span>'
+                var context = '<span ><input type="text" class="textStyle" style="width:60px;height: 28px"><button style="height: 28px;width: 65px" class=" button tij">提交</button><button style="height: 28px;width: 65px" class="button qx">取消</button></span>'
                 $(this).next().html(context);
             });
 

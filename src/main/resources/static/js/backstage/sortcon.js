@@ -257,7 +257,6 @@ $('#dianji').click(function () {
 $(document).on("click",".quxiao",function(){
     $("#yc").css("display","none");
 });
-
     //提交
     $(document).on("click",".bc",function(){
 

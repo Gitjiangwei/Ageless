@@ -93,8 +93,8 @@ function cha(id ,name){
                     }
                 }
             s+="</td><td>"+data[p].categoryName+"</td>"
-            s+="<td id='del"+data[p].id+"'><span class='xg' onclick=xiu("+data[p].id+");>修改</span>"
-            s+="<span onclick=update1("+data[p].id+");>删除</span></td></tr>";
+            s+="<td id='del"+data[p].id+"'><button class='button xg'style='height:28px;width:65px' onclick=xiu("+data[p].id+");>修改</button>"
+            s+="<button class='button'style='height:28px;width:65px' onclick=update1("+data[p].id+");>删除<button/></td></tr>";
         }
             $("#tbod").html(s);
           /*  $('#tableData tbody').replaceWith(tbody);*/
