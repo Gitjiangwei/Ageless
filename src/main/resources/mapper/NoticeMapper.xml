@@ -3,26 +3,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.NoticeMapper">
     <select id="selectAll" resultType="Notice">
-        SELECT id,title,link,announcement_content,announcement_time,typeId,modificationDate FROM notice
-        <trim prefix="WHERE" prefixOverrides="AND">
-            <if test="title!=null and title!=''">
-                and title=#{title}
-            </if>
-            <if test="typeId=='国际'and typeId=='国内'">
-                and typeId=#{typeId}
-            </if>
-        </trim>
+        SELECT id,title,link,announcement_content,announcement_time,typeId,modificationDate,typeName FROM notice INNER JOIN newstype ON notice.typeId=newstype.n_id
+        <if test="title!=null and title!=''">
+            and title LIKE CONCAT('%',#{title},'%')
+        </if>
+        <if test="typeId!=0 and typeId!=null">
+            and typeId=#{typeId}
+        </if>
+
 
     </select>
     <insert id="add">
-		INSERT INTO
-		notice(title,link,announcement_content,announcement_time,typeId,modificationDate)VALUES(#{title},#{link},#{announcement_content},#{announcement_time},#{typeId},#{modificationDate});
+            INSERT INTO
+            notice(title,link,announcement_content,announcement_time,typeId,modificationDate)VALUES(#{title},#{link},#{announcementContent},now(),#{typeId},now());
 	</insert>
     <delete id="delete">
 	DELETE FROM notice WHERE id=#{id}
 	</delete>
     <update id="xiuGai">
-		UPDATE notice SET announcement_content=#{announcement_content} WHERE id=#{id}
+		UPDATE notice SET title=#{title},typeId=#{typeId},link=#{link},announcement_content=#{announcementContent} WHERE id=#{id}
 	</update>
 
     <select id="qianselect"   resultType="Notice">
@@ -52,7 +51,24 @@
     </select>
 
 
+    <select id="xiaLa" resultType="NewsType">
+        SELECT n_id,typeName FROM newstype;
+    </select>
 
+    <select id="selectId" resultType="Notice">
+        SELECT id,title,link,announcement_content,announcement_time,typeId,modificationDate,typeName FROM notice INNER JOIN newstype ON notice.typeId=newstype.n_id
+        where id=#{id}
+    </select>
+
+    <select id="selectNewsType" resultType="NewsType">
+        SELECT n_id,typeName FROM newstype ORDER BY n_id DESC
+    </select>
+    <delete id="deletNews">
+        DELETE FROM newstype WHERE n_id=#{nId}
+    </delete>
+    <insert id="insertNews">
+        INSERT INTO newstype (typeName) VALUES (#{typeName})
+    </insert>
 
 
 
