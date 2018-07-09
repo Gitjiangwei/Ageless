@@ -107,7 +107,6 @@ function cha(id ,name){
 }
 $("#sousou").click(function () {
     var sid=$("#sid").val();
-    alert(sid);
     var sname=$("#sname").val();
     cha(sid ,sname);
 });

@@ -6,13 +6,6 @@ import com.ageless.util.GetSMS;
 import com.ageless.util.MD5;
 import com.ageless.util.RandUtil;
 import com.alibaba.fastjson.JSON;
-import com.alipay.api.internal.util.StringUtils;
-/*import com.qq.connect.QQConnectException;
-import com.qq.connect.api.OpenID;
-import com.qq.connect.api.qzone.UserInfo;
-import com.qq.connect.javabeans.AccessToken;
-import com.qq.connect.javabeans.qzone.UserInfoBean;
-import com.qq.connect.oauth.Oauth;*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +14,20 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+/*import com.qq.connect.QQConnectException;
+import com.qq.connect.api.OpenID;
+import com.qq.connect.api.qzone.UserInfo;
+import com.qq.connect.javabeans.AccessToken;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
+import com.qq.connect.oauth.Oauth;*/
 
 /**
  * 用户

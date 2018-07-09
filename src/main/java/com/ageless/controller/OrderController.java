@@ -6,7 +6,6 @@ import com.ageless.pojo.SkuProperty;
 import com.ageless.service.OrderService;
 import com.ageless.service.ProductService;
 import com.alibaba.fastjson.JSON;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -130,4 +129,45 @@ public class OrderController {
         return skus;
     }
 
+
+    //订单后台需要
+    @GetMapping("/dingdanPage")
+    public String dingdanPage(){
+        return "backstage/orderAll";
+    }
+
+
+    @GetMapping(value = "/xq")
+    @ResponseBody
+    public Object selectall(@RequestParam(required = false) String numbers ,@RequestParam(required = false) int id ,@RequestParam(required = false) String create) {
+        List<Order> lsts =orderService.seleAll(numbers,id,create);
+        System.out.println(lsts);
+        Object obj = JSON.toJSON(lsts);
+        System.out.println(obj);
+        return obj;
+    }
+    @GetMapping(value = "/xqs")
+    @ResponseBody
+    public Object selectnid(@RequestParam(required = false) String nid) {
+        List<Order> lsts =orderService.selenid(nid);
+        System.out.println(lsts);
+        Object obj = JSON.toJSON(lsts);
+        System.out.println(obj);
+        return obj;
+    }
+    @GetMapping(value = "/sc")
+    @ResponseBody
+    public Object deleteall(@RequestParam(required = false) String nid) {
+        int res = orderService.delete(nid);
+        Object obj = JSON.toJSONString(res);
+        return obj;
+    }
+    @GetMapping(value = "/dall")
+    @ResponseBody
+    public Object delete(@RequestParam(required = false) List<String> nid) {
+        int res = orderService.dall(nid);
+        Object obj = JSON.toJSONString(res);
+        System.out.println(obj);
+        return obj;
+    }
 }
