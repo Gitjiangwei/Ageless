@@ -61,7 +61,12 @@
         <if test="membership!=null and membership!=''">
             and membership=#{membership}
         </if>
-
+        <if test="phone!=null and phone!=''">
+            and phone=#{phone}
+        </if>
+        <if test="mailbox!=null and mailbox!=''">
+            and mailbox=#{mailbox}
+        </if>
     </update>
 
     <select id="selectId" resultType="java.lang.Integer">

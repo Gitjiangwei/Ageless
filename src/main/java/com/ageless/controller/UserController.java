@@ -337,7 +337,6 @@ public class UserController {
             data1=new Date();
             object="{\"back\":\"成功\"}";
         }
-
         /*try {
             rum =Integer.parseInt(randum);
         } catch (NumberFormatException e) {
@@ -346,6 +345,27 @@ public class UserController {
         return object;
     }
 
+    @RequestMapping("/sendMessage1")
+    @ResponseBody
+    public Object sendMessage1(@RequestParam(required = false) String yzNum){
+        Object object =null;
+        User user =new User();
+        user.setPhone(yzNum);
+        if(userService.selectCount(user)==1){
+            String randum = GetSMS.getmMssage(yzNum);
+            rum = randum;
+            data1=new Date();
+            object="{\"back\":\"重复\"}";
+        }else {
+            object="{\"back\":\"成功\"}";
+        }
+        /*try {
+            rum =Integer.parseInt(randum);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }*/
+        return object;
+    }
     /**
      * 添加手机号注册的用户
      * @param numBack
@@ -368,7 +388,6 @@ public class UserController {
         if(num>=60){
             object="{\"back\":\"超时\"}";
         }else if(numBack.equals(rum)){
-
             if(phoneNo.contains("@")&&phoneNo.contains(".")){
                 user.setMailbox(phoneNo);
                 if(userService.selectCount(user)==1){
@@ -387,6 +406,42 @@ public class UserController {
                 }
             }
 
+        }else{
+            object="{\"back\":\"错的\"}";
+        }
+        return object;
+    }
+    @RequestMapping("/updateMember")
+    @ResponseBody
+    public Object updateMember(@RequestParam(required = false) String numBack, @RequestParam(required = false) String phoneNo, @RequestParam(required = false) String pwdNum){
+        data2=new Date();
+        long num = (data2.getTime()-data1.getTime())/1000;
+        Object object=null;
+        User user =new User();
+        Map<String,Object> map= new HashMap<String,Object>();
+        user.setLoginpwd(md5.string2MD5(pwdNum));
+        map.put("loginpwd",user.getLoginpwd());
+        if(num>=60){
+            object="{\"back\":\"超时\"}";
+        }else if(numBack.equals(rum)){
+            if(phoneNo.contains("@")&&phoneNo.contains(".")){
+                user.setMailbox(phoneNo);
+                map.put("mailbox",user.getMailbox());
+                if(userService.updateUser(map)==1){
+                    object="{\"back\":\"对的\"}";
+                }else {
+                    object="{\"back\":\"重复\"}";
+                }
+            }else {
+                user.setPhone(phoneNo);
+                map.put("phone",user.getPhone());
+                if(userService.updateUser(map)==1){
+                    userService.updateUser(map);
+                    object="{\"back\":\"对的\"}";
+                }else {
+                    object="{\"back\":\"重复\"}";
+                }
+            }
         }else{
             object="{\"back\":\"错的\"}";
         }
@@ -420,6 +475,37 @@ public class UserController {
             //发送的内容
             mainMessage.setText("【花想容】您好您的验证码是："+rum+"请于1分钟内完成验证，如非本人请忽略本内容");
             jms.send(mainMessage);
+            object="{\"back\":\"成功\"}";
+        }
+        return object;
+    }
+    /**
+     * 忘记密码发送邮箱验证码
+     * @param yzNum
+     * @return
+     */
+    @RequestMapping("/sendEmail1")
+    @ResponseBody
+    public Object send1(@RequestParam(required = false)String yzNum){
+        Object object =null;
+        User user =new User();
+        user.setMailbox(yzNum);
+        if(userService.selectCount(user)==1){
+            rum =RandUtil.getRandomNum();
+            data1=new Date();
+            //建立邮件消息
+            SimpleMailMessage mainMessage = new SimpleMailMessage();
+            //发送者
+            mainMessage.setFrom("821488037@qq.com");
+            //接收者
+            mainMessage.setTo(yzNum);
+            //发送的标题
+            mainMessage.setSubject("【花想容】");
+            //发送的内容
+            mainMessage.setText("【花想容】您好您的验证码是："+rum+"请于1分钟内完成验证，如非本人请忽略本内容");
+            jms.send(mainMessage);
+            object="{\"back\":\"重复\"}";
+        }else {
             object="{\"back\":\"成功\"}";
         }
         return object;

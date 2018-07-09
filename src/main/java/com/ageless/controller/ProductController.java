@@ -1,6 +1,5 @@
 package com.ageless.controller;
 
-
 import com.ageless.pojo.*;
 import com.ageless.service.ProductAndPicService;
 import com.ageless.service.ProductService;
@@ -23,6 +22,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * yyk
+ */
 @Controller
 @RequestMapping("/commodity")
 public class ProductController {
@@ -39,6 +41,12 @@ public class ProductController {
     @Autowired
     private ProductAndPicService picService;
 
+    /**
+     * 进入详情页面
+     * @param model 返回给详情页传值
+     * @param id 获取到的id，默认值为2
+     * @return 返回给item_show.html页面
+     */
     @RequestMapping("/shopshow.html")
     public String shopshow(Model model,@RequestParam(value = "id",defaultValue = "2")Integer id){
         List<ProductPic> pics = service.selectAllPicById(id);
@@ -92,6 +100,13 @@ public class ProductController {
         return "item_show";
     }
 
+    /**
+     * 渲染带有sku的右半部分
+     * @param modelAndView 渲染页面传值
+     * @param request 用来获取传过来的数组
+     * @param id 用户id
+     * @return 渲染视图的页面
+     */
     @RequestMapping("/productRight-y")
     public ModelAndView productRight(ModelAndView modelAndView, HttpServletRequest request, @RequestParam("id")Integer id){
         Product product = service.selectPoroductById(id);
@@ -153,10 +168,6 @@ public class ProductController {
                 }
             }
         }
-        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-        System.out.println(skuOptionIdss);
-        System.out.println(ssku.size());
-        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         StringBuffer skucon2 = new StringBuffer();
         Integer emm = 0;
         System.out.println(thefirst);
@@ -165,12 +176,6 @@ public class ProductController {
             skucon2.append(skupro.getId() + ":" + thefirst.get(emm) + ",");
             emm ++;
         }
-        System.out.println("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-        for (SkuOption ss :
-                options) {
-            System.out.println(ss.getProductId());
-        }
-        System.out.println("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
         Sku sku = service.selectSkuByCon(skucon2.toString(),id);
         modelAndView.addObject("options",options);
         modelAndView.addObject("properties",properties);
