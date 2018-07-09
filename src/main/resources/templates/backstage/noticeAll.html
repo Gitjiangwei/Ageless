@@ -11,6 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
 		<link rel="stylesheet" type="text/css" href="/css/backstage/popup.css" />
 
+
 	</head>
 
 	<body>
@@ -18,20 +19,16 @@
 			<h1 class="tabTitle"><span onclick="NewPage('table.html')"><img src="/images/backstage//xjt.png"/></span>公告信息</h1>
 			<!--搜索区开始-->
 			<div class="serach">
-				<span>新闻标题：</span>
-				<input type="text" class="textStyle" placeholder="请输标题" style="width: 180px;height: 24px;line-height: 24px;" />
-			
 						<span>新闻类型：</span>
-								<select class="selectStyle" style="width:210px;">
-									<option>全部</option>
-									<option>新闻</option>
-									<option>娱乐</option>								
+								<select class="selectStyle selt" style="width:210px;" >
+
 								</select>
-							
+                <span>新闻标题：</span>
+                <input type="text" class="textStyle" placeholder="请输标题" style="width: 180px;height: 24px;line-height: 24px;" />
 						
 						</dd>
 					</dl>
-				<input type="button" value="搜索" class="button search" />
+				<input type="button" value="搜索" class="button search" onclick="sousuo()"/>
 			</div>
 			<!--搜索区结束-->
 			<div class="info">
@@ -44,24 +41,13 @@
 							<th>操作</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td colspan="4">
-								<img src="/images/backstage/loading.gif" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								1
-							</td>
-							<td>新闻</td>
-							<td>U袋网平台已上线，您还在等什么？</td>
-							<td>
-								<a href="javascript:;" id="edit" class="button edi">编辑</a>
-								<a href="javascript:;" id="open" class="button">详情</a>
-								<a href="javascript:;" id="del"  class="button del">删除</a>
-						    </td>
-						</tr>
+					<tr id>
+						<td colspan="4">
+							<img src="/images/backstage/loading.gif" id="shabiwuleilei" />
+						</td>
+					</tr>
+					<tbody id="tbo">
+
 					</tbody>
 				</table>
 				<div class='pageStyle'></div>
@@ -72,7 +58,7 @@
 		<div id="mb_all" class="mbStyle">&nbsp;</div>
 		<div class="popup" id="all">
 			<h1>详情<span class="closeX" onclick="closeMask('all')">X</span></h1>
-			<div class="pInfo addForm">
+			<div class="pInfo addForm" id="pp">
 			<dl>
 						<dt><span>标题</span></dt>
 						<dd>
@@ -84,7 +70,7 @@
 					<dl>
 						<dt><span>类型</span></dt>
 						<dd>
-							<div class="fbox">	
+							<div class="fbox">
 							    新闻			
 							</div>
 
@@ -134,13 +120,14 @@
 		<div id="mb_stuInfo2">&nbsp;</div>
 		<div class="popup" id="stuInfo2">
 			<h1>查询列表<span class="closeX" onclick="closeMask('stuInfo2')">X</span></h1>
-			<div class="pInfo">
-				<form action="#" method="post" enctype="multipart/form-data" onsubmit="return checkForm()" class="addForm">
+			<div class="pInfo" id="hh">
+				<form action="#" method="post" id="form" enctype="multipart/form-data" onsubmit="return checkForm()" class="addForm">
 					<dl>
-						<dt><span>标题</span></dt>
+                        <input type="hidden"  id="mm" name="id">
+                        <dt><span>标题</span></dt>
 						<dd>
 							<div class="fbox">
-								<input type="text" class="textStyle" id="userName" name="userName" style="width:200px;" value="U袋网平台已上线，您还在等什么？" maxlength="20" />
+								<input type="text" class="textStyle" id="userNames" name="userName" style="width:200px;" value="U袋网平台已上线，您还在等什么？" maxlength="20" />
 							</div>
 							<span>不能超过20个字</span>
 						</dd>
@@ -149,10 +136,9 @@
 						<dt><span>类型</span></dt>
 						<dd>
 							<div class="fbox">
-								<select class="selectStyle" style="width:150px;">
-									<option>全部</option>
-									<option selected>新闻</option>
-									<option>娱乐</option>								
+								<select class="selectStyle selt" id="select" style="width:150px;" >
+
+
 								</select>
 							</div>
 
@@ -162,7 +148,7 @@
 						<dt><span>网址</span></dt>
 						<dd>
 							<div class="fbox">
-								<input type="text" name="" id="" style="width:200px;" class="textStyle" value="www.udai.com">
+								<input type="text" name="" id="url" style="width:200px;" class="textStyle" value="www.udai.com">
 							</div>
 
 						</dd>
@@ -171,7 +157,7 @@
 						<dt><span>内容</span></dt>
 						<dd>
 							<div class="fbox">
-								<textarea name="" id="" style="height:500px; width: 600px" class="dateStyle">   因为全国遭遇罕见强寒潮天气，各大快递公司纷纷在1月25 日左右结束收派件业务，提前放假过年；各品牌厂家近期也年末清仓，货源极度不稳定，断货、下架的情况也是蛮多的！
+								<textarea name="" id="nei" style="height:500px; width: 600px" class="dateStyle">   因为全国遭遇罕见强寒潮天气，各大快递公司纷纷在1月25 日左右结束收派件业务，提前放假过年；各品牌厂家近期也年末清仓，货源极度不稳定，断货、下架的情况也是蛮多的！
 								</textarea>
 							</div>
 						</dd>
@@ -180,6 +166,7 @@
 				</form>
 			</div>
 			<div class="pfooter">
+
 				<input type="button" value="更新" id="ed" class="button edit" />
 			</div>
 		</div>
@@ -188,7 +175,7 @@
 		<script type="text/javascript" src="/js/backstage/global.js"></script>
 		<script type="text/javascript" src="/js/backstage/index.js"></script>
 		<script type="text/javascript" src="/js/backstage/popup.js"></script>
-
+		<script type="text/javascript" src="/js/backstage/notice.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$(document).on("click","#open",function() {
@@ -197,36 +184,36 @@
                 $(document).on("click",".edi",function(){
                    	mask(800, 520, true, "stuInfo2");
                 });
-				$(document).on("click",".del",function() {
-					var id=$(this).attr("id");
-					deleteShowAlert('删除提示', '确定要删除吗？', '确定', '取消', id);
-				});
-				$(document).on("click","#ed",function() {
-					var id=$(this).attr("id");
-					mask(800,520,false,"prop");
-					deleteShowAlert('更新提示', '确定要更新吗？', '确定', '取消',id);
-				});
+				// $(document).on("click",".del",function() {
+				// 	var id=$(this).attr("id");
+				// 	deleteShowAlert('删除提示', '确定要删除吗？', '确定', '取消', id);
+				// });
+				// $(document).on("click","#ed",function() {
+				// 	var id=$(this).attr("id");
+				// 	mask(800,520,false,"prop");
+				// 	deleteShowAlert('更新提示', '确定要更新吗？', '确定', '取消',id);
+				// });
 			});
-			function result(bz, choose) {
-				 if(bz=="del"){
-					if(choose) {					
-						$("#"+bz).parent().parent().remove();
-						showWebAlert('删除成功！');
-					} 
-				}
-				if(bz=="ed"){
-					if(choose) {
-						closeMask('all');	
-						closeMask('stuInfo2');	
-						closeMask('prop');			
-						showWebAlert('更新成功！');
-					}else{
-						closeMask('all');
-						closeMask('prop');
-						closeMask("stuInfo2");
-                    }
-				}
-			}
+			// function result(bz, choose) {
+			// 	 if(bz=="del"){
+			// 		if(choose) {
+			// 			$("#"+bz).parent().parent().remove();
+			// 			showWebAlert('删除成功！');
+			// 		}
+			// 	}
+			// 	if(bz=="ed"){
+			// 		if(choose) {
+			// 			closeMask('all');
+			// 			closeMask('stuInfo2');
+			// 			closeMask('prop');
+			// 			showWebAlert('更新成功！');
+			// 		}else{
+			// 			closeMask('all');
+			// 			closeMask('prop');
+			// 			closeMask("stuInfo2");
+             //        }
+			// 	}
+			// }
 		</script>
 	</body>
 

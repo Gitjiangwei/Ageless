@@ -1,10 +1,9 @@
 package com.ageless.service.impl;
 
 import com.ageless.mapper.NoticeMapper;
+import com.ageless.pojo.NewsType;
 import com.ageless.pojo.Notice;
 import com.ageless.service.NoticeService;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,8 +31,8 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public int xiuGai(Integer id, String announcement_content) {
-        return noticeMapper.xiuGai(id,announcement_content);
+    public int xiuGai(Integer id,String title,Integer typeId,String link,String announcementContent) {
+        return noticeMapper.xiuGai(id,title,typeId,link,announcementContent);
     }
 
     @Override
@@ -47,5 +46,29 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
 
+    @Override
+    public List<NewsType> xiaLa() {
+        return noticeMapper.xiaLa();
+    }
+
+    @Override
+    public Notice selectId(Integer id) {
+        return noticeMapper.selectId(id);
+    }
+
+    @Override
+    public List<NewsType> selectNewsType() {
+        return noticeMapper.selectNewsType();
+    }
+
+    @Override
+    public int deletNews(Integer nId) {
+        return noticeMapper.deletNews(nId);
+    }
+
+    @Override
+    public int insertNews(String typeName) {
+        return noticeMapper.insertNews(typeName);
+    }
 }
 
