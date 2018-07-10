@@ -3,9 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.SeckillMapper">
     <select id="selectSeckill" resultType="Seckill">
-        SELECT seckill.productId,productName,price,picPath,seckill.count FROM product,productpic,seckill
+       SELECT seckill.productId,productName,sku.price,picPath,seckill.count FROM product,productpic,seckill,sku
         WHERE product.id=seckill.productId
         AND product.id=productpic.productId
+	AND product.id=sku.productId
         GROUP BY seckill.productId
         LIMIT 0,4
     </select>
