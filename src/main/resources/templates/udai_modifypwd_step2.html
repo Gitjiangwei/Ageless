@@ -3,17 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="css/iconfont.css">
-	<link rel="stylesheet" href="css/global.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/swiper.min.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<script src="js/jquery.1.12.4.min.js" charset="UTF-8"></script>
-	<script src="js/bootstrap.min.js" charset="UTF-8"></script>
-	<script src="js/swiper.min.js" charset="UTF-8"></script>
-	<script src="js/global.js" charset="UTF-8"></script>
-	<script src="js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
+	<link rel="stylesheet" href="/css/iconfont.css">
+	<link rel="stylesheet" href="/css/global.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/css/swiper.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
+	<script src="/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
+	<script src="/js/bootstrap.min.js" charset="UTF-8"></script>
+	<script src="/js/swiper.min.js" charset="UTF-8"></script>
+	<script src="/js/global.js" charset="UTF-8"></script>
+	<script src="/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
 	<title>U袋网</title>
 </head>
 <body>
@@ -38,7 +38,7 @@
 	<div class="bgf5 clearfix">
 		<div class="top-user">
 			<div class="inner">
-				<a class="logo" href="index.html"><img src="images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+				<a class="logo" href="index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 				<div class="title">个人中心</div>
 			</div>
 		</div>
@@ -129,7 +129,7 @@
 						<div class="user-form-group tags-box">
 							<button type="button" class="btn ">提交</button>
 						</div>
-						<script src="js/login.js"></script>
+						<script src="/js/login.js"></script>
 						<script>
 							$(document).ready(function(){
 								$('.form-control').on('blur focus',function() {
@@ -140,7 +140,7 @@
                                     var npwd1=$("#npwd1").val();
                                     var npwd2=$("#npwd2").val();
                                     if (npwd1==npwd2 && npwd1!=""){
-                                        var url="/udai_modifypwd_step2_npwd?npwd="+npwd2+"";
+                                        var url="/ageless/udai_modifypwd_step2_npwd?npwd="+npwd2+"";
                                         $.ajax({
                                             url:url,
                                             type:"post",
@@ -149,7 +149,7 @@
                                                 if(result.mes=="no"){
                                                     alert("修改失败")
                                                 }else if(result.mes=="yes"){
-                                                    location.href="/udai_modifypwd_step3.html";
+                                                    location.href="/ageless/udai_modifypwd_step3.html";
                                                 }
                                             },error:function () {
                                                 alert("链接服务器失败！");
@@ -216,16 +216,16 @@
 		<div class="footer-tags">
 			<div class="tags-box inner">
 				<div class="tag-div">
-					<img src="images/icons/footer_1.gif" alt="厂家直供">
+					<img src="/images/icons/footer_1.gif" alt="厂家直供">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_2.gif" alt="一件代发">
+					<img src="/images/icons/footer_2.gif" alt="一件代发">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_3.gif" alt="美工活动支持">
+					<img src="/images/icons/footer_3.gif" alt="美工活动支持">
 				</div>
 				<div class="tag-div">
-					<img src="images/icons/footer_4.gif" alt="信誉认证">
+					<img src="/images/icons/footer_4.gif" alt="信誉认证">
 				</div>
 			</div>
 		</div>

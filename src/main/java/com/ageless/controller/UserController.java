@@ -35,6 +35,7 @@ import com.qq.connect.oauth.Oauth;*/
  * 以保存该用户所用信息
  */
 @Controller
+@RequestMapping(value = "ageless")
 public class UserController {
 
     Logger logger = LoggerFactory.getLogger(AreaController.class);
