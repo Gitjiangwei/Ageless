@@ -43,15 +43,15 @@ public class UserController {
     Logger logger = LoggerFactory.getLogger(AreaController.class);
 
     @Autowired
+    JavaMailSender jms;
+
+    @Autowired
     private UserService userService;
     //private  HttpSession session;
     MD5 md5 = new MD5();
 
-    @Autowired
-    JavaMailSender jms;
-
     private String rum;
-
+    private String member;
     private Date data1;
     private Date data2;
 
@@ -351,6 +351,7 @@ public class UserController {
     @RequestMapping("/sendMessage1")
     @ResponseBody
     public Object sendMessage1(@RequestParam(required = false) String yzNum){
+        member=yzNum;
         Object object =null;
         User user =new User();
         user.setPhone(yzNum);
@@ -426,7 +427,7 @@ public class UserController {
         map.put("loginpwd",user.getLoginpwd());
         if(num>=60){
             object="{\"back\":\"超时\"}";
-        }else if(numBack.equals(rum)){
+        }else if(numBack.equals(rum)&&member.equals(phoneNo)){
             if(phoneNo.contains("@")&&phoneNo.contains(".")){
                 user.setMailbox(phoneNo);
                 map.put("mailbox",user.getMailbox());
@@ -465,9 +466,8 @@ public class UserController {
         if(userService.selectCount(user)==1){
             object="{\"back\":\"重复\"}";
         }else {
-            rum =RandUtil.getRandomNum();
             data1=new Date();
-            //建立邮件消息
+            String rum = RandUtil.getRandomNum();
             SimpleMailMessage mainMessage = new SimpleMailMessage();
             //发送者
             mainMessage.setFrom("821488037@qq.com");
@@ -478,6 +478,7 @@ public class UserController {
             //发送的内容
             mainMessage.setText("【花想容】您好您的验证码是："+rum+"请于1分钟内完成验证，如非本人请忽略本内容");
             jms.send(mainMessage);
+            //建立邮件消息
             object="{\"back\":\"成功\"}";
         }
         return object;
@@ -490,6 +491,8 @@ public class UserController {
     @RequestMapping("/sendEmail1")
     @ResponseBody
     public Object send1(@RequestParam(required = false)String yzNum){
+        System.out.println("++++++++++++++++++++="+yzNum);
+        member=yzNum;
         Object object =null;
         User user =new User();
         user.setMailbox(yzNum);
@@ -507,9 +510,9 @@ public class UserController {
             //发送的内容
             mainMessage.setText("【花想容】您好您的验证码是："+rum+"请于1分钟内完成验证，如非本人请忽略本内容");
             jms.send(mainMessage);
-            object="{\"back\":\"重复\"}";
-        }else {
             object="{\"back\":\"成功\"}";
+        }else {
+            object="{\"back\":\"未注册\"}";
         }
         return object;
     }

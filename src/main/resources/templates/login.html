@@ -250,7 +250,6 @@
                                         }else if(data.back=='重复'){
                                             error.html(msgtemp('该账号已被注册 <strong>请重新输入',  'alert-warning'));
                                         }
-
                                     },
                                     error:function (data) {
                                         alert("失败");
@@ -265,6 +264,7 @@
                                     url:"/sendEmail",
                                     data:"yzNum="+yzNum,
                                     dataType:"json",
+                                    async: true,
                                     success:function (data) {
                                         if (data.back=='成功') {
                                             $('#regis_sms').rewire(60);
@@ -296,14 +296,14 @@
                                         if (data.back=='成功') {
                                             error.html(msgtemp('该账号未注册 <strong>请重新输入',  'alert-warning'));
                                         }else if(data.back=='重复'){
-                                            $('#regis_sms').rewire(60);
+                                            $('#rsetpwd_sm').rewire(60);
                                             error.html(msgtemp('验证码 <strong>已发送</strong>','alert-success'));
 
                                         }
 
                                     },
                                     error:function (data) {
-                                        alert("失败");
+                                        alert("失败重置密码");
                                     },
                                 });
                                 break;
@@ -316,15 +316,15 @@
                                     data:"yzNum="+yzNum,
                                     dataType:"json",
                                     success:function (data) {
-                                        if (data.back=='成功') {
+                                        if (data.back=='未注册') {
                                             error.html(msgtemp('该账号未注册 <strong>请重新输入',  'alert-warning'));
-                                        }else if(data.back=='重复'){
-                                            $('#regis_sms').rewire(60);
+                                        }else if(data.back=='成功'){
+                                            $('#rsetpwd_sm').rewire(60);
                                             error.html(msgtemp('验证码 <strong>已发送</strong>','alert-success'));
                                         }
                                     },
-                                    error:function (data) {
-                                        alert("失败");
+                                    error:function () {
+                                        alert("失败重置秘密啊邮箱");
                                     }
                                 });
                                 break;
