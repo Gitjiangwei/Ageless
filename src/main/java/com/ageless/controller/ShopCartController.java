@@ -45,12 +45,12 @@ public class ShopCartController {
 
     @PostMapping("/udai_shopcart.html")
     @ResponseBody
-    public Integer udaishop(@RequestParam("skuId") Integer skuId,@RequestParam("id") Integer id) {
+    public Integer udaishop(@RequestParam("skuId") Integer skuId,@RequestParam("id") Integer id,@RequestParam("shuliang")Integer shuliang) {
 
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setUserId(1);
         shoppingCart.setProductId(id);
-        shoppingCart.setOrderamount(1);
+        shoppingCart.setOrderamount(shuliang);
         shoppingCart.setSkuid(skuId);
         Integer index = shopCartService.addShoppingCart(shoppingCart);
 
