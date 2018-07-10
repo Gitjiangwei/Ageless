@@ -1,23 +1,18 @@
 package com.ageless.controller;
 
-import com.ageless.mapper.CategoryOneMapper;
-import com.ageless.mapper.SortMapper;
 import com.ageless.pojo.CategoryOne;
-import com.ageless.pojo.CategoryThree;
 import com.ageless.pojo.Sort;
-import com.ageless.pojo.Sortcon;
 import com.ageless.service.CategoryOneService;
 import com.ageless.service.SortService;
 import com.ageless.service.SortconService;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.List;
 
 @Controller
 @RequestMapping("/sort")
@@ -45,6 +40,14 @@ public class SortconController {
         session.setAttribute("lis",ls);
         System.out.println("-----------"+ls);
         return "/backstage/sortcon";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/selects")
+    public Object selects(@RequestParam(required = false)Integer categoryThree){
+        List<Sort> ls= sortconService.selectAll(null,categoryThree,null);
+        Object ob = JSONArray.toJSONString(ls);
+        return ob;
     }
 
     @RequestMapping(value = "/sortcon",method = RequestMethod.POST)

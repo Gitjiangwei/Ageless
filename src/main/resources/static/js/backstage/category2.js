@@ -28,9 +28,9 @@ function loadAjax(){
         success:function(data){
             var oneCategory;
             var twoCategory;
-            twoCategory+='<tr> <th>&nbsp;</th> <th>编号</th> <th>分类名</th> <th>操作</th> </tr>';
+            twoCategory+='<tr> <th>编号</th> <th>分类名</th> <th>操作</th> </tr>';
             data.map(function(item,index){
-                oneCategory +='<tr><th>&nbsp;</th><th>'+item.id+'</th><th>'+item.categoryName+'</th><th><button class="del" onclick="nav('+item.id+')">删除</button> <span  class="aaa">修改</span><span cid='+item.id+' cparentId='+item.parentId+'></span></th></tr>';
+                oneCategory +='<tr><th>'+item.id+'</th><th>'+item.categoryName+'</th><th><button class=" button del" style="width:65px;height: 28px"  onclick="nav('+item.id+')">删除</button> &nbsp;&nbsp;<button  class=" button aaa" style="width:65px;height: 28px">修改</button><span cid='+item.id+' cparentId='+item.parentId+'></span></th></tr>';
             });
             $("#fen2").html("");
             $("#fen2").html(twoCategory+oneCategory);
@@ -50,9 +50,9 @@ $('#sousuo').click(function () {
         success:function(data){
             var oneCategory;
             var twoCategory;
-            twoCategory+='<tr> <th>&nbsp;</th> <th>编号</th> <th>分类名</th> <th>操作</th> </tr>';
+            twoCategory+='<tr> <th>编号</th> <th>分类名</th> <th>操作</th> </tr>';
             data.map(function(item,index){
-                oneCategory +='<tr><th>&nbsp;</th><th>'+item.id+'</th><th>'+item.categoryName+'</th><th><button class="del" onclick="nav('+item.id+')">删除</button>  <span  class="aaa">修改</span><span cid='+item.id+'></span></th></tr>';
+                oneCategory +='<tr><th>'+item.id+'</th><th>'+item.categoryName+'</th><th><button style="width:65px;height: 28px" class="button del" onclick="nav('+item.id+')">删除</button>&nbsp;&nbsp;  <button style="width:65px;height: 28px" class="button aaa">修改</button><span cid='+item.id+'></span></th></tr>';
             });
             $("#fen2").html("");
             $("#fen2").html(twoCategory+oneCategory);

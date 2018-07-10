@@ -1224,6 +1224,10 @@ img.zoom-img {
 	display: inline-block;
 	text-decoration: none;
 }
+.page a:hover{
+	color:red;
+	cursor: pointer;
+}
 .page a.select {
 	color: #fff;
 	border-color:  #b31e22;

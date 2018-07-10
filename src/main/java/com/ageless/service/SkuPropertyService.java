@@ -2,7 +2,6 @@ package com.ageless.service;
 
 import com.ageless.pojo.SkuOption;
 import com.ageless.pojo.SkuProperty;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
