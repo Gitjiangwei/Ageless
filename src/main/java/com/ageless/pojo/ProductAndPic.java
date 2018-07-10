@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ProductAndPic extends Product {
     private ProductPic productPic;
-    private Sku sku;
+    /*private Sku sku;*/
 
 }
