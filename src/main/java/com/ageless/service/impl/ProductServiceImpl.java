@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<SkuProperty> selectAllSkupropertyByIds(List<String> list) {
-        return mapper.selectAllSkupropertyByIds(list);
+            return mapper.selectAllSkupropertyByIds(list);
     }
 
     @Override
