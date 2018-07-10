@@ -260,6 +260,7 @@
                             case 2: error.html(msgtemp('<strong>手机号码错误</strong> 请输入11位数的号码','alert-warning')); break;
                             case 3: error.html(msgtemp('<strong>手机号码/邮箱错误</strong> 请输入正确的号码/邮箱',  'alert-warning')); break;
                             case 4:
+                                $('#regis_sms').rewire(60);
                                 $.ajax({
                                     url:"/sendEmail",
                                     data:"yzNum="+yzNum,
@@ -267,8 +268,7 @@
                                     async: true,
                                     success:function (data) {
                                         if (data.back=='成功') {
-                                            $('#regis_sms').rewire(60);
-                                            error.html(msgtemp('验证码 <strong>已发送</strong>','alert-success'));
+                                            error.html(msgtemp('验证码 <strong>已送达</strong>','alert-success'));
                                         }else if(data.back=='重复'){
                                             error.html(msgtemp('该账号已被注册 <strong>请重新输入',  'alert-warning'));
                                         }
@@ -311,6 +311,7 @@
                             case 2: error.html(msgtemp('<strong>手机号码错误</strong> 请输入11位数的号码','alert-warning')); break;
                             case 3: error.html(msgtemp('<strong>手机号码/邮箱错误</strong> 请输入正确的号码/邮箱',  'alert-warning')); break;
                             case 4:
+                                $('#rsetpwd_sm').rewire(60);
                                 $.ajax({
                                     url:"/sendEmail1",
                                     data:"yzNum="+yzNum,
@@ -319,8 +320,7 @@
                                         if (data.back=='未注册') {
                                             error.html(msgtemp('该账号未注册 <strong>请重新输入',  'alert-warning'));
                                         }else if(data.back=='成功'){
-                                            $('#rsetpwd_sm').rewire(60);
-                                            error.html(msgtemp('验证码 <strong>已发送</strong>','alert-success'));
+                                            error.html(msgtemp('验证码 <strong>已送达</strong>','alert-success'));
                                         }
                                     },
                                     error:function () {
