@@ -1,0 +1,31 @@
+
+.page_fen{
+	padding-left:80px;
+}
+.page_fen li{
+	list-style: none;
+	border:1px solid #D1D5DE;
+	float: left;
+	width: 40px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+    margin-top: 8px;
+
+}
+.page_fen li a{
+	color: #333333;
+}
+.page_fen:after{
+	clear: both;
+	center:"";
+	display:block;
+}
+#pages{
+	border: 1px solid #D1D5DE;
+	width: 50px;
+	height: 30px;
+	margin-top: 8px;
+	margin-left: 10px;
+	line-height: 30px;
+}
