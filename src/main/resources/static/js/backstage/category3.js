@@ -12,10 +12,10 @@ function nav(){
             var three ;
             var threeCategory;
 
-            three +='<tr><th>&nbsp;</th> <th>编号</th> <th>分类名</th><th>操作</th></tr>'
+            three +='<tr> <th>编号</th> <th>分类名</th><th>操作</th></tr>'
             data.map(function(item,index){
-                threeCategory +='<tr><th>&nbsp;</th><th>'+item.id+'</th><th>'+item.categoryName+'</th>'
-                    +'<th><button class="del" onclick="nav2('+item.id+')">删除</button> <span  class="aaa">修改</span><span cid='+item.id+'></span></th></tr>';
+                threeCategory +='<tr><th>'+item.id+'</th><th>'+item.categoryName+'</th>'
+                    +'<th><button style="width:65px;height: 28px" class="button del" onclick="nav2('+item.id+')">删除</button>&nbsp;&nbsp; <button style="width:65px;height: 28px" class="button aaa">修改</button><span cid='+item.id+'></span></th></tr>';
             });
             $("#there").html("");
             $("#there").html(three+threeCategory);
@@ -69,10 +69,10 @@ $("#sousuo").click(function(){
             var three ;
             var threeCategory;
 
-            three +='<tr><th>&nbsp;</th> <th>编号</th> <th>分类名</th><th>操作</th></tr>'
+            three +='<tr> <th>编号</th> <th>分类名</th><th>操作</th></tr>'
             data.map(function(item,index){
-                threeCategory +='<tr><th>&nbsp;</th><th>'+item.id+'</th><th>'+item.categoryName+'</th>'
-                    +'<th><button class="del" onclick="nav2('+item.id+')" >删除</button> <span  class="aaa">修改</span><span cid='+item.id+'></span></th></tr>';
+                threeCategory +='<tr><th>'+item.id+'</th><th>'+item.categoryName+'</th>'
+                    +'<th><button style="width:65px;height: 28px" class="button del" onclick="nav2('+item.id+')" >删除</button>&nbsp;&nbsp; <button style="width:65px;height: 28px" class="button aaa">修改</button><span cid='+item.id+'></span></th></tr>';
             });
             $("#there").html("");
             $("#there").html(three+threeCategory);

@@ -260,10 +260,10 @@
             success: function (data) {
 
                 $("#option").html("");
-                var str='<p>属性名：<input type="text" class="textStyle ming" style="width:80px;"value='+data[0].propertyName+'  readonly="readonly"  /> <a href="#"  class="aaa"> 修改</a><span cid='+data[0].id+' class="t"></span></p><p>属性选项：'
+                var str='<p>属性名：<input type="text" class="textStyle ming" style="width:80px;height: 28px"value='+data[0].propertyName+'  readonly="readonly"  /> <button style="height: 28px;width: 65px" class="button aaa"> 修改</button><span cid='+data[0].id+' class="t"></span></p><p>属性选项：'
                 $.each(data[0].list, function (i, item) {
 
-                    str+='<input type=\"text\" id=\"op'+item.id+'\" class=\"textStyle\" name=\"sProblem\" style=\"width:80px;\" value='+item.optionName+'  readonly="readonly" /><a href="#" class="bbb">修改</a><span sid='+item.id+' class="t"></span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+                    str+='<input type=\"text\" id=\"op'+item.id+'\" class=\"textStyle\" name=\"sProblem\" style="width:80px;height: 28px" value='+item.optionName+'  readonly="readonly" /><button style="height: 28px;width: 65px" class="button bbb">修改</button><span sid='+item.id+' class="t"></span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
                 });
 
                 str+='</p>'
@@ -273,11 +273,11 @@
         } );
     }
     $(document).on("click",".aaa",function(){
-        var context = '<span class="t"><input type="text" class="textStyle" style="width:60px;"><a href="#" class="ti t">提交</a><a href="#" class="qx">取消</a></span>'
+        var context = '<span class="t"><input type="text" class="textStyle" style="width:60px;height: 28px"><button style="height: 28px;width: 65px"  class="button ti t">提交</button><button style="height: 28px;width: 65px" class="button qx">取消</button></span>'
         $(this).next().html(context);
     });
     $(document).on("click",".bbb",function(){
-        var context = '<span ><input type="text" class="textStyle" style="width:60px;"><a href="#" class="tij">提交</a><a href="#" class="qx">取消</a></span>'
+        var context = '<span ><input type="text" class="textStyle" style="width:60px;height: 28px"><button style="height: 28px;width: 65px" class="button tij">提交</button><button style="height: 28px;width: 65px" class="button qx">取消</button></span>'
         $(this).next().html(context);
     });
 

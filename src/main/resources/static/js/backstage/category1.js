@@ -77,7 +77,7 @@ function getCategoryListOne(param){
             var oneCategory="<tr><th>&nbsp;</th><th>编号</th><th>一级分类名</th><th>操作</th></tr>";
             data.map(function(item,index){
                 oneCategory +='<tr><th>&nbsp;</th><th>'+item.id+'</th><th>'+item.categoryName+'</th>'
-                    +'<th><button class="del" onclick="nav('+item.id+')">删除</button> <span  class="aaa">修改</span><span cid='+item.id+'></span></th></tr>';
+                    +'<th><button class="button" style="height: 28px;width: 65px;" onclick="nav('+item.id+')">删除</button>&nbsp;&nbsp; <button style="height: 28px;width: 65px;" class="button aaa">修改</button><span cid='+item.id+'></span></th></tr>';
             });
             $(".categoryOne").html("");
             $(".categoryOne").html(oneCategory);

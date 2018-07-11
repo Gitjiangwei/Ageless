@@ -74,7 +74,7 @@
 					$(this).prev().append(sortcon);
 				});
 				$(document).on("click",".aaa",function(){
-             		var context = '<input type="text" class="textStyle" style="width:60px;"><span class="ti">提交</span>&nbsp;&nbsp;<span onclick=NewPage("/CateOne/goCategory1")>返回</span>'
+             		var context = '&nbsp;&nbsp;<input type="text" class="textStyle" style="width:80px;height: 28px">&nbsp;&nbsp;<button style="height: 28px;width: 65px;" class="button ti">提交</button>&nbsp;&nbsp;<button style="height: 28px;width: 65px;"class="button" onclick=NewPage("/CateOne/goCategory1")>返回</button>'
 					$(this).next().html(context);
 				});
 			});

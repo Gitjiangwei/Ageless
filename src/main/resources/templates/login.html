@@ -22,7 +22,7 @@
 	<div class="public-head-layout container">
 		<a class="logo" href="/ageless/index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"/></a>
 	</div>
-	<div style="background:url(images/login_bg.jpg) no-repeat center center; ">
+	<div style="background:url(/images/login_bg.jpg) no-repeat center center; ">
 		<div class="login-layout container">
 			<div class="form-box login">
 				<div class="tabs-nav">
@@ -240,7 +240,7 @@
                             case 0:
                                 // 短信验证码的php请求
                                 $.ajax({
-                                    url:"/sendMessage",
+                                    url:"/ageless/sendMessage",
                                     data:"yzNum="+yzNum,
                                     dataType:"json",
                                     success:function (data) {
@@ -250,7 +250,6 @@
                                         }else if(data.back=='重复'){
                                             error.html(msgtemp('该账号已被注册 <strong>请重新输入',  'alert-warning'));
                                         }
-
                                     },
                                     error:function (data) {
                                         alert("失败");
@@ -261,14 +260,15 @@
                             case 2: error.html(msgtemp('<strong>手机号码错误</strong> 请输入11位数的号码','alert-warning')); break;
                             case 3: error.html(msgtemp('<strong>手机号码/邮箱错误</strong> 请输入正确的号码/邮箱',  'alert-warning')); break;
                             case 4:
+                                $('#regis_sms').rewire(60);
                                 $.ajax({
-                                    url:"/sendEmail",
+                                    url:"/ageless/sendEmail",
                                     data:"yzNum="+yzNum,
                                     dataType:"json",
+                                    async: true,
                                     success:function (data) {
                                         if (data.back=='成功') {
-                                            $('#regis_sms').rewire(60);
-                                            error.html(msgtemp('验证码 <strong>已发送</strong>','alert-success'));
+                                            error.html(msgtemp('验证码 <strong>已送达</strong>','alert-success'));
                                         }else if(data.back=='重复'){
                                             error.html(msgtemp('该账号已被注册 <strong>请重新输入',  'alert-warning'));
                                         }
@@ -289,21 +289,21 @@
                             case 0:
                                 // 短信验证码的php请求
                                 $.ajax({
-                                    url:"/sendMessage1",
+                                    url:"/ageless/sendMessage1",
                                     data:"yzNum="+yzNum,
                                     dataType:"json",
                                     success:function (data) {
                                         if (data.back=='成功') {
                                             error.html(msgtemp('该账号未注册 <strong>请重新输入',  'alert-warning'));
                                         }else if(data.back=='重复'){
-                                            $('#regis_sms').rewire(60);
+                                            $('#rsetpwd_sm').rewire(60);
                                             error.html(msgtemp('验证码 <strong>已发送</strong>','alert-success'));
 
                                         }
 
                                     },
                                     error:function (data) {
-                                        alert("失败");
+                                        alert("失败重置密码");
                                     },
                                 });
                                 break;
@@ -311,20 +311,20 @@
                             case 2: error.html(msgtemp('<strong>手机号码错误</strong> 请输入11位数的号码','alert-warning')); break;
                             case 3: error.html(msgtemp('<strong>手机号码/邮箱错误</strong> 请输入正确的号码/邮箱',  'alert-warning')); break;
                             case 4:
+                                $('#rsetpwd_sm').rewire(60);
                                 $.ajax({
-                                    url:"/sendEmail1",
+                                    url:"/ageless/sendEmail1",
                                     data:"yzNum="+yzNum,
                                     dataType:"json",
                                     success:function (data) {
-                                        if (data.back=='成功') {
+                                        if (data.back=='未注册') {
                                             error.html(msgtemp('该账号未注册 <strong>请重新输入',  'alert-warning'));
-                                        }else if(data.back=='重复'){
-                                            $('#regis_sms').rewire(60);
-                                            error.html(msgtemp('验证码 <strong>已发送</strong>','alert-success'));
+                                        }else if(data.back=='成功'){
+                                            error.html(msgtemp('验证码 <strong>已送达</strong>','alert-success'));
                                         }
                                     },
-                                    error:function (data) {
-                                        alert("失败");
+                                    error:function () {
+                                        alert("失败重置秘密啊邮箱");
                                     }
                                 });
                                 break;
@@ -385,14 +385,14 @@
                         }
 
                         $.ajax({
-                            url:"/user/loginUser",
+                            url:"/ageless/user/loginUser",
                             data:{membership:membership,phone:phone,
 								   mailbox:mailbox,loginpwd:UserPwd},
                             type:"post",
 							dataType:"json",
                             success:function(result){
 								if (result.mes=="success"){
-									location.href="/";
+									location.href="/ageless/index.html";
 								}else if(result.mes=="frozen"){
 								    alert("该账号已被冻结！")
 								}else if(result.mes=="error"){
@@ -439,7 +439,7 @@
                         case 1: error.html(msgtemp('<strong></strong> 请输入验证码','alert-warning')); return; break;
                         case 2:
                             $.ajax({
-                                url:"/addMember",
+                                url:"/ageless/addMember",
                                 data:"numBack="+numBack+"&phoneNo="+phoneNo+"&pwdNum="+pwdNum,
                                 dataType:"json",
                                 success:function(data){
@@ -502,7 +502,7 @@
                         case 1: error.html(msgtemp('<strong></strong> 请输入验证码','alert-warning')); return; break;
                         case 2:
                             $.ajax({
-                                url:"/updateMember",
+                                url:"/ageless/updateMember",
                                 data:"numBack="+numBack+"&phoneNo="+phoneNo+"&pwdNum="+pwdNum,
                                 dataType:"json",
                                 success:function(data){

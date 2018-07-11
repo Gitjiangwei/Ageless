@@ -105,8 +105,10 @@ $(function(){
             var kucun = $(item).find(".setting_sku_stock").val();
             if(kucun ==null || kucun=="" ){
                 alert("请输入完整信息！");
+                return false;
             }else  if(isNaN(kucun)==true){
                 alert("库存只能为数字！");
+                return false;
             }
             var propval = propvalids+","+price +","+kucun;
             propvals += propval + "-";
@@ -131,6 +133,7 @@ $(function(){
         var shopImg5 = $("#pic5")[0].files[0];
         if(shopImg1==null || shopImg1==""){
             alert("请输入商品照片！");
+            return false;
         }
         var formData = new FormData();
         formData.append("shopImg1",shopImg1);
