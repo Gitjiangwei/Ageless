@@ -49,4 +49,14 @@ public class OrderServiceImpl implements OrderService{
         return orderMapper.dall(number);
     }
 
+    @Override
+    public int addOrder(Order order) {
+        return orderMapper.addOrder(order);
+    }
+
+    @Override
+    public int addOrderdet(Order order) {
+        return orderMapper.addOrderdet(order);
+    }
+
 }

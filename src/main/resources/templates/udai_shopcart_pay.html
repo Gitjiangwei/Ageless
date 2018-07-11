@@ -109,17 +109,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="shop in shopList">
-									<th scope="row"><a href="item_show.html"><div class="img"><img :src="shop.picPath" style="width: 120px">{{shop.picPath}}<!--<img src="/images/temp/M-003.jpg" alt="" class="cover">--></div></a></th>
-									<td>
-										<div class="name ep3">{{shop.productName}}</div>
-										<div class="type c9">{{shop.optiinName}}</div>
-									</td>
-									<td>{{shop.price | money('元')}}</td>
-									<td>{{shop.orderamount}}</td>
-									<td>¥0.0</td>
-									<td>{{shop.price*shop.orderamount | money('元')}}</td>
-								</tr>
+							<tr v-for="shop in shopList">
+								<th scope="row"><a href="item_show.html"><div class="img"><img :src="shop.picPath" style="width: 120px">{{shop.picPath}}<!--<img src="/images/temp/M-003.jpg" alt="" class="cover">--></div></a></th>
+								<td>
+									<div class="productName">{{shop.productName}}</div>
+									<div class="type c9">{{shop.optiinName}}</div>
+									<div class="skuids">{{shop.skuid}}</div>
+									<div class="productIds">{{shop.productId}}</div>
+
+								</td>
+								<td >{{shop.price | money('元')}}</td>
+								<td class="orderamounts">{{shop.orderamount}}</td>
+								<td>¥0.0</td>
+								<td class="prices">{{shop.price*shop.orderamount | money元}}</td>
+							</tr>
 								<!--<tr>
 									<th scope="row"><a href="item_show.html"><div class="img"><img src="/images/temp/S-005.jpg" alt="" class="cover"></div></a></th>
 									<td>
@@ -211,7 +214,8 @@
 						</div>
 					</div>
 					<div class="user-form-group shopcart-submit">
-						<button type="button" class="btn" @click="zhizhi()">继续支付</button>
+						<!--<button type="button" class="btn" @click="zhizhi()">继续支付</button>-->
+						<a href="JavaScript:;" id="zh">继续支付</a>
 					</div>
 					<script>
 						$(document).ready(function(){
@@ -334,6 +338,7 @@
     <script src="/js/lib/vue-resource.js"></script>
 
     <script src="/js/udai_shopcart_pay.js"></script>
+	<script src="/js/udai_shopcart_payOrder.js"></script>
 	<script>
         function cc(id,nameId) {
             $.ajax({
