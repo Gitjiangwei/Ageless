@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.CommentMapper">
+
+    <select id="seleAll" resultType="Comment">
+         select evaluate.productId, productName,descript,picPath from evaluate
+          INNER JOIN product on product.id=evaluate.ProductId
+          INNER JOIN productpic on productpic.productId=product.id
+          INNER JOIN categoryone ON categoryone.id=product.category01
+          INNER JOIN categorytwo on categorytwo.id=product.category02
+          INNER JOIN categorythree on categorythree.id=product.category03
+          where 1=1
+              <if test="CatrOne!=null and CatrOne!=0">
+                and  product.category01=#{CatrOne}
+              </if>
+              <if test="CatrTwo!=null and CatrTwo!=0">
+                and  product.category02=#{CatrTwo}
+              </if>
+              <if test="CatrThree!=null and CatrThree!=0">
+                and  product.category03=#{CatrThree}
+              </if>
+              <if test="proName!=null and proName!=''">
+
+                and  productName LIKE CONCAT('%',#{proName},'%')
+              </if>
+          GROUP BY  evaluate.productId
+
+    </select>
+
+    <select id="seleCount"  resultType="int">
+        select count(*) from evaluate
+        where 1=1
+        <if test="proId!=null and proId!=0">
+           and productId=#{proId} GROUP BY dengji
+        </if>
+        <if test="proId==null or proId==0">
+         GROUP BY  evaluate.productId
+        </if>
+    </select>
+
+
+    <select id="seleCommPro" resultType="Comment">
+        select evaluate.pingId,`name`,file,photo1,photo2,photo3,photo4,photo5,create_time
+          from evaluate
+          INNER JOIN `user` on `user`.id=evaluate.uesrId
+          where 1=1
+          <if test="proId!=null and proId!=0">
+            and  evaluate.productId=#{proId}
+          </if>
+          <if test="pinj!=null and pinj!=''">
+            and  evaluate.dengji=#{pinj}
+          </if>
+          <if test="id!=null and id!=0">
+            and  evaluate.pingId=#{id}
+          </if>
+
+    </select>
+    
+    
+    <delete id="deleCommById">
+        delete from evaluate where evaluate.pingId=#{cid}
+    </delete>
+</mapper>

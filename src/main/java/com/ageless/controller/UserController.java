@@ -5,13 +5,7 @@ import com.ageless.service.UserService;
 import com.ageless.util.GetSMS;
 import com.ageless.util.MD5;
 import com.ageless.util.RandUtil;
-import com.alipay.api.internal.util.StringUtils;
-/*import com.qq.connect.QQConnectException;
-import com.qq.connect.api.OpenID;
-import com.qq.connect.api.qzone.UserInfo;
-import com.qq.connect.javabeans.AccessToken;
-import com.qq.connect.javabeans.qzone.UserInfoBean;
-import com.qq.connect.oauth.Oauth;*/
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +14,20 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+/*import com.qq.connect.QQConnectException;
+import com.qq.connect.api.OpenID;
+import com.qq.connect.api.qzone.UserInfo;
+import com.qq.connect.javabeans.AccessToken;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
+import com.qq.connect.oauth.Oauth;*/
 
 /**
  * 用户
@@ -37,20 +35,21 @@ import java.util.Map;
  * 以保存该用户所用信息
  */
 @Controller
+@RequestMapping(value = "ageless")
 public class UserController {
 
     Logger logger = LoggerFactory.getLogger(AreaController.class);
+
+    @Autowired
+    JavaMailSender jms;
 
     @Autowired
     private UserService userService;
     //private  HttpSession session;
     MD5 md5 = new MD5();
 
-    @Autowired
-    JavaMailSender jms;
-
     private String rum;
-
+    private String member;
     private Date data1;
     private Date data2;
 
@@ -159,7 +158,7 @@ public class UserController {
     @GetMapping("/item_category.html")
     public String item_category() { return "item_category"; }
     /**
-     * 地址
+     * 支付地址
      * @return
      */
     @GetMapping("/udai_shopcart_pay.html")
@@ -189,7 +188,7 @@ public class UserController {
            //用户ID key为 user
            session.setAttribute("uid",id);
           Long dongjie=  u.getDongjie();
-          if(dongjie==1){
+          if(dongjie==2){
               return "{\"mes\":\"frozen\"}";
           }else{
               return "{\"mes\":\"success\"}";
@@ -209,6 +208,7 @@ public class UserController {
     public String udai_modifypwd_step1_opwd(String opwd,HttpSession session) {
         String op= md5.string2MD5(opwd);//获取输入的密码
         User u= (User) session.getAttribute("user");
+        System.out.println("1111"+u);
         String  pwd=u.getLoginpwd();//获取用户密码
         if(op.equals(pwd)){
             return "{\"mes\":\"yes\"}";
@@ -338,7 +338,6 @@ public class UserController {
             data1=new Date();
             object="{\"back\":\"成功\"}";
         }
-
         /*try {
             rum =Integer.parseInt(randum);
         } catch (NumberFormatException e) {
@@ -347,6 +346,28 @@ public class UserController {
         return object;
     }
 
+    @RequestMapping("/sendMessage1")
+    @ResponseBody
+    public Object sendMessage1(@RequestParam(required = false) String yzNum){
+        member=yzNum;
+        Object object =null;
+        User user =new User();
+        user.setPhone(yzNum);
+        if(userService.selectCount(user)==1){
+            String randum = GetSMS.getmMssage(yzNum);
+            rum = randum;
+            data1=new Date();
+            object="{\"back\":\"重复\"}";
+        }else {
+            object="{\"back\":\"成功\"}";
+        }
+        /*try {
+            rum =Integer.parseInt(randum);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }*/
+        return object;
+    }
     /**
      * 添加手机号注册的用户
      * @param numBack
@@ -369,7 +390,6 @@ public class UserController {
         if(num>=60){
             object="{\"back\":\"超时\"}";
         }else if(numBack.equals(rum)){
-
             if(phoneNo.contains("@")&&phoneNo.contains(".")){
                 user.setMailbox(phoneNo);
                 if(userService.selectCount(user)==1){
@@ -393,6 +413,42 @@ public class UserController {
         }
         return object;
     }
+    @RequestMapping("/updateMember")
+    @ResponseBody
+    public Object updateMember(@RequestParam(required = false) String numBack, @RequestParam(required = false) String phoneNo, @RequestParam(required = false) String pwdNum){
+        data2=new Date();
+        long num = (data2.getTime()-data1.getTime())/1000;
+        Object object=null;
+        User user =new User();
+        Map<String,Object> map= new HashMap<String,Object>();
+        user.setLoginpwd(md5.string2MD5(pwdNum));
+        map.put("loginpwd",user.getLoginpwd());
+        if(num>=60){
+            object="{\"back\":\"超时\"}";
+        }else if(numBack.equals(rum)&&member.equals(phoneNo)){
+            if(phoneNo.contains("@")&&phoneNo.contains(".")){
+                user.setMailbox(phoneNo);
+                map.put("mailbox",user.getMailbox());
+                if(userService.updateUser(map)==1){
+                    object="{\"back\":\"对的\"}";
+                }else {
+                    object="{\"back\":\"重复\"}";
+                }
+            }else {
+                user.setPhone(phoneNo);
+                map.put("phone",user.getPhone());
+                if(userService.updateUser(map)==1){
+                    userService.updateUser(map);
+                    object="{\"back\":\"对的\"}";
+                }else {
+                    object="{\"back\":\"重复\"}";
+                }
+            }
+        }else{
+            object="{\"back\":\"错的\"}";
+        }
+        return object;
+    }
 
     /**
      * 发送邮箱验证码
@@ -408,6 +464,37 @@ public class UserController {
         if(userService.selectCount(user)==1){
             object="{\"back\":\"重复\"}";
         }else {
+            data1=new Date();
+            String rum = RandUtil.getRandomNum();
+            SimpleMailMessage mainMessage = new SimpleMailMessage();
+            //发送者
+            mainMessage.setFrom("821488037@qq.com");
+            //接收者
+            mainMessage.setTo(yzNum);
+            //发送的标题
+            mainMessage.setSubject("【花想容】");
+            //发送的内容
+            mainMessage.setText("【花想容】您好您的验证码是："+rum+"请于1分钟内完成验证，如非本人请忽略本内容");
+            jms.send(mainMessage);
+            //建立邮件消息
+            object="{\"back\":\"成功\"}";
+        }
+        return object;
+    }
+    /**
+     * 忘记密码发送邮箱验证码
+     * @param yzNum
+     * @return
+     */
+    @RequestMapping("/sendEmail1")
+    @ResponseBody
+    public Object send1(@RequestParam(required = false)String yzNum){
+        System.out.println("++++++++++++++++++++="+yzNum);
+        member=yzNum;
+        Object object =null;
+        User user =new User();
+        user.setMailbox(yzNum);
+        if(userService.selectCount(user)==1){
             rum =RandUtil.getRandomNum();
             data1=new Date();
             //建立邮件消息
@@ -422,8 +509,23 @@ public class UserController {
             mainMessage.setText("【花想容】您好您的验证码是："+rum+"请于1分钟内完成验证，如非本人请忽略本内容");
             jms.send(mainMessage);
             object="{\"back\":\"成功\"}";
+        }else {
+            object="{\"back\":\"未注册\"}";
         }
         return object;
+    }
+    /**
+     * 获取登录用户基本信息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getUserInfo")
+    public Object getUserInfo(HttpSession session){
+        Object object=null;
+        User user  = (User)session.getAttribute("user");
+        Object json = JSON.toJSON(user);
+        System.out.println("===================="+json);
+        return json;
     }
     /**
      * 生成QQ授权

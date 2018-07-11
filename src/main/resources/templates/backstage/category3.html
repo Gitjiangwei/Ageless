@@ -1,0 +1,91 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>三级分类管理</title>
+
+		<link rel="stylesheet" type="text/css" href="/css/backstage/global.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/table.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/page.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/popup.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
+	</head>
+
+	<body>
+		<div class="container">
+			<h1 class="tabTitle"><span onclick="NewPage('/CateThree/goThree')"><img src="/images/backstage/xjt.png"/></span>三级分类</h1>
+			<div class="serach">
+				
+				一级分类：<select class="textStyle" style="width:80px;" id="onecate">
+
+					</select>
+				二级分类：<select class="textStyle" style="width:80px;" id="twocate">
+
+					</select>
+				三级分类名：<input type="text" class="textStyle" style="width:120px;" id="nama"/>
+				<input type="button" value="搜索" class="button search" id="sousuo"/>
+				<input type="button" value="新增" class="button add"  id="dianji" />
+				
+				
+			</div>
+			<div class="mbStyle">&nbsp;</div>
+
+			<!--搜索区结束-->
+			<div class="info">
+				<table cellpadding="0" cellspacing="0" border="0" class="selectTable" id="tableData">
+					<thead id="there">
+
+					</thead>
+					<!-- <tbody>
+						<tr>
+							<td colspan="11"><img src='images/loading.gif' /></td>
+						</tr>
+					</tbody>-->
+				</table>
+				<div style="display:none" id="xianshi">
+				  <from action="" method="post">
+					<br/>
+					<div class="sort">
+					<p style="position:relative; ">三级分类<span class="sortcon"><input type="text" class="textStyle threetext" name="sProblem" style="width:80px;"/></span>
+					<input type="button" value="" class="button add addsortcon" id="" style="position:absolute; bottom:0; height:35px" /></p></div>
+					<div>
+						<input type="submit" value="提交"  class="button " id="insertThree">
+						<input type="submit" value="返回" onclick="NewPage('/CateThree/goThree')" class="button ">
+					</div>
+					  <!--对话框蒙板开始-->
+					  <div class="mbStyle">&nbsp;</div>
+				</from>
+				</div>
+			</div>
+
+		</div>
+
+		<script src="/js/backstage/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="/js/backstage/table.js"></script>
+		<script type="text/javascript" src="/js/backstage/popup.js"></script>
+		<script type="text/javascript" src="/js/backstage/category3.js"></script>
+		<script type="text/javascript" src="/js/backstage/global.js"></script>
+		<script type="text/javascript">
+			$("#dianji").click(function(){
+			$("#xianshi").show();
+			$(".aaa").siblings().remove();
+				});
+				
+			$(function(){
+				
+				$(".sort").on("click",".addsortcon",function(){
+					var sortcon = '<input type="text" class="textStyle threetext" name="sProblem" style="width:80px;" onchange="addsortcon()">';
+					$(this).prev().append(sortcon);
+				});
+                $(document).on("click",".aaa",function(){
+                    var context = '&nbsp;&nbsp;<input type="text" class="textStyle" style="width:65px;height: 28px">&nbsp;&nbsp;<button style="width:65px;height: 28px" class="button ti">提交</button>&nbsp;&nbsp;<button class="button" style="width:80px;height: 28px"onclick=NewPage("/CateThree/goThree")>返回</button>'
+                    $(this).next().html(context);
+                });
+			});
+
+		</script>
+
+	</body>
+
+</html>

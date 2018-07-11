@@ -51,10 +51,10 @@
             <if test="city!=null and city!=''">
                 city=#{city},
             </if>
-            <if test="area!=null and area!=''">
+            <if test="area!=null">
                 area=#{area},
             </if>
-            <if test="street!=null and street!=''">
+            <if test="street!=null">
                 street=#{street},
             </if>
             <if test="details!=null and details!=''">

@@ -1,8 +1,6 @@
 package com.ageless.service;
 
 import com.ageless.pojo.Product;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,7 +10,7 @@ public interface ShangService {
      * @param
      * @return
      */
-    List<Product> cha();
+   public List<Product> cha();
     /**
      *对商品状态的修改（下架）
      * @param
@@ -24,11 +22,13 @@ public interface ShangService {
      * @param
      * @return
      */
-    List<Product> cha2();
+   public List<Product> cha2();
     /**
      *对商品状态的修改（上架）
      * @param
      * @return
      */
     public int update1(List list);
+
+    public int updateByTime(String date);
 }

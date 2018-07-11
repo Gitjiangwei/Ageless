@@ -45,4 +45,9 @@ public class SortServiceImpl implements SortService {
     public int addSortcon(List<Sortcon> ls,Integer id) {
         return sortMapper.addSortcon(ls,id);
     }
+
+    @Override
+    public int update(Integer sortconid, String sortconname) {
+        return sortMapper.update(sortconid,sortconname);
+    }
 }

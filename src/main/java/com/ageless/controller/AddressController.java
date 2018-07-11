@@ -22,7 +22,7 @@ public class AddressController {
     private AddressService addressService;
 
     /**
-     * 显示收货地址
+     * 显示该用户收货地址
      * @param id
      * @param session
      * @return

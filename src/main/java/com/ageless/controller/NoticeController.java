@@ -1,5 +1,6 @@
 package com.ageless.controller;
 
+import com.ageless.pojo.NewsType;
 import com.ageless.pojo.Notice;
 import com.ageless.service.NoticeService;
 import com.alibaba.fastjson.JSON;
@@ -12,9 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -85,6 +83,95 @@ public class NoticeController {
         request.setAttribute("xid",xid);
         request.setAttribute("yid",yid);
         return  "udai_notice";
+    }
+
+
+    //查询所有
+    @GetMapping(value = "/select")
+    @ResponseBody
+    public Object select(@RequestParam(required = false) String title, @RequestParam(required = false) Integer typeId){
+
+        List<Notice> l=noticeService.selectAll(title,typeId);
+
+        Object obj=JSON.toJSONString(l);
+        System.out.println(l);
+
+        return obj;
+    }
+    //新增方法
+    @GetMapping(value="/insert")
+    @ResponseBody
+    public Object add(@ModelAttribute Notice n){
+        System.out.println(n);
+        //  n.setAnnouncementTime(new Date());
+        int i=noticeService.add(n);
+
+        Object p=JSON.toJSON(i);
+        return p;
+    }
+    //删除
+    @ResponseBody
+    @GetMapping(value="/delet")
+    public Object delect(@RequestParam(required = false) Integer id){
+        int d=noticeService.delete(id);
+        Object obj=JSON.toJSON(d);
+        return obj;
+    }
+    //修改
+    @GetMapping(value ="/update")
+    @ResponseBody
+    public Object eidtUser(@RequestParam(required = false) Integer id,@RequestParam(required = false) String title,@RequestParam(required = false) Integer typeId,String link,@RequestParam(required = false) String announcementContent) {
+        int x= noticeService.xiuGai(id,title,typeId,link,announcementContent);
+        Object obj=JSON.toJSON(x);
+        return obj;
+    }
+
+    //下拉查询所有
+    @GetMapping(value = "/xiaLa")
+    @ResponseBody
+    public Object select1()  {
+
+        List<NewsType> n= noticeService.xiaLa();
+
+        Object obj=JSON.toJSON(n);
+        return obj;
+    }
+
+    //根据Id下拉列表查
+    @GetMapping(value = "/selectId")
+    @ResponseBody
+    public Object selectId(@RequestParam Integer id){
+        Notice t=noticeService.selectId(id);
+        Object obj=JSON.toJSONString(t);
+        return obj;
+    }
+
+    //类型查询所有
+    @GetMapping("/selectNews")
+    @ResponseBody
+    public Object selectNews(){
+        List<NewsType> k=noticeService.selectNewsType();
+        Object obj=JSON.toJSON(k);
+        return obj;
+    }
+    //类型删除
+    @GetMapping(value = "/deletNews")
+    @ResponseBody
+    public Object deletNews(Integer nId){
+        int r=noticeService.deletNews(nId);
+        Object obj=JSON.toJSON(r);
+        return obj;
+    }
+
+    //类型表新增
+    @GetMapping(value = "/insertNews")
+    @ResponseBody
+    public Object insertNews(String typeName){
+        System.out.println("oooooooooooo"+typeName);
+        int g=noticeService.insertNews(typeName);
+        Object obj=JSON.toJSON(g);
+        System.out.println("ppppppppp"+obj);
+        return obj;
     }
 
 }

@@ -2,6 +2,7 @@ package com.ageless.service;
 
 import com.ageless.pojo.User;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserService {
@@ -59,4 +60,9 @@ public interface UserService {
      * @return
      */
     int addQqUser(User user);
+    /**
+     * 查询所有信息
+     * @return
+     */
+    List<User> sellectAll(User user);
 }

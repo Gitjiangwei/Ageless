@@ -43,7 +43,7 @@ public class CategoryTwoController {
     }
     @RequestMapping(value="/goCategory2")
     public String goCategory2(){
-        return "/management/category2";
+        return "/backstage/category2";
     }
     /**
      * 添加二级选项

@@ -22,13 +22,11 @@
 	<div class="tab-header">
 		<div class="inner">
 			<div class="pull-left">
-				<div class="pull-left">嗨，欢迎来到<span class="cr">U袋网</span></div>
+				<div class="pull-left">嗨，<span id="userName"></span>欢迎来到<span class="cr">U袋网</span></div>
 				<a href="agent_level.html">网店代销</a>
 				<a href="temp_article/udai_article4.html">帮助中心</a>
 			</div>
-			<div class="pull-right">
-				<a href="login.html"><span class="cr">登录</span></a>
-				<a href="login.html?p=register">注册</a>
+			<div class="pull-right" id="logs">
 				<a href="udai_welcome.html">我的U袋</a>
 				<a href="udai_order.html">我的订单</a>
 				<a href="udai_integral.html">积分平台</a>
@@ -109,17 +107,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="shop in shopList">
-									<th scope="row"><a href="item_show.html"><div class="img"><img :src="shop.picPath" style="width: 120px">{{shop.picPath}}<!--<img src="/images/temp/M-003.jpg" alt="" class="cover">--></div></a></th>
-									<td>
-										<div class="name ep3">{{shop.productName}}</div>
-										<div class="type c9">{{shop.optiinName}}</div>
-									</td>
-									<td>{{shop.price | money('元')}}</td>
-									<td>{{shop.orderamount}}</td>
-									<td>¥0.0</td>
-									<td>{{shop.price*shop.orderamount | money('元')}}</td>
-								</tr>
+							<tr v-for="shop in shopList">
+								<th scope="row"><a href="item_show.html"><div class="img"><img :src="shop.picPath" style="width: 120px">{{shop.picPath}}<!--<img src="/images/temp/M-003.jpg" alt="" class="cover">--></div></a></th>
+								<td>
+									<div class="productName">{{shop.productName}}</div>
+									<div class="type c9">{{shop.optiinName}}</div>
+									<div class="skuids">{{shop.skuid}}</div>
+									<div class="productIds">{{shop.productId}}</div>
+
+								</td>
+								<td >{{shop.price | money('元')}}</td>
+								<td class="orderamounts">{{shop.orderamount}}</td>
+								<td>¥0.0</td>
+								<td class="prices">{{shop.price*shop.orderamount | money元}}</td>
+							</tr>
 								<!--<tr>
 									<th scope="row"><a href="item_show.html"><div class="img"><img src="/images/temp/S-005.jpg" alt="" class="cover"></div></a></th>
 									<td>
@@ -211,7 +212,8 @@
 						</div>
 					</div>
 					<div class="user-form-group shopcart-submit">
-						<button type="button" class="btn" @click="zhizhi()">继续支付</button>
+						<!--<button type="button" class="btn" @click="zhizhi()">继续支付</button>-->
+						<a href="JavaScript:;" id="zh">继续支付</a>
 					</div>
 					<script>
 						$(document).ready(function(){
@@ -334,7 +336,27 @@
     <script src="/js/lib/vue-resource.js"></script>
 
     <script src="/js/udai_shopcart_pay.js"></script>
+	<script src="/js/udai_shopcart_payOrder.js"></script>
 	<script>
+        $(function () {
+            $.ajax({
+                url:"/ageless/getUserInfo",
+                type:"post",
+                dataTyep:"text",
+                success:function (data) {
+                    alert(data.membership)
+                    if(data.membership!=null){
+                        $("#userName").html(data.membership);
+                        $("#membership").val(data.membership);
+                        $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注销</a>");
+                        $("#logs").prepend("<a href=\"/ageless/udai_setting.html\"><span class=\"cr\">"+data.membership+"</span></a>");
+                    }else{
+                        $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注册</a>");
+                        $("#logs").prepend("<a href=\"/ageless/login.html\"><span class=\"cr\">登录</span></a>");
+                    }
+                }
+            });
+        });
         function cc(id,nameId) {
             $.ajax({
                 type:'post',

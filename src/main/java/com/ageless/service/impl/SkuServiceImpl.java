@@ -17,4 +17,11 @@ public class SkuServiceImpl implements SkuService {
     public int addSku(List<Sku> sk, Integer productId) {
         return mapper.addSku(sk,productId);
     }
+
+    @Override
+    public int deleteSku(Integer productId) {
+        return mapper.deleteSku(productId);
+    }
+
+
 }

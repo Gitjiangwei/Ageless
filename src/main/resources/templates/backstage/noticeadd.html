@@ -17,12 +17,12 @@
 			<h1 class="tabTitle"><span onclick="NewPage('table.html')"><img src="/images/backstage/xjt.png"/></span>新增系统公告</h1>
 			<div class="mbStyle">&nbsp;</div>
 			<div class="info">
-				<form action="#" method="post"  onsubmit="return checkForm()" class="formSheet">
+				<form action="#" method="post"  id="insert" onsubmit="return checkForm()" class="formSheet">
 					<dl>
 						<dt><span>标题：</span></dt>
 						<dd>
 							<div class="fbox">
-								<input type="text" class="textStyle" id="userName" name="userName" style="width:360px;" maxlength="20" placeholder="请输入标题" />
+								<input type="text" class="textStyle" id="userName" name="title" style="width:360px;" maxlength="20" placeholder="请输入标题" />
 							</div>
 						
 						</dd>
@@ -32,10 +32,8 @@
 						<dd>
 							<div class="fbox">
 								
-								<select class="selectStyle" style="width:210px;">
-									<option>全部</option>
-									<option>新闻</option>
-									<option>娱乐</option>								
+								<select id="xiaLa" class="textStyle" style="width:210px;" name="typeId">
+
 								</select>
 							</div>
 						
@@ -45,7 +43,7 @@
 						<dt><span>网址:</span></dt>
 						<dd>
 							<div class="fbox">
-								<input type="url" class="dateStyle" style="width:360px;" />
+								<input type="url" class="dateStyle" style="width:360px;" name="link" />
 							</div>
 							
 						</dd>
@@ -54,7 +52,7 @@
 						<dt><span>文章内容</span></dt>
 						<dd>
 							<div class="fbox">
-								<textarea class="areaStyle" style="width:440px;height: 500px;"></textarea>
+								<textarea class="areaStyle" style="width:440px;height: 500px;" name="announcementContent"></textarea>
 							</div>
 							<span class="txtInfo">网站描述，一般显示在搜索引擎搜索结果中的描述文字，用于介绍网站，吸引浏览者点击。</span>
 						</dd>
@@ -76,13 +74,8 @@
 		<script type="text/javascript" src="/js/backstage/global.js"></script>
 		<script type="text/javascript" src="/js/backstage/popup.js"></script>
 		<script type="text/javascript" src="/js/backstage/upload.js"></script>
-		<script type="text/javascript">
-			$(function(){
-		       $("#save").click(function(){
-		       	   showWebAlert('保存成功！');
-		       });
-			});
-		</script>
+		<script type="text/javascript" src="/js/backstage/noticeAdd.js"></script>
+
 
 	</body>
 

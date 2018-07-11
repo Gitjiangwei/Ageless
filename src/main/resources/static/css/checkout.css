@@ -265,15 +265,33 @@
   .cart-item-list .item-price-total {
     color: #d1434a; }
 
+  .cart-item-check{
+    display: inline-block;
+  }
 .item-check-btn {
-  display: inline-block;
+  display:inline-block;
   width: 16px;
   height: 16px;
   border: 1px solid #ccc;
   border-radius: 50%;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer; }
+  cursor: pointer;
+}
+.jddw .item-check-btn {
+  display:inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  left: 6px;
+  top:65px;
+}
+.jddw{
+  position: relative;
+}
   .item-check-btn .icon-ok {
     display: none;
     width: 100%;

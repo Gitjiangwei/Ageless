@@ -6,17 +6,15 @@ import com.ageless.pojo.SkuProperty;
 import com.ageless.service.OrderService;
 import com.ageless.service.ProductService;
 import com.alibaba.fastjson.JSON;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping(value="/Order")
@@ -130,4 +128,96 @@ public class OrderController {
         return skus;
     }
 
+
+    //订单后台需要
+    @GetMapping("/dingdanPage")
+    public String dingdanPage(){
+        return "backstage/orderAll";
+    }
+
+
+    @GetMapping(value = "/xq")
+    @ResponseBody
+    public Object selectall(@RequestParam(required = false) String numbers ,@RequestParam(required = false) int id ,@RequestParam(required = false) String create) {
+        List<Order> lsts =orderService.seleAll(numbers,id,create);
+        System.out.println(lsts);
+        Object obj = JSON.toJSON(lsts);
+        System.out.println(obj);
+        return obj;
+    }
+    @GetMapping(value = "/xqs")
+    @ResponseBody
+    public Object selectnid(@RequestParam(required = false) String nid) {
+        List<Order> lsts =orderService.selenid(nid);
+        System.out.println(lsts);
+        Object obj = JSON.toJSON(lsts);
+        System.out.println(obj);
+        return obj;
+    }
+    @GetMapping(value = "/sc")
+    @ResponseBody
+    public Object deleteall(@RequestParam(required = false) String nid) {
+        int res = orderService.delete(nid);
+        Object obj = JSON.toJSONString(res);
+        return obj;
+    }
+    @GetMapping(value = "/dall")
+    @ResponseBody
+    public Object delete(@RequestParam(required = false) List<String> nid) {
+        int res = orderService.dall(nid);
+        Object obj = JSON.toJSONString(res);
+        System.out.println(obj);
+        return obj;
+    }
+
+    //添加生成订单
+    @PostMapping("/addOrder")
+    @ResponseBody
+    public  Object  addOrder(@RequestParam(required = false) String number,
+                             @RequestParam(required = false) Integer addressid,
+                             @RequestParam(required = false) String createDate,
+                             @RequestParam(required = false) Integer atch,
+                             @RequestParam(required = false) Integer userId,
+                             @RequestParam(required = false)  Integer orderNumber,
+                             @RequestParam(required = false) Integer OrderStatus,
+                             @RequestParam(required = false) String order_price,
+                             @RequestParam(required = false) Integer productid){
+
+
+        Order order=new Order();
+        //生成随机18位订单编号
+        String s = "";
+        Random random = new Random();
+        s+=1+(random.nextInt(9));
+        for (int i = 0; i < 18-1; i++) {
+            s+=random.nextInt(10);
+        }
+        BigInteger bigInteger=new BigInteger(s);
+        order.setNumber(bigInteger.toString());//订单编号随机
+        order.setAddressid(1);//地址编号
+        order.setAtch(1);//交易流水号
+        order.setUserId(1);
+        order.setOrderNumber(5);
+        order.setOrderStatus(2);
+        order.setProductid(productid);
+        order.setOrder_price(order_price);
+        int addorder=orderService.addOrder(order);
+        Object json=JSON.toJSON(addorder);
+        return json;
+    }
+    @PostMapping("/addOrderdet")
+    @ResponseBody
+    public  Object  addOrderdet( @RequestParam(required = false) Integer shipid,
+                                 @RequestParam(required = false) Integer oid,
+                                 @RequestParam(required = false) Integer skuId,
+                                 @RequestParam(required = false) Integer count){
+        Order order=new Order();
+        order.setOid(2);
+        order.setCount(3);
+        order.setShipid(1);
+        order.setSkuId(skuId);
+        int addorders=orderService.addOrderdet(order);
+        Object json=JSON.toJSON(addorders);
+        return json;
+    }
 }

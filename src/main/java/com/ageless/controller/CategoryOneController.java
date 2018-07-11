@@ -27,12 +27,12 @@ public class CategoryOneController {
      */
     @RequestMapping(value="/index")
     public String goIndex(){
-        return "/management/index";
+        return "/backstage/index";
     }
 
     @RequestMapping(value="/goCategory1")
     public String goCategory1(){
-        return "/management/category1";
+        return "/backstage/category1";
     }
 
     @ResponseBody

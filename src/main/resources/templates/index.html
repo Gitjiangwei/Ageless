@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/swiper.min.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/amazeui.css">
+    <link rel="stylesheet" href="/css/hmstyle.css">
     <script src="/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
     <script src="/js/bootstrap.min.js" charset="UTF-8"></script>
     <script src="/js/swiper.min.js" charset="UTF-8"></script>
@@ -16,6 +18,8 @@
     <script src="/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
     <script src="/js/fenye.js" charset="UTF-8"></script>
     <script src="/js/sortcon.js" charset="UTF-8"></script>
+    <script src="/js/Notice.js" charset="UTF-8"></script>
+
     <title>U袋网</title>
 </head>
 <body>
@@ -23,13 +27,11 @@
 <div class="tab-header">
     <div class="inner">
         <div class="pull-left">
-            <div class="pull-left">嗨，欢迎来到<span class="cr">U袋网</span></div>
+            <div class="pull-left">嗨，<span id="userName"></span>欢迎来到<span class="cr">U袋网</span></div>
             <a href="agent_level.html">网店代销</a>
             <a href="temp_article/udai_article4.html">帮助中心</a>
         </div>
-        <div class="pull-right">
-            <a href="login.html"><span class="cr">登录</span></a>
-            <a href="login.html?p=register">注册</a>
+        <div class="pull-right" id="logs">
             <a href="udai_welcome.html">我的U袋</a>
             <a href="udai_order.html">我的订单</a>
             <a href="udai_integral.html">积分平台</a>
@@ -49,15 +51,7 @@
 						</button>
                 </span>
             </form>
-            <p class="help-block text-nowrap">
-                <a href="">连衣裙</a>
-                <a href="">裤</a>
-                <a href="">衬衫</a>
-                <a href="">T恤</a>
-                <a href="">女包</a>
-                <a href="">家居服</a>
-                <a href="">2017新款</a>
-            </p>
+            <p class="help-block text-nowrap">-</p>
         </div>
         <div class="cart-box">
             <a href="udai_shopcart.html" class="cart-but">
@@ -197,6 +191,38 @@
 <!-- 楼层内容 -->
 <div class="content inner" style="margin-bottom: 40px;">
     	<section class="scroll-floor floor-1 clearfix">
+            <!-- 秒杀抢购 -->
+            <div class="am-container">
+
+                <div class="sale-mt">
+                    <i></i>
+                    <em class="sale-title">限时秒杀</em>
+                    <div class="s-time" id="countdown">
+                        <span class="hh">01</span>
+                        <span class="mm">20</span>
+                        <span class="ss">59</span>
+                    </div>
+                </div>
+                <div class="am-g am-g-fixed sale">
+              <#list list6 as seckill>
+
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="/commodity/shopshow.html?id=${seckill.productId} "><img src="${seckill.picPath}" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="/commodity/shopshow.html?id=${seckill.productId}"><p class="s-title">${seckill.productName}</p></a>
+                            <p class="kucun">库存: <span>${seckill.count}</span>件</p>
+                            <div class="s-price">￥<b>${seckill.price}</b>
+                                <a class="s-buy" href="/commodity/shopshow.html?id=${seckill.productId}">秒杀</a>
+                            </div>
+                        </div>
+                    </div>
+
+            </#list>
+            </div>
+
+
             <div class="pull-left">
                 <div class="floor-title">
                     <i class="iconfont icon-tuijian fz16"></i> 爆款推荐
@@ -214,7 +240,7 @@
                                     <img src="${product.productPic.picPath}" alt="${product.productName}" class="cover">
                                 </div>
                                 <div class="price clearfix">
-                                    <span class="pull-left cr fz16">￥${product.sku.price}</span>
+                                    <span class="pull-left cr fz16">￥${product.price}</span>
                                     <span class="pull-right c6">进货价</span>
                                 </div>
                                 <div class="name ep" title="${product.productName}">${product.productName}</div>
@@ -224,7 +250,7 @@
                     </div>
                 </div>
             </div>
-        <div class="pull-right">
+        <div class="pull-right ggao">
                     <div class="floor-title">
                         <i class="iconfont icon-horn fz16"></i> 平台公告
                         <a href="udai_notice.html" class="more"><i class="iconfont icon-more"></i></a>
@@ -232,7 +258,7 @@
                     <div class="con-box">
                         <div class="notice-box bgf5">
                             <div class="swiper-container">
-                        <div class="swiper-wrapper">
+                        <div class="swiper-wrapper" id="info">
                             <a class="swiper-slide ep" href="udai_notice.html">【公告】U袋网平台已上线，您还在等什么呢？是吧~</a>
                             <a class="swiper-slide ep" href="udai_notice.html">【资讯】P站服务器爆炸啦。国内86%地区IP被限制~</a>
                             <a class="swiper-slide ep" href="udai_notice.html">【公告】六趣公司9月底将彻底关闭66RPG论坛~</a>
@@ -298,7 +324,7 @@
                     <img src="${newlist.productPic.picPath}" alt="${newlist.productName}" class="cover">
                 </div>
                 <div class="price clearfix">
-                    <span class="pull-left cr fz16">￥${newlist.sku.price}</span>
+                    <span class="pull-left cr fz16">￥${newlist.price}</span>
                     <span class="pull-right c6">进货价</span>
                 </div>
                 <div class="name ep" title="${newlist.productName}">${newlist.productName}</div>
@@ -411,6 +437,25 @@
 
 </div>
 <script>
+    $(function () {
+            $.ajax({
+                url:"/ageless/getUserInfo",
+                type:"post",
+                dataTyep:"text",
+                success:function (data) {
+                    alert(data.membership)
+                    if(data.membership!=null){
+                        $("#userName").html(data.membership);
+                        $("#membership").val(data.membership);
+                        $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注销</a>");
+                        $("#logs").prepend("<a href=\"/ageless/udai_setting.html\"><span class=\"cr\">"+data.membership+"</span></a>");
+                    }else{
+                        $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注册</a>");
+                        $("#logs").prepend("<a href=\"/ageless/login.html\"><span class=\"cr\">登录</span></a>");
+                    }
+                }
+            });
+    });
     $(document).ready(function(){
         // 顶部banner轮播
         var banner_swiper = new Swiper('.banner-box', {
@@ -445,7 +490,7 @@
         </li>
         <li class="r-toolbar-item">
             <a href="udai_shopcart.html" class="r-item-hd">
-                <i class="iconfont icon-cart" data-badge="10"></i>
+                <i class="iconfont icon-cart" ></i>
                 <div class="r-tip__box"><span class="r-tip-text">购物车</span></div>
             </a>
         </li>

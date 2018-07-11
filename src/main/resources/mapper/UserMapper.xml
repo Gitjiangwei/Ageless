@@ -50,8 +50,23 @@
             <if test="mailbox!=null and mailbox!=''">
                 mailbox=#{mailbox},
             </if>
+            <if test="dongjie!=null and dongjie!=''">
+                dongjie=#{dongjie},
+            </if>
         </trim>
-        where id=#{id}
+        where 1=1
+        <if test="id!=null and id!=''">
+            and id=#{id}
+        </if>
+        <if test="membership!=null and membership!=''">
+            and membership=#{membership}
+        </if>
+        <if test="phone!=null and phone!=''">
+            and phone=#{phone}
+        </if>
+        <if test="mailbox!=null and mailbox!=''">
+            and mailbox=#{mailbox}
+        </if>
     </update>
 
     <select id="selectId" resultType="java.lang.Integer">
@@ -65,7 +80,9 @@
         <if test="mailbox!=null and mailbox!=''">
             and mailbox=#{mailbox}
         </if>
-
+        <if test="membership!=null and membership!=''">
+            and membership=#{membership}
+        </if>
     </select>
     <insert id="inserInfo" parameterType="com.ageless.pojo.User">
         INSERT INTO ageless.user (membership,phone,loginpwd,regtime)VALUES(#{membership},#{phone},#{loginpwd},#{regtime});
@@ -99,4 +116,11 @@
     #{openId},
     );
     </insert>
+
+    <select id="sellectAll" resultType="com.ageless.pojo.User" parameterType="com.ageless.pojo.User">
+        SELECT 	id, membership, NAME, phone, sex, birthday, loginpwd, dongjie, regtime, truename, integral, state, paymentpwd, mailbox, openId, haoqi FROM ageless.user where 1=1
+        <if test="membership!=null and membership!=''">
+            and membership=#{membership}
+        </if>
+    </select>
 </mapper>

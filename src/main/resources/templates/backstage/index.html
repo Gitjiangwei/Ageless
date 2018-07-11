@@ -10,22 +10,23 @@
 
 	<body>
 		<div class="head">
-			<div class="logo"><img src="/images/backstage/logo.jpg" /></div>
+			<div class="logo"><img src="/images/backstage/logo.png" /></div>
 			<ul class="hav">
 				<li class="hav_li">用户</li>
 				<li class="hav_li">商品</li>
 				<li class="hav_li">订单</li>
 				<li class="hav_li">公告</li>
+				<li class="hav_li">评论</li>
 <!-- 				<li class="hav_li">微信</li>
 <li class="hav_li">会员</li>
 <li class="hav_li">积分</li> -->
 			</ul>
 			<div class="login" id="admin"> 
-				<span class="loginUser">管理员-XXX</span>
+				<span class="loginUser">管理员-</span>
 				<div class="person"> 
 				   <span>个人中心</span> 
 				   <span>修改密码</span> 
-				   <span onclick="openPage('login.html')";>退出</span> 
+				   <span onclick="openPage('/backstage/back_login.html')";>退出</span>
 				</div>
 			</div>
 		</div>
@@ -39,20 +40,16 @@
 					<ul class="nav_ul">
 						<li>
 							<div class="nav_title">用户管理</div>
-									<ul class='second'>
-										<li>添加</li>
-										<li>
-											查看
-										</li>
-										
-									</ul>
-						</li>
-						<li>
-							<div class="nav_title">积分设置</div>
 							<ul class='second'>
-								<li>等级划分</li>
+								<li onclick="NewPage('/backstage/back_table.html')">会员列表</li>
 							</ul>
 						</li>
+						<!--<li>-->
+							<!--<div class="nav_title">积分设置</div>-->
+							<!--<ul class='second'>-->
+								<!--<li>等级划分</li>-->
+							<!--</ul>-->
+						<!--</li>-->
 
 					</ul>
 
@@ -64,22 +61,25 @@
 					<h1>商品管理</h1>
 					<ul class="nav_ul">
 						<li>
-							<div class="nav_title">一级分类</div>
+							<div class="nav_title" onclick="NewPage('/CateOne/goCategory1')">一级分类</div>
 						</li>
 						<li>
-							<div class="nav_title">二级分类</div>
+							<div class="nav_title" onclick="NewPage('/CateTwo/goCategory2')">二级分类</div>
 						</li>
 						<li>
-							<div class="nav_title">三级分类</div>
-						</li>						
-						<li>
-							<div class="nav_title">商品属性</div>
+							<div class="nav_title" onclick="NewPage('/CateThree/goThree')">三级分类</div>
 						</li>
 						<li>
-							<div class="nav_title">属性选项</div>
+							<div class="nav_title" onclick="NewPage('/sort/sortcon')">商品属性</div>
 						</li>
 						<li>
-							<div class="nav_title">商品上架</div>
+							<div class="nav_title" onclick="NewPage('/sku/su')";>SKU属性</div>
+						</li>
+						<li>
+							<div class="nav_title" onclick="NewPage('/commodity/goshangjia')";>商品上架</div>
+						</li>
+						<li>
+							<div class="nav_title" onclick="NewPage('/commodity/goxiajia')";>商品下架</div>
 						</li>
 					</ul>
 
@@ -91,7 +91,7 @@
 					<h1>订单管理</h1>
 					<ul class="nav_ul">
 						<li>
-							<div class="nav_title">所有订单</div>
+							<div class="nav_title" onclick="NewPage('/Order/dingdanPage')";>所有订单</div>
 						</li>
 	<!-- 					<li>
 		<div class="nav_title">请假管理3</div>
@@ -122,10 +122,26 @@
 					</ul>
 
 				</div>
+
+				<!--NO5 END-->
+				<div id="nav_5" class="nav" style="display:none;">
+					<h1>评论管理</h1>
+					<ul class="nav_ul">
+						<li onclick="NewPage('/backstage/comment.html')">
+							<div class="nav_title">查看评论</div>
+						</li>
+
+					</ul>
+
+				</div>
+
+
 			</div>
 
+
+
 			<div class="right">
-				<iframe class="iframe" name="frmright" src="add.html" frameborder="0" scrolling="yes"></iframe>
+				<iframe class="iframe" name="frmright" src="/backstage/back_table.html" frameborder="0" scrolling="yes"></iframe>
 			</div>
 
 		</div>
@@ -134,7 +150,17 @@
 		<script type="text/javascript" src="/js/backstage/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="/js/backstage/index.js"></script>
 		<script type="text/javascript" src="/js/backstage/global.js"></script>
-        
+        <script>
+			$(function () {
+				$.ajax()
+            });
+            var result;
+            var url=window.location.search; //获取url中"?"符后的字串
+            if(url.indexOf("?")!=-1){
+                result = url.substr(url.indexOf("=")+1);
+            }
+            $(".loginUser").text("管理员-"+result);
+		</script>
 	</body>
 
 </html>

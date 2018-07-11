@@ -5,6 +5,7 @@ package com.ageless.mapper;
 import com.ageless.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserMapper {
@@ -63,4 +64,10 @@ public interface UserMapper {
      * @return
      */
     int addQqUser(User user);
+
+ /**
+  * 查询所有信息
+  * @return
+  */
+    List<User> sellectAll(User user);
 }

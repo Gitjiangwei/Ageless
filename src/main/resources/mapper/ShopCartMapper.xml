@@ -27,15 +27,16 @@
 
 		SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
 
-		,productpic.picPath,product.productName,sku.SKUcon FROM shoppingcart
+		,productpic.picPath,product.productName,sku.SKUcon,shoppingcart.skuid  FROM shoppingcart
 
-		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
+		LEFT  JOIN sku ON shoppingcart.skuid=sku.skuid
 
 		LEFT  JOIN productpic ON shoppingcart.productId=productpic.tuid
 
 		LEFT  JOIN product ON shoppingcart.productId=product.productId  GROUP BY shoppingcart.id
 
 		ORDER BY shoppingcart.id DESC
+
 
 
      </select>
@@ -46,11 +47,12 @@
 	<!--查询购物车中要进行结算的商品-->
 	<select id="queryShopChecked" resultType="ShoppingCart" parameterType="Integer">
 
+
 	SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
 
 		,productpic.picPath,product.productName,sku.SKUcon  FROM shoppingcart
 
-		LEFT  JOIN sku ON shoppingcart.productId=sku.productId
+		LEFT  JOIN sku ON shoppingcart.skuid=sku.SKUId
 
 		LEFT  JOIN productpic ON shoppingcart.productId=productpic.tuid
 

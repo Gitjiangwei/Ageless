@@ -1,8 +1,6 @@
 package com.ageless.service;
 
-import com.ageless.mapper.OrderMapper;
 import com.ageless.pojo.Order;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,4 +30,17 @@ public interface OrderService {
      * @return
      */
     List<Order> order_product(Integer id);
+
+
+    //订单后台需要
+    List<Order> seleAll(String number, int id, String createDate);
+    List<Order> selenid(String number);
+    int delete(String number);
+    int dall(List<String> number);
+
+    /**
+     * 支付确认生成订单
+     */
+    public int addOrder(Order order);
+    public int addOrderdet(Order order);
 }

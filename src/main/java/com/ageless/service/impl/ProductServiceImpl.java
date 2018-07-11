@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<SkuProperty> selectAllSkupropertyByIds(List<String> list) {
-        return mapper.selectAllSkupropertyByIds(list);
+            return mapper.selectAllSkupropertyByIds(list);
     }
 
     @Override
@@ -58,5 +58,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int add(Product pro) {
         return mapper.add(pro);
+    }
+
+    @Override
+    public int modifyProduct(Product pro) {
+        return mapper.modifyProduct(pro);
+    }
+
+    @Override
+    public List<Sku> selectNullSkuByOptId(List list,Integer productId) {
+        return mapper.selectNullSkuByOptId(list,productId);
     }
 }

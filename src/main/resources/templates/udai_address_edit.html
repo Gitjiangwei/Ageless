@@ -200,14 +200,13 @@
                             var area=$("#area").text();
                             var street=$("#street").text();
 
-                            var area0=$("#area").val();
-                            var street0=$("#street").val();
-
                             var province1=$(".province").val();
                             var city1=$(".city").val();
                             var area1=$(".area").val();
                             var street1=$(".street").val();
 
+                            var ds_area = $("#ds_area").text();
+                            var ds_town = $("#ds_town").text();
 
                             if($("#name").val()==""){
                                 alert("请输入姓名");
@@ -221,30 +220,47 @@
                                 alert("请选择市");
                                 return;
                             }
-                            if(province1!=province && city1!=city && area=="请选择"){
-                                alert("请选择区")
-                                return;
-                            }
-                            if(province1==province && city1!=city && area=="请选择"){
-                                alert("请选择区")
-                                return;
-                            }
-                            if(province1!=province && city1!=city && area1!=area && street=="请选择"){
-                                alert("请选择街区")
-                                return;
-                            }
-                            if(province1==province && city1==city && area1!=area && street=="请选择"){
-                                alert("请选择街区")
-                                return;
-                            }
+                            if(ds_area!=""){
+
+                                if(province1!=province && city1!=city && area=="请选择"){
+                                    alert("请选择区")
+                                    return;
+                                }
+                                if(province1==province && city1!=city && area=="请选择"){
+                                    alert("请选择区")
+                                    return;
+                                }
+                                if(province1==province && city1==city && area=="请选择"){
+                                    alert("请选择区")
+                                    return;
+                                }
+							}else if(ds_area==""){
+                                area="";
+							}
+                            if(ds_town!=""){
+                                if(province1!=province && city1!=city && area1!=area && street=="请选择"){
+                                    alert("请选择街区")
+                                    return;
+                                }
+
+                                if(province1==province && city1==city && area1!=area && street=="请选择"){
+                                    alert("请选择街区")
+                                    return;
+                                }
+                                if(province1==province && city1==city && area1==area && street=="请选择"){
+                                    alert("请选择街区")
+                                    return;
+                                }
+							}else if(ds_town==""){
+                                street="";
+							}
+
                             if(area=="请选择"){
                                 area="";
                             }
                             if(street=="请选择"){
                                 street="";
                             }
-
-
                             if($("#details").val()==""){
                                 alert("请输入详细地址");
                                 return;
@@ -493,7 +509,7 @@
 					<div class="tdf2">所在地</div>
 					<div class="tdf3"><div class="tdt-a_l">详细地址</div></div>
 					<!-- <div class="tdf1">邮编</div> -->
-					<div class="tdf1">电话/手机</div>
+					<div class="tdf1">手机号</div>
 					<div class="tdf1">操作</div>
 					<div class="tdf1"></div>
 				</div>

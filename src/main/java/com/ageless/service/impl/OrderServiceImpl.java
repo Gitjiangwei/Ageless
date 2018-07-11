@@ -31,4 +31,32 @@ public class OrderServiceImpl implements OrderService{
         return orderMapper.order_product(id);
     }
 
+
+    //订单后台需要
+    @Override
+    public List<Order> seleAll(String number, int id, String createDate) {
+
+        return orderMapper.seleAll(number,id,createDate);
+    }
+    public List<Order> selenid(String number) {
+
+        return orderMapper.selenid(number);
+    }
+    public int delete(String number){
+        return orderMapper.delete(number);
+    }
+    public int dall(List<String> number){
+        return orderMapper.dall(number);
+    }
+
+    @Override
+    public int addOrder(Order order) {
+        return orderMapper.addOrder(order);
+    }
+
+    @Override
+    public int addOrderdet(Order order) {
+        return orderMapper.addOrderdet(order);
+    }
+
 }
