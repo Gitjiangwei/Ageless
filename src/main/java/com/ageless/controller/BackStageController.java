@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping(value="backstage")
 public class BackStageController {
@@ -27,5 +29,16 @@ public class BackStageController {
     @GetMapping("noticetype.html")
     public String noticetype(){
         return "backstage/noticetype";
+    }
+
+    @GetMapping("/comment.html")
+    public String comment(){
+        return "backstage/comment";
+    }
+
+    @GetMapping("/com_details.html")
+    public String com_details(Integer  productId, HttpServletRequest request){
+        request.setAttribute("productId",productId);
+        return "backstage/com_details";
     }
 }
