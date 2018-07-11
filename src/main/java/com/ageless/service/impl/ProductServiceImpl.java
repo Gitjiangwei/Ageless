@@ -56,6 +56,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Evaluate> selectEvaluatesBydengji(String ping,Integer id) {
+        return mapper.selectEvaluatesBydengji(ping,id);
+    }
+
+    @Override
     public int add(Product pro) {
         return mapper.add(pro);
     }

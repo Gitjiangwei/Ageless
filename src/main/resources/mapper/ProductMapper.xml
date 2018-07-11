@@ -142,6 +142,30 @@
             productId = #{id}
     </select>
 
+    <select id="selectEvaluatesBydengji" resultType="com.ageless.pojo.Evaluate">
+        SELECT 	pingId,
+        dengji,
+        evaluate.file,
+        photo1,
+        photo2,
+        photo3,
+        photo4,
+        photo5,
+        uesrId,
+        ProductId,
+        create_Time,
+        user.name
+        FROM
+        ageless.evaluate,ageless.user
+        WHERE
+        user.id = evaluate.uesrId
+        AND ProductId = #{id}
+            <if test="ping!='全部'">
+                AND
+                dengji = #{ping};
+            </if>
+    </select>
+
     <insert id="add" parameterType="Product">
         <selectKey keyProperty="id" resultType="int" order="AFTER">
             select last_insert_id();
