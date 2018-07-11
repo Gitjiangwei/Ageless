@@ -17,5 +17,6 @@ public class Evaluate {
     private Integer uesrId; //用户的id
     private Integer productId;  //商品ID
     private Date createTime;    //创建时间
+    private String name;
 
 }

@@ -64,6 +64,19 @@ function add(canshu) {
             }
         });
     }
+}
 
-
+function pinglun(id) {
+    $.ajax({
+        type: "post",
+        url: "/commodity/selectEvaluateByping",
+        data:{id:id},
+        /* dataType:"html",*/
+        success: function (data) {
+            $("#pinglun").empty();
+            $("#pinglun").append(data);
+        }, error: function (data) {
+            alert("no");
+        }
+    });
 }

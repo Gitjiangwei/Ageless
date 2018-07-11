@@ -1,0 +1,162 @@
+<#setting number_format="0.00">
+<div class="evaluate-content">
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="all" aria-labelledby="all-tab">
+            <#if evaluates0?? && (evaluates0?size > 0) >
+            <#list evaluates0 as ev0>
+            <div class="eval-box">
+                <div class="eval-author">
+                    <div class="port">
+                        <img src="/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
+                    </div>
+                    <div class="name">${ev0.name}</div>
+                </div>
+                <div class="eval-content">
+                    <div class="eval-text">
+                        ${ev0.file}
+                    </div>
+                    <div class="eval-imgs">
+                        <#if ev0.photo1??>
+                        <div class="img-temp"><img src="/images/temp/S-001-1_s.jpg" data-src="/images/temp/S-001-1_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                    <#if ev0.photo2??>
+                        <div class="img-temp"><img src="/images/temp/S-001-2_s.jpg" data-src="/images/temp/S-001-2_b.jpg" data-action="zoom" class="cover"></div>
+                    </#if>
+                    <#if ev0.photo3??>
+                        <div class="img-temp"><img src="/images/temp/S-001-3_s.jpg" data-src="/images/temp/S-001-3_b.jpg" data-action="zoom" class="cover"></div>
+                    </#if>
+                    <#if ev0.photo4??>
+                        <div class="img-temp"><img src="/images/temp/S-001-4_s.jpg" data-src="/images/temp/S-001-4_b.jpg" data-action="zoom" class="cover"></div>
+                    </#if>
+                    <#if ev0.photo5??>
+                        <div class="img-temp"><img src="/images/temp/S-001-5_s.jpg" data-src="/images/temp/S-001-5_b.jpg" data-action="zoom" class="cover"></div>
+                    </#if>
+                    </div>
+                    <div class="eval-time">
+                        ${ev0.createTime?string('yyyy-MM-dd')}
+                    </div>
+                </div>
+            </div>
+            </#list>
+            </#if>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="good" aria-labelledby="good-tab">
+            <#if evaluates1?? && (evaluates1?size > 0) >
+            <#list evaluates1 as ev1>
+            <div class="eval-box">
+                <div class="eval-author">
+                    <div class="port">
+                        <img src="/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
+                    </div>
+                    <div class="name">${ev1.name}</div>
+                </div>
+                <div class="eval-content">
+                    <div class="eval-text">
+                        ${ev1.file}
+                    </div>
+                    <div class="eval-imgs">
+                        <#if ev1.photo1??>
+                        <div class="img-temp"><img src="/images/temp/S-001-1_s.jpg" data-src="/images/temp/S-001-1_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev1.photo2??>
+                        <div class="img-temp"><img src="/images/temp/S-001-2_s.jpg" data-src="/images/temp/S-001-2_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev1.photo3??>
+                        <div class="img-temp"><img src="/images/temp/S-001-3_s.jpg" data-src="/images/temp/S-001-3_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev1.photo4??>
+                        <div class="img-temp"><img src="/images/temp/S-001-4_s.jpg" data-src="/images/temp/S-001-4_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev1.photo5??>
+                        <div class="img-temp"><img src="/images/temp/S-001-5_s.jpg" data-src="/images/temp/S-001-5_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                    </div>
+                    <div class="eval-time">
+                        ${ev1.createTime?string('yyyy-MM-dd')}
+                    </div>
+                </div>
+            </div>
+            </#list>
+            </#if>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="normal" aria-labelledby="normal-tab">
+            <#if evaluates2?? && (evaluates2?size > 0) >
+            <#list evaluates2 as ev2>
+            <div class="eval-box">
+                <div class="eval-author">
+                    <div class="port">
+                        <img src="/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
+                    </div>
+                    <div class="name">${ev2.name}</div>
+                </div>
+                <div class="eval-content">
+                    <div class="eval-text">
+                        ${ev2.file}
+                    </div>
+                    <div class="eval-imgs">
+                        <#if ev2.photo1??>
+                        <div class="img-temp"><img src="/images/temp/S-001-1_s.jpg" data-src="/images/temp/S-001-1_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev2.photo2??>
+                        <div class="img-temp"><img src="/images/temp/S-001-2_s.jpg" data-src="/images/temp/S-001-2_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev2.photo3??>
+                        <div class="img-temp"><img src="/images/temp/S-001-3_s.jpg" data-src="/images/temp/S-001-3_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev2.photo4??>
+                        <div class="img-temp"><img src="/images/temp/S-001-4_s.jpg" data-src="/images/temp/S-001-4_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev2.photo5??>
+                        <div class="img-temp"><img src="/images/temp/S-001-5_s.jpg" data-src="/images/temp/S-001-5_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                    </div>
+                    <div class="eval-time">
+                        ${ev2.createTime?string('yyyy-MM-dd')}
+                    </div>
+                </div>
+            </div>
+            </#list>
+            </#if>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="bad" aria-labelledby="bad-tab">
+            <#if evaluates3?? && (evaluates3?size > 0) >
+            <#list evaluates3 as ev3>
+            <div class="eval-box">
+                <div class="eval-author">
+                    <div class="port">
+                        <img src="/images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
+                    </div>
+                    <div class="name">${ev3.name}</div>
+                </div>
+                <div class="eval-content">
+                    <div class="eval-text">
+                        ${ev3.file}
+                    </div>
+                    <div class="eval-imgs">
+                        <#if ev3.photo1??>
+                        <div class="img-temp"><img src="${ev3.photo1}" data-src="/images/temp/S-001-1_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev3.photo2??>
+                        <div class="img-temp"><img src="${ev3.photo2}" data-src="/images/temp/S-001-2_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev3.photo3??>
+                        <div class="img-temp"><img src="${ev3.photo3}" data-src="/images/temp/S-001-3_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev3.photo4??>
+                        <div class="img-temp"><img src="${ev3.photo4}" data-src="/images/temp/S-001-4_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                        <#if ev3.photo5??>
+                        <div class="img-temp"><img src="${ev3.photo5}" data-src="/images/temp/S-001-5_b.jpg" data-action="zoom" class="cover"></div>
+                        </#if>
+                    </div>
+                    <div class="eval-time">
+                        ${ev3.createTime?string('yyyy-MM-dd')}
+                    </div>
+                </div>
+            </div>
+            </#list>
+            </#if>
+        </div>
+    </div>
+    <script src="/js/jquery.zoom.js"></script>
+</div>
