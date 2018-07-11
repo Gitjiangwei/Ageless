@@ -22,13 +22,11 @@
 	<div class="tab-header">
 		<div class="inner">
 			<div class="pull-left">
-				<div class="pull-left">嗨，欢迎来到<span class="cr">U袋网</span></div>
+				<div class="pull-left">嗨，<span id="userName"></span>欢迎来到<span class="cr">U袋网</span></div>
 				<a href="agent_level.html">网店代销</a>
 				<a href="temp_article/udai_article4.html">帮助中心</a>
 			</div>
-			<div class="pull-right">
-				<a href="login.html"><span class="cr">登录</span></a>
-				<a href="login.html?p=register">注册</a>
+			<div class="pull-right" id="logs">
 				<a href="udai_welcome.html">我的U袋</a>
 				<a href="udai_order.html">我的订单</a>
 				<a href="udai_integral.html">积分平台</a>
@@ -335,6 +333,25 @@
 
     <script src="/js/udai_shopcart_pay.js"></script>
 	<script>
+        $(function () {
+            $.ajax({
+                url:"/ageless/getUserInfo",
+                type:"post",
+                dataTyep:"text",
+                success:function (data) {
+                    alert(data.membership)
+                    if(data.membership!=null){
+                        $("#userName").html(data.membership);
+                        $("#membership").val(data.membership);
+                        $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注销</a>");
+                        $("#logs").prepend("<a href=\"/ageless/udai_setting.html\"><span class=\"cr\">"+data.membership+"</span></a>");
+                    }else{
+                        $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注册</a>");
+                        $("#logs").prepend("<a href=\"/ageless/login.html\"><span class=\"cr\">登录</span></a>");
+                    }
+                }
+            });
+        });
         function cc(id,nameId) {
             $.ajax({
                 type:'post',
