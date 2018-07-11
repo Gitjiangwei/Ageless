@@ -288,127 +288,127 @@ public class UserController {
      * @param session
      * @return
      */
-    @PostMapping("/udai_updateUser")
-    @ResponseBody
-    public String udai_updateUser(User user,HttpSession session){
-        User u= (User) session.getAttribute("user");
-        Long  id=u.getId();//获取用户ID
-        user.setId(id);
-        Date dateDate =user.getBirthday();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = formatter.format(dateDate);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        try {
-            date = dateFormat.parse(dateString);
-            System.out.println(date.toLocaleString().split(" ")[0]);//切割掉不要的时分秒数据
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Map<String,Object> map=new HashMap<>();
-        map.put("membership",user.getMembership());
-        map.put("name",user.getName());
-        map.put("sex",user.getSex());
-        map.put("birthday",date.toLocaleString().split(" ")[0]);
-        map.put("truename",user.getTruename());
-        map.put("id",id);
-        int x=userService.updateUser(map);
-        if(x>0){
-            return "{\"mes\":\"yes\"}";
-        }else{
-            return "{\"mes\":\"no\"}";
-        }
-    }
-
-    /**
-     * 发送短信验证码
-     * @return
-     */
-    @RequestMapping("/sendMessage")
-    @ResponseBody
-    public Object sendMessage(@RequestParam(required = false) String yzNum){
-        Object object =null;
-        User user =new User();
-        user.setPhone(yzNum);
-        if(userService.selectCount(user)==1){
-            object="{\"back\":\"重复\"}";
-        }else {
-            String randum = GetSMS.getmMssage(yzNum);
-            rum = randum;
-            data1=new Date();
-            object="{\"back\":\"成功\"}";
-        }
-        /*try {
-            rum =Integer.parseInt(randum);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }*/
-        return object;
-    }
-
-    @RequestMapping("/sendMessage1")
-    @ResponseBody
-    public Object sendMessage1(@RequestParam(required = false) String yzNum){
-        member=yzNum;
-        Object object =null;
-        User user =new User();
-        user.setPhone(yzNum);
-        if(userService.selectCount(user)==1){
-            String randum = GetSMS.getmMssage(yzNum);
-            rum = randum;
-            data1=new Date();
-            object="{\"back\":\"重复\"}";
-        }else {
-            object="{\"back\":\"成功\"}";
-        }
-        /*try {
-            rum =Integer.parseInt(randum);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }*/
-        return object;
-    }
-    /**
-     * 添加手机号注册的用户
-     * @param numBack
-     * @param phoneNo
-     * @param pwdNum
-     * @return
-     */
-    @RequestMapping("/addMember")
-    @ResponseBody
-    public Object addMember(@RequestParam(required = false) String numBack, @RequestParam(required = false) String phoneNo, @RequestParam(required = false) String pwdNum){
-        data2=new Date();
-        long num = (data2.getTime()-data1.getTime())/1000;
-        Object object=null;
-        int name = userService.selectId()+1;
-        String names ="ty"+RandUtil.getRandomNum5() +name;
-        User user =new User();
-        user.setMembership(names);
-        user.setLoginpwd(md5.string2MD5(pwdNum));
-        user.setRegtime(new Date());
-        if(num>=60){
-            object="{\"back\":\"超时\"}";
-        }else if(numBack.equals(rum)){
-            if(phoneNo.contains("@")&&phoneNo.contains(".")){
-                user.setMailbox(phoneNo);
-                if(userService.selectCount(user)==1){
-                    object="{\"back\":\"重复\"}";
-                }else {
-                    userService.inserInfo1(user);
-                    object="{\"back\":\"对的\"}";
+            @PostMapping("/udai_updateUser")
+            @ResponseBody
+            public String udai_updateUser(User user,HttpSession session){
+                User u= (User) session.getAttribute("user");
+                Long  id=u.getId();//获取用户ID
+                user.setId(id);
+                Date dateDate =user.getBirthday();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String dateString = formatter.format(dateDate);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = null;
+                try {
+                    date = dateFormat.parse(dateString);
+                    System.out.println(date.toLocaleString().split(" ")[0]);//切割掉不要的时分秒数据
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-            }else {
-                user.setPhone(phoneNo);
-                if(userService.selectCount(user)==1){
-                    object="{\"back\":\"重复\"}";
-                }else {
-                    userService.inserInfo(user);
-                    object="{\"back\":\"对的\"}";
+                Map<String,Object> map=new HashMap<>();
+                map.put("membership",user.getMembership());
+                map.put("name",user.getName());
+                map.put("sex",user.getSex());
+                map.put("birthday",date.toLocaleString().split(" ")[0]);
+                map.put("truename",user.getTruename());
+                map.put("id",id);
+                int x=userService.updateUser(map);
+                if(x>0){
+                    return "{\"mes\":\"yes\"}";
+                }else{
+                    return "{\"mes\":\"no\"}";
                 }
             }
 
-        }else{
+            /**
+             * 发送短信验证码
+             * @return
+             */
+            @RequestMapping("/sendMessage")
+            @ResponseBody
+            public Object sendMessage(@RequestParam(required = false) String yzNum){
+                Object object =null;
+                User user =new User();
+                user.setPhone(yzNum);
+                if(userService.selectCount(user)==1){
+                    object="{\"back\":\"重复\"}";
+                }else {
+                    String randum = GetSMS.getmMssage(yzNum);
+                    rum = randum;
+                    data1=new Date();
+                    object="{\"back\":\"成功\"}";
+                }
+        /*try {
+            rum =Integer.parseInt(randum);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }*/
+                return object;
+            }
+
+            @RequestMapping("/sendMessage1")
+            @ResponseBody
+            public Object sendMessage1(@RequestParam(required = false) String yzNum){
+                member=yzNum;
+                Object object =null;
+                User user =new User();
+                user.setPhone(yzNum);
+                if(userService.selectCount(user)==1){
+                    String randum = GetSMS.getmMssage(yzNum);
+                    rum = randum;
+                    data1=new Date();
+                    object="{\"back\":\"重复\"}";
+                }else {
+                    object="{\"back\":\"成功\"}";
+                }
+        /*try {
+            rum =Integer.parseInt(randum);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }*/
+                return object;
+            }
+            /**
+             * 添加手机号注册的用户
+             * @param numBack
+             * @param phoneNo
+             * @param pwdNum
+             * @return
+             */
+            @RequestMapping("/addMember")
+            @ResponseBody
+            public Object addMember(@RequestParam(required = false) String numBack, @RequestParam(required = false) String phoneNo, @RequestParam(required = false) String pwdNum){
+                data2=new Date();
+                long num = (data2.getTime()-data1.getTime())/1000;
+                Object object=null;
+                int name = userService.selectId()+1;
+                String names ="ty"+RandUtil.getRandomNum5() +name;
+                User user =new User();
+                user.setMembership(names);
+                user.setLoginpwd(md5.string2MD5(pwdNum));
+                user.setRegtime(new Date());
+                if(num>=60){
+                    object="{\"back\":\"超时\"}";
+                }else if(numBack.equals(rum)){
+                    if(phoneNo.contains("@")&&phoneNo.contains(".")){
+                        user.setMailbox(phoneNo);
+                        if(userService.selectCount(user)==1){
+                            object="{\"back\":\"重复\"}";
+                        }else {
+                            userService.inserInfo1(user);
+                            object="{\"back\":\"对的\"}";
+                        }
+                    }else {
+                        user.setPhone(phoneNo);
+                        if(userService.selectCount(user)==1){
+                            object="{\"back\":\"重复\"}";
+                        }else {
+                            userService.inserInfo(user);
+                            object="{\"back\":\"对的\"}";
+                        }
+                    }
+
+                }else{
             object="{\"back\":\"错的\"}";
         }
         return object;
@@ -600,4 +600,15 @@ public class UserController {
         }
         return "redirect:../../web/index";
     }*/
+
+    @GetMapping("/loginShopcart")
+    public String loginshort(HttpSession session){
+        User u= (User) session.getAttribute("user");
+        if(u==null){
+            return "login";
+        }else{
+            return "/shop/shopcart.html";
+        }
+    }
+
 }
