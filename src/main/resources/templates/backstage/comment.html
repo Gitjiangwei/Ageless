@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>所有评论</title>
+		<link rel="stylesheet" type="text/css" href="/css/backstage/global.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/news.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/layout.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/pages.css" />
+	</head>
+
+	<body>
+		<div class="container">
+			<h1 class="tabTitle"><span onclick="NewPage('table.html')"><img src="/images/backstage/xjt.png"/></span>所有商品</h1>
+			<div class="serach">
+			    <div class="fbox">
+					<select class="selectStyle" id="one" style="width:210px;">
+
+					</select>
+					<select class="selectStyle" id="two" style="width:210px;">
+
+					</select>
+					<select class="selectStyle" id="three" style="width:210px;">
+
+					</select>
+					<span>商品名称</span>
+					<input type="text" class="textStyle" id="proName" placeholder="请输入商品名称" style="width: 180px;height: 24px;line-height: 24px;" />
+					<input type="button" class="button search" v-on:click="soso" value="搜索" id="search" />
+				</div>
+                
+			</div>
+			<div class="info" id="show" >
+
+				<div class="news_nav" >
+					<!--开始-->
+					<div class="news"  v-for="item in orderList.list">
+						<img  v-bind:src="item.picPath" />
+						<h3>【{{item.productName}}】</h3>
+
+						<span class="tit">{{item.descript}}</span>
+						<div class="operation">
+							<a class="select_tit" v-bind:href="('/backstage/com_details.html?productId='+(item.productId))">[查看]</a>
+						</div>
+					</div>
+					<!--结束-->
+
+				</div>
+				<div class='pageStyle'>
+					<ul class="page_fen">
+						<li style="width:60px" v-if="orderList.pageNum!=1"><a href="javascript:;" v-on:click="pages"  pages="1">首页</a></li>
+						<li style="width:60px" v-if="orderList.pageNum!=1"><a href="javascript:;" v-on:click="pages"  pages="orderList.prePage">上一页</a></li>
+						<li style="width:60px" v-if="orderList.pageNum!=orderList.lastNum"><a href="javascript:;" v-on:click="pages"  pages="orderList.nextPage">下一页</a></li>
+						<li style="width:60px" v-if="orderList.pageNum!=orderList.lastNum"><a href="javascript:;" v-on:click="pages"   pages="orderList.lastPage">末页</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src='/js/backstage/jquery-3.3.1.min.js'></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<script src="/js/lib/vue-resource.js"></script>
+		<script type="text/javascript" src="/js/backstage/global.js"></script>
+		<script type="text/javascript" src="/js/backstage/comment.js"></script>
+        <script type="text/javascript" src="/js/backstage/comVue.js"></script>
+			<script type="text/javascript">
+			//$(".btn").click(function(){
+			// 	$(this).addClass("btn_active");
+			// 	$(this).siblings().removeClass("btn_active");
+			// })
+		</script>
+	</body>
+
+</html>

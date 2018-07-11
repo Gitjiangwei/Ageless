@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>所有评论</title>
+		<link rel="stylesheet" type="text/css" href="/css/backstage/global.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/table.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/page.css">
+		<link rel="stylesheet" type="text/css" href="/css/backstage/form.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/popup.css" />
+		<link rel="stylesheet" type="text/css" href="/css/backstage/pages.css" />
+		<style>
+             .commen{
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;  
+				-webkit-line-clamp: 1;  
+				-webkit-box-orient: vertical;  
+             }
+
+	    </style>
+	</head>
+
+	<body>
+	<input type="hidden" value="${productId}" id="proId">
+<div class="container">
+			<h1 class="tabTitle"><span onclick="NewPage('table.html')"><img src="/images/backstage/xjt.png"/></span>商品评论</h1>
+			<!--搜索区开始-->
+			<div class="serach">
+			    	&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" value="好评" class="pinj" name="sex" class="radioStyle" id="good" checked="checked" />
+					<label for="good"> 好评【<span class="pin1"></span>】</label>&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" value="中评" class="pinj" name="sex" class="radioStyle" id="zhopi"/> <label for="zhopi">中评【<span class="pin0"></span>】</label>&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" value="差评" class="pinj" name="sex" class="radioStyle"  id="chapi"/> <label for="chapi">差评【<span class="pin2"></span>】</label>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="pin4">好评率：</span>
+
+			</div>
+			<!--搜索区结束-->
+			<div class="info">
+				<table id="dg" cellpadding="0" cellspacing="0" border="0" class="selectTable">
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>用户名</th>
+							<th>评论内容</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+				<div class='pageStyle'>
+
+					<ul class="page_fen">
+
+					</ul>
+				</div>
+			</div>
+		<!--详情-->
+		<div id="mb_all" class="mbStyle">&nbsp;</div>
+		<div class="popup" id="all">
+			<h1>详情<span class="closeX" onclick="closeMask('all')">X</span></h1>
+			<div class="pInfo addForm">
+			<dl>
+						<dt><span>用户名</span></dt>
+						<dd>
+							<div class="fbox" id="fbox1">
+
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt><span>评论内容</span></dt>
+						<dd>
+							<div class="fbox" id="fbox2">
+							</div>
+
+						</dd>
+					</dl>
+					<dl>
+						<dt><span>图片</span></dt>
+						<dd>
+							<div class="fbox" id="fbox3">
+						</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt><span>评论日期</span></dt>
+						<dd>
+							<div class="fbox" id="fbox4">
+
+							</div>
+						</dd>
+					</dl>
+			</div>
+		</div>
+		</div>
+<div id="mb_prop">&nbsp;</div>
+		<script src="/js/backstage/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="/js/backstage/global.js"></script>
+		<script type="text/javascript" src="/js/backstage/popup.js"></script>
+	    <script src="/js/backstage/detais.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$(document).on("click","#open",function() {
+					mask(580, 420, true, "all");
+				});
+                $(document).on("click",".edi",function(){
+                   	mask(800, 520, true, "stuInfo2");
+                });
+				$(document).on("click",".del",function() {
+					var id=$(this).attr("xq");
+					deleteShowAlert('删除提示', '确定要删除吗？', '确定', '取消', id);
+				});
+			});
+		</script>
+
+	</body>
+
+</html>
