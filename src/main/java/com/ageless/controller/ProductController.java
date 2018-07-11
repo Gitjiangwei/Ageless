@@ -91,12 +91,20 @@ public class ProductController {
                 }
             }
         }
+        List<Evaluate> evaluates0 = service.selectEvaluatesBydengji("全部",id);
+        List<Evaluate> evaluates1 = service.selectEvaluatesBydengji("好评",id);
+        List<Evaluate> evaluates2 = service.selectEvaluatesBydengji("中评",id);
+        List<Evaluate> evaluates3 = service.selectEvaluatesBydengji("差评",id);
         model.addAttribute("productId",id);
         model.addAttribute("propertys",propertys);
         model.addAttribute("firsts",thefirst);
         model.addAttribute("product",product);
         model.addAttribute("firtsPic",firtsPic);
         model.addAttribute("pics",pics);
+        model.addAttribute("quanbu",evaluates0.size());
+        model.addAttribute("haoping",evaluates1.size());
+        model.addAttribute("zhongping",evaluates2.size());
+        model.addAttribute("chaping",evaluates3.size());
         return "item_show";
     }
 
@@ -336,5 +344,26 @@ public class ProductController {
         }else {
             return "0";
         }
+    }
+
+    /**
+     * 根据好中差评查询所有的评论
+     * @param modelAndView 返回的视图
+     * @return
+     */
+    @RequestMapping("/selectEvaluateByping")
+    @ResponseBody
+    public ModelAndView selectEvaluateByping(ModelAndView modelAndView,@RequestParam("id")Integer id){
+        System.out.println(id);
+        List<Evaluate> evaluates0 = service.selectEvaluatesBydengji("全部",id);
+        List<Evaluate> evaluates1 = service.selectEvaluatesBydengji("好评",id);
+        List<Evaluate> evaluates2 = service.selectEvaluatesBydengji("中评",id);
+        List<Evaluate> evaluates3 = service.selectEvaluatesBydengji("差评",id);
+        modelAndView.addObject("evaluates0",evaluates0);
+        modelAndView.addObject("evaluates1",evaluates1);
+        modelAndView.addObject("evaluates2",evaluates2);
+        modelAndView.addObject("evaluates3",evaluates3);
+        modelAndView.setViewName("item_ping");
+        return modelAndView;
     }
 }
