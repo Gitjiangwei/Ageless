@@ -24,23 +24,6 @@ public class SortconController {
     @Autowired
     private SortService sortService;
 
-    @RequestMapping(value = "/sortcon")
-    public String selectAll(@RequestParam(required = false) String name,@RequestParam(required = false)String categoryName,
-                            @RequestParam(required = false)Integer categoryThree,@RequestParam(required = false)Integer sortId, HttpSession session){
-        System.out.print(categoryThree+"------------------------------");
-        if (name == "") {
-            name=null;
-        }
-
-        List<CategoryOne> lg=categoryOneService.Onelist(categoryName);
-        List<Sort> ls= sortconService.selectAll(name,categoryThree,sortId);
-        session.setAttribute("category",lg);
-
-
-        session.setAttribute("lis",ls);
-        System.out.println("-----------"+ls);
-        return "/backstage/sortcon";
-    }
 
     @ResponseBody
     @RequestMapping(value = "/selects")

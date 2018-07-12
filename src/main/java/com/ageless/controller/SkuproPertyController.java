@@ -1,6 +1,5 @@
 package com.ageless.controller;
 
-import com.ageless.pojo.CategoryOne;
 import com.ageless.pojo.SkuProperty;
 import com.ageless.service.CategoryOneService;
 import com.ageless.service.SkuPropertyService;
@@ -8,7 +7,6 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -22,13 +20,7 @@ public class SkuproPertyController {
     private SkuPropertyService skuPropertyService;
     @Autowired
     private CategoryOneService categoryOneService;
-    @GetMapping("/su")
-    public String su(ModelAndView mv,@RequestParam(required = false)String categoryName, HttpSession session){
-        List<CategoryOne> lg=categoryOneService.Onelist(categoryName);
-        session.setAttribute("category",lg);
-            return "/backstage/sortcon1";
 
-    }
     @ResponseBody
     @GetMapping("/cha")
     public  Object cha(@RequestParam(value="id",required = false)Integer Fid ,@RequestParam(value = "nam",required = false)String name){

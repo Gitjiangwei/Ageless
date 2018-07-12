@@ -4,16 +4,14 @@ import com.ageless.pojo.User;
 import com.ageless.service.UserService;
 import com.ageless.util.MD5;
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -33,11 +31,21 @@ public class BackUserController {
 
     MD5 md5 = new MD5();
     @RequestMapping("back_table.html")
-    public String table(){
+    public String table(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if(user == null){
+            return "/backstage/back_login";
+        }
         return "backstage/back_table";
     }
     @RequestMapping("back_add.html")
-    public String add(){
+    public String add(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if(user == null){
+            return "/backstage/back_login";
+        }
         return "backstage/back_add";
     }
     @RequestMapping("back_login.html")

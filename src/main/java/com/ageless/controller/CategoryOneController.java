@@ -21,23 +21,9 @@ public class CategoryOneController {
     @Autowired
     private CategoryOneService categoryOneService;
 
-    /**
-     * 查询所有
-     * @return
-     */
-    @RequestMapping(value="/index")
-    public String goIndex(){
-        return "/backstage/index";
-    }
-
-    @RequestMapping(value="/goCategory1")
-    public String goCategory1(){
-        return "/backstage/category1";
-    }
-
     @ResponseBody
-    @RequestMapping(value="/getcategory1list",method = RequestMethod.POST)
-    public Object OneList(@RequestParam String name){
+    @RequestMapping(value="/getcategory1list",method = RequestMethod.POST )
+    public Object OneList(@RequestParam(value = "name",required = false) String name){
         List<CategoryOne> onell=categoryOneService.Onelist(name);
         Object obj= JSON.toJSONString(onell);
         return obj;
