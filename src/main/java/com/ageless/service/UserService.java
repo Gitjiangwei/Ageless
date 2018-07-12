@@ -65,4 +65,9 @@ public interface UserService {
      * @return
      */
     List<User> sellectAll(User user);
+    /**
+     * 除了登陆用户外的所有信息
+     * @return
+     */
+    List<User> sellectAll1(User user);
 }

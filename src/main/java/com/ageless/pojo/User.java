@@ -2,7 +2,6 @@ package com.ageless.pojo;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 /**

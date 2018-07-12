@@ -77,9 +77,8 @@
                             type:"post",
                             dataType:"json",
                             success:function (result) {
-                                var num =result.num;
                                 if (result.mes=="success"){
-                                    location.href="/backstage/index.html?num="+num;
+                                    location.href="/backstage/index.html"
                                 }else if(result.mes=="frozen"){
                                     alert("该账号已被冻结！")
                                 }else if(result.mes=="frozen1"){

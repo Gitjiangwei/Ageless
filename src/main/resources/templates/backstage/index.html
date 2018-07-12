@@ -24,7 +24,7 @@
 			<div class="login" id="admin"> 
 				<span class="loginUser">管理员-</span>
 				<div class="person"> 
-				   <span>个人中心</span> 
+				   <span id="geren" onclick=" NewPage('/backstage/back_add.html')">个人中心</span>
 				   <span>修改密码</span> 
 				   <span onclick="openPage('/backstage/back_login.html')";>退出</span>
 				</div>
@@ -120,7 +120,6 @@
 							<div class="nav_title">公告类型管理</div>
 						</li>
 					</ul>
-
 				</div>
 
 				<!--NO5 END-->
@@ -130,16 +129,9 @@
 						<li onclick="NewPage('/backstage/comment.html')">
 							<div class="nav_title">查看评论</div>
 						</li>
-
 					</ul>
-
 				</div>
-
-
 			</div>
-
-
-
 			<div class="right">
 				<iframe class="iframe" name="frmright" src="/backstage/back_table.html" frameborder="0" scrolling="yes"></iframe>
 			</div>
@@ -152,14 +144,32 @@
 		<script type="text/javascript" src="/js/backstage/global.js"></script>
         <script>
 			$(function () {
-				$.ajax()
+			    $("#geren").click(function () {
+			        var member =$(this).parent().prev().text();
+                    $.ajax({
+                        url: "/backstage/xiangqing",
+                        type: "get",
+                        data:"member="+member,
+                        dataType: "json",
+                        success: function(data) {
+                        },
+                        error: function() {
+                            alert("出现异常！");
+                        }
+                    });
+                });
+				$.ajax({
+                    url:"/backstage/bindex",
+                    type:"post",
+                    dataType:"json",
+                    success:function (data) {
+                        $(".loginUser").text(data.membership);
+                    },
+                    error:function () {
+                        alert("未登录请先登陆");
+                    }
+				});
             });
-            var result;
-            var url=window.location.search; //获取url中"?"符后的字串
-            if(url.indexOf("?")!=-1){
-                result = url.substr(url.indexOf("=")+1);
-            }
-            $(".loginUser").text("管理员-"+result);
 		</script>
 	</body>
 

@@ -71,4 +71,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.sellectAll(user);
     }
 
+    @Override
+    public List<User> sellectAll1(User user) {
+        return userMapper.sellectAll1(user);
+    }
+
 }

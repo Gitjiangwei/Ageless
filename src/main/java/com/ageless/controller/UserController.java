@@ -521,7 +521,6 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/getUserInfo")
     public Object getUserInfo(HttpSession session){
-        Object object=null;
         User user  = (User)session.getAttribute("user");
         Object json = JSON.toJSON(user);
         System.out.println("===================="+json);
