@@ -67,6 +67,13 @@ public interface ProductMapper {
       */
      List<Product> selectall(@Param("id") Integer id);
 
+     /**
+      * 根据评价好坏查询评价
+      * @param ping (全部、好中差评)
+      * @return 查询得到的评价的对象list
+      */
+     List<Evaluate> selectEvaluatesBydengji(@Param("ping") String ping,@Param("id")Integer id);
+
      int add(Product pro);
 
      int modifyProduct(Product pro);

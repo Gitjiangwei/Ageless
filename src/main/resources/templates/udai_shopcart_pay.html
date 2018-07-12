@@ -17,7 +17,7 @@
 
 	<title>U袋网</title>
 </head>
-<body>
+<body id="bdo">
 	<!-- 顶部tab -->
 	<div class="tab-header">
 		<div class="inner">
@@ -90,7 +90,7 @@
 							<a href="udai_address_edit.html" class="edit">修改</a>
 						</div>-->
 					</div>
-					<div class="add_addr"><a href="udai_address.html">添加新地址</a></div>
+					<div class="add_addr"><a href="/ageless/udai_address.html">添加新地址</a></div>
 					<div class="shop-title">确认订单</div>
 
 <div id="xunhuan">
@@ -107,17 +107,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="shop in shopList">
-									<th scope="row"><a href="item_show.html"><div class="img"><img :src="shop.picPath" style="width: 120px">{{shop.picPath}}<!--<img src="/images/temp/M-003.jpg" alt="" class="cover">--></div></a></th>
-									<td>
-										<div class="name ep3">{{shop.productName}}</div>
-										<div class="type c9">{{shop.optiinName}}</div>
-									</td>
-									<td>{{shop.price | money('元')}}</td>
-									<td>{{shop.orderamount}}</td>
-									<td>¥0.0</td>
-									<td>{{shop.price*shop.orderamount | money('元')}}</td>
-								</tr>
+							<tr v-for="shop in shopList">
+								<th scope="row"><a href="item_show.html"><div class="img"><img :src="shop.picPath" style="width: 120px">{{shop.picPath}}<!--<img src="/images/temp/M-003.jpg" alt="" class="cover">--></div></a></th>
+								<td>
+									<div class="productName">{{shop.productName}}</div>
+									<div class="type c9">{{shop.optiinName}}</div>
+									<div class="skuids">{{shop.skuid}}</div>
+									<div class="productIds">{{shop.productId}}</div>
+
+								</td>
+								<td >{{shop.price | money('元')}}</td>
+								<td class="orderamounts">{{shop.orderamount}}</td>
+								<td>¥0.0</td>
+								<td class="prices">{{shop.price*shop.orderamount | money元}}</td>
+							</tr>
 								<!--<tr>
 									<th scope="row"><a href="item_show.html"><div class="img"><img src="/images/temp/S-005.jpg" alt="" class="cover"></div></a></th>
 									<td>
@@ -180,18 +183,15 @@
 					<div class="shop-title">确认订单</div>
 					<div class="pay-mode__box">
 						<div class="radio-line radio-box">
-							<label class="radio-label ep">
-								<input name="pay-mode" value="1" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								<span class="fz16">余额支付</span><span class="fz14">（可用余额：¥88.0）</span>
-							</label>
-							<div class="pay-value">支付<b class="fz16 cr">18.00</b>元</div>
+
 						</div>
 						<div class="radio-line radio-box">
 							<label class="radio-label ep">
 								<input name="pay-mode" value="2" autocomplete="off" type="radio"><i class="iconfont icon-radio"></i>
-								<img src="/images/icons/alipay.png" alt="支付宝支付">
+								<input type="hidden" id="WIDsubject" value="支付宝支付">
+								<img src="/images/icons/alipay.png" alt="支付宝支付" >
 							</label>
-							<div class="pay-value">支付<b class="fz16 cr">18.00</b>元</div>
+							<div class="pay-value" >支付<b class="fz16 cr" id="WIDtotal_amount">0.01</b>元</div>
 						</div>
 						<div class="radio-line radio-box">
 							<label class="radio-label ep">
@@ -209,7 +209,9 @@
 						</div>
 					</div>
 					<div class="user-form-group shopcart-submit">
-						<button type="button" class="btn" @click="zhizhi()">继续支付</button>
+						<!--<button type="button" class="btn" @click="zhizhi()">继续支付</button>-->
+
+						<button type="button" class="btn" id="zh">继续支付</button>
 					</div>
 					<script>
 						$(document).ready(function(){
@@ -330,8 +332,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
     <script src="/js/lib/vue-resource.js"></script>
-
+	<script src="/js/jquery-1.12.4.js"></script>
+	<script src="/js/alipy.js"></script>
     <script src="/js/udai_shopcart_pay.js"></script>
+	<script src="/js/udai_shopcart_payOrder.js"></script>
 	<script>
         $(function () {
             $.ajax({

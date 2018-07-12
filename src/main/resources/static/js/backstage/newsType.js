@@ -54,15 +54,20 @@ function result(bz, choose,choo) {
 //新增方法
 function insertNews() {
     var form =$("#ll").serialize();
-    $.ajax({
-        type:"GET",
-        url:"/er/insertNews",
-        data:form,
-        dataType:"json",
-        success:function (data) {
+    if(form==null || form ==""){
+        $.ajax({
+            type:"GET",
+            url:"/er/insertNews",
+            data:form,
+            dataType:"json",
+            success:function (data) {
 
-            showWebAlert('新增成功！');
-            selectNews();
-        }
-    });
+                showWebAlert('新增成功！');
+                selectNews();
+            }
+        });
+    }else {
+        showWebAlert('新增内容不能为空！');
+    }
+
 }

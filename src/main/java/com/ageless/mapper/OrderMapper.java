@@ -38,4 +38,10 @@ public interface OrderMapper {
     List<Order> selenid(@Param("number")String number);
     int delete(@Param("number")String number);
     int dall(List<String> number);
+
+    /**
+     * 支付确认生成订单---添加订单
+     */
+    public int addOrder(Order order);
+    public int addOrderdet(Order order);
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.ageless.mapper.OrderMapper">
 
         <select id="all" resultType="Order" >
-            SELECT  DISTINCT order.id,createDate,`number`,productpic.picPath,product.descript,sku.price,skuCon,
+            SELECT  DISTINCT order.id,createDate,`number`,productpic.picPath,product.descript,sku.price,skuCon,OrderStatus,
             order.orderNumber,order.order_price,order_status.status,productName AS order3
             FROM ageless.order
             INNER JOIN order_status ON ageless.order.OrderStatus=order_status.id
@@ -86,4 +86,19 @@
             #{number}
         </foreach>
     </delete>
+
+    <insert id="addOrder" parameterType="Order" >
+
+	INSERT INTO ageless.order (number,addressid,createDate,atch,userId,orderNumber,OrderStatus,
+	order_price,productid)
+	VALUES(#{number},#{addressid},NOW(),#{atch},#{userId},#{orderNumber},
+	#{OrderStatus},#{order_price},#{productid})
+
+	</insert>
+    <insert id="addOrderdet"  parameterType="Order">
+       INSERT INTO ageless.order_details
+		(shipid,oid,skuId,`count`)
+		VALUES(#{shipid},#{oid},#{skuId},#{count})
+
+	</insert>
 </mapper>

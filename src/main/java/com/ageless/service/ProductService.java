@@ -63,6 +63,13 @@ public interface ProductService {
      */
     List<Product> selectall( Integer id);
 
+    /**
+     * 根据评价好坏查询评价
+     * @param ping (全部、好中差评)
+     * @return 查询得到的评价的对象list
+     */
+    List<Evaluate> selectEvaluatesBydengji(String ping,Integer id);
+
     int add(Product pro);
 
     List<Sku> selectNullSkuByOptId(List<Integer> list,Integer productId);
