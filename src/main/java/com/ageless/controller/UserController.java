@@ -1,6 +1,8 @@
 package com.ageless.controller;
 
+import com.ageless.pojo.Address;
 import com.ageless.pojo.User;
+import com.ageless.service.AddressService;
 import com.ageless.service.UserService;
 import com.ageless.util.GetSMS;
 import com.ageless.util.MD5;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -45,6 +48,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AddressService addressService;
     //private  HttpSession session;
     MD5 md5 = new MD5();
 
@@ -163,6 +168,18 @@ public class UserController {
      */
     @GetMapping("/udai_shopcart_pay.html")
     public String udai_shopcart_pay() { return "udai_shopcart_pay"; }
+
+    /**
+     * 根据id查询地址
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/udai_address_edit.html")
+    private String selectAdd(@RequestParam Long id, Model model){
+        Address address=addressService.selectAddress(id);
+        model.addAttribute("address",address);
+        return "udai_address_edit";
+    }
 
     /**
      * 首页
