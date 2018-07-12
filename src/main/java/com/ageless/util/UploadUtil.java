@@ -28,6 +28,7 @@ public class UploadUtil {
                     break;
                 }
                 String img = addImg(pro,shopImg.getInputStream(),shopImg.getOriginalFilename());
+                System.out.println("我进来了"+shopImg.getOriginalFilename());
                 li.add(img);
             }
             return li;
@@ -35,6 +36,26 @@ public class UploadUtil {
         return null;
     }
 
+    public List<String> uploadPics(HttpServletRequest request, Product pro) throws IOException {
+        MultipartFile shopImg = null;
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(
+                request.getSession().getServletContext());// 图片解析器
+
+        if (commonsMultipartResolver.isMultipart(request)) {
+            MultipartHttpServletRequest multipartHttpServletRequest =(MultipartHttpServletRequest)request;
+            List<String> li = new ArrayList<>();
+
+                 List<MultipartFile> ulaaa =multipartHttpServletRequest.getFiles("shopImg1");
+                  System.out.println(ulaaa.size());
+                for (int i=0;i<ulaaa.size();i++){
+                String img = addImg(pro, ulaaa.get(i).getInputStream(), ulaaa.get(i).getOriginalFilename());
+                    System.out.println(ulaaa.get(i).getOriginalFilename());
+                li.add(img);
+            }
+            return li;
+        }
+        return null;
+    }
     private String addImg(Product product, InputStream shopImg, String imgName) {
         // 获取shop图片目录的相对值路径
         String dest = PathUtil.getShopImagePath(product.getId());

@@ -90,17 +90,7 @@ public class AddressController {
         return obj;
     }
 
-    /**
-     * 根据id查询地址
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/udai_address_edit.html")
-    private String selectAdd(@RequestParam Long id, Model model){
-        Address address=addressService.selectAddress(id);
-        model.addAttribute("address",address);
-        return "udai_address_edit";
-    }
+
 
     /**
      * 修改收货地址

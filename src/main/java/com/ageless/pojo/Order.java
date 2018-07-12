@@ -31,12 +31,8 @@ public class Order {
     private Date transactionTime; //成交时间
     private String address;//详细地址
     private Integer count;//一件商品数量
-
-    //订单后台需要
-    private String name;
-    private String province;
-    private String city;
-    private String area;
-    private String street;
-    private String details;
+    private Integer oid;//订单id
+    private String order_price;
+    private Integer shipid;
+    private Integer skuId;
 }
