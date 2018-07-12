@@ -2,6 +2,7 @@ package com.ageless.controller;
 
 import com.ageless.pojo.ProductAndPic;
 import com.ageless.pojo.Seckill;
+import com.ageless.pojo.User;
 import com.ageless.pojo.oneAndtwoAndthree;
 import com.ageless.service.OneAndtwoAndthreeService;
 import com.ageless.service.ProductAndPicService;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class OneAndtwoAndthreeController {
     private SeckillService seckillService;
 
     @RequestMapping("/index.html")
-    public String lists(Model model){
+    public String lists(Model model, HttpSession session){
         if (redisUtil.getStringKey("shouye") == null){
             List<oneAndtwoAndthree> list=oneAndtwoAndthreeService.lists();
             model.addAttribute("list1",list);
@@ -46,9 +48,10 @@ public class OneAndtwoAndthreeController {
             }
             model.addAttribute("list1",list);
             System.out.println(list);
-
-
         }
+       User user = (User) session.getAttribute("user");
+        System.out.println(user+"==================================================");
+        model.addAttribute("list7",user);
         List<ProductAndPic> list4 =productService.list();
         model.addAttribute("list4",list4);
         List<ProductAndPic> list5 =productService.Newlist();
