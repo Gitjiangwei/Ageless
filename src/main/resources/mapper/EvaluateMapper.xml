@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ageless.mapper.EvaluateMapper">
+    <insert id="add">
+        INSERT INTO evaluate(dengji,file,photo1,photo2,photo3,photo4,photo5,uesrId,ProductId,create_Time)
+        VALUES(#{dengJi},#{file},#{photo1},#{photo2},#{photo3},#{photo4},#{photo5},#{uesrId},#{productId},now());
+    </insert>
+</mapper>
