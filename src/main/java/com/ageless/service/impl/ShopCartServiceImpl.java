@@ -4,6 +4,7 @@ import com.ageless.mapper.ShopCartMapper;
 import com.ageless.pojo.ShopCart;
 import com.ageless.pojo.ShoppingCart;
 import com.ageless.service.ShopCartService;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import java.util.List;
 public class ShopCartServiceImpl implements ShopCartService{
     @Autowired
     private ShopCartMapper shoppingCartMapper;
+    @Autowired
+    RedisUtil redisUtil;
 
     @Override
     public int addShoppingCart(ShoppingCart shoppingCart) {
@@ -42,6 +45,7 @@ public class ShopCartServiceImpl implements ShopCartService{
 
     @Override
     public List<ShoppingCart> selectCart(int id) {
+        redisUtil.setString("shopcart",JSON.toJSONString(shoppingCartMapper.selectCart(id)),5000L);
         return shoppingCartMapper.selectCart(id);
     }
 
