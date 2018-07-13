@@ -97,7 +97,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.7</version>
+            <version>1.2.38</version>
         </dependency>
         <!--支付宝SDK仓库-->
         <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
@@ -109,7 +109,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.6</version>
+            <version>3.4</version>
         </dependency>
 
         <!-- Json转换神器之Google Gson的使用-->
@@ -126,11 +126,6 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.2.1</version>
-        </dependency>
         <!--图片处理  -->
         <dependency>
             <groupId>net.coobird</groupId>
@@ -234,8 +229,9 @@
         </dependency>
         <!-- 微信支付依赖 -->
         <dependency>
-            <groupId>org.xmlpull</groupId>
+            <groupId>xmlpull</groupId>
             <artifactId>xmlpull</artifactId>
+            <version>1.1.3.1</version>
         </dependency>
         <dependency>
             <groupId>com.ning</groupId>
@@ -243,11 +239,7 @@
             <version>1.8.13</version>
         </dependency>
 
-        <!-- 阿里云 短信 依赖 -->
-        <dependency>
-            <groupId>taobao</groupId>
-            <artifactId>taobao</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -275,6 +267,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
             </plugin>
         </plugins>
 

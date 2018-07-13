@@ -6,7 +6,7 @@
     <select id="loginUser" resultType="User">
         SELECT  `id`,`membership`,`name`,`phone`,
         `sex`,`birthday`,`loginpwd`,`dongjie`,`regtime`,`truename`,
-        `integral`,`state`,`paymentpwd`,`mailbox`
+        `integral`,`state`,`paymentpwd`,`mailbox`,`haoqi`
         FROM `user`
         WHERE loginpwd = #{loginpwd}
         <if test="phone != null and phone != ''">
@@ -52,6 +52,9 @@
             </if>
             <if test="dongjie!=null and dongjie!=''">
                 dongjie=#{dongjie},
+            </if>
+            <if test="state!=null and state!=''">
+                state=#{state},
             </if>
         </trim>
         where 1=1
@@ -121,6 +124,12 @@
         SELECT 	id, membership, NAME, phone, sex, birthday, loginpwd, dongjie, regtime, truename, integral, state, paymentpwd, mailbox, openId, haoqi FROM ageless.user where 1=1
         <if test="membership!=null and membership!=''">
             and membership=#{membership}
+        </if>
+    </select>
+    <select id="sellectAll1" resultType="com.ageless.pojo.User" parameterType="com.ageless.pojo.User">
+        SELECT 	id, membership, NAME, phone, sex, birthday, loginpwd, dongjie, regtime, truename, integral, state, paymentpwd, mailbox, openId, haoqi FROM ageless.user where 1=1
+        <if test="membership!=null and membership!=''">
+            and membership!=#{membership}
         </if>
     </select>
 </mapper>

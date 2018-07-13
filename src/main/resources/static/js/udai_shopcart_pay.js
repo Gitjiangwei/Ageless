@@ -15,7 +15,7 @@ $(function () {
                         "\t\t\t\t\t\t\t\t（"+i.consignee+" 收） 1"+i.tel+"\n" +
                         "\t\t\t\t\t\t\t</label>\n" +
                         "\t\t\t\t\t\t\t<a href=\"javascript:;\" class=\"default\">默认地址</a>\n" +
-                        "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+i.id+"\" class=\"edit\">修改</a>\n" +
+                        "\t\t\t\t\t\t\t<a href=\"/ageless/udai_address_edit.html?id="+i.id+"\" class=\"edit\">修改</a>\n" +
                         "\t\t\t\t\t\t</div>";
                 }else if(i.state==0){
                     context+="<div class=\"radio-line radio-box\">\n" +
@@ -26,7 +26,7 @@ $(function () {
                         "\t\t\t\t\t\t\t\t（"+i.consignee+" 收） 1"+i.tel+"\n" +
                         "\t\t\t\t\t\t\t</label>\n" +
                         "\t\t\t\t\t\t\t<a onclick=\"cc("+i.id+','+i.nameId+")\" class=\"default\">设为默认地址</a>\n" +
-                        "\t\t\t\t\t\t\t<a href=\"udai_address_edit.html?id="+i.id+"\" class=\"edit\">修改</a>\n" +
+                        "\t\t\t\t\t\t\t<a href=\"/ageless/udai_address_edit.html?id="+i.id+"\" class=\"edit\">修改</a>\n" +
                         "\t\t\t\t\t\t</div>";
                 }
 

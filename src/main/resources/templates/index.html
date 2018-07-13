@@ -54,7 +54,7 @@
             <p class="help-block text-nowrap">-</p>
         </div>
         <div class="cart-box">
-            <a href="udai_shopcart.html" class="cart-but">
+            <a href="/ageless/loginShopcart" class="cart-but">
                 <i class="iconfont icon-shopcart cr fz16"></i> 购物车 0 件
             </a>
         </div>
@@ -116,17 +116,25 @@
             <img src="images/icons/default_avt.png" alt="欢迎来到U袋网" class="cover b-r50">
         </div>
         <!-- 已登录 -->
-        <div class="name c6">Hi~ <span class="cr">18759808122</span></div>
-        <div class="point c6">积分: 30</div>
+        <#if (list7)??>
+        <div class="name c6"><span class="cr">欢迎:${list7.membership}</span></div>
+        <#if (list7.haoqi)??>
+        <div class="point c6">积分:${list7.haoqi!}</div>
+        <#else>
+        <div class="point c6">积分:0</div>
+         </#if>
+        <#else>
+        <div class="name c6"><span class="cr">未登录</span></div>
+        </#if>
 
         <!-- 未登录 -->
         <!-- <div class="name c6">Hi~ 你好</div>
         <div class="point c6"><a href="">点此登录</a>，发现更多精彩</div> -->
-        <div class="report-box">
+        <!--<div class="report-box">
             <span class="badge">+30</span>
             <a class="btn btn-info btn-block disabled" href="#" role="button">已签到1天</a>
-            <!-- <a class="btn btn-primary btn-block" href="#" role="button">签到领积分</a> -->
-        </div>
+            &lt;!&ndash; <a class="btn btn-primary btn-block" href="#" role="button">签到领积分</a> &ndash;&gt;
+        </div>-->
     </div>
     <div class="agent-box">
         <a href="#" class="agent">

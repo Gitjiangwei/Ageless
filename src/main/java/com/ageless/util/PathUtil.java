@@ -8,7 +8,7 @@ public class PathUtil {
 		String os = System.getProperty("os.name");
 		String basePath = "";
 		if (os.toLowerCase().startsWith("win")) {
-			basePath = "E:/IdeaProjects/Ageless/src/main/resources/static/";
+			basePath = "D:/sb/";
 		} else {
 			basePath = "/home/xiangze/image/";
 		}

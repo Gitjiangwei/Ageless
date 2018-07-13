@@ -26,13 +26,14 @@
 							<th>会员名</th>
 							<th>是否冻结</th>
 							<th>注册时间</th>
+							<th>权限</th>
 							<th>积分</th>
                             <th>操作</th>
 						</tr>
 					</thead>
 					<tbody id="showList">
 						<tr>
-							<td colspan="11"><img src='images/loading.gif' /></td>
+							<td colspan="11"><img src='/images/backstage/loading.gif' /></td>
 						</tr>
 					</tbody>
 				</table>
@@ -46,41 +47,119 @@
 		<script type="text/javascript">
             var dong =2;
 			$(function() {
-				$.ajax({
-					url: "/backstage/selectA",
-					type: "get",
-					dataType: "json",
-					async: true,
-					success: function(data) {
-						var tbody = $('<tbody></tbody>');
-						for (var i=0;i<data.length;i++){
-						   /* $("#showList").append("<tr><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td><span onclick=update("+data[i].membership+");>冻结</span><span onclick=update("+data[i].membership+");><a href='back_add.html'>详情信息</a></span></td></tr>");*/
+                $.ajax({
+                    url:"/backstage/bindex",
+                    type:"post",
+                    dataType:"json",
+                    success:function (data) {
+                       	if(data.state=='3'){
+                            $.ajax({
+                                url: "/backstage/selectB",
+                                type: "get",
+                                dataType: "json",
+                                async: true,
+                                success: function(data) {
+                                    var tbody = $('<tbody></tbody>');
+                                    for (var i=0;i<data.length;i++){
+                                        /* $("#showList").append("<tr><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td><span onclick=update("+data[i].membership+");>冻结</span><span onclick=update("+data[i].membership+");><a href='back_add.html'>详情信息</a></span></td></tr>");*/
 
-                            var tr = $('<tr></tr>');
-                            tr.append("<td width='40'><input type='checkbox' name='CheckBox' value='pro1'/></td>");
-                            tr.append("<td>" + data[i].membership + "</td>");
-                            if(data[i].dongjie==2){
-                                tr.append("<td>已冻结</td>");
-                                tr.append("<td>" + getMyDate(data[i].regtime) + "</td>");
-                                tr.append("<td>" + data[i].haoqi + "</td>");
-                                tr.append("<td><span onclick=jiedong(\""+data[i].membership+"\");>解冻</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span></td>");
-							}else{
-                                tr.append("<td>未冻结</td>");
-                                tr.append("<td>" + getMyDate(data[i].regtime) + "</td>");
-                                tr.append("<td>" + data[i].haoqi + "</td>");
-                                tr.append("<td><span onclick=dongjie(\""+data[i].membership+"\");>冻结</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span></td>");
-							}
-                            tbody.append(tr);
+                                        var tr = $('<tr></tr>');
+                                        tr.append("<td width='40'><input type='checkbox' name='CheckBox' value='pro1'/></td>");
+                                        tr.append("<td>" + data[i].membership + "</td>");
+                                        if(data[i].dongjie==2){
+                                            tr.append("<td>已冻结</td>");
+                                            tr.append("<td>" + getMyDate(data[i].regtime) + "</td>");
+                                            if(data[i].state==1){
+                                                tr.append("<td>普通用户</td>");
+                                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                                tr.append("<td><span onclick=dongjie(\""+data[i].membership+"\");>冻结</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=shenji(\""+data[i].membership+"\");>升级为管理员</a></span></td>");
+											}else{
+                                                tr.append("<td>管理员</td>");
+                                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                                tr.append("<td><span onclick=dongjie(\""+data[i].membership+"\");>冻结</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=jiangji(\""+data[i].membership+"\");>更改为普通用户</a></span></td>");
+                                            }
+                                            tr.append("<td>" + data[i].haoqi + "</td>");
+                                            tr.append("<td><span onclick=jiedong(\""+data[i].membership+"\");>解冻</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=shengji(\""+data[i].membership+"\");>升级为管理员</a></span></td>");
+                                        }else{
+                                            tr.append("<td>未冻结</td>");
+                                            tr.append("<td>" + getMyDate(data[i].regtime) + "</td>");
+                                            if(data[i].state==1){
+                                                tr.append("<td>普通用户</td>");
+                                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                                tr.append("<td><span onclick=dongjie(\""+data[i].membership+"\");>冻结</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=shengji(\""+data[i].membership+"\");>升级为管理员</a></span></td>");
+                                            }else{
+                                                tr.append("<td>管理员</td>");
+                                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                                tr.append("<td><span onclick=dongjie(\""+data[i].membership+"\");>冻结</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=jiangji(\""+data[i].membership+"\");>更改为普通用户</a></span></td>");
+                                            }
+
+                                        }
+                                        tbody.append(tr);
+                                    }
+                                    $('#tableData tbody').replaceWith(tbody);
+                                    showPage(1, 10, 46);
+                                },
+                                error: function() {
+                                    alert("出现异常！");
+                                }
+
+                            });
+						}else{
+                            $.ajax({
+                                url: "/backstage/selectB",
+                                type: "get",
+                                dataType: "json",
+                                async: true,
+                                success: function(data) {
+                                    var tbody = $('<tbody></tbody>');
+                                    for (var i=0;i<data.length;i++){
+                                        /* $("#showList").append("<tr><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td>" + data[i].membership + "</td><td><span onclick=update("+data[i].membership+");>冻结</span><span onclick=update("+data[i].membership+");><a href='back_add.html'>详情信息</a></span></td></tr>");*/
+
+                                        var tr = $('<tr></tr>');
+                                        tr.append("<td width='40'><input type='checkbox' name='CheckBox' value='pro1'/></td>");
+                                        tr.append("<td>" + data[i].membership + "</td>");
+                                        if(data[i].dongjie==2){
+                                            tr.append("<td>已冻结</td>");
+                                            tr.append("<td>" + getMyDate(data[i].regtime) + "</td>");
+                                            if(data[i].state==1){
+                                                tr.append("<td>普通用户</td>");
+                                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                                tr.append("<td><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span></td>");
+                                            }else{
+                                                tr.append("<td>管理员</td>");
+                                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                                tr.append("<td><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span></td>");
+                                            }
+                                            tr.append("<td>" + data[i].haoqi + "</td>");
+                                            tr.append("<td><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span></td>");
+                                        }else{
+                                            tr.append("<td>未冻结</td>");
+                                            tr.append("<td>" + getMyDate(data[i].regtime) + "</td>");
+                                            if(data[i].state==1){
+                                                tr.append("<td>普通用户</td>");
+                                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                                tr.append("<td><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span></td>");
+                                            }else{
+                                                tr.append("<td>管理员</td>");
+                                                tr.append("<td>" + data[i].haoqi + "</td>");
+                                                tr.append("<td><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span></td>");
+                                            }
+                                        }
+                                        tbody.append(tr);
+                                    }
+                                    $('#tableData tbody').replaceWith(tbody);
+                                    showPage(1, 10, 46);
+                                },
+                                error: function() {
+                                    alert("出现异常！");
+                                }
+
+                            });
 						}
-						$('#tableData tbody').replaceWith(tbody);
-						showPage(1, 10, 46);
-					},
-					error: function() {
-						alert("出现异常！");
-					}
-
-				});
-
+                    },
+                    error:function () {
+                    }
+                });
 			});
 			/*冻结账号*/
 			function dongjie(member){
@@ -106,7 +185,57 @@
                     //alert("取消");
                     return false;
                 }
-			}
+            }
+            /*升级为管理员*/
+            function shengji(member){
+                if(window.confirm('将此账号升级为管理员？')){
+                    $.ajax({
+                        url: "/backstage/shengji",
+                        type: "POST",
+                        data:"member="+member,
+                        dataType: "json",
+                        async: true,
+                        success: function(data) {
+                            if(data.mes=='yes'){
+                                location.href="/backstage/back_table.html";
+                            }else {
+                                alert("bucheng");
+                            }
+                        },
+                        error: function() {
+                            alert("出现异常！");
+                        }
+                    });
+                }else{
+                    //alert("取消");
+                    return false;
+                }
+            }
+            /*更改为普通用户*/
+            function jiangji(member){
+                if(window.confirm('将此账号更改为普通用户？')){
+                    $.ajax({
+                        url: "/backstage/jiangji",
+                        type: "POST",
+                        data:"member="+member,
+                        dataType: "json",
+                        async: true,
+                        success: function(data) {
+                            if(data.mes=='yes'){
+                                location.href="/backstage/back_table.html";
+                            }else {
+                                alert("bucheng");
+                            }
+                        },
+                        error: function() {
+                            alert("出现异常！");
+                        }
+                    });
+                }else{
+                    //alert("取消");
+                    return false;
+                }
+            }
 			/*解除冻结*/
             function jiedong(member){
                 if(window.confirm('你确定要解冻该账号吗？')){

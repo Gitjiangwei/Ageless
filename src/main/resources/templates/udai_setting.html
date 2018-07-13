@@ -389,7 +389,7 @@
         var year = $("#year").val();
         var month = $("#month").val();
         var days = $("#days").val();
-        var birthday=year+"-"+month+"-"+days;//日期类型转换失败
+        var birthday=year+"-"+month+"-"+days;
         var usertruename=$("#user-truename").val();
 
 		$.ajax({
@@ -400,7 +400,7 @@
 			type:"post",
 			success:function(data){
                 if (result.mes=="yes"){
-                    alert("修改成功！")
+                    location.href="/ageless/udai_setting.html";
                 }else if(result.mes=="no"){
                     alert("修改失败！")
                 }
