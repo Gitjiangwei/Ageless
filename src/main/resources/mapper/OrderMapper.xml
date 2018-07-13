@@ -28,7 +28,7 @@
     
     
         <select id="order_details" resultType="Order">
-            SELECT  order.id,createDate,`number`,atch,CONCAT(consignee,",",tel,",",address.province,address.city,`area`,street,details) AS address,payment_Time,transaction_Time,order_price
+            SELECT  order.id,createDate,`number`,OrderStatus,atch,CONCAT(consignee,",",tel,",",address.province,address.city,`area`,street,details) AS address,payment_Time,transaction_Time,order_price
             FROM ageless.order
             INNER JOIN ageless.address ON ageless.address.id=order.addressid
             INNER JOIN ageless.order_details ON ageless.order_details.oid=order.id
@@ -101,4 +101,13 @@
 		VALUES(#{shipid},#{oid},#{skuId},#{count})
 
 	</insert>
+
+    <update id="updataOrder" parameterType="Order" >
+
+        UPDATE ageless.order SET
+        OrderStatus = #{OrderStatus}
+        WHERE  id =#{id}
+    </update>
+
+
 </mapper>

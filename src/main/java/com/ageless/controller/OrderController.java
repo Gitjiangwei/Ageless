@@ -3,6 +3,7 @@ package com.ageless.controller;
 import com.ageless.pojo.Order;
 import com.ageless.pojo.SkuOption;
 import com.ageless.pojo.SkuProperty;
+import com.ageless.pojo.User;
 import com.ageless.service.OrderService;
 import com.ageless.service.ProductService;
 import com.alibaba.fastjson.JSON;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,31 @@ public class OrderController {
     public String show(){
         return "udai_order";
     }
+
+
+    @RequestMapping("/shows")
+    public String shows(Model model, @RequestParam(required = false) String status,
+                        @RequestParam(required = false)Integer id){
+        Order address=orderService.order_details(id);
+        List<Order> allProduct=orderService.order_product(id);
+        for (int i=0;i<allProduct.size();i++){
+            String skuNum= allProduct.get(i).getSkuCon();
+            System.out.println(skuNum+"-*******************************************");
+            String s=skuString(skuNum);
+            allProduct.get(i).setSkuCons(s);
+        }
+        for (Order v:allProduct
+                ) {
+            System.out.println(v.getSkuCons()+"-*******************************************");
+        }
+        model.addAttribute("item",address);
+        model.addAttribute("items",allProduct);
+        return "udai_order_receipted";
+    }
+
+
+
+
 
     //查询所有订单
     @RequestMapping("/all")
@@ -181,7 +208,8 @@ public class OrderController {
                              @RequestParam(required = false)  Integer orderNumber,
                              @RequestParam(required = false) Integer OrderStatus,
                              @RequestParam(required = false) String order_price,
-                             @RequestParam(required = false) Integer productid){
+                             @RequestParam(required = false) Integer productid,
+                             HttpSession session){
 
 
         Order order=new Order();
@@ -196,7 +224,9 @@ public class OrderController {
         order.setNumber(bigInteger.toString());//订单编号随机
         order.setAddressid(1);//地址编号
         order.setAtch(1);//交易流水号
-        order.setUserId(1);
+        User user= (User) session.getAttribute("user");
+        Long useId=user.getId();
+        order.setUserId(useId.intValue());
         order.setOrderNumber(5);
         order.setOrderStatus(2);
         order.setProductid(productid);
@@ -220,4 +250,17 @@ public class OrderController {
         Object json=JSON.toJSON(addorders);
         return json;
     }
+
+    //收货修改订单状态
+       @RequestMapping("/updateOrder")
+       public String updataOrd(Integer id,Integer OrderStatus){
+           int upOrder=orderService.updataOrder(id,OrderStatus);
+           if(upOrder>0){
+                System.out.print("修改成功！");
+           }else{
+                System.out.print("修改失败！");
+           }
+           return"/Order/show";
+       }
+
 }

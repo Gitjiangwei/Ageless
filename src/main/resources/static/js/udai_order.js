@@ -6,6 +6,8 @@ new Vue({
         orderList:[],
         delId:0,
         delRessult:0,
+        delFlag: false,
+        product:'',
     },
     filters:{
         /*  formatMoney: function (value) {
@@ -28,20 +30,26 @@ new Vue({
             });
         },
         getorder:function (status) {
-            alert(status);
+            //alert(status);
             this.$http.get("/Order/all",{"status":status}).then(function (json) {
                 this.orderList=json.data;
 
             });
         },
-        delProduct: function (item) {
-            alert(item);
+        delConfrim: function (item) {
+            this.delFlag = true;
+            this.product = item;
             this.delId=item.id;
-            alert(this.delId);
+
+        },
+        delProduct: function (item) {
+            //alert(item);
+            this.delId=item.id;
+            //alert(this.delId);
             var _this=this;
             this.$http.get("/Order/delorder",{"delid":_this.delId}).then(function (data) {
                 _this.delRessult=data.data;
-                alert(_this.delRessult);
+                //alert(_this.delRessult);
                 if(_this.delRessult>0){
                     alert("删除成功！");
                     this.cartView();
@@ -49,8 +57,13 @@ new Vue({
                     alert("删除失败！");
                 }
             },function () {
-                alert("删除成功！");
+                alert("删除失败！");
             });
+
+            this.delFlag = false;
+        },
+        delefhsh:function(){
+             alert("此订单还未完成，不能删除！");
         },
 
     }

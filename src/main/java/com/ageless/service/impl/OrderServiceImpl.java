@@ -59,4 +59,9 @@ public class OrderServiceImpl implements OrderService{
         return orderMapper.addOrderdet(order);
     }
 
+    @Override
+    public int updataOrder(Integer id,Integer OrderStatus) {
+        return orderMapper.updataOrder(id,OrderStatus);
+    }
+
 }
