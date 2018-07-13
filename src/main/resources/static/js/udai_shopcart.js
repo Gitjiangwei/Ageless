@@ -21,7 +21,7 @@ new Vue({
     methods:{
         cartView:function () {
             var _this=this;
-            this.$http.get("/shop/selshopAll").then(function (json) {
+            this.$http.get("/shop/selectshopcart").then(function (json) {
                 _this.productList=json.data;
             });
         },

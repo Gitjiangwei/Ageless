@@ -33,4 +33,19 @@ public interface ShopCartService {
 
     //根据商品id修改件数
     public int repairNumberById(ShoppingCart shoppingCart);
+
+    /**
+     * 购物车查询
+     * @param id
+     * @return
+     */
+    public List<ShoppingCart> selectCart(int id);
+
+    /**
+     *
+     * 购物车查询条数
+     * @param id
+     * @return
+     */
+    public int chaCart(int id);
 }
