@@ -41,7 +41,6 @@ public class ProductAreaController  {
             List<ProductAndPic> list= productAndPicService.listbyxiaoliang(product);
             PageInfo info=new PageInfo(list);
             int countpage= info.getPages();
-            System.out.println(countpage);
             model.addAttribute("list1",list);
             modelAndView.setViewName("item_sale_page_s");
             model.addAttribute("pageindex",pageindex);

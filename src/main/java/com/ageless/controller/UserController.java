@@ -636,7 +636,7 @@ public class UserController {
         if(u==null){
             return "login";
         }else{
-            return "/shop/shopcart.html";
+            return "/shop/selectshopcart";
         }
     }
 

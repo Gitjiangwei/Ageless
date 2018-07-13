@@ -13,6 +13,7 @@ import java.util.List;
 public class ShopCartServiceImpl implements ShopCartService{
     @Autowired
     private ShopCartMapper shoppingCartMapper;
+
     @Override
     public int addShoppingCart(ShoppingCart shoppingCart) {
 
@@ -37,6 +38,16 @@ public class ShopCartServiceImpl implements ShopCartService{
     @Override
     public int repairNumberById(ShoppingCart shoppingCart) {
         return shoppingCartMapper.repairNumberById(shoppingCart);
+    }
+
+    @Override
+    public List<ShoppingCart> selectCart(int id) {
+        return shoppingCartMapper.selectCart(id);
+    }
+
+    @Override
+    public int chaCart(int id) {
+        return shoppingCartMapper.chaCart(id);
     }
 
 

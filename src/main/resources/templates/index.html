@@ -54,8 +54,13 @@
             <p class="help-block text-nowrap">-</p>
         </div>
         <div class="cart-box">
-            <a href="/ageless/loginShopcart" class="cart-but">
-                <i class="iconfont icon-shopcart cr fz16"></i> 购物车 0 件
+            <a href="/shop/shopcart.html" class="cart-but">
+                <i class="iconfont icon-shopcart cr fz16"></i>
+                <#if (list8)??>
+                购物车${list8}件
+                <#else>
+                请先登录
+            </#if>
             </a>
         </div>
     </div>
