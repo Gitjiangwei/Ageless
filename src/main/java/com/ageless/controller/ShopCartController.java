@@ -41,7 +41,11 @@ public class  ShopCartController {
         return "item_show";
     }
     @GetMapping("/shopcart.html")
-    public String shopcart() {
+    public String shopcart(HttpSession session) {
+        User u = (User) session.getAttribute("user");
+        if(u==null){
+            return "login";
+        }
         return "udai_shopcart";
     }
 

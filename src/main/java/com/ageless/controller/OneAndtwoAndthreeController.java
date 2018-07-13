@@ -51,23 +51,16 @@ public class OneAndtwoAndthreeController {
             System.out.println(list);
         }
        User user = (User) session.getAttribute("user");
-
+        model.addAttribute("list7",user);
+        List<ProductAndPic> list4 =productService.list();
+        model.addAttribute("list4",list4);
+        List<ProductAndPic> list5 =productService.Newlist();
+        model.addAttribute("list5",list5);
+        List<Seckill> list6 = seckillService.selectSeckill();
+        model.addAttribute("list6",list6);
         if(user==null){
-            model.addAttribute("list7",user);
-            List<ProductAndPic> list4 =productService.list();
-            model.addAttribute("list4",list4);
-            List<ProductAndPic> list5 =productService.Newlist();
-            model.addAttribute("list5",list5);
-            List<Seckill> list6 = seckillService.selectSeckill();
-            model.addAttribute("list6",list6);
+            return "index";
         }else{
-            model.addAttribute("list7",user);
-            List<ProductAndPic> list4 =productService.list();
-            model.addAttribute("list4",list4);
-            List<ProductAndPic> list5 =productService.Newlist();
-            model.addAttribute("list5",list5);
-            List<Seckill> list6 = seckillService.selectSeckill();
-            model.addAttribute("list6",list6);
             int num= user.getId().intValue();
             int number=shopCartService.chaCart(num);
             model.addAttribute("list8",number);
