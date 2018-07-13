@@ -44,4 +44,7 @@ public interface OrderMapper {
      */
     public int addOrder(Order order);
     public int addOrderdet(Order order);
+
+    //完成确认收货
+    public  int  updataOrder(@Param("id")Integer id, @Param("OrderStatus") Integer OrderStatus);
 }
