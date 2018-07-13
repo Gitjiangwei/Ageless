@@ -28,7 +28,7 @@
 			</div>
 			<div class="pull-right" id="logs">
 				<a href="udai_welcome.html">我的U袋</a>
-				<a href="udai_order.html">我的订单</a>
+				<a href="/Order/show">我的订单</a>
 				<a href="udai_integral.html">积分平台</a>
 			</div>
 		</div>
@@ -112,8 +112,8 @@
 								<td>
 									<div class="productName">{{shop.productName}}</div>
 									<div class="type c9">{{shop.optiinName}}</div>
-									<div class="skuids">{{shop.skuid}}</div>
-									<div class="productIds">{{shop.productId}}</div>
+									<div style="overflow: hidden" class="skuids">{{shop.skuid}}</div>
+									<div style="overflow: hidden" class="productIds">{{shop.productId}}</div>
 
 								</td>
 								<td >{{shop.price | money('元')}}</td>

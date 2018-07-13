@@ -43,4 +43,7 @@ public interface OrderService {
      */
     public int addOrder(Order order);
     public int addOrderdet(Order order);
+
+    //确认收货
+    public  int  updataOrder(Integer id,Integer OrderStatus);
 }
