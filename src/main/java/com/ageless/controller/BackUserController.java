@@ -4,16 +4,14 @@ import com.ageless.pojo.User;
 import com.ageless.service.UserService;
 import com.ageless.util.MD5;
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -33,11 +31,21 @@ public class BackUserController {
 
     MD5 md5 = new MD5();
     @RequestMapping("back_table.html")
-    public String table(){
+    public String table(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if(user == null){
+            return "/backstage/back_login";
+        }
         return "backstage/back_table";
     }
     @RequestMapping("back_add.html")
-    public String add(){
+    public String add(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if(user == null){
+            return "/backstage/back_login";
+        }
         return "backstage/back_add";
     }
     @RequestMapping("back_login.html")
@@ -62,24 +70,40 @@ public class BackUserController {
             //用户ID key为 user
             session.setAttribute("uid",id);
             Long dongjie=  u.getDongjie();
-            String nam =u.getMembership();
             Long state =u.getState();
             if(dongjie==2){
                 return "{\"mes\":\"frozen\"}";
-            }else if(state==0){
+            }else if(state==1){
                 return "{\"mes\":\"frozen1\"}";
             }else{
-                return "{\"mes\":\"success\",\"num\":\""+nam+"\"}";
+                return "{\"mes\":\"success\"}";
             }
         }
         return "{\"mes\":\"error\"}";
     }
     @GetMapping("/selectA")
     @ResponseBody
-    public Object selectAll(){
-        User user =new User();
+    public Object selectAll(HttpSession session){
+        User user = (User) session.getAttribute("user");
         List<User> list = userService.sellectAll(user);
         Object str = JSON.toJSON(list);
+        System.out.println(str);
+        return str;
+    }
+    @GetMapping("/selectB")
+    @ResponseBody
+    public Object selectAll1(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        List<User> list = userService.sellectAll1(user);
+        Object str = JSON.toJSON(list);
+        System.out.println(str);
+        return str;
+    }
+    @RequestMapping("/bindex")
+    @ResponseBody
+    public Object selectU(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        Object str = JSON.toJSON(user);
         System.out.println(str);
         return str;
     }
@@ -106,6 +130,34 @@ public class BackUserController {
         }
     }
 
+    @RequestMapping("/shengji")
+    @ResponseBody
+    public Object shengji(@RequestParam(required = false) String member){
+        Map<String,Object> map= new HashMap<String,Object>();
+        Integer result=0;
+            map.put("membership",member);
+            map.put("state",2);
+            result = userService.updateUser(map);
+        if(result>=1){
+            return "{\"mes\":\"yes\"}";
+        }else {
+            return "{\"mes\":\"no\"}";
+        }
+    }
+    @RequestMapping("/jiangji")
+    @ResponseBody
+    public Object jiangji(@RequestParam(required = false) String member){
+        Map<String,Object> map= new HashMap<String,Object>();
+        Integer result=0;
+        map.put("membership",member);
+        map.put("state",1);
+        result = userService.updateUser(map);
+        if(result>=1){
+            return "{\"mes\":\"yes\"}";
+        }else {
+            return "{\"mes\":\"no\"}";
+        }
+    }
     @GetMapping("/xiangqing")
     @ResponseBody
     public Object xiangQing(@RequestParam(required = false)String member,HttpSession session){

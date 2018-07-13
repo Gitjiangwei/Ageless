@@ -73,15 +73,7 @@ public class CategoryThreeController {
         }
     }
 
-    /**
-     * 进入三级分类页面
-     * @return
-     */
-    @RequestMapping(value="/goThree")
-    public String GoTh(){
 
-        return "/backstage/category3";
-    }
 
     /**
      * 删除三级选项

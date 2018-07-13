@@ -195,16 +195,6 @@ public class ProductController {
         return modelAndView;
     }
 
-    @GetMapping("/goshangjia")
-    public String goshangjia(){
-        return "/backstage/category";
-    }
-
-    @GetMapping("/goxiajia")
-    public String goxiajia(){
-        return "/backstage/shang";
-    }
-
     @GetMapping("/goaddproject")
     public String goshgoaddprojectangjia(@RequestParam("context")String context,@RequestParam("oneId")Integer oneId,
                                          @RequestParam("twoId")Integer twoId,@RequestParam("threeId")Integer threeId,Model model){

@@ -129,13 +129,6 @@ public class OrderController {
     }
 
 
-    //订单后台需要
-    @GetMapping("/dingdanPage")
-    public String dingdanPage(){
-        return "backstage/orderAll";
-    }
-
-
     @GetMapping(value = "/xq")
     @ResponseBody
     public Object selectall(@RequestParam(required = false) String numbers ,@RequestParam(required = false) int id ,@RequestParam(required = false) String create) {
