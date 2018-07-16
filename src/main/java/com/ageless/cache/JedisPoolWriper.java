@@ -10,6 +10,7 @@ import redis.clients.jedis.JedisPoolConfig;
  *
  */
 public class JedisPoolWriper {
+	//Redis连接池对象
 	private JedisPool jedisPool;
 
 	public JedisPoolWriper(final JedisPoolConfig poolConfig, final String host,
@@ -21,10 +22,18 @@ public class JedisPoolWriper {
 		}
 	}
 
+	/**
+	 * 获取Redis连接池对象
+	 * @return
+	 */
 	public JedisPool getJedisPool() {
 		return jedisPool;
 	}
 
+	/**
+	 * 注入Redis连接池对象
+	 * @param jedisPool
+	 */
 	public void setJedisPool(JedisPool jedisPool) {
 		this.jedisPool = jedisPool;
 	}
