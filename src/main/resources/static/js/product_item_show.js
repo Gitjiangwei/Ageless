@@ -46,7 +46,7 @@ function add(canshu) {
     var id = $("#right").attr("name");
     var shuliang = $("#shuliang").val();
     if (canshu == 'ljgm') {
-        window.location.href="/commodity/udai_shopcart_pay?id="+id+",skuid="+skuId+",shuliang=" + shuliang;
+        window.location.href="/commodity/udai_shopcart_pay?id="+id+"&skuid="+skuId+"&shuliang=" + shuliang;
     }else if (canshu == 'gwc') {
         $.ajax({
             type: "post",

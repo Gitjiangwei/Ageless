@@ -49,10 +49,10 @@
 				</div>
 				<div class='pageStyle'>
 					<ul class="page_fen">
-						<li style="width:60px" v-if="orderList.pageNum!=1"><a href="javascript:;" v-on:click="pages"  pages="1">首页</a></li>
-						<li style="width:60px" v-if="orderList.pageNum!=1"><a href="javascript:;" v-on:click="pages"  pages="orderList.prePage">上一页</a></li>
-						<li style="width:60px" v-if="orderList.pageNum!=orderList.lastNum"><a href="javascript:;" v-on:click="pages"  pages="orderList.nextPage">下一页</a></li>
-						<li style="width:60px" v-if="orderList.pageNum!=orderList.lastNum"><a href="javascript:;" v-on:click="pages"   pages="orderList.lastPage">末页</a></li>
+						<li style="width:60px" v-if="orderList.pageNum!=1"><a href="javascript:;" v-on:click="pages(1)" >首页</a></li>
+						<li style="width:60px" v-if="orderList.pageNum!=1"><a href="javascript:;" v-on:click="pages(orderList.prePage)" >上一页</a></li>
+						<li style="width:60px" v-if="orderList.pageNum!=orderList.lastPage"><a href="javascript:;" v-on:click="pages(orderList.nextPage)" >下一页</a></li>
+						<li style="width:60px" v-if="orderList.pageNum!=orderList.lastPage"><a href="javascript:;" v-on:click="pages(orderList.lastPage)"  >末页</a></li>
 					</ul>
 				</div>
 			</div>

@@ -123,6 +123,7 @@
 						</div>
 						<script src="/js/login.js"></script>
 						<script>
+                            /*导航栏登陆显示开始*/
                             $(function () {
                                 $.ajax({
                                     url:"/ageless/getUserInfo",
@@ -133,7 +134,7 @@
                                         if(data.membership!=null){
                                             $("#userName").html(data.membership);
                                             $("#membership").val(data.membership);
-                                            $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注销</a>");
+                                            $("#logs").prepend("<a href=\"/ageless/login.html\" onclick='cleaInfo()'>注销</a>");
                                             $("#logs").prepend("<a href=\"/ageless/udai_setting.html\"><span class=\"cr\">"+data.membership+"</span></a>");
                                         }else{
                                             $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注册</a>");
@@ -142,6 +143,21 @@
                                     }
                                 });
                             });
+
+                            function cleaInfo(){
+                                $.ajax({
+                                    url:"/ageless/cleaInfo",
+                                    type:"post",
+                                    dataType:"json",
+                                    success:function (data) {
+                                        alert("清空了");
+                                    },
+                                    error:function () {
+
+                                    }
+                                });
+                            }
+                            /*导航栏登陆时间结束*/
 							$(document).ready(function(){
 								$('.form-controlform-control').on('blur focus',function() {
 									$(this).addClass('focus');

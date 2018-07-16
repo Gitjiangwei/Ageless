@@ -72,14 +72,12 @@
                                             if(data[i].state==1){
                                                 tr.append("<td>普通用户</td>");
                                                 tr.append("<td>" + data[i].haoqi + "</td>");
-                                                tr.append("<td><span onclick=dongjie(\""+data[i].membership+"\");>冻结</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=shenji(\""+data[i].membership+"\");>升级为管理员</a></span></td>");
+                                                tr.append("<td><span onclick=jiedong(\""+data[i].membership+"\");>解冻</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=shengji(\""+data[i].membership+"\");>升级为管理员</a></span></td>");
 											}else{
                                                 tr.append("<td>管理员</td>");
                                                 tr.append("<td>" + data[i].haoqi + "</td>");
-                                                tr.append("<td><span onclick=dongjie(\""+data[i].membership+"\");>冻结</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=jiangji(\""+data[i].membership+"\");>更改为普通用户</a></span></td>");
+                                                tr.append("<td><span onclick=jiedong(\""+data[i].membership+"\");>解冻</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=降级(\""+data[i].membership+"\");>更改为普通用户</a></span></td>");
                                             }
-                                            tr.append("<td>" + data[i].haoqi + "</td>");
-                                            tr.append("<td><span onclick=jiedong(\""+data[i].membership+"\");>解冻</span><span onclick=xiangqing(\""+data[i].membership+"\");>详情信息</a></span><span onclick=shengji(\""+data[i].membership+"\");>升级为管理员</a></span></td>");
                                         }else{
                                             tr.append("<td>未冻结</td>");
                                             tr.append("<td>" + getMyDate(data[i].regtime) + "</td>");

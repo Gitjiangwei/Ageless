@@ -32,10 +32,15 @@ public class JedisUtil {
 		return jedisPool;
 	}
 
+	/**
+	 * 设置redis连接池
+	 * @param jedisPoolWriper
+	 */
 	public void setJedisPool(JedisPoolWriper jedisPoolWriper) {
 		this.jedisPool = jedisPoolWriper.getJedisPool();
 	}
 
+	
 	public JedisPool getPool() {
 		return jedisPool;
 	}

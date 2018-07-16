@@ -356,4 +356,10 @@ public class ProductController {
         modelAndView.setViewName("item_ping");
         return modelAndView;
     }
+
+    @RequestMapping("/udai_shopcart_pay")
+    public String cartpay(){
+        return "udai_shopcart_pay";
+    }
+
 }

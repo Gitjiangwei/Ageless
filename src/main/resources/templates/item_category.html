@@ -67,26 +67,11 @@
 		</div>
 	</div>
 	<!-- 内页导航栏 -->
-	<div class="top-nav bg3">
-		<div class="nav-box inner">
-			<div class="all-cat">
-				<div class="title"><i class="iconfont icon-menu"></i> 全部分类</div>
-			</div>
-			<ul class="nva-list">
-				<a href="index.html"><li>首页</li></a>
-				<a href="temp_article/udai_article10.html"><li>企业简介</li></a>
-				<a href="temp_article/udai_article5.html"><li>新手上路</li></a>
-				<a href="class_room.html"><li>U袋学堂</li></a>
-				<a href="enterprise_id.html"><li>企业账号</li></a>
-				<a href="udai_contract.html"><li>诚信合约</li></a>
-				<a href="item_remove.html"><li>实时下架</li></a>
-			</ul>
-		</div>
-	</div>
+
 	<div class="content inner">
 		<section class="filter-section clearfix">
 			<ol class="breadcrumb">
-				<li><a href="index.html">首页</a></li>
+				<li><a href="/ageless/index.html">首页</a></li>
 				<li>商品筛选</li>
 			</ol>
 			<div class="filter-box">
@@ -184,48 +169,45 @@
 			</div>
 		</section>
 	</div>
-	<!-- 右侧菜单 -->
-	<div class="right-nav">
-		<ul class="r-with-gotop">
-			<li class="r-toolbar-item">
-				<a href="udai_welcome.html" class="r-item-hd">
-					<i class="iconfont icon-user" data-badge="0"></i>
-					<div class="r-tip__box"><span class="r-tip-text">用户中心</span></div>
-				</a>
-			</li>
-			<li class="r-toolbar-item">
-				<a href="udai_shopcart.html" class="r-item-hd">
-					<i class="iconfont icon-cart"></i>
-					<div class="r-tip__box"><span class="r-tip-text">购物车</span></div>
-				</a>
-			</li>
-			<li class="r-toolbar-item">
-				<a href="udai_collection.html" class="r-item-hd">
-					<i class="iconfont icon-aixin"></i>
-					<div class="r-tip__box"><span class="r-tip-text">我的收藏</span></div>
-				</a>
-			</li>
-			<li class="r-toolbar-item">
-				<a href="" class="r-item-hd">
-					<i class="iconfont icon-liaotian"></i>
-					<div class="r-tip__box"><span class="r-tip-text">联系客服</span></div>
-				</a>
-			</li>
-			<li class="r-toolbar-item">
-				<a href="issues.html" class="r-item-hd">
-					<i class="iconfont icon-liuyan"></i>
-					<div class="r-tip__box"><span class="r-tip-text">留言反馈</span></div>
-				</a>
-			</li>
-			<li class="r-toolbar-item to-top">
-				<i class="iconfont icon-top"></i>
-				<div class="r-tip__box"><span class="r-tip-text">返回顶部</span></div>
-			</li>
-		</ul>
-		<script>
-			$(document).ready(function(){ $('.to-top').toTop({position:false}) });
-		</script>
-	</div>
+<!-- 右侧菜单 -->
+<div class="right-nav">
+	<ul class="r-with-gotop">
+		<li class="r-toolbar-item">
+			<a href="udai_welcome.html" class="r-item-hd">
+				<i class="iconfont icon-user"></i>
+				<div class="r-tip__box"><span class="r-tip-text">用户中心</span></div>
+			</a>
+		</li>
+		<li class="r-toolbar-item">
+			<a href="udai_shopcart.html" class="r-item-hd">
+				<i class="iconfont icon-cart" ></i>
+				<div class="r-tip__box"><span class="r-tip-text">购物车</span></div>
+			</a>
+		</li>
+		<li class="r-toolbar-item">
+			<a href="udai_collection.html" class="r-item-hd">
+				<i class="iconfont icon-aixin"></i>
+				<div class="r-tip__box"><span class="r-tip-text">我的收藏</span></div>
+			</a>
+		</li>
+		<li class="r-toolbar-item">
+			<a href="" class="r-item-hd">
+				<i class="iconfont icon-liaotian"></i>
+				<div class="r-tip__box"><span class="r-tip-text">联系客服</span></div>
+			</a>
+		</li>
+		<li class="r-toolbar-item">
+			<a href="issues.html" class="r-item-hd">
+				<i class="iconfont icon-liuyan"></i>
+				<div class="r-tip__box"><span class="r-tip-text">留言反馈</span></div>
+			</a>
+		</li>
+		<li class="r-toolbar-item to-top">
+			<i class="iconfont icon-top"></i>
+			<div class="r-tip__box"><span class="r-tip-text">返回顶部</span></div>
+		</li>
+	</ul>
+</div>
 	<!-- 底部信息 -->
 	<div class="footer">
 		<div class="footer-tags">
@@ -283,6 +265,7 @@
 	</div>
 </body>
 <script>
+    /*导航栏登陆显示开始*/
     $(function () {
         $.ajax({
             url:"/ageless/getUserInfo",
@@ -293,7 +276,7 @@
                 if(data.membership!=null){
                     $("#userName").html(data.membership);
                     $("#membership").val(data.membership);
-                    $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注销</a>");
+                    $("#logs").prepend("<a href=\"/ageless/login.html\" onclick='cleaInfo()'>注销</a>");
                     $("#logs").prepend("<a href=\"/ageless/udai_setting.html\"><span class=\"cr\">"+data.membership+"</span></a>");
                 }else{
                     $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注册</a>");
@@ -302,5 +285,20 @@
             }
         });
     });
+
+    function cleaInfo(){
+        $.ajax({
+            url:"/ageless/cleaInfo",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                alert("清空了");
+            },
+            error:function () {
+
+            }
+        });
+    }
+    /*导航栏登陆时间结束*/
 </script>
 </html>

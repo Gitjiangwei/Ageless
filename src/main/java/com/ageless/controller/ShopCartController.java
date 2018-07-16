@@ -2,6 +2,7 @@ package com.ageless.controller;
 
 import com.ageless.pojo.SkuOption;
 import com.ageless.pojo.SkuProperty;
+import com.ageless.pojo.User;
 import com.ageless.service.ProductService;
 import com.ageless.pojo.ShoppingCart;
 import com.ageless.service.ShopCartService;
@@ -18,6 +19,7 @@ import lombok.Builder;
 import org.apache.commons.collections.bag.SynchronizedSortedBag;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +27,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value="/shop")
-public class ShopCartController {
+public class  ShopCartController {
 
     List<ShoppingCart> productList=new ArrayList<ShoppingCart>();
     int totalAllMoney=0;
@@ -34,12 +36,18 @@ public class ShopCartController {
     @Resource
     private ProductService productService;
 
+
+
     @GetMapping("/")
     public String udai() {
         return "item_show";
     }
     @GetMapping("/shopcart.html")
-    public String shopcart() {
+    public String shopcart(HttpSession session) {
+        User u = (User) session.getAttribute("user");
+        if(u==null){
+            return "login";
+        }
         return "udai_shopcart";
     }
 
@@ -101,21 +109,31 @@ public class ShopCartController {
 
 
     //购物车查询
-    @GetMapping("/selshopAll")
+    @GetMapping("/selectshopcart")
     @ResponseBody
-    public Object  selShopsAll(){
-        List<ShoppingCart>  productList =shopCartService.selshopAll();   //查询出来的集合
-        System.out.println("-------------------------------------------" + productList.size());
-        for (int i = 0; i < productList.size(); i++) {
-            String  orderamount = productList.get(i).getSKUcon();
-            String s = skuString(orderamount);                              //得到的是一个String型的数据
-            System.out.println("---------------------"+s+"--------------------------------");
-            productList.get(i).setOptiinName(s);
-            /*productList.add(shoppingCart);*/
+    public Object  selShopsAll(HttpSession session){
+        System.out.println("***********************************************************");
+        User u = (User) session.getAttribute("user");
+        if(u==null){
+            return "redi";
+        }else{
+            int num = u.getId().intValue();
+            List<ShoppingCart>  productList =shopCartService.selectCart(num);//查询出来的集合
+            System.out.println("-------------------------------------------" + productList.size());
+            for (int i = 0; i < productList.size(); i++) {
+                String  orderamount = productList.get(i).getSKUcon();
+                String s = skuString(orderamount);                              //得到的是一个String型的数据
+                System.out.println("---------------------"+s+"--------------------------------");
+                productList.get(i).setOptiinName(s);
+                /*productList.add(shoppingCart);*/
+            }
+            Object json = JSON.toJSON(productList);
+            return json;
         }
-        Object json = JSON.toJSON(productList);
-        return json;
-    }
+        }
+
+
+
 
 
 /*    //带值进来的方法
@@ -197,5 +215,6 @@ public class ShopCartController {
         String skus = sku.toString().substring(0, sku.length()-1);//截取最后一个
         return skus;
     }
+
 
 }

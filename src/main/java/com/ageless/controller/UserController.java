@@ -53,7 +53,9 @@ public class UserController {
     //private  HttpSession session;
     MD5 md5 = new MD5();
 
+    //保存短信验证码
     private String rum;
+    //保存电话号码
     private String member;
     private Date data1;
     private Date data2;
@@ -544,6 +546,17 @@ public class UserController {
         return json;
     }
     /**
+     * 清空session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/cleaInfo")
+    public Object cleaInfo(HttpSession session){
+        System.out.println("aaaaaaaaaaaaaaaaaaa");
+        session.invalidate();
+        return "\"back\":\"清空了\"";
+    }
+    /**
      * 生成QQ授权
      *
      * @param request
@@ -623,7 +636,7 @@ public class UserController {
         if(u==null){
             return "login";
         }else{
-            return "/shop/shopcart.html";
+            return "/shop/selectshopcart";
         }
     }
 

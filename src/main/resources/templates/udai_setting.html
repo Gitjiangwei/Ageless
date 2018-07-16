@@ -315,7 +315,7 @@
                 if(data.membership!=null){
                     $("#userName").html(data.membership);
                     $("#membership").val(data.membership);
-                    $("#logs").prepend("<a href=\"login.html?p=register\">注销</a>");
+                    $("#logs").prepend("<a href=\"login.html\" onclick='cleaInfo()'>注销</a>");
                     $("#logs").prepend("<a href=\"udai_setting.html\"><span class=\"cr\">"+data.membership+"</span></a>");
 				}else{
                     $("#logs").prepend("<a href=\"login.html?p=register\">注册</a>");
@@ -376,7 +376,20 @@
             /*console.log(year+month+day)*/
         })
     })
+	/*清空session*/
+    function cleaInfo(){
+        $.ajax({
+            url:"/ageless/cleaInfo",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                alert("清空了");
+            },
+            error:function () {
 
+            }
+        });
+    }
     /**
 	 * 修改用户信息
      */
