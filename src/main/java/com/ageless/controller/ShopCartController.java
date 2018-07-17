@@ -128,6 +128,7 @@ public class  ShopCartController {
                 /*productList.add(shoppingCart);*/
             }
             Object json = JSON.toJSON(productList);
+
             return json;
         }
         }

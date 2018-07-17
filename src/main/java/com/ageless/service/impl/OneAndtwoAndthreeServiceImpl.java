@@ -19,7 +19,7 @@ public class OneAndtwoAndthreeServiceImpl implements OneAndtwoAndthreeService {
     RedisUtil redisUtil;
     @Override
     public List<oneAndtwoAndthree> lists() {
-        redisUtil.setString("shouye",JSON.toJSONString(oneAndtwoAndthreeMapper.lists()),5000L);
+        redisUtil.setString("shouye",JSON.toJSONString(oneAndtwoAndthreeMapper.lists()));
         return oneAndtwoAndthreeMapper.lists();
     }
 
