@@ -4,6 +4,8 @@ import com.ageless.mapper.NoticeMapper;
 import com.ageless.pojo.NewsType;
 import com.ageless.pojo.Notice;
 import com.ageless.service.NoticeService;
+import com.alibaba.fastjson.JSON;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,6 +17,8 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Resource
     private NoticeMapper noticeMapper;
+    @Autowired
+    RedisUtil redisUtil;
     @Override
     public List<Notice> selectAll( String title,Integer typeId) {
         return noticeMapper.selectAll(title,typeId);
@@ -37,6 +41,7 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     public List<Notice> qianselect(Integer id, Integer typeId, String typeName) {
+
         return noticeMapper.qianselect(id,typeId,typeName);
     }
 

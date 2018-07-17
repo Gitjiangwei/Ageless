@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping(value="/Order")
@@ -26,6 +24,7 @@ public class OrderController {
 
     @Resource
     private ProductService productService;
+    final Timer timer = new Timer();
 
     //进入商品页面
     @RequestMapping("/show")
@@ -217,15 +216,36 @@ public class OrderController {
         order.setNumber(bigInteger.toString());//订单编号随机
         order.setAddressid(1);//地址编号
         order.setAtch(1);//交易流水号
-        User user= (User) session.getAttribute("user");
-        Long useId=user.getId();
-        order.setUserId(useId.intValue());
+        /*User user= (User) session.getAttribute("user");
+        Long useId=user.getId();//报错
+        order.setUserId(useId.intValue());*/
+        order.setUserId(1);
         order.setOrderNumber(5);
         order.setOrderStatus(2);
         order.setProductid(productid);
         order.setOrder_price(order_price);
         int addorder=orderService.addOrder(order);
         Object json=JSON.toJSON(addorder);
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                try {
+                    Integer ret = orderService.delete(order.getNumber());
+                    if(ret > 0) {
+
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                // 中断线程
+                timer.cancel();
+            }
+            //1秒等于1000毫秒  这里是一天
+        },1*60*1000);
+
         return json;
     }
     @PostMapping("/addOrderdet")

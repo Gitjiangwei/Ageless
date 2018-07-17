@@ -36,6 +36,8 @@ public class  ShopCartController {
     @Resource
     private ProductService productService;
 
+
+
     @GetMapping("/")
     public String udai() {
         return "item_show";
@@ -126,6 +128,7 @@ public class  ShopCartController {
                 /*productList.add(shoppingCart);*/
             }
             Object json = JSON.toJSON(productList);
+
             return json;
         }
         }
@@ -213,49 +216,6 @@ public class  ShopCartController {
         String skus = sku.toString().substring(0, sku.length()-1);//截取最后一个
         return skus;
     }
-
-//        @RequestMapping("/selectshopcart")
-//        public String selectShopCart(HttpSession session) {
-//            User u = (User) session.getAttribute("user");
-//            if (u == null) {
-//                return "login";
-//            } else {
-//                int num = u.getId().intValue();
-//                System.out.println(num);
-//                List<ShoppingCart> list = shopCartService.selectCart(num);
-//                System.out.println(list);
-//                return "udai_shopcart";
-//            }
-//
-//        }
-
-
-
-/*
-    //购物车查询
-    @GetMapping("/selectshopcart")
-    @ResponseBody
-    public Object  selectShopCart(HttpSession session){
-        User u = (User) session.getAttribute("user");
-        if(u==null){
-            return "login";
-        }else{
-            int num = u.getId().intValue();
-            System.out.println(num);
-            List<ShoppingCart>  productList =shopCartService.selectCart(num);   //查询出来的集合
-            System.out.println("-------------------------------------------" + productList.size());
-            for (int i = 0; i < productList.size(); i++) {
-                String  orderamount = productList.get(i).getSKUcon();
-                System.out.println(orderamount+"/////////////////////////////////////////");
-                String s = skuString(orderamount);                              //得到的是一个String型的数据
-                System.out.println("---------------------"+s+"--------------------------------");
-                productList.get(i).setOptiinName(s);
-                *//*productList.add(shoppingCart);*//*
-            }
-            Object json = JSON.toJSON(productList);
-            return json;
-        }
-        }*/
 
 
 }

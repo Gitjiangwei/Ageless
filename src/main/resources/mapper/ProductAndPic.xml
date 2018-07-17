@@ -28,7 +28,7 @@
 	INNER JOIN productpic ON  product.id=productpic.productId
 		WHERE
 		product.status=1
-	GROUP BY product.id
+	/*GROUP BY product.id*/
     ORDER BY xiaoliang DESC
 </select>
 
@@ -59,7 +59,7 @@
 	INNER JOIN productpic ON  product.id=productpic.productId
 		WHERE
 		product.status=1
-	GROUP BY product.id
+	/*GROUP BY product.id*/
     ORDER BY product.update DESC
 </select>
 

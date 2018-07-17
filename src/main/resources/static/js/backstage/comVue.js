@@ -35,13 +35,12 @@ new Vue({
                 _thiss.orderList = json.data;
             });
         },
-        pages:function () {
+        pages:function (pageNo) {
             var _pages=this;
             var one=$("#one").val();
             var two=$("#two").val();
             var three=$("#three").val();
             var proName=$("#proName").val();
-            var pageNo=$(this).attr("pages");
             this.$http.get("/comment/selPro",{pageNo:pageNo,CatrOne:one,CatrTwo:two,CatrThree:three,proName:proName},{emulateJSON:false}).then(function (json) {
                 _pages.orderList = json.data;
             });

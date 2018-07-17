@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -360,6 +361,14 @@ public class ProductController {
     @RequestMapping("/udai_shopcart_pay")
     public String cartpay(){
         return "udai_shopcart_pay";
+    }
+
+    @RequestMapping("/productbyId")
+    public  void  productbyId(HttpSession session,int productId){
+        session.setAttribute("proId",productId);
+
+
+
     }
 
 }

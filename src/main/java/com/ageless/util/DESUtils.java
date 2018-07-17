@@ -94,4 +94,5 @@ public class DESUtils {
 		System.out.println(getEncryptString("123"));
 	}
 
+
 }
