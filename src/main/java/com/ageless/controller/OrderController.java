@@ -221,10 +221,10 @@ public class OrderController {
         order.setNumber(bigInteger.toString());//订单编号随机
         order.setAddressid(1);//地址编号
         order.setAtch(1);//交易流水号
-        /*User user= (User) session.getAttribute("user");
+        User user= (User) session.getAttribute("user");
         Long useId=user.getId();//报错
-        order.setUserId(useId.intValue());*/
-        order.setUserId(1);
+        order.setUserId(useId.intValue());
+//        order.setUserId(1);
         order.setOrderNumber(5);
         order.setOrderStatus(2);
         order.setProductid(productid);
