@@ -186,11 +186,13 @@ public class ProductController {
             emm ++;
         }
         Sku sku = service.selectSkuByCon(skucon2.toString(),id);
+        System.out.println("sku++++"+sku.getSKUId());
         modelAndView.addObject("options",options);
         modelAndView.addObject("properties",properties);
         modelAndView.addObject("product",product);
         modelAndView.addObject("thefirst",thefirst);
         modelAndView.addObject("sku",sku);
+        modelAndView.addObject("skuId",sku.getSKUId());
         modelAndView.addObject("skuOptionIdss",skuOptionIdss);
         modelAndView.setViewName("item_right");
         return modelAndView;

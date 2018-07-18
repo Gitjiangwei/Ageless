@@ -116,23 +116,12 @@
 													<div class="img"><img v-bind:src="(item.picPath)" alt="" class="cover"></div>
 													<div class="name ep2">{{item.order3}}</div>
 													<div class="format">{{item.skuCons}}</span></div>
-													<div class="favour">使用优惠券：优惠¥2.00</div>
 												</div>
 											</label>
 										</td>
 										<td>{{item.price  |  money('元')}}</td>
 										<td>{{item.orderNumber}}</td>
 										<td>{{item.price*item.orderNumber  |  money('元')}}<br><span class="fz12 c6 text-nowrap">(含运费: ¥0.00)</span></td>
-										<!--<td class="state">
-											<a class="but c6">{{item.status}}</a>
-											<a v-bind:href="('./udai_order_detail.html?id='+(item.id))" class="but c9">订单详情</a>
-										</td>
-										<td class="order">
-											<div class="del"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>
-											<a href="udai_shopcart_pay.html" class="but but-primary">立即付款</a>
-											<a href="" class="but but-link">评价</a>
-											<a href="javascript:void (0)" class="but c3" @click="delProduct(item)" >取消订单</a>
-										</td>-->
 										<td class="state" v-if="item.orderStatus=='1'" >
 											<a class="but c6">{{item.status}}</a>
 											<a v-bind:href="('./udai_order_detail.html?id='+(item.id))" class="but c9">订单详情</a>
@@ -140,7 +129,7 @@
 										<td class="order" v-if="item.orderStatus=='1'" >
 											<div class="del" @click="delFlag=true"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>
 
-											<a href=" " class="but but-primary">立即付款</a>
+											<a href="JavaScript:;" v-on:click="fukuan"  class="but but-primary">立即付款</a>
 
 											<!--<a href="javascript:void (0)" class="but c3" @click="delProduct(item)" >取消1订单</a>
 											<a href="javascript:void (0)" class="but c3"  >取消2订单</a>-->

@@ -25,6 +25,7 @@ public class CategoryOneServiceImpl implements CategoryOneService {
     @Autowired
     private JedisUtil.Strings jedisStrings;
 
+
     private static String ONELIST="onelist";
     @Override
     public List<CategoryOne> Onelist(String categoryName) {
