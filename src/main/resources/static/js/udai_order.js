@@ -65,6 +65,9 @@ new Vue({
         delefhsh:function(){
              alert("此订单还未完成，不能删除！");
         },
+        fukuan:function () {
+            
+        }
 
     }
 

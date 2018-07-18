@@ -45,7 +45,7 @@ public class ShopCartServiceImpl implements ShopCartService{
 
     @Override
     public List<ShoppingCart> selectCart(int id) {
-        redisUtil.setString("shopcart",JSON.toJSONString(shoppingCartMapper.selectCart(id)),5000L);
+        redisUtil.setString("shopcart",JSON.toJSONString(shoppingCartMapper.selectCart(id)),50000L);
         return shoppingCartMapper.selectCart(id);
     }
 

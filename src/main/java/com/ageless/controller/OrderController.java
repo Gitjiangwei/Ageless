@@ -1,12 +1,17 @@
 package com.ageless.controller;
 
+import com.ageless.cache.JedisUtil;
 import com.ageless.pojo.Order;
 import com.ageless.pojo.SkuOption;
 import com.ageless.pojo.SkuProperty;
 import com.ageless.pojo.User;
 import com.ageless.service.OrderService;
 import com.ageless.service.ProductService;
+import com.ageless.service.impl.OrderServiceImpl;
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +24,12 @@ import java.util.*;
 @Controller
 @RequestMapping(value="/Order")
 public class OrderController {
-    @Resource
+    @Autowired
     private OrderService orderService;
 
-    @Resource
+    @Autowired
     private ProductService productService;
-    final Timer timer = new Timer();
+
 
     //进入商品页面
     @RequestMapping("/show")
@@ -226,26 +231,6 @@ public class OrderController {
         order.setOrder_price(order_price);
         int addorder=orderService.addOrder(order);
         Object json=JSON.toJSON(addorder);
-
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-
-                try {
-                    Integer ret = orderService.delete(order.getNumber());
-                    if(ret > 0) {
-
-                    }
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                // 中断线程
-                timer.cancel();
-            }
-            //1秒等于1000毫秒  这里是一天
-        },1*60*1000);
-
         return json;
     }
     @PostMapping("/addOrderdet")
@@ -276,4 +261,16 @@ public class OrderController {
            return"/Order/show";
        }
 
+
+    /**
+     * 支付未付款订单时判断是否过期
+     * @return
+     */
+    @GetMapping(value = "/judegOrder")
+    public Object judgeOrder(){
+       Date date=new Date();
+       String createDate=OrderServiceImpl.jedis.get("createDate");
+       System.out.println(createDate);
+           return 1;
+    }
 }

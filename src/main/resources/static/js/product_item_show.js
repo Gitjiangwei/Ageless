@@ -52,7 +52,7 @@ function add(canshu) {
             type: "post",
             url: "/shop/udai_shopcart.html",
             data: {skuId:skuId,id:id,shuliang:shuliang},
-            /* dataType:"html",*/
+            dataType:"JSON",
             success: function (data) {
                 if (data == 1){
                     alert("加入成功！");

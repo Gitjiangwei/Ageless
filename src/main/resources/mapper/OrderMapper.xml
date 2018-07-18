@@ -89,7 +89,7 @@
 
     <insert id="addOrder" parameterType="Order" >
 
-	INSERT INTO ageless.order (number,addressid,createDate,atch,userId,orderNumber,OrderStatus,
+	INSERT INTO ageless.order (`number`,addressid,createDate,atch,userId,orderNumber,OrderStatus,
 	order_price,productid)
 	VALUES(#{number},#{addressid},NOW(),#{atch},#{userId},#{orderNumber},
 	#{OrderStatus},#{order_price},#{productid})
