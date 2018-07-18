@@ -73,7 +73,7 @@
     </update>
 
     <select id="selectId" resultType="java.lang.Integer">
-        SELECT id FROM USER ORDER BY id DESC LIMIT 0,1
+        SELECT id FROM `user` ORDER BY id DESC LIMIT 0,1
     </select>
     <select id="selectCount" parameterType="com.ageless.pojo.User" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM ageless.user where 1=1
