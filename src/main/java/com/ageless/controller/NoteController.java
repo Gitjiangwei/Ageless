@@ -52,4 +52,8 @@ public class NoteController {
     public String udai_article12(){
         return "/temp_article/udai_article12";
     }
+    @RequestMapping("udai_contract.html")
+    public String udai_contract(){
+        return "udai_contract";
+    }
 }
