@@ -10,7 +10,7 @@
     and product.id=#{id}
 
 </select>
-    <resultMap id="select" type="Product" autoMapping="true">
+    <resultMap id="select" type="com.ageless.pojo.Product" autoMapping="true">
         <id property="id" column="id"></id>
         <result property="productId" column="productId"></result>
         <result property="productName" column="productName"></result>
@@ -29,13 +29,13 @@
         <result property="category03" column="category03"></result>
         <result property="sortId" column="sortId"></result>
         <result property="sortConId" column="sortConId"></result>
-<association property="skuOption" javaType="SkuOption">
+<association property="skuOption" javaType="com.ageless.pojo.SkuOption">
     <id property="id" column="id"></id>
     <result property="optionName" column="optionName"></result>
     <result property="productId" column="productId"></result>
 
 </association>
-        <association property="skuProperty" javaType="SkuProperty">
+        <association property="skuProperty" javaType="com.ageless.pojo.SkuProperty">
             <id property="id" column="id"></id>
             <result property="propertyName" column="propertyName"></result>
             <result property="categoryId" column="categoryId"></result>
@@ -67,7 +67,7 @@
             id = #{id}
     </select>
 
-    <select id="selectAllSkuById" parameterType="Integer" resultType="Sku">
+    <select id="selectAllSkuById" parameterType="Integer" resultType="com.ageless.pojo.Sku">
         SELECT SKUId,
             productId,
             SKUcon,
@@ -80,7 +80,7 @@
             ORDER BY SKUId
     </select>
     
-    <select id="selectAllSkuoptionById" resultType="SkuOption">
+    <select id="selectAllSkuoptionById" resultType="com.ageless.pojo.SkuOption">
         SELECT 	id, 
             optionName, 
             productId
@@ -93,7 +93,7 @@
             </foreach>
     </select>
     
-    <select id="selectAllSkupropertyByIds" resultType="SkuProperty" >
+    <select id="selectAllSkupropertyByIds" resultType="com.ageless.pojo.SkuProperty" >
         SELECT 	id,
             propertyName,
             categoryId
@@ -105,7 +105,7 @@
             </foreach>
     </select>
 
-    <select id="selectSkuByCon" resultType="Sku">
+    <select id="selectSkuByCon" resultType="com.ageless.pojo.Sku">
         SELECT 	SKUId,
             productId,
             SKUcon,
@@ -119,7 +119,7 @@
             productId = #{id}
     </select>
 
-    <select id="selectAllPicById"  resultType="ProductPic">
+    <select id="selectAllPicById"  resultType="com.ageless.pojo.ProductPic">
         SELECT 	tuid,
             picPath,
             productId
@@ -130,7 +130,7 @@
             productId = #{id}
     </select>
     
-    <select id="selectPropertyAllById"  resultType="Property">
+    <select id="selectPropertyAllById"  resultType="com.ageless.pojo.Property">
         SELECT 	id,
             productId,
             title,
@@ -142,7 +142,7 @@
             productId = #{id}
     </select>
 
-    <select id="selectEvaluatesBydengji" resultType="Evaluate">
+    <select id="selectEvaluatesBydengji" resultType="com.ageless.pojo.Evaluate">
         SELECT 	pingId,
         dengji,
         evaluate.file,
@@ -166,7 +166,7 @@
             </if>
     </select>
 
-    <insert id="add" parameterType="Product">
+    <insert id="add" parameterType="com.ageless.pojo.Product">
         <selectKey keyProperty="id" resultType="int" order="AFTER">
             select last_insert_id();
         </selectKey>
@@ -190,7 +190,7 @@
         )
     </insert>
 
-    <update id="modifyProduct" parameterType="Product">
+    <update id="modifyProduct" parameterType="com.ageless.pojo.Product">
         update product
         <set>
             <if test="productName!=null and productName!=''">
@@ -220,7 +220,7 @@
         where id = #{id}
     </update>
 
-    <select id="selectNullSkuByOptId" resultType="Sku">
+    <select id="selectNullSkuByOptId" resultType="com.ageless.pojo.Sku">
         SELECT 	SKUId,
             productId,
             SKUcon,

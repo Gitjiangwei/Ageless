@@ -135,14 +135,14 @@
 	</select>
 
 
-	<resultMap id="productandpic" type="ProductAndPic">
+	<resultMap id="productandpic" type="com.ageless.pojo.ProductAndPic">
 		<id property="id" column="id"></id>
 		<result property="price" column="price"></result>
 		<result property="productName" column="productName"></result>
 		<result property="xiaoliang" column="xiaoliang"></result>
 		<result property="comment" column="comment"></result>
 		<result property="price" column="price"></result>
-		<association property="productPic" javaType="ProductPic">
+		<association property="productPic" javaType="com.ageless.pojo.ProductPic">
 			<id property="tuid" column="tid"></id>
 			<result property="picPath" column="picPath"></result>
 			<result property="productId" column="proid"></result>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.OrderMapper">
 
-        <select id="all" resultType="Order" >
+        <select id="all" resultType="com.ageless.pojo.Order" >
             SELECT  DISTINCT order.id,createDate,`number`,productpic.picPath,product.descript,sku.price,skuCon,OrderStatus,
             order.orderNumber,order.order_price,order_status.status,productName AS order3
             FROM ageless.order
@@ -21,13 +21,13 @@
             GROUP BY order.id
         </select>
 
-        <delete id="delOrder" parameterType="Order"  >
+        <delete id="delOrder" parameterType="com.ageless.pojo.Order"  >
             DELETE FROM ageless.order WHERE id = #{id}
         </delete>
          
     
     
-        <select id="order_details" resultType="Order">
+        <select id="order_details" resultType="com.ageless.pojo.Order">
             SELECT  order.id,createDate,`number`,OrderStatus,atch,CONCAT(consignee,",",tel,",",address.province,address.city,`area`,street,details) AS address,payment_Time,transaction_Time,order_price
             FROM ageless.order
             INNER JOIN ageless.address ON ageless.address.id=order.addressid
@@ -35,7 +35,7 @@
             WHERE order.id=#{id} GROUP BY number
         </select>
 
-       <select id="order_product" resultType="Order">
+       <select id="order_product" resultType="com.ageless.pojo.Order">
             SELECT  order_status.`status` ,productName AS order3,`count`,SKUcon,sku.price,picPath
             FROM ageless.order_details
             LEFT JOIN ageless.order ON ageless.order_details.oid=order.id
@@ -51,12 +51,12 @@
 
 
     <!-- 订单后台需要 -->
-    <select id="seleAll" resultType="Order">
+    <select id="seleAll" resultType="com.ageless.pojo.Order">
         SELECT `order`.`number`,`order`.`order_price`,`status` ,`name`
         FROM `order`
         INNER JOIN `user` ON `order`.`userId`=`user`.`id`
         INNER JOIN `order_status` ON `order`.`OrderStatus`=`order_status`.`id`
-        <trim prefix="where" prefixOverrides="and|or">
+        <trim prefix="where" prefixOverrides="and">
             <if test="number!=null and number!=''">
                 and `number` like CONCAT('%',#{number},'%')
             </if>
@@ -69,7 +69,7 @@
         </trim>
         ORDER BY `order`.`id` DESC
     </select>
-    <select id="selenid" resultType="Order">
+    <select id="selenid" resultType="com.ageless.pojo.Order">
         SELECT `order`.`number`,`order`.`atch`,`order`.`order_price`,`status` ,`name`,`address`.`province`,`address`.`city`,`address`.`area`,`address`.`street`,`address`.`details`,`order`.`createDate`
         FROM `order`
         INNER JOIN `user` ON `order`.`userId`=`user`.`id`
@@ -87,7 +87,7 @@
         </foreach>
     </delete>
 
-    <insert id="addOrder" parameterType="Order" >
+    <insert id="addOrder" parameterType="com.ageless.pojo.Order" >
 
 	INSERT INTO ageless.order (`number`,addressid,createDate,atch,userId,orderNumber,OrderStatus,
 	order_price,productid)
@@ -95,14 +95,14 @@
 	#{OrderStatus},#{order_price},#{productid})
 
 	</insert>
-    <insert id="addOrderdet"  parameterType="Order">
+    <insert id="addOrderdet"  parameterType="com.ageless.pojo.Order">
        INSERT INTO ageless.order_details
 		(shipid,oid,skuId,`count`)
 		VALUES(#{shipid},#{oid},#{skuId},#{count})
 
 	</insert>
 
-    <update id="updataOrder" parameterType="Order" >
+    <update id="updataOrder" parameterType="com.ageless.pojo.Order" >
 
         UPDATE ageless.order SET
         OrderStatus = #{OrderStatus}

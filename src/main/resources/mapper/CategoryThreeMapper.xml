@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.CategoryThreeMapper">
-    <select id="listThree" resultType="CategoryThree">
+    <select id="listThree" resultType="com.ageless.pojo.CategoryThree">
         select id,categoryName,parentId from categorythree
         <where>
             <if test="id!=null and id!=''">
@@ -22,7 +22,7 @@
         </foreach>
 
     </insert>
-    <update id="updateThree" parameterType="CategoryThree">
+    <update id="updateThree" parameterType="com.ageless.pojo.CategoryThree">
         update categorythree set categoryName=#{categoryName},parentId=#{parentId} where id=#{id}
     </update>
     <delete id="deleteThree" parameterType="int">

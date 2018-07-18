@@ -17,11 +17,11 @@
 			and s.id=#{pid}
 		</if>
 	</select>
-	<resultMap id="sela" type="SkuProperty">
+	<resultMap id="sela" type="com.ageless.pojo.SkuProperty">
 		<id column="sid" property="id"></id>
 		<result column="propertyName" property="propertyName"></result>
 		<result column="categoryName" property="categoryName"></result>
-		<collection property="list" ofType="SkuOption">
+		<collection property="list" ofType="com.ageless.pojo.SkuOption">
 			<id column="oid" property="id"></id>
 			<result column="optionName" property="optionName"></result>
 		</collection>

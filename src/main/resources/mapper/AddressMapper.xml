@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.AddressMapper">
 
-    <select id="getListAddress" resultType="Address">
+    <select id="getListAddress" resultType="com.ageless.pojo.Address">
         SELECT  `id`,`nameId`,`consignee`,`tel`,`province`,
         `city`,`area`,`street`,`details`,`state`,`zipcode`
         FROM `address`
@@ -68,7 +68,7 @@
         where id=#{id}
     </update>
 
-    <select id="selectAddress" resultType="Address" parameterType="java.lang.Long">
+    <select id="selectAddress" resultType="com.ageless.pojo.Address" parameterType="java.lang.Long">
         SELECT  `id`,`nameId`,`consignee`,`tel`,`province`,
         `city`,`area`,`street`,`details`,`state`,`zipcode`
         FROM `address`

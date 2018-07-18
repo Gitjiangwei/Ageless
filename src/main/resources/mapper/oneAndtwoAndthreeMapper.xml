@@ -9,14 +9,14 @@
         INNER JOIN categorytwo ON categorytwo.parentId=categoryone.id
         INNER JOIN categorythree ON categorythree.parentId=categorytwo.id
     </select>
-    <resultMap id="caidan" type="oneAndtwoAndthree">
+    <resultMap id="caidan" type="com.ageless.pojo.oneAndtwoAndthree">
         <id property="id" column="id"></id>
         <result property="categoryName" column="categoryName"></result>
-        <collection property="categoryTwo" ofType="twoAndthree">
+        <collection property="categoryTwo" ofType="com.ageless.pojo.twoAndthree">
             <id property="id" column="tid"></id>
             <result property="categoryName" column="tname"></result>
             <result property="parentId" column="parentId"></result>
-            <collection property="categoryThree" ofType="CategoryThree">
+            <collection property="categoryThree" ofType="com.ageless.pojo.CategoryThree">
                 <id property="id" column="thid"></id>
                 <result property="categoryName" column="thname"></result>
                 <result property="parentId" column="parentId"></result>

@@ -23,7 +23,7 @@
 </insert>
 
 	<!--购物车查询语句-->
-	<select id="selshopAll" resultType="ShoppingCart" >
+	<select id="selshopAll" resultType="com.ageless.pojo.ShoppingCart" >
 
 		/*SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
 
@@ -43,12 +43,12 @@
 
 
      </select>
-     <delete id="delshop" parameterType="ShoppingCart" >
+     <delete id="delshop" parameterType="com.ageless.pojo.ShoppingCart" >
             DELETE FROM shoppingcart WHERE id = #{id}
 	 </delete>
 
 	<!--查询购物车中要进行结算的商品-->
-	<select id="queryShopChecked" resultType="ShoppingCart" parameterType="Integer">
+	<select id="queryShopChecked" resultType="com.ageless.pojo.ShoppingCart" parameterType="Integer">
 
 
 	SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
@@ -69,11 +69,11 @@
      </select>
 
 
-	<update id="repairNumberById" parameterType="ShoppingCart" >
+	<update id="repairNumberById" parameterType="com.ageless.pojo.ShoppingCart" >
 		UPDATE shoppingcart SET orderamount=#{orderamount} WHERE id=#{id}
 	</update>
 
-	<select id="selectCart" parameterType="int" resultType="ShoppingCart">
+	<select id="selectCart" parameterType="int" resultType="com.ageless.pojo.ShoppingCart">
 			SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
 
 		,productpic.picPath,product.productName,sku.SKUcon,shoppingcart.skuid  FROM shoppingcart
