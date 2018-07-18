@@ -34,7 +34,7 @@
 	<div class="bgf5 clearfix">
 		<div class="top-user">
 			<div class="inner">
-				<a class="logo" href="index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
+				<a class="logo" href="/ageless/index.html"><img src="/images/icons/logo.jpg" alt="U袋网" class="cover"></a>
 				<div class="title">个人中心</div>
 			</div>
 		</div>
@@ -121,7 +121,7 @@
                                     type:"post",
                                     dataTyep:"text",
                                     success:function (data) {
-                                        alert(data.membership)
+
                                         if(data.membership!=null){
                                             $("#userName").html(data.membership);
                                             $("#membership").val(data.membership);
