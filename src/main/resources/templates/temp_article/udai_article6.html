@@ -21,16 +21,14 @@
 	<div class="tab-header">
 		<div class="inner">
 			<div class="pull-left">
-				<div class="pull-left">嗨，欢迎来到<span class="cr">U袋网</span></div>
+				<div class="pull-left">嗨，<span id="userName"></span>欢迎来到<span class="cr">U袋网</span></div>
 				<a href="../agent_level.html">网店代销</a>
 				<a href="udai_article4.html">帮助中心</a>
 			</div>
-			<div class="pull-right">
-				<a href="../login.html"><span class="cr">登录</span></a>
-				<a href="../login.html?p=register">注册</a>
-				<a href="../udai_welcome.html">我的U袋</a>
-				<a href="../udai_order.html">我的订单</a>
-				<a href="../udai_integral.html">积分平台</a>
+			<div class="pull-right" id="logs">
+				<a href="/ageless/udai_welcome.html">我的U袋</a>
+				<a href="/Order/show">我的订单</a>
+				<a href="/chafen">积分平台</a>
 			</div>
 		</div>
 	</div>
@@ -49,24 +47,18 @@
 				<div class="title">U袋欢迎页</div>
 				<dl class="user-center__nav">
 					<dt>帐户信息</dt>
-					<a href="../udai_setting.html"><dd>个人资料</dd></a>
-					<a href="../udai_treasurer.html"><dd>资金管理</dd></a>
-					<a href="../udai_integral.html"><dd>积分平台</dd></a>
-					<a href="../udai_address.html"><dd>收货地址</dd></a>
-					<a href="../udai_coupon.html"><dd>我的优惠券</dd></a>
-					<a href="../udai_paypwd_modify.html"><dd>修改支付密码</dd></a>
-					<a href="../udai_pwd_modify.html"><dd>修改登录密码</dd></a>
+					<a href="/ageless/udai_setting.html"><dd>个人资料</dd></a>
+					<a href="/chafen"><dd>积分平台</dd></a>
+					<a href="/ageless/udai_address.html"><dd>收货地址</dd></a>
+					<a href="/ageless/udai_paypwd_modify.html"><dd>修改支付密码</dd></a>
+					<a href="/ageless/udai_pwd_modify.html"><dd>修改登录密码</dd></a>
 				</dl>
 				<dl class="user-center__nav">
 					<dt>订单中心</dt>
-					<a href="../udai_order.html"><dd>我的订单</dd></a>
-					<a href="../udai_collection.html"><dd>我的收藏</dd></a>
-					<a href="../udai_refund.html"><dd>退款/退货</dd></a>
+					<a href="/Order/show"><dd>我的订单</dd></a>
 				</dl>
 				<dl class="user-center__nav">
 					<dt>服务中心</dt>
-					<a href="../udai_mail_query.html"><dd>物流查询</dd></a>
-					<a href=""><dd>数据自助下载</dd></a>
 					<a href="udai_article1.html"><dd>售后服务</dd></a>
 					<a href="udai_article2.html"><dd>配送服务</dd></a>
 					<a href="udai_article3.html"><dd>用户协议</dd></a>
@@ -77,7 +69,6 @@
 					<a href="udai_article5.html"><dd>如何成为代理商</dd></a>
 					<a href="udai_article6.html"><dd class="active">代销商上架教程</dd></a>
 					<a href="udai_article7.html"><dd>分销商常见问题</dd></a>
-					<a href="udai_article8.html"><dd>付款账户</dd></a>
 				</dl>
 				<dl class="user-center__nav">
 					<dt>U袋网</dt>
@@ -101,7 +92,7 @@
 	<div class="right-nav">
 		<ul class="r-with-gotop">
 			<li class="r-toolbar-item">
-				<a href="../udai_welcome.html" class="r-item-hd">
+				<a href="/ageless/udai_welcome.html" class="r-item-hd">
 					<i class="iconfont icon-user" data-badge="0"></i>
 					<div class="r-tip__box"><span class="r-tip-text">用户中心</span></div>
 				</a>
@@ -110,12 +101,6 @@
 				<a href="../udai_shopcart.html" class="r-item-hd">
 					<i class="iconfont icon-cart"></i>
 					<div class="r-tip__box"><span class="r-tip-text">购物车</span></div>
-				</a>
-			</li>
-			<li class="r-toolbar-item">
-				<a href="../udai_collection.html" class="r-item-hd">
-					<i class="iconfont icon-aixin"></i>
-					<div class="r-tip__box"><span class="r-tip-text">我的收藏</span></div>
 				</a>
 			</li>
 			<li class="r-toolbar-item">
@@ -137,6 +122,41 @@
 		</ul>
 		<script>
 			$(document).ready(function(){ $('.to-top').toTop({position:false}) });
+            /*导航栏显示开始*/
+            $(function () {
+                $.ajax({
+                    url:"/ageless/getUserInfo",
+                    type:"post",
+                    dataTyep:"text",
+                    success:function (data) {
+                        alert(data.membership)
+                        if(data.membership!=null){
+                            $("#userName").html(data.membership);
+                            $("#membership").val(data.membership);
+                            $("#logs").prepend("<a href=\"/ageless/login.html\" onclick='cleaInfo()'>注销</a>");
+                            $("#logs").prepend("<a href=\"/ageless/udai_setting.html\"><span class=\"cr\">"+data.membership+"</span></a>");
+                        }else{
+                            $("#logs").prepend("<a href=\"/ageless/login.html?p=register\">注册</a>");
+                            $("#logs").prepend("<a href=\"/ageless/login.html\"><span class=\"cr\">登录</span></a>");
+                        }
+                    }
+                });
+            });
+
+            function cleaInfo(){
+                $.ajax({
+                    url:"/ageless/cleaInfo",
+                    type:"post",
+                    dataType:"json",
+                    success:function (data) {
+                        alert("清空了");
+                    },
+                    error:function () {
+
+                    }
+                });
+            }
+            /*导航栏登陆显示结束*/
 		</script>
 	</div>
 	<!-- 底部信息 -->
@@ -176,7 +196,6 @@
 				<a href="udai_article5.html"><dd>如何成为代理商</dd></a>
 				<a href="udai_article6.html"><dd>代销商上架教程</dd></a>
 				<a href="udai_article7.html"><dd>分销商常见问题</dd></a>
-				<a href="udai_article8.html"><dd>付款账户</dd></a>
 			</dl>
 		</div>
 		<div class="copy-box clearfix">

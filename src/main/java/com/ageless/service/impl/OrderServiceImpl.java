@@ -1,16 +1,26 @@
 package com.ageless.service.impl;
 
+import com.ageless.cache.JedisUtil;
 import com.ageless.mapper.OrderMapper;
 import com.ageless.pojo.Order;
 import com.ageless.service.OrderService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
+import java.util.Date;
 import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService{
     @Autowired
     private OrderMapper orderMapper;
+
+    public static Jedis jedis;
+
+
+    private static String CREATEDATE="createDate";
     @Override
     public List<Order> all(String status,Integer id) {
         return orderMapper.all(status, id);
@@ -51,6 +61,8 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public int addOrder(Order order) {
+        String key=CREATEDATE;
+        jedis.set(key, String.valueOf(new Date()));
         return orderMapper.addOrder(order);
     }
 

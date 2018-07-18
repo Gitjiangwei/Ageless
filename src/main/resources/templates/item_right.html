@@ -9,14 +9,14 @@
     <div class="item-price bgf5">
         <div class="price-box clearfix">
             <div class="price-panel pull-left">
-                售价：<span class="price" id="skuId" name="${sku.SKUId}">￥${sku.price} <s class="fz16 c9">￥${product.price}</s></span>
+                售价：<span class="price" id="skuId" name="${skuId?c}">￥${sku.price} <s class="fz16 c9">￥${product.price}</s></span>
             </div>
         </div>
     </div>
     <ul class="item-ind-panel clearfix">
         <li class="item-ind-item">
             <span class="ind-label c9">累计销量</span>
-            <span class="ind-count cr">${product.xiaoliang}</span>
+            <span class="ind-count cr">${product.xiaoliang} </span>
         </li>
         <li class="item-ind-item">
             <a href=""><span class="ind-label c9">累计评论</span>
@@ -24,7 +24,7 @@
         </li>
         <li class="item-ind-item">
             <a href=""><span class="ind-label c9">赠送积分</span>
-                <span class="ind-count cg">${sku.price}</span></a>
+                <span class="ind-count cg">${sku.price*0.1}</span></a>
         </li>
     </ul>
     <div class="item-key">
