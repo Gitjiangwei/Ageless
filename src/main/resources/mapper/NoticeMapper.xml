@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.NoticeMapper">
-    <select id="selectAll" resultType="Notice">
+    <select id="selectAll" resultType="com.ageless.pojo.Notice">
         SELECT id,title,link,announcement_content,announcement_time,typeId,modificationDate,typeName FROM notice INNER JOIN newstype ON notice.typeId=newstype.n_id
         <if test="title!=null and title!=''">
             and title LIKE CONCAT('%',#{title},'%')
@@ -24,7 +24,7 @@
 		UPDATE notice SET title=#{title},typeId=#{typeId},link=#{link},announcement_content=#{announcementContent} WHERE id=#{id}
 	</update>
 
-    <select id="qianselect"   resultType="Notice">
+    <select id="qianselect"   resultType="com.ageless.pojo.Notice">
         select ne.typeName,n.id,n.title,n.announcement_content,n.announcement_time,n.typeId from notice n
         join newstype ne
         on n.typeId=ne.n_id
@@ -42,7 +42,7 @@
         </trim>
 </select>
 
-    <select id="incha"   resultType="Notice">
+    <select id="incha"   resultType="com.ageless.pojo.Notice">
         select ne.typeName,n.id,n.title,n.announcement_content,n.announcement_time,n.typeId from notice n
         join newstype ne
         on n.typeId=ne.n_id
@@ -51,16 +51,16 @@
     </select>
 
 
-    <select id="xiaLa" resultType="NewsType">
+    <select id="xiaLa" resultType="com.ageless.pojo.NewsType">
         SELECT n_id,typeName FROM newstype;
     </select>
 
-    <select id="selectId" resultType="Notice">
+    <select id="selectId" resultType="com.ageless.pojo.Notice">
         SELECT id,title,link,announcement_content,announcement_time,typeId,modificationDate,typeName FROM notice INNER JOIN newstype ON notice.typeId=newstype.n_id
         where id=#{id}
     </select>
 
-    <select id="selectNewsType" resultType="NewsType">
+    <select id="selectNewsType" resultType="com.ageless.pojo.NewsType">
         SELECT n_id,typeName FROM newstype ORDER BY n_id DESC
     </select>
     <delete id="deletNews">

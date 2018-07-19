@@ -17,13 +17,13 @@
 
 
     </select>
-    <resultMap id="all" type="Sort">
+    <resultMap id="all" type="com.ageless.pojo.Sort">
         <id column="sid" property="id"></id>
         <result property="name" column="sname"></result>
-        <association property="three" javaType="CategoryThree">
+        <association property="three" javaType="com.ageless.pojo.CategoryThree">
            <result property="categoryName" column="categoryName"></result>
         </association>
-        <collection property="sortcons" ofType="Sortcon">
+        <collection property="sortcons" ofType="com.ageless.pojo.Sortcon">
             <id property="sortconid" column="cid"></id>
             <result property="sortconname" column="cname"></result>
         </collection>
