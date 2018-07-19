@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ageless.mapper.UserMapper">
 
-    <select id="loginUser" resultType="User">
+    <select id="loginUser" resultType="com.ageless.pojo.User">
         SELECT  `id`,`membership`,`name`,`phone`,
         `sex`,`birthday`,`loginpwd`,`dongjie`,`regtime`,`truename`,
         `integral`,`state`,`paymentpwd`,`mailbox`,`haoqi`
