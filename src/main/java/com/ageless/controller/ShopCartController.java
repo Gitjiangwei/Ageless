@@ -53,10 +53,11 @@ public class  ShopCartController {
 
     @PostMapping("/udai_shopcart.html")
     @ResponseBody
-    public Integer udaishop(@RequestParam("skuId") Integer skuId,@RequestParam("id") Integer id,@RequestParam("shuliang")Integer shuliang) {
-
+    public Integer udaishop(@RequestParam("skuId") Integer skuId,@RequestParam("id") Integer id,@RequestParam("shuliang")Integer shuliang,HttpSession session) {
+        User user = (User) session.getAttribute("user");
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setUserId(1);
+        int a = user.getId().intValue();
+        shoppingCart.setUserId(a);
         shoppingCart.setProductId(id);
         shoppingCart.setOrderamount(shuliang);
         shoppingCart.setSkuid(skuId);
