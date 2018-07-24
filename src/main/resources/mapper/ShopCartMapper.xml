@@ -53,7 +53,7 @@
 
 	SELECT shoppingcart.id,shoppingcart.userId,shoppingcart.productId,shoppingcart.orderamount,sku.price
 
-		,productpic.picPath,product.productName,sku.SKUcon  FROM shoppingcart
+		,productpic.picPath,product.productName,sku.SKUcon,sku.SKUId FROM shoppingcart
 
 		LEFT  JOIN sku ON shoppingcart.skuid=sku.SKUId
 

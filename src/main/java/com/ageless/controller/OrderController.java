@@ -31,16 +31,9 @@ public class OrderController {
     private ProductService productService;
 
 
-    //进入订单页面
-    @ResponseBody
+    //进入商品页面
     @RequestMapping("/show")
-    public Object show( HttpSession session){
-        User user= (User) session.getAttribute("user");
-        Object obj=JSON.toJSON(user);
-        return obj;
-    }
-    @RequestMapping("/dingdan")
-    public String dingdan( HttpSession session){
+    public String show(){
         return "udai_order";
     }
 
@@ -252,6 +245,7 @@ public class OrderController {
         order.setShipid(1);
         order.setSkuId(skuId);
         int addorders=orderService.addOrderdet(order);
+        int res = orderService.deleteSku(skuId);
         Object json=JSON.toJSON(addorders);
         return json;
     }
@@ -280,4 +274,5 @@ public class OrderController {
        System.out.println(createDate);
            return 1;
     }
+
 }

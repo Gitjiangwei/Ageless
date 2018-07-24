@@ -47,4 +47,6 @@ public interface OrderMapper {
 
     //完成确认收货
     public  int  updataOrder(@Param("id")Integer id, @Param("OrderStatus") Integer OrderStatus);
+
+    public int deleteSku(Integer skuId);
 }

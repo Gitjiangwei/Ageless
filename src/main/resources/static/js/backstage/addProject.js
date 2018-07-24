@@ -159,7 +159,7 @@ $(function(){
             success:function(data){
                 if(data == "1"){
                     alert("商品添加成功！");
-                    window.location.href="/commodity/goxiajia";
+                    window.location.href="/backstage/goxiajia";
                 }else{
                     showWebAlert("商品添加失败！");
                 }

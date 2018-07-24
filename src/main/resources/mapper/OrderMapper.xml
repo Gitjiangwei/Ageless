@@ -109,5 +109,9 @@
         WHERE  id =#{id}
     </update>
 
+    <delete id="deleteSku" parameterType="Integer">
+        delete from shoppingcart where skuid = #{skuId}
+    </delete>
+
 
 </mapper>

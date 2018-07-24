@@ -74,4 +74,9 @@ public class OrderServiceImpl implements OrderService{
         return orderMapper.updataOrder(id,OrderStatus);
     }
 
+    @Override
+    public int deleteSku(Integer skuId) {
+        return orderMapper.deleteSku(skuId);
+    }
+
 }
