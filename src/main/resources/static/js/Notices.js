@@ -13,8 +13,6 @@ function nav(){
         dataType:"json",
         success:function(data){
             $("#linfo").html("");
-
-            alert("asda");
             for (var i=0;i<data.length;i++){
 
                 $("#linfo").append("<a href='javascript:;' class='ep active woqu' vid="+data[i].id+"  >【"+data[i].typeName+"】 "+data[i].title+"</a>");
@@ -75,7 +73,6 @@ function f() {
             var hours  = date.getHours();
             var minutes  = date.getMinutes() ;
             var seconds = date.getSeconds();
-            alert(year+"年"+month+"月"+day+"日"+hours+"时"+minutes+"分"+seconds+"秒");
             $("#idcha").append("<div class=\"head-div clearfix posr\"><div class=\"title\">"+'【' + data.typeName + '】' + data.title + "</div><div class=\"time pull-right\">发布时间："+year+"年"+month+"月"+day+"日"+hours+"时"+minutes+"分"+seconds+"秒"+"</div></div><div class=\"html-code\"><p style=\"text-indent: 2em\">" + data.announcementContent  + "</p></div>");
             },error:function(){
             alert("查看失败");
@@ -85,7 +82,6 @@ function f() {
 //窗体类型
 function index(a) {
     var typeId=$("#xid").val();
-    alert(typeId);
     $.ajax({
         type:"post",
         url:"/er/probyxiao.html",

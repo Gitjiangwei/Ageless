@@ -1,9 +1,7 @@
 $(function () {
 
-alert("xhaungti");
 
 
-ss(1);
 
 
 
@@ -32,7 +30,6 @@ function ss(PageIndex) {
 function lll(jiage) {
     var zhi=$("#login_phone").val();
 
-alert(jiage);
 
 
 
@@ -43,7 +40,7 @@ $.ajax({
     dataType:"JSON",
     success:function (data) {
         alert("兑换成功");
-        window.location.href="/shangpin";
+        window.location.href="/chafen";
 
     },error:function () {
         alert("兑换失败");

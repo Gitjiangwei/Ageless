@@ -101,7 +101,7 @@ public class IntegralController {
 
     @ResponseBody
     @RequestMapping(value="gai",method = RequestMethod.GET)
-    public Object duihaun(@RequestParam(required = false) Integer ji,String hhhh,String membership,String phone,String mailbox){
+    public Object duihaun(@RequestParam(required = false) double ji,String hhhh,String membership,String phone,String mailbox){
        /* User u=new User();
         boolean huiyaun=false;
         if(hhhh.indexOf("@")!=-1){
@@ -139,7 +139,7 @@ public class IntegralController {
          int pp=Integer.parseInt(oo);
         System.out.println(ji+"llll");
 
-         int ll=pp-ji;
+         int ll=(int)(pp-ji);
         System.out.println(ll);
         String kk=Integer.toString(ll);
         int result=service.update(kk,1);
