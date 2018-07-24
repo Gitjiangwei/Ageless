@@ -4,7 +4,6 @@ $(function () {
         var prices=$(".prices").text();
         var skuids=$(".skuids").text();
         var productIds=$(".productIds").text();
-
         $.ajax({
             type:"POST",
             url:"/Order/addOrder",
@@ -20,7 +19,6 @@ $(function () {
                         success:function(data){
                             if(data>0){
                                 alert("添加成功!");
-                                window.location.href="/Order/show";
                             }
                         },error:function(data){
                             alert("添加失败！");

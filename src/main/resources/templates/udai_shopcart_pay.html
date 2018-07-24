@@ -67,7 +67,7 @@
 							</thead>
 							<tbody>
 							<tr v-for="shop in shopList">
-								<th scope="row"><a href="item_show.html"><div class="img"><img :src="shop.picPath" style="width: 120px">{{shop.picPath}}<!--<img src="/images/temp/M-003.jpg" alt="" class="cover">--></div></a></th>
+								<th scope="row"><a href="item_show.html"><div class="img"><img :src="shop.picPath" style="width: 120px"><!--<img src="/images/temp/M-003.jpg" alt="" class="cover">--></div></a></th>
 								<td>
 									<div class="productName">{{shop.productName}}</div>
 									<div class="type c9">{{shop.optiinName}}</div>
@@ -94,7 +94,6 @@
 						<div class="pull-right text-right">
 							<div class="info-line">运费：<span class="c6">¥0.00</span></div>
 							<div class="info-line">合计：<b class="fz18 cr">{{totalMoney|money('元')}}</b></div>
-							<div class="info-line fz12 c9">（可获 <span class="c6">{{money?number*0.1}}</span> 积分）</div>
 						</div>
 					</div>
 

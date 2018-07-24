@@ -30,8 +30,7 @@ public class AddressController {
     @PostMapping(value = "/showAdd")
     @ResponseBody
     private String showAddress(Long id,HttpSession session){
-        User u= (User) session.getAttribute("user");
-        Long userId=u.getId();//用户Id
+        Long userId= (Long) session.getAttribute("uid");
         /*Long userId= Long.valueOf(1);//用户Id*/
         List<Address> userList=addressService.getListAddress(userId);
         return JSON.toJSONString(userList);

@@ -43,7 +43,8 @@ new Vue({
     el:"#xunhuan",
     data:{
         totalMoney:0,
-        shopList:[],
+        shopList:[
+        ],
     },
     filters:{
     },
@@ -66,13 +67,13 @@ new Vue({
                 }*/
             });
             this.$http.get("/shop/getList").then(function (json) {
-                _this.shopList=json.data;
-
+                _this.shopList=json.data.productList;
                 /*for (var int i;i<json.data.length;i++){
 
                 }*/
                 /*alert(json.data.length);*/
             });
+
         },
     }
 })
