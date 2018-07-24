@@ -21,9 +21,7 @@ import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping(value="/shop")
@@ -81,14 +79,13 @@ public class  ShopCartController {
             }
         }
         totalAllMoney=totalMoney;
-        System.out.println(productList.size()+"******"+totalMoney);
 
         return "udai_shopcart_pay";
     }
     //获取list集合
     @RequestMapping("/getList")
     @ResponseBody
-    public Object getData(){
+    public Map getData(){
 
         for (int i = 0; i < productList.size(); i++) {
             String  orderamount = productList.get(i).getSKUcon();
@@ -97,7 +94,10 @@ public class  ShopCartController {
             productList.get(i).setOptiinName(s);
             /*productList.add(shoppingCart);*/
         }
-        return   JSON.toJSONString(productList);
+        System.out.println(productList);
+        Map m = new HashMap<>();
+        m.put("productList",productList);
+        return  m;
     }
     //获取总金额
     @GetMapping("/getTotalMoney")

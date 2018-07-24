@@ -61,8 +61,6 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public int addOrder(Order order) {
-        String key=CREATEDATE;
-        jedis.set(key, String.valueOf(new Date()));
         return orderMapper.addOrder(order);
     }
 
