@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -122,7 +123,7 @@ public class BackStageController {
         return "/backstage/category3";
     }
 
-    @RequestMapping(value = "/sortcon")
+    @RequestMapping(value = "/sortcon",method =RequestMethod.GET)
     public String selectAll(@RequestParam(required = false) String name, @RequestParam(required = false)String categoryName,
                             @RequestParam(required = false)Integer categoryThree, @RequestParam(required = false)Integer sortId, HttpSession session){
         User user = (User)session.getAttribute("user");

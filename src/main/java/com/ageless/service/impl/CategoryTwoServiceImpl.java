@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 @Service
 public class CategoryTwoServiceImpl implements CategoryTwoService{
 
-    @Autowired
+    @Resource
     private CategoryTwoMapper categoryTwoMapper;
     @Autowired
     private JedisUtil.Keys jedisKeys;
@@ -27,28 +28,7 @@ public class CategoryTwoServiceImpl implements CategoryTwoService{
     private static String TWOLIST="twolist";
     @Override
     public List<CategoryTwo> Twolist(Integer id,String categoryName) {
-        String key=TWOLIST;
-        List<CategoryTwo> TT=null;
-        ObjectMapper objectMapper=new ObjectMapper();
-        if(!jedisKeys.exists(key)) {
-            TT = categoryTwoMapper.Twolist(id, categoryName);
-            String jsonString=null;
-            try {
-                jsonString=objectMapper.writeValueAsString(TT);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            jedisStrings.set(key,jsonString);
-        }else{
-            String jsonString=jedisStrings.get(key);
-            JavaType javaType=objectMapper.getTypeFactory().constructParametricType(ArrayList.class,CategoryTwo.class);
-            try {
-                TT=objectMapper.readValue(jsonString,javaType);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return TT;
+        return categoryTwoMapper.Twolist(id, categoryName);
     }
     @Override
     public List<CategoryTwo> Twolist2() {

@@ -93,7 +93,7 @@ function result(bz, choose) {
                     showWebAlert("服务器异常！");
                 }
               if(falg){
-                    window.location.href="/sort/sortcon";
+                    window.location.href="/backstage/sortcon";
                 }
 
             },
@@ -305,7 +305,7 @@ if(fag){
             }else{
                 showWebAlert("添加失败")
             }
-            window.location.href="/sort/sortcon";
+            window.location.href="/backstage/sortcon";
         },
         error:function (data) {
             showWebAlert("服务器异常！");
@@ -377,5 +377,5 @@ $(document).on("click",".qx",function (){
 });
 
 $(".fanhui").click(function () {
-    window.location.href="/sort/sortcon";
+    window.location.href="/backstage/sortcon";
 });

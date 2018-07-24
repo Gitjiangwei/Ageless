@@ -12,13 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 @Service
 @Transactional
 public class CategoryOneServiceImpl implements CategoryOneService {
-    @Autowired
+    @Resource
     private CategoryOneMapper categoryOneMapper;
     @Autowired
     private JedisUtil.Keys jedisKeys;
@@ -29,28 +30,8 @@ public class CategoryOneServiceImpl implements CategoryOneService {
     private static String ONELIST="onelist";
     @Override
     public List<CategoryOne> Onelist(String categoryName) {
-        String key=ONELIST;
-        List<CategoryOne> oneList=null;
-        ObjectMapper objectMapper=new ObjectMapper();
-        if(!jedisKeys.exists(key)) {
-            oneList = categoryOneMapper.Onelist(categoryName);
-            String jsonString=null;
-            try {
-                jsonString=objectMapper.writeValueAsString(oneList);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            jedisStrings.set(key,jsonString);
-        }else{
-            String jsonString=jedisStrings.get(key);
-            JavaType javaType=objectMapper.getTypeFactory().constructParametricType(ArrayList.class,CategoryOne.class);
-            try {
-                oneList=objectMapper.readValue(jsonString,javaType);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return oneList;
+            ;
+        return categoryOneMapper.Onelist(categoryName);
     }
 
     @Override

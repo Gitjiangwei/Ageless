@@ -334,7 +334,7 @@ $(document).on("click",".bc",function() {
                 } else {
                     alert("添加失败")
                 }
-                window.location.href = "/sku/su";
+                window.location.href = "/backstage/su";
             },
             error: function (data) {
                 showWebAlert("服务器异常！");
@@ -407,5 +407,5 @@ $(document).on("click",".qx",function (){
 });
 
 $(".fanhui").click(function () {
-    window.location.href = "/sku/su";
+    window.location.href = "/backstage/su";
 });
