@@ -4,7 +4,7 @@ $(function () {
         var prices=$(".prices").text();
         var skuids=$(".skuids").text();
         var productIds=$(".productIds").text();
-        alert("a");
+
         $.ajax({
             type:"POST",
             url:"/Order/addOrder",

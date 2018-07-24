@@ -52,7 +52,7 @@
 				<a href="/ageless/udai_setting.html"><dd>个人资料</dd></a>
 				<a href="/chafen"><dd>积分平台</dd></a>
 				<a href="/ageless/udai_address.html"><dd>收货地址</dd></a>
-				<a href="/ageless/udai_paypwd_modify.html"><dd>修改支付密码</dd></a>
+
 				<a href="/ageless/udai_pwd_modify.html"><dd>修改登录密码</dd></a>
 			</dl>
 			<dl class="user-center__nav">
@@ -126,8 +126,8 @@
 										</td>
 										<td class="order" v-if="item.orderStatus=='1'" >
 											<div class="del" @click="delFlag=true"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>
-
-											<a href="JavaScript:;" v-on:click="fukuan"  class="but but-primary">立即付款</a>
+												<input type="hidden" class="" value="{{}}">
+											<a href="JavaScript:;" v-on:click="fukuan"  id="qqa" ii=null bb=null aa=null class="but but-primary">立即付款</a>
 
 											<!--<a href="javascript:void (0)" class="but c3" @click="delProduct(item)" >取消1订单</a>
 											<a href="javascript:void (0)" class="but c3"  >取消2订单</a>-->
