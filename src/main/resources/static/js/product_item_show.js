@@ -60,7 +60,8 @@ function add(canshu) {
                     alert("加入失败！");
                 }
             }, error: function (data) {
-                alert("no");
+                alert("请先登录!");
+                window.location.href = "/ageless/login.html";
             }
         });
     }
@@ -80,3 +81,4 @@ function pinglun(id) {
         }
     });
 }
+

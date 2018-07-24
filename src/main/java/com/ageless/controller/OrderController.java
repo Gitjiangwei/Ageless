@@ -31,9 +31,16 @@ public class OrderController {
     private ProductService productService;
 
 
-    //进入商品页面
+    //进入订单页面
+    @ResponseBody
     @RequestMapping("/show")
-    public String show(){
+    public Object show( HttpSession session){
+        User user= (User) session.getAttribute("user");
+        Object obj=JSON.toJSON(user);
+        return obj;
+    }
+    @RequestMapping("/dingdan")
+    public String dingdan( HttpSession session){
         return "udai_order";
     }
 

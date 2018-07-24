@@ -47,3 +47,51 @@ $(document).on("click",".woqu",function (){
 
 
 
+$(document).on("click","#dingdan",function (){
+    $.ajax({
+        type:"get",
+        url:"/Order/show",
+        dataType:"json",
+        success:function(data){
+            var ss=data;
+          if(ss!=null){
+              window.location.href = "/Order/dingdan";
+          }
+        },error:function(){
+            alert("请先登录!");
+            window.location.href = "/ageless/login.html";
+        }
+    })
+});
+$(document).on("click","#Udai",function (){
+    $.ajax({
+        type:"get",
+        url:"/ageless/udai_welcome",
+        dataType:"json",
+        success:function(data){
+            var ss=data;
+            if(ss!=null){
+                window.location.href = "/ageless/udai_article1";
+            }
+        },error:function(){
+            alert("请先登录!");
+            window.location.href = "/ageless/login.html";
+        }
+    })
+});
+$(document).on("click","#jifen",function (){
+    $.ajax({
+        type:"get",
+        url:"/chafen",
+        dataType:"json",
+        success:function(data){
+            var ss=data;
+            if(ss!=null){
+                window.location.href = "/chafens";
+            }
+        },error:function(){
+            alert("请先登录!");
+            window.location.href = "/ageless/login.html";
+        }
+    })
+});

@@ -1,7 +1,13 @@
 package com.ageless.controller;
 
+import com.ageless.pojo.User;
+import com.alibaba.fastjson.JSON;
+import com.alipay.api.internal.parser.json.ObjectJsonParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Wang.sir
@@ -11,9 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("ageless")
 public class NoteController {
-    @RequestMapping("udai_article1.html")
-    public String udai_article1(){
-        System.out.println("aaaaa");
+
+    @ResponseBody
+    @RequestMapping("udai_welcome")
+    public Object udai_article1(HttpSession session){
+        User user= (User) session.getAttribute("user");
+        Object obj=JSON.toJSON(user);
+        return obj;
+    }
+    @RequestMapping("udai_article1")
+    public String udai_article1s(){
         return "/temp_article/udai_article1";
     }
     @RequestMapping("udai_article2.html")
