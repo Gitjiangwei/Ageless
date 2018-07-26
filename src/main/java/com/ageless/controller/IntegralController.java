@@ -43,18 +43,26 @@ public class IntegralController {
         Object obj=JSON.toJSON(user);
         return obj;
     }*/
-    @RequestMapping(value = "chafen",method = RequestMethod.GET)
-    public  String jifens(Model model){
-
-        System.out.println("chafenchanef_________________________");
-        User uu=service.selectjifen(1);
-
-        System.out.println("完成");
-        System.out.println(uu);
-        model.addAttribute("list",uu);
-        return "udai_integral";
+    @ResponseBody
+    @RequestMapping(value = "chafens",method = RequestMethod.GET)
+    public  Object jifens(HttpSession session){
+        User user= (User) session.getAttribute("user");
+        Object obj=JSON.toJSON(user);
+        return obj;
 
     }
+@RequestMapping(value = "chafen",method = RequestMethod.GET)
+public  String jifen(Model model){
+
+    System.out.println("chafenchanef_________________________");
+    User uu=service.selectjifen(1);
+
+    System.out.println("完成");
+    System.out.println(uu);
+    model.addAttribute("list",uu);
+    return "udai_integral";
+
+}
 
 
 

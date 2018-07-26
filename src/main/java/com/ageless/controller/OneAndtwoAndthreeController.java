@@ -58,6 +58,7 @@ public class OneAndtwoAndthreeController {
         }else{
             int num= user.getId().intValue();
             int number=shopCartService.chaCart(num);
+            session.setAttribute("list8",number);
             model.addAttribute("list8",number);
         }
         return "index";

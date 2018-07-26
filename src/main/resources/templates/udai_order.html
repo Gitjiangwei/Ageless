@@ -20,7 +20,7 @@
 	<script src="/js/jquery.DJMask.2.1.1.js" charset="UTF-8"></script>
 	<title>花想容</title>
 </head>
-<body>
+<body id="bdo">
 <!-- 顶部tab -->
 <div class="tab-header">
 	<div class="inner">
@@ -127,7 +127,7 @@
 										<td class="order" v-if="item.orderStatus=='1'" >
 											<div class="del" @click="delFlag=true"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>
 
-											<a href="JavaScript:;" v-on:click="fukuan" id="fuk" class="but but-primary">立即付款</a>
+											<a  id="fuk" class="but but-primary">立即付款</a>
 
 											<!--<a href="javascript:void (0)" class="but c3" @click="delProduct(item)" >取消1订单</a>
 											<a href="javascript:void (0)" class="but c3"  >取消2订单</a>-->
@@ -484,7 +484,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
 <script src="/js/lib/vue-resource.js"></script>
-
+<script src="/js/alipy.js"></script>
 <script src="/js/udai_order.js"></script>
 <script>
     /*导航栏显示开始*/

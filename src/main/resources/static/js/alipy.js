@@ -1,5 +1,5 @@
 $(function () {
-   $(document).on('click','#zh',function () {
+   $(document).on('click','#fuk',function () {
 
        var vNow = new Date();
        var sNow = "";
@@ -10,8 +10,8 @@ $(function () {
        sNow += String(vNow.getMinutes());
        sNow += String(vNow.getSeconds());
        sNow += String(vNow.getMilliseconds());
-       var WIDsubject=$("#WIDsubject").val();
-       var WIDtotal_amount=$("#WIDtotal_amount").html();
+       var WIDsubject="sbjiangwei";
+       var WIDtotal_amount=0.01;
        $.ajax({
            type:"POST",
            url:"/alipay/pagepay",

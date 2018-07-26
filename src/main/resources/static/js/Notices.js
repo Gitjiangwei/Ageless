@@ -64,8 +64,6 @@ function f() {
         dataType:"json",
         success:function(data){
             $("#idcha").html("");
-            alert(yid);
-            alert("asda");
             var date = new Date(data.announcementTime);
             var month = date.getMonth()+1;
             var year =date.getFullYear();

@@ -82,12 +82,12 @@ $(document).on("click","#Udai",function (){
 $(document).on("click","#jifen",function (){
     $.ajax({
         type:"get",
-        url:"/chafen",
+        url:"/chafens",
         dataType:"json",
         success:function(data){
             var ss=data;
             if(ss!=null){
-                window.location.href = "/chafens";
+                window.location.href = "/chafen";
             }
         },error:function(){
             alert("请先登录!");
